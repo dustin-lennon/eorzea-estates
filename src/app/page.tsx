@@ -1,65 +1,154 @@
-import Image from "next/image";
+import Link from "next/link"
+import { Suspense } from "react"
+import prisma from "@/lib/prisma"
+import { EstateCard } from "@/components/estate-card"
+import { Button } from "@/components/ui/button"
+import { Home, Search, Star } from "lucide-react"
 
-export default function Home() {
+async function FeaturedEstates() {
+  const estates = await prisma.estate.findMany({
+    where: { published: true },
+    orderBy: { likeCount: "desc" },
+    take: 6,
+    include: {
+      images: { orderBy: { order: "asc" }, take: 1 },
+      owner: {
+        select: {
+          name: true,
+          lodestoneCharacterName: true,
+          lodestoneVerified: true,
+        },
+      },
+      venueDetails: { select: { venueType: true } },
+    },
+  })
+
+  if (estates.length === 0) return null
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <section className="container mx-auto px-4 pb-16">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          <Star className="h-5 w-5 text-yellow-500" />
+          Featured Estates
+        </h2>
+        <Button variant="ghost" asChild>
+          <Link href="/directory">View all →</Link>
+        </Button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {estates.map((estate) => {
+          const ownerName = estate.owner.lodestoneVerified
+            ? estate.owner.lodestoneCharacterName
+            : estate.owner.name
+          return (
+            <EstateCard
+              key={estate.id}
+              id={estate.id}
+              name={estate.name}
+              type={estate.type}
+              district={estate.district}
+              server={estate.server}
+              dataCenter={estate.dataCenter}
+              tags={estate.tags}
+              likeCount={estate.likeCount}
+              coverImage={estate.images[0]?.cloudinaryUrl}
+              ownerName={ownerName ?? null}
+              lodestoneVerified={estate.owner.lodestoneVerified}
+              venueType={estate.venueDetails?.venueType ?? null}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+async function StatsRow() {
+  const [total, venues, byType] = await Promise.all([
+    prisma.estate.count({ where: { published: true } }),
+    prisma.estate.count({ where: { published: true, type: "VENUE" } }),
+    prisma.estate.groupBy({
+      by: ["type"],
+      where: { published: true },
+      _count: true,
+    }),
+  ])
+
+  return (
+    <div className="flex flex-wrap justify-center gap-8 text-center">
+      <div>
+        <p className="text-2xl font-bold">{total}</p>
+        <p className="text-sm text-muted-foreground">Total Estates</p>
+      </div>
+      <div>
+        <p className="text-2xl font-bold">{venues}</p>
+        <p className="text-sm text-muted-foreground">Venues</p>
+      </div>
+      <div>
+        <p className="text-2xl font-bold">{byType.length}</p>
+        <p className="text-sm text-muted-foreground">Estate Types</p>
+      </div>
     </div>
-  );
+  )
+}
+
+export default function HomePage() {
+  return (
+    <div>
+      {/* Hero */}
+      <section className="relative bg-gradient-to-b from-muted/50 to-background py-20 text-center">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center mb-4">
+            <Home className="h-12 w-12 text-primary" />
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            Eorzea Estates
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
+            A community directory of Final Fantasy XIV player-owned estates. Venues, private homes,
+            free company halls, apartments — shared by the players who built them.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild size="lg">
+              <Link href="/directory">
+                <Search className="h-5 w-5 mr-2" />
+                Browse Estates
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/submit">Submit Your Estate</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="border-y bg-muted/30 py-8">
+        <div className="container mx-auto px-4">
+          <Suspense fallback={null}>
+            <StatsRow />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Featured */}
+      <div className="py-12">
+        <Suspense
+          fallback={
+            <div className="container mx-auto px-4 pb-16">
+              <div className="h-8 w-48 bg-muted rounded animate-pulse mb-6" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="aspect-video bg-muted rounded-xl animate-pulse" />
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <FeaturedEstates />
+        </Suspense>
+      </div>
+    </div>
+  )
 }

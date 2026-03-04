@@ -1,0 +1,26 @@
+name: Deploy
+
+# Vercel handles deployments automatically via its GitHub integration.
+# This workflow documents the deployment flow for reference.
+#
+# Production deploys:  triggered by pushes to `main`
+# Preview deploys:     triggered by pushes to `develop` and all PRs
+#
+# To connect:
+#   1. Go to vercel.com → New Project → import this repo
+#   2. Set environment variables in Vercel dashboard
+#   3. Vercel's GitHub app will take over deployments automatically
+#
+# If you prefer manual Vercel CLI deploys, uncomment the job below
+# and add VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID as secrets.
+
+on:
+  workflow_dispatch: # Allow manual trigger for reference
+
+jobs:
+  placeholder:
+    name: Deployment managed by Vercel
+    runs-on: ubuntu-latest
+    if: false # Never runs — Vercel GitHub integration handles this
+    steps:
+      - run: echo "See Vercel dashboard for deployment status"

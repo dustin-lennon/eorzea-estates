@@ -1,0 +1,234 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js required models
+// ---------------------------------------------------------------------------
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Users
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+
+  // Discord-specific fields (populated from OAuth profile)
+  discordUsername String?
+  discordId       String? @unique
+
+  // Lodestone character (optional, self-reported + verified)
+  lodestoneCharacterId   String?
+  lodestoneCharacterName String?
+  lodestoneServer        String?
+  lodestoneVerified      Boolean @default(false)
+
+  accounts   Account[]
+  sessions   Session[]
+  estates    Estate[]
+  likes      Like[]
+  comments   Comment[]
+  venueStaff VenueStaff[] @relation("StaffUser")
+
+  lodestoneVerification LodestoneVerification?
+}
+
+// ---------------------------------------------------------------------------
+// Estates
+// ---------------------------------------------------------------------------
+
+enum EstateType {
+  PRIVATE
+  FC_ESTATE
+  VENUE
+  APARTMENT
+  FC_ROOM
+}
+
+enum HousingDistrict {
+  MIST
+  LAVENDER_BEDS
+  GOBLET
+  SHIROGANE
+  EMPYREUM
+}
+
+model Estate {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+
+  name        String
+  description String   @db.Text
+  inspiration String   @db.Text
+
+  type     EstateType
+  district HousingDistrict?
+
+  region     String
+  dataCenter String
+  server     String
+
+  ward  Int?
+  plot  Int?
+
+  tags String[]
+
+  likeCount    Int @default(0)
+  commentCount Int @default(0)
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  images       Image[]
+  venueDetails VenueDetails?
+  likes        Like[]
+  comments     Comment[]
+  staffLinks   VenueStaff[]  @relation("StaffLinkedEstate")
+}
+
+model Image {
+  id               String @id @default(cuid())
+  estateId         String
+  cloudinaryUrl    String
+  cloudinaryPublicId String
+  order            Int    @default(0)
+
+  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Venue Details (only for VENUE estates)
+// ---------------------------------------------------------------------------
+
+enum VenueType {
+  BAR
+  NIGHTCLUB
+  CAFE
+  RESTAURANT
+  GALLERY
+  LIBRARY
+  SHOP
+  BATHHOUSE
+  INN
+  OTHER
+}
+
+model VenueDetails {
+  id       String    @id @default(cuid())
+  estateId String    @unique
+  estate   Estate    @relation(fields: [estateId], references: [id], onDelete: Cascade)
+
+  venueType VenueType
+  timezone  String    @default("UTC")
+
+  // Hours stored as JSON: { mon: "8pm-11pm" | null, tue: ..., ... }
+  hours Json?
+
+  staff VenueStaff[]
+}
+
+model VenueStaff {
+  id      String @id @default(cuid())
+  venueId String
+  venue   VenueDetails @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  characterName String
+  role          String
+
+  // Optional: links to a registered user
+  linkedUserId String?
+  linkedUser   User?  @relation("StaffUser", fields: [linkedUserId], references: [id], onDelete: SetNull)
+
+  // Optional: links to that user's estate entry on this site
+  linkedEstateId String?
+  linkedEstate   Estate? @relation("StaffLinkedEstate", fields: [linkedEstateId], references: [id], onDelete: SetNull)
+}
+
+// ---------------------------------------------------------------------------
+// Social
+// ---------------------------------------------------------------------------
+
+model Like {
+  userId    String
+  estateId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
+
+  @@id([userId, estateId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  userId   String
+  estateId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Lodestone Verification
+// ---------------------------------------------------------------------------
+
+model LodestoneVerification {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  code      String
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
