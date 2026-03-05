@@ -1,0 +1,61 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat",     "release": "minor" },
+          { "type": "fix",      "release": "patch" },
+          { "type": "perf",     "release": "patch" },
+          { "type": "revert",   "release": "patch" },
+          { "type": "docs",     "release": false   },
+          { "type": "style",    "release": false   },
+          { "type": "refactor", "release": false   },
+          { "type": "test",     "release": false   },
+          { "type": "build",    "release": false   },
+          { "type": "ci",       "release": false   },
+          { "type": "chore",    "release": false   },
+          { "breaking": true,   "release": "major" }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat",     "section": "✨ Features"       },
+            { "type": "fix",      "section": "🐛 Bug Fixes"      },
+            { "type": "perf",     "section": "⚡ Performance"     },
+            { "type": "revert",   "section": "⏪ Reverts"        },
+            { "type": "docs",     "section": "📚 Documentation",  "hidden": true },
+            { "type": "style",    "section": "💄 Styling",        "hidden": true },
+            { "type": "refactor", "section": "♻️  Refactor",      "hidden": true },
+            { "type": "test",     "section": "✅ Tests",          "hidden": true },
+            { "type": "build",    "section": "🏗️  Build",         "hidden": true },
+            { "type": "ci",       "section": "👷 CI",             "hidden": true },
+            { "type": "chore",    "section": "🔧 Chores",         "hidden": true }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# Changelog\n\nAll notable changes to Eorzea Estates are documented here.\nThis project adheres to [Semantic Versioning](https://semver.org/)."
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": "🎉 This is included in version ${nextRelease.version}. See the [release notes](${nextRelease.url}).",
+        "labels": ["released"],
+        "releasedLabels": ["released@${nextRelease.channel}"]
+      }
+    ]
+  ]
+}

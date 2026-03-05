@@ -6,22 +6,27 @@ import { Button } from "@/components/ui/button"
 import { Home, Search, Star } from "lucide-react"
 
 async function FeaturedEstates() {
-  const estates = await prisma.estate.findMany({
-    where: { published: true },
-    orderBy: { likeCount: "desc" },
-    take: 6,
-    include: {
-      images: { orderBy: { order: "asc" }, take: 1 },
-      owner: {
-        select: {
-          name: true,
-          lodestoneCharacterName: true,
-          lodestoneVerified: true,
+  let estates
+  try {
+    estates = await prisma.estate.findMany({
+      where: { published: true },
+      orderBy: { likeCount: "desc" },
+      take: 6,
+      include: {
+        images: { orderBy: { order: "asc" }, take: 1 },
+        owner: {
+          select: {
+            name: true,
+            lodestoneCharacterName: true,
+            lodestoneVerified: true,
+          },
         },
+        venueDetails: { select: { venueType: true } },
       },
-      venueDetails: { select: { venueType: true } },
-    },
-  })
+    })
+  } catch {
+    return null
+  }
 
   if (estates.length === 0) return null
 
@@ -65,15 +70,20 @@ async function FeaturedEstates() {
 }
 
 async function StatsRow() {
-  const [total, venues, byType] = await Promise.all([
-    prisma.estate.count({ where: { published: true } }),
-    prisma.estate.count({ where: { published: true, type: "VENUE" } }),
-    prisma.estate.groupBy({
-      by: ["type"],
-      where: { published: true },
-      _count: true,
-    }),
-  ])
+  let total = 0, venues = 0, byType: unknown[] = []
+  try {
+    ;[total, venues, byType] = await Promise.all([
+      prisma.estate.count({ where: { published: true } }),
+      prisma.estate.count({ where: { published: true, type: "VENUE" } }),
+      prisma.estate.groupBy({
+        by: ["type"],
+        where: { published: true },
+        _count: true,
+      }),
+    ])
+  } catch {
+    return null
+  }
 
   return (
     <div className="flex flex-wrap justify-center gap-8 text-center">
