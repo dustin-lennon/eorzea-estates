@@ -54,7 +54,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       ? { updatedAt: "desc" as const }
       : { createdAt: "desc" as const }
 
-  const [estates, total] = await Promise.all([
+  const dbResult = await Promise.all([
     prisma.estate.findMany({
       where,
       orderBy,
@@ -81,7 +81,10 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       },
     }),
     prisma.estate.count({ where }),
-  ])
+  ]).catch(() => null)
+
+  const estates = dbResult?.[0] ?? []
+  const total = dbResult?.[1] ?? 0
 
   const totalPages = Math.ceil(total / PAGE_SIZE)
 
