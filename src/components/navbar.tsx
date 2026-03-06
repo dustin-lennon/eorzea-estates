@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "@/auth"
 import { Home, Plus, LayoutDashboard, User, LogOut } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Navbar() {
   const session = await auth()
@@ -27,6 +28,8 @@ export default async function Navbar() {
           <Link href="/directory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Browse
           </Link>
+
+          <ThemeToggle />
 
           {session?.user ? (
             <>
