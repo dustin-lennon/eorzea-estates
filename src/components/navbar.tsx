@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { auth } from "@/auth"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -10,18 +11,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "@/auth"
-import { Home, Plus, LayoutDashboard, User, LogOut } from "lucide-react"
+import { Plus, LayoutDashboard, User, LogOut } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Navbar() {
   const session = await auth()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-          <Home className="h-5 w-5" />
-          Eorzea Estates
+        <Link href="/" aria-label="Eorzea Estates home">
+          <Image src="/eorzea-estates-navbar.svg" alt="Eorzea Estates" width={0} height={0} className="h-12 w-auto" />
         </Link>
 
         <nav className="flex items-center gap-4">
