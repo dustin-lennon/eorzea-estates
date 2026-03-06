@@ -111,11 +111,8 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-b from-muted/50 to-background py-20 text-center">
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
-            <Image src="/eorzea-estates-icon.svg" alt="Eorzea Estates icon" width={48} height={48} />
+            <Image src="/eorzea-estates-icon.svg" alt="Eorzea Estates icon" width={240} height={240} />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Eorzea Estates
-          </h1>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
             A community directory of Final Fantasy XIV player-owned estates. Venues, private homes,
             free company halls, apartments — shared by the players who built them.
