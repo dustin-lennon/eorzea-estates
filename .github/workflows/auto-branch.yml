@@ -1,0 +1,52 @@
+name: Auto Branch
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  create-branch:
+    name: Create branch for issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+
+            const prefixMap = { 'feat:': 'feature', 'fix:': 'fix', 'ci:': 'ci', 'docs:': 'docs', 'chore:': 'chore' };
+            const titleLower = issue.title.toLowerCase();
+            const prefix = Object.entries(prefixMap).find(([k]) => titleLower.startsWith(k))?.[1] ?? 'feature';
+
+            const slug = issue.title
+              .toLowerCase()
+              .replace(/^(feat|fix|ci|docs|chore|style|refactor|test|perf|build|revert):\s*/i, '')
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-|-$/g, '')
+              .slice(0, 50);
+
+            const branchName = `${prefix}/${issue.number}-${slug}`;
+
+            const { data: ref } = await github.rest.git.getRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'heads/develop',
+            });
+
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/heads/${branchName}`,
+              sha: ref.object.sha,
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `Branch created: \`${branchName}\``,
+            });
