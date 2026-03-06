@@ -1,9 +1,10 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Suspense } from "react"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
 import { Button } from "@/components/ui/button"
-import { Home, Search, Star } from "lucide-react"
+import { Search, Star } from "lucide-react"
 
 async function FeaturedEstates() {
   let estates
@@ -110,7 +111,7 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-b from-muted/50 to-background py-20 text-center">
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
-            <Home className="h-12 w-12 text-primary" />
+            <Image src="/eorzea-estates-icon.svg" alt="Eorzea Estates icon" width={48} height={48} />
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
             Eorzea Estates
