@@ -1,117 +1,165 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <style>
+    /* ── Default: Dark theme ── */
+    :root {
+      --stone-s:    #1c3050;
+      --stone-e:    #0c1a2c;
+      --roof-s:     #0c1828;
+      --roof-e:     #182840;
+      --gold-s:     #f5e090;
+      --gold-m:     #d09510;
+      --gold-e:     #8a5c05;
+      --div-m:      #f0d060;
+      --div-e:      #c8920a;
+      --cryst-s:    #c8eeff;
+      --cryst-e:    #1a68c0;
+      --win-s:      #ffe898;
+      --door-bg:    #05101e;
+      --step-bg:    #142030;
+      --star-color: #b0d0ff;
+      --star-op:    0.55;
+      --bloom-op:   0.14;
+    }
+
+    /* ── Light theme override ── */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --stone-s:    #3d5270;
+        --stone-e:    #2c3e58;
+        --roof-s:     #1e2e44;
+        --roof-e:     #2a3e58;
+        --gold-s:     #c87000;
+        --gold-m:     #7a4200;
+        --gold-e:     #4c2800;
+        --div-m:      #a05800;
+        --div-e:      #7a3c00;
+        --cryst-s:    #80c8f8;
+        --cryst-e:    #0a48a0;
+        --win-s:      #c87020;
+        --door-bg:    #1c2e44;
+        --step-bg:    #28405a;
+        --star-color: #4a6888;
+        --star-op:    0.55;
+        --bloom-op:   0.10;
+      }
+    }
+  </style>
+
   <defs>
-    <radialGradient id="bgA" cx="50%" cy="38%" r="62%">
-      <stop offset="0%"   stop-color="#101e38"/>
-      <stop offset="100%" stop-color="#04080f"/>
+    <linearGradient id="stoneG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color: var(--stone-s)"/>
+      <stop offset="100%" style="stop-color: var(--stone-e)"/>
+    </linearGradient>
+    <linearGradient id="roofG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color: var(--roof-s)"/>
+      <stop offset="100%" style="stop-color: var(--roof-e)"/>
+    </linearGradient>
+    <linearGradient id="goldG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color: var(--gold-s)"/>
+      <stop offset="45%"  style="stop-color: var(--gold-m)"/>
+      <stop offset="100%" style="stop-color: var(--gold-e)"/>
+    </linearGradient>
+    <linearGradient id="divG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color: var(--div-e); stop-opacity: 0"/>
+      <stop offset="25%"  style="stop-color: var(--div-m); stop-opacity: 1"/>
+      <stop offset="75%"  style="stop-color: var(--div-m); stop-opacity: 1"/>
+      <stop offset="100%" style="stop-color: var(--div-e); stop-opacity: 0"/>
+    </linearGradient>
+    <radialGradient id="winG" cx="50%" cy="35%" r="65%">
+      <stop offset="0%"   style="stop-color: var(--win-s); stop-opacity: 0.85"/>
+      <stop offset="100%" style="stop-color: var(--win-s); stop-opacity: 0"/>
     </radialGradient>
-    <linearGradient id="stoneA" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#1c3050"/>
-      <stop offset="100%" stop-color="#0c1a2c"/>
-    </linearGradient>
-    <linearGradient id="roofA" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#0c1828"/>
-      <stop offset="100%" stop-color="#182840"/>
-    </linearGradient>
-    <linearGradient id="goldA" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#f5e090"/>
-      <stop offset="45%"  stop-color="#d09510"/>
-      <stop offset="100%" stop-color="#8a5c05"/>
-    </linearGradient>
-    <linearGradient id="divA" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#c8920a" stop-opacity="0"/>
-      <stop offset="25%"  stop-color="#f0d060" stop-opacity="1"/>
-      <stop offset="75%"  stop-color="#f0d060" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#c8920a" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="winA" cx="50%" cy="35%" r="65%">
-      <stop offset="0%"   stop-color="#ffe898" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#c06808" stop-opacity="0"/>
+    <radialGradient id="crystG" cx="40%" cy="20%" r="70%">
+      <stop offset="0%"   style="stop-color: var(--cryst-s)"/>
+      <stop offset="100%" style="stop-color: var(--cryst-e)"/>
     </radialGradient>
-    <radialGradient id="crystA" cx="40%" cy="20%" r="70%">
-      <stop offset="0%"   stop-color="#c8eeff"/>
-      <stop offset="100%" stop-color="#1a68c0"/>
-    </radialGradient>
-    <filter id="winBloomA" x="-80%" y="-80%" width="260%" height="260%">
+    <filter id="winBloom" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
     </filter>
-    <filter id="crystBloomA" x="-100%" y="-100%" width="300%" height="300%">
+    <filter id="crystBloom" x="-100%" y="-100%" width="300%" height="300%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="200" height="200" rx="20" fill="url(#bgA)"/>
-
-  <!-- Subtle stars -->
-  <g fill="#b0d0ff" opacity="0.5">
-    <circle cx="24" cy="20" r="1.0"/><circle cx="42" cy="12" r="0.8"/>
-    <circle cx="158" cy="12" r="0.8"/><circle cx="176" cy="20" r="1.0"/>
-    <circle cx="14" cy="50" r="0.7"/><circle cx="186" cy="50" r="0.7"/>
+  <!-- Stars -->
+  <g style="fill: var(--star-color); opacity: var(--star-op)">
+    <circle cx="24"  cy="20" r="1.0"/>
+    <circle cx="42"  cy="12" r="0.8"/>
+    <circle cx="158" cy="12" r="0.8"/>
+    <circle cx="176" cy="20" r="1.0"/>
+    <circle cx="14"  cy="50" r="0.7"/>
+    <circle cx="186" cy="50" r="0.7"/>
   </g>
 
-  <!-- Window warm bloom (behind house) -->
-  <ellipse cx="76"  cy="120" rx="18" ry="14" fill="#ffcc40" opacity="0.14" filter="url(#winBloomA)"/>
-  <ellipse cx="124" cy="120" rx="18" ry="14" fill="#ffcc40" opacity="0.14" filter="url(#winBloomA)"/>
+  <!-- Window warm bloom -->
+  <ellipse cx="76"  cy="120" rx="18" ry="14"
+           fill="#ffcc40" style="opacity: var(--bloom-op)" filter="url(#winBloom)"/>
+  <ellipse cx="124" cy="120" rx="18" ry="14"
+           fill="#ffcc40" style="opacity: var(--bloom-op)" filter="url(#winBloom)"/>
 
   <!-- House body -->
-  <rect x="52" y="92" width="96" height="60" fill="url(#stoneA)" stroke="url(#goldA)" stroke-width="1.6"/>
+  <rect x="52" y="92" width="96" height="60"
+        fill="url(#stoneG)" stroke="url(#goldG)" stroke-width="1.6"/>
 
   <!-- Roof -->
-  <polygon points="38,92 100,42 162,92" fill="url(#roofA)" stroke="url(#goldA)" stroke-width="1.6"/>
+  <polygon points="38,92 100,42 162,92"
+           fill="url(#roofG)" stroke="url(#goldG)" stroke-width="1.6"/>
 
-  <!-- Roof–wall join line -->
-  <line x1="38" y1="92" x2="162" y2="92" stroke="url(#goldA)" stroke-width="0.6" opacity="0.45"/>
+  <!-- Roof–wall join -->
+  <line x1="38" y1="92" x2="162" y2="92"
+        stroke="url(#goldG)" stroke-width="0.6" opacity="0.45"/>
 
   <!-- Column edge accents -->
-  <line x1="52"  y1="92" x2="52"  y2="152" stroke="url(#goldA)" stroke-width="0.8" opacity="0.35"/>
-  <line x1="148" y1="92" x2="148" y2="152" stroke="url(#goldA)" stroke-width="0.8" opacity="0.35"/>
+  <line x1="52"  y1="92" x2="52"  y2="152" stroke="url(#goldG)" stroke-width="0.8" opacity="0.35"/>
+  <line x1="148" y1="92" x2="148" y2="152" stroke="url(#goldG)" stroke-width="0.8" opacity="0.35"/>
 
   <!-- Left arched window -->
   <path d="M 65,132 L 65,114 A 11,11 0 0,1 87,114 L 87,132 Z"
-        fill="url(#winA)" stroke="url(#goldA)" stroke-width="1.1"/>
-  <line x1="76" y1="114" x2="76" y2="132" stroke="url(#goldA)" stroke-width="0.7" opacity="0.55"/>
-  <line x1="65" y1="124" x2="87" y2="124" stroke="url(#goldA)" stroke-width="0.7" opacity="0.55"/>
+        fill="url(#winG)" stroke="url(#goldG)" stroke-width="1.1"/>
+  <line x1="76" y1="114" x2="76" y2="132" stroke="url(#goldG)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="65" y1="124" x2="87" y2="124" stroke="url(#goldG)" stroke-width="0.7" opacity="0.55"/>
 
   <!-- Right arched window -->
   <path d="M 113,132 L 113,114 A 11,11 0 0,1 135,114 L 135,132 Z"
-        fill="url(#winA)" stroke="url(#goldA)" stroke-width="1.1"/>
-  <line x1="124" y1="114" x2="124" y2="132" stroke="url(#goldA)" stroke-width="0.7" opacity="0.55"/>
-  <line x1="113" y1="124" x2="135" y2="124" stroke="url(#goldA)" stroke-width="0.7" opacity="0.55"/>
+        fill="url(#winG)" stroke="url(#goldG)" stroke-width="1.1"/>
+  <line x1="124" y1="114" x2="124" y2="132" stroke="url(#goldG)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="113" y1="124" x2="135" y2="124" stroke="url(#goldG)" stroke-width="0.7" opacity="0.55"/>
 
   <!-- Arched door -->
   <path d="M 89,152 L 89,133 A 11,11 0 0,1 111,133 L 111,152 Z"
-        fill="#05101e" stroke="url(#goldA)" stroke-width="1.1"/>
-  <circle cx="107.5" cy="144" r="1.8" fill="url(#goldA)"/>
+        style="fill: var(--door-bg)" stroke="url(#goldG)" stroke-width="1.1"/>
+  <circle cx="107.5" cy="144" r="1.8" fill="url(#goldG)"/>
 
   <!-- Door step -->
   <rect x="83" y="152" width="34" height="4" rx="1"
-        fill="#142030" stroke="url(#goldA)" stroke-width="0.8"/>
+        style="fill: var(--step-bg)" stroke="url(#goldG)" stroke-width="0.8"/>
 
   <!-- Aetheryte crystal at roof peak -->
-  <g filter="url(#crystBloomA)">
-    <polygon points="100,35 106,45 100,50 94,45" fill="url(#crystA)"/>
+  <g filter="url(#crystBloom)">
+    <polygon points="100,35 106,45 100,50 94,45" fill="url(#crystG)"/>
     <polygon points="100,35 106,45 100,42"        fill="white" opacity="0.45"/>
   </g>
-  <ellipse cx="100" cy="44" rx="7" ry="5" fill="#50b8ff" opacity="0.22" filter="url(#winBloomA)"/>
+  <ellipse cx="100" cy="44" rx="7" ry="5"
+           fill="#50b8ff" opacity="0.22" filter="url(#winBloom)"/>
 
   <!-- Divider -->
-  <line x1="36" y1="165" x2="164" y2="165" stroke="url(#divA)" stroke-width="1"/>
-  <polygon points="100,161.5 102.5,165 100,168.5 97.5,165" fill="url(#goldA)" opacity="0.9"/>
+  <line x1="36" y1="165" x2="164" y2="165" stroke="url(#divG)" stroke-width="1"/>
+  <polygon points="100,161.5 102.5,165 100,168.5 97.5,165" fill="url(#goldG)" opacity="0.9"/>
 
   <!-- Text -->
   <text x="100" y="179"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
         font-size="17" font-weight="bold" letter-spacing="4"
-        fill="url(#goldA)">EORZEA</text>
+        fill="url(#goldG)">EORZEA</text>
   <text x="100" y="193"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
         font-size="11" font-weight="normal" letter-spacing="5.5"
-        fill="url(#goldA)" opacity="0.88">ESTATES</text>
+        fill="url(#goldG)" opacity="0.88">ESTATES</text>
 
   <!-- Flanking dots -->
-  <circle cx="35"  cy="186" r="1.3" fill="url(#goldA)" opacity="0.6"/>
-  <circle cx="165" cy="186" r="1.3" fill="url(#goldA)" opacity="0.6"/>
+  <circle cx="35"  cy="186" r="1.3" fill="url(#goldG)" opacity="0.6"/>
+  <circle cx="165" cy="186" r="1.3" fill="url(#goldG)" opacity="0.6"/>
 </svg>
