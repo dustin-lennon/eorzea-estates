@@ -8,6 +8,9 @@ export const authConfig: NextAuthConfig = {
       clientSecret: process.env.AUTH_DISCORD_SECRET!,
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   pages: {
     signIn: "/login",
   },
