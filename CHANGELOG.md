@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.2.0...v1.3.0) (2026-03-07)
+
+### ✨ Features
+
+* derive location from character and add room number fields ([d7197d5](https://github.com/dustin-lennon/eorzea-estates/commit/d7197d5be38603de18263f3757c7e8ba49941f32)), closes [#45](https://github.com/dustin-lennon/eorzea-estates/issues/45)
+
 ## [1.2.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.1.2...v1.2.0) (2026-03-07)
 
 ### ✨ Features
