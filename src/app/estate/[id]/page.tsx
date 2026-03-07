@@ -60,8 +60,8 @@ export default async function EstateDetailPage({ params }: PageProps) {
           include: {
             staff: {
               include: {
-                linkedEstate: {
-                  select: { id: true, name: true },
+                linkedCharacter: {
+                  select: { id: true, characterName: true },
                 },
               },
             },
@@ -221,18 +221,16 @@ export default async function EstateDetailPage({ params }: PageProps) {
                   <div className="space-y-2">
                     {estate.venueDetails.staff.map((s) => (
                       <div key={s.id} className="flex items-center justify-between text-sm">
-                        <div>
-                          <span className="font-medium">
-                            {s.linkedEstate ? (
-                              <Link href={`/estate/${s.linkedEstate.id}`} className="hover:underline flex items-center gap-1">
-                                {s.characterName}
-                                <ExternalLink className="h-3 w-3" />
-                              </Link>
-                            ) : (
-                              s.characterName
-                            )}
-                          </span>
-                        </div>
+                        <span className="font-medium">
+                          {s.linkedCharacter ? (
+                            <Link href={`/character/${s.linkedCharacter.id}`} className="hover:underline flex items-center gap-1">
+                              {s.characterName}
+                              <ExternalLink className="h-3 w-3" />
+                            </Link>
+                          ) : (
+                            s.characterName
+                          )}
+                        </span>
                         <span className="text-muted-foreground">{s.role}</span>
                       </div>
                     ))}

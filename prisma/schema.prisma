@@ -90,6 +90,7 @@ model FfxivCharacter {
   user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   estates Estate[]
   lodestoneVerification LodestoneVerification?
+  venueStaffLinks VenueStaff[] @relation("StaffCharacter")
 
   @@unique([userId, lodestoneId])
 }
@@ -150,7 +151,6 @@ model Estate {
   venueDetails VenueDetails?
   likes        Like[]
   comments     Comment[]
-  staffLinks   VenueStaff[]  @relation("StaffLinkedEstate")
 }
 
 model Image {
@@ -206,9 +206,9 @@ model VenueStaff {
   linkedUserId String?
   linkedUser   User?  @relation("StaffUser", fields: [linkedUserId], references: [id], onDelete: SetNull)
 
-  // Optional: links to that user's estate entry on this site
-  linkedEstateId String?
-  linkedEstate   Estate? @relation("StaffLinkedEstate", fields: [linkedEstateId], references: [id], onDelete: SetNull)
+  // Optional: links to that staff member's character profile on this site
+  linkedCharacterId String?
+  linkedCharacter   FfxivCharacter? @relation("StaffCharacter", fields: [linkedCharacterId], references: [id], onDelete: SetNull)
 }
 
 // ---------------------------------------------------------------------------

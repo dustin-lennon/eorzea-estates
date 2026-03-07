@@ -13,7 +13,7 @@ export const hoursSchema = z.object({
 export const staffMemberSchema = z.object({
   characterName: z.string().min(1, "Character name is required"),
   role: z.string().min(1, "Role is required"),
-  linkedEstateId: z.string().optional(),
+  linkedCharacterId: z.string().optional(),
 })
 
 export const estateFormSchema = z.object({

@@ -390,7 +390,7 @@ export function EstateSubmitForm({ characters }: Props) {
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => appendStaff({ characterName: "", role: "", linkedEstateId: "" })}
+                  onClick={() => appendStaff({ characterName: "", role: "", linkedCharacterId: "" })}
                 >
                   <Plus className="h-4 w-4 mr-1" />
                   Add Staff Member
@@ -427,10 +427,10 @@ export function EstateSubmitForm({ characters }: Props) {
                         />
                       </div>
                       <div className="col-span-2">
-                        <Label className="text-xs">Linked Estate ID (optional)</Label>
+                        <Label className="text-xs">Character Profile ID (optional)</Label>
                         <Input
-                          {...form.register(`venueStaff.${index}.linkedEstateId`)}
-                          placeholder="Paste estate ID if they have a listing here"
+                          {...form.register(`venueStaff.${index}.linkedCharacterId`)}
+                          placeholder="Character ID from their profile URL (e.g. /character/abc123)"
                           className="mt-1"
                         />
                       </div>
