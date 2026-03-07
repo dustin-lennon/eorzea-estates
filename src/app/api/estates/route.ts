@@ -1,6 +1,7 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { estateFormSchema } from "@/lib/schemas"
+import { getRegionByDataCenter } from "@/lib/ffxiv-data"
 import { NextResponse } from "next/server"
 
 // Per-character housing limits (only one of each type allowed)
@@ -56,11 +57,12 @@ export async function POST(req: Request) {
       inspiration: data.inspiration ?? "",
       type: data.type,
       district: data.district ?? null,
-      region: data.region,
-      dataCenter: data.dataCenter,
-      server: data.server,
+      region: getRegionByDataCenter(character.dataCenter),
+      dataCenter: character.dataCenter,
+      server: character.server,
       ward: data.ward ?? null,
       plot: data.plot ?? null,
+      room: data.room ?? null,
       tags: data.tags,
       published: true,
       ownerId: session.user.id,

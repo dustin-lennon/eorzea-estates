@@ -163,5 +163,10 @@ export function getServers(regionName: string, dcName: string): string[] {
   return getDataCenters(regionName).find((dc) => dc.name === dcName)?.servers ?? []
 }
 
+// Helper: get region name for a given data center name
+export function getRegionByDataCenter(dcName: string): string {
+  return REGIONS.find((r) => r.dataCenters.some((dc) => dc.name === dcName))?.name ?? ""
+}
+
 // Districts that don't apply to apartments/FC rooms
-export const PLOT_BASED_TYPES = ["PRIVATE", "FC_ESTATE", "VENUE"] as const
+export const PLOT_BASED_TYPES = ["PRIVATE", "FC_ESTATE", "VENUE", "FC_ROOM"] as const
