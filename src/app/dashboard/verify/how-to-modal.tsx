@@ -67,6 +67,12 @@ const STEPS: { title: string; description: string; image?: string }[] = [
       "Come back to Eorzea Estates and click the 'Verify' button. Once verified, you can remove the code from your Lodestone bio.",
     image: "/images/code_how_to/step_9.png",
   },
+  {
+    title: "Click the Verify button",
+    description:
+      "Click the 'Verify' button shown below. Eorzea Estates will check your Lodestone bio for the code. Once found, your character will be verified and you can remove the code from your bio.",
+    image: "/images/code_how_to/step_10.png",
+  },
 ]
 
 export function HowToModal() {
