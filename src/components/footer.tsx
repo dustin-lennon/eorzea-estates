@@ -4,10 +4,8 @@ export default function Footer() {
   return (
     <footer className="border-t bg-background mt-auto">
       <div className="container mx-auto px-4 py-6 flex flex-col items-center gap-2 text-center text-xs text-muted-foreground">
-        <p>
-          FINAL FANTASY XIV &copy; 2010 &ndash; 2021 SQUARE ENIX CO., LTD. All Rights Reserved.
-          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.
-        </p>
+        <p>&copy; SQUARE ENIX CO., LTD. All Rights Reserved.</p>
+        <p>FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.</p>
         <p>Created by Caspian Nightworth of Brynhildr</p>
         <p>
           &copy; {year} Eorzea Estates. All Rights Reserved. &middot;{" "}
