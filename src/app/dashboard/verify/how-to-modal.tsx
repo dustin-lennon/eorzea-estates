@@ -41,6 +41,7 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Open Character Profile settings",
     description:
       "Click your character portrait in the top-right corner to open the account menu. Select 'Character Profile' from the dropdown.",
+    image: "/images/code_how_to/step_5.png",
   },
   {
     title: "Edit your profile bio",
