@@ -18,8 +18,11 @@ async function FeaturedEstates() {
         owner: {
           select: {
             name: true,
-            lodestoneCharacterName: true,
-            lodestoneVerified: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
           },
         },
         venueDetails: { select: { venueType: true } },
@@ -44,9 +47,8 @@ async function FeaturedEstates() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {estates.map((estate) => {
-          const ownerName = estate.owner.lodestoneVerified
-            ? estate.owner.lodestoneCharacterName
-            : estate.owner.name
+          const verifiedChar = estate.owner.characters[0]
+          const ownerName = verifiedChar?.characterName ?? estate.owner.name
           return (
             <EstateCard
               key={estate.id}
@@ -60,7 +62,7 @@ async function FeaturedEstates() {
               likeCount={estate.likeCount}
               coverImage={estate.images[0]?.cloudinaryUrl}
               ownerName={ownerName ?? null}
-              lodestoneVerified={estate.owner.lodestoneVerified}
+              lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}
             />
           )

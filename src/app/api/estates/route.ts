@@ -3,6 +3,9 @@ import prisma from "@/lib/prisma"
 import { estateFormSchema } from "@/lib/schemas"
 import { NextResponse } from "next/server"
 
+// Per-character housing limits (only one of each type allowed)
+const SINGLE_LIMIT_TYPES = ["PRIVATE", "APARTMENT", "FC_ROOM", "FC_ESTATE"] as const
+
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) {
@@ -17,6 +20,33 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data
+
+  // Verify the character belongs to this user and is verified
+  const character = await prisma.ffxivCharacter.findFirst({
+    where: { id: data.characterId, userId: session.user.id, verified: true },
+  })
+  if (!character) {
+    return NextResponse.json(
+      { error: "Character not found or not verified." },
+      { status: 400 }
+    )
+  }
+
+  // Enforce per-character housing limits
+  if ((SINGLE_LIMIT_TYPES as readonly string[]).includes(data.type)) {
+    const existing = await prisma.estate.findFirst({
+      where: { characterId: data.characterId, type: data.type },
+      select: { id: true },
+    })
+    if (existing) {
+      const label = data.type.replace("_", " ").toLowerCase()
+      return NextResponse.json(
+        { error: `${character.characterName} already has a listing for a ${label}.` },
+        { status: 409 }
+      )
+    }
+  }
+
   const isVenue = data.type === "VENUE"
 
   const estate = await prisma.estate.create({
@@ -34,6 +64,7 @@ export async function POST(req: Request) {
       tags: data.tags,
       published: true,
       ownerId: session.user.id,
+      characterId: data.characterId,
       images: {
         create: data.images.map((img, i) => ({
           cloudinaryUrl: img.url,

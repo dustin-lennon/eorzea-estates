@@ -49,8 +49,11 @@ export default async function EstateDetailPage({ params }: PageProps) {
             id: true,
             name: true,
             image: true,
-            lodestoneCharacterName: true,
-            lodestoneVerified: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
           },
         },
         venueDetails: {
@@ -78,8 +81,11 @@ export default async function EstateDetailPage({ params }: PageProps) {
             id: true,
             name: true,
             image: true,
-            lodestoneCharacterName: true,
-            lodestoneVerified: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
           },
         },
       },
@@ -101,9 +107,9 @@ export default async function EstateDetailPage({ params }: PageProps) {
     ? VENUE_TYPES.find((v) => v.value === estate.venueDetails!.venueType)?.label
     : null
 
-  const ownerDisplayName = estate.owner.lodestoneVerified
-    ? estate.owner.lodestoneCharacterName
-    : estate.owner.name
+  const ownerVerifiedChar = estate.owner.characters[0]
+  const ownerIsVerified = !!ownerVerifiedChar
+  const ownerDisplayName = ownerVerifiedChar?.characterName ?? estate.owner.name
 
   const hours = estate.venueDetails?.hours as HoursSchedule | null | undefined
 
@@ -147,12 +153,12 @@ export default async function EstateDetailPage({ params }: PageProps) {
       <div className="flex items-center gap-2 mt-4 text-sm">
         <span className="text-muted-foreground">Listed by</span>
         <Link href={`/profile/${estate.owner.id}`} className="flex items-center gap-1 hover:underline font-medium">
-          {estate.owner.lodestoneVerified && (
+          {ownerIsVerified && (
             <BadgeCheck className="h-4 w-4 text-blue-500" />
           )}
           {ownerDisplayName}
         </Link>
-        {estate.owner.lodestoneVerified && (
+        {ownerIsVerified && (
           <span className="text-xs text-muted-foreground">(verified character)</span>
         )}
       </div>
