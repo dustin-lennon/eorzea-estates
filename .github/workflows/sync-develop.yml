@@ -1,29 +1,113 @@
-name: Sync develop from main
+name: Sync Main to Develop
+
+permissions:
+  contents: write
+  pull-requests: write
 
 on:
   push:
     branches: [main]
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
   sync:
-    name: Merge main into develop
+    name: Sync main to develop
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
-          ref: develop
-          fetch-depth: 0
           token: ${{ secrets.SYNC_PAT }}
+          fetch-depth: 0
 
-      - name: Configure git
+      - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Merge main into develop
+      - name: Sync main to develop
+        id: sync
         run: |
-          git merge origin/main --no-edit
-          git push origin develop
+          git fetch origin main
+          git fetch origin develop
+
+          git checkout develop
+
+          BEHIND=$(git rev-list --count develop..main)
+
+          if [ $BEHIND -gt 0 ]; then
+            echo "Develop is $BEHIND commits behind main. Syncing..."
+
+            if git merge origin/main --no-edit; then
+              echo "Successfully merged main into develop"
+              git push origin develop
+              echo "sync_status=success" >> $GITHUB_OUTPUT
+            else
+              echo "Merge conflict detected. Will create pull request..."
+
+              git merge --abort
+
+              SYNC_BRANCH="sync/main-to-develop-$(date +%Y%m%d-%H%M%S)"
+              git checkout -b $SYNC_BRANCH
+
+              git merge origin/main --no-edit || true
+
+              git add .
+              git commit -m "Sync main to develop - conflicts need resolution" || true
+
+              git push origin $SYNC_BRANCH
+
+              echo "sync_branch=$SYNC_BRANCH" >> $GITHUB_OUTPUT
+              echo "sync_status=conflict" >> $GITHUB_OUTPUT
+              echo "Sync branch created: $SYNC_BRANCH"
+            fi
+          else
+            echo "Develop is up to date with main"
+            echo "sync_status=up_to_date" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request for conflicts
+        if: steps.sync.outputs.sync_status == 'conflict'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.SYNC_PAT }}
+          branch: ${{ steps.sync.outputs.sync_branch }}
+          title: "Sync main to develop (merge conflicts detected)"
+          body: |
+            ## Automatic Sync: main → develop
+
+            **Status:** Merge conflicts detected
+
+            This pull request was automatically created because there were merge conflicts when attempting to sync changes from `main` into `develop`.
+
+            ### What happened:
+            - Changes were pushed to `main`
+            - Automatic sync to `develop` was attempted
+            - Merge conflicts were detected and require manual resolution
+
+            ### Next steps:
+            1. Review the conflicts in the files below
+            2. Resolve conflicts manually
+            3. Commit the resolved changes
+            4. Merge this PR to complete the sync
+
+            ### Sync Details:
+            - **Source branch:** `main`
+            - **Target branch:** `develop`
+            - **Sync branch:** `${{ steps.sync.outputs.sync_branch }}`
+            - **Triggered by:** ${{ github.event.head_commit.message || 'Manual workflow dispatch' }}
+          base: develop
+          head: ${{ steps.sync.outputs.sync_branch }}
+          labels: |
+            sync
+            merge-conflict
+            automation
+          assignees: ${{ github.actor }}
+          reviewers: ${{ github.actor }}
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Failed to sync main to develop. Check workflow logs for details."
