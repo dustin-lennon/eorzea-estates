@@ -2,39 +2,67 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { toast } from "sonner"
-import { BadgeCheck, Copy, ExternalLink } from "lucide-react"
+import { BadgeCheck, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getAllServers } from "@/lib/ffxiv-data"
+import { REGIONS } from "@/lib/ffxiv-data"
+import { HowToModal } from "./how-to-modal"
 
 interface Props {
-  existingCode: string | null
-  existingCharacterName: string | null
+  pendingCharacterId: string | null
+  pendingCode: string | null
+  pendingCharacterName: string | null
+  pendingAvatarUrl: string | null
 }
 
-export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Props) {
+type SearchTab = "name" | "id"
+
+export function LodestoneVerifyForm({
+  pendingCharacterId,
+  pendingCode,
+  pendingCharacterName,
+  pendingAvatarUrl,
+}: Props) {
   const router = useRouter()
-  const [step, setStep] = useState<"search" | "confirm">(existingCode ? "confirm" : "search")
-  const [characterName, setCharacterName] = useState(existingCharacterName ?? "")
+  const [step, setStep] = useState<"search" | "confirm">(
+    pendingCharacterId ? "confirm" : "search"
+  )
+  const [searchTab, setSearchTab] = useState<SearchTab>("name")
+  const [characterName, setCharacterName] = useState("")
   const [server, setServer] = useState("")
-  const [code, setCode] = useState(existingCode ?? "")
+  const [lodestoneIdInput, setLodestoneIdInput] = useState("")
+  const [code, setCode] = useState(pendingCode ?? "")
+  const [characterId, setCharacterId] = useState(pendingCharacterId ?? "")
+  const [displayName, setDisplayName] = useState(pendingCharacterName ?? "")
+  const [displayServer, setDisplayServer] = useState("")
+  const [avatarUrl, setAvatarUrl] = useState(pendingAvatarUrl ?? "")
   const [loading, setLoading] = useState(false)
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     try {
+      const body: Record<string, string> =
+        searchTab === "name"
+          ? { characterName, server }
+          : { lodestoneId: lodestoneIdInput.trim() }
+
       const res = await fetch("/api/lodestone/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ characterName, server }),
+        body: JSON.stringify(body),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       setCode(data.code)
+      setCharacterId(data.characterId)
+      setDisplayName(data.characterName ?? "")
+      setDisplayServer(data.server && data.dataCenter ? `${data.server} [${data.dataCenter}]` : "")
+      setAvatarUrl(data.avatarUrl ?? "")
       setStep("confirm")
       toast.success("Character found! Follow the steps below.")
     } catch (err) {
@@ -47,10 +75,14 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
   async function handleConfirm() {
     setLoading(true)
     try {
-      const res = await fetch("/api/lodestone/confirm", { method: "POST" })
+      const res = await fetch("/api/lodestone/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ characterId }),
+      })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      toast.success("Character verified successfully!")
+      toast.success(`${data.characterName} verified successfully!`)
       router.push("/dashboard")
       router.refresh()
     } catch (err) {
@@ -60,43 +92,92 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
     }
   }
 
-  const allServers = getAllServers()
-
   return (
     <div className="space-y-6">
       {step === "search" && (
         <Card>
           <CardHeader>
-            <CardTitle>Step 1: Find your character</CardTitle>
+            <CardTitle>Find your character</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-5">
+            {/* Search mode tabs */}
+            <div className="flex rounded-lg border overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setSearchTab("name")}
+                className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                  searchTab === "name"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Name &amp; World
+              </button>
+              <button
+                type="button"
+                onClick={() => setSearchTab("id")}
+                className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                  searchTab === "id"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Lodestone ID
+              </button>
+            </div>
+
             <form onSubmit={handleSearch} className="space-y-4">
-              <div>
-                <Label>Character Name</Label>
-                <Input
-                  value={characterName}
-                  onChange={(e) => setCharacterName(e.target.value)}
-                  placeholder="Firstname Lastname"
-                  className="mt-1"
-                  required
-                />
-              </div>
-              <div>
-                <Label>Home World</Label>
-                <Input
-                  value={server}
-                  onChange={(e) => setServer(e.target.value)}
-                  placeholder="e.g. Balmung"
-                  list="servers-list"
-                  className="mt-1"
-                  required
-                />
-                <datalist id="servers-list">
-                  {allServers.map((s) => (
-                    <option key={s} value={s} />
-                  ))}
-                </datalist>
-              </div>
+              {searchTab === "name" ? (
+                <>
+                  <div>
+                    <Label>Character Name</Label>
+                    <Input
+                      value={characterName}
+                      onChange={(e) => setCharacterName(e.target.value)}
+                      placeholder="Firstname Lastname"
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label>Home World</Label>
+                    <select
+                      value={server}
+                      onChange={(e) => setServer(e.target.value)}
+                      required
+                      className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <option value="" disabled>Select home world</option>
+                      {REGIONS.flatMap((region) =>
+                        region.dataCenters.map((dc) => (
+                          <optgroup key={dc.name} label={dc.name}>
+                            {dc.servers.map((s) => (
+                              <option key={s} value={s}>{s}</option>
+                            ))}
+                          </optgroup>
+                        ))
+                      )}
+                    </select>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <Label>Lodestone Character ID</Label>
+                  <Input
+                    value={lodestoneIdInput}
+                    onChange={(e) => setLodestoneIdInput(e.target.value.replace(/\D/g, ""))}
+                    placeholder="e.g. 12345678"
+                    className="mt-1"
+                    inputMode="numeric"
+                    required
+                  />
+                  <p className="text-xs text-muted-foreground mt-1.5">
+                    Find your ID in your Lodestone profile URL:{" "}
+                    na.finalfantasyxiv.com/lodestone/character/<strong>12345678</strong>/
+                  </p>
+                </div>
+              )}
+
               <Button type="submit" disabled={loading}>
                 {loading ? "Searching..." : "Find Character"}
               </Button>
@@ -107,9 +188,38 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
 
       {step === "confirm" && (
         <>
+          {/* Character preview card */}
+          {(displayName || avatarUrl) && (
+            <Card>
+              <CardContent className="pt-5">
+                <div className="flex items-center gap-4">
+                  {avatarUrl ? (
+                    <div className="relative h-16 w-16 rounded-full overflow-hidden border-2 border-muted shrink-0">
+                      <Image
+                        src={avatarUrl}
+                        alt={displayName}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-16 w-16 rounded-full bg-muted shrink-0" />
+                  )}
+                  <div>
+                    <p className="font-semibold text-base">{displayName}</p>
+                    {displayServer && (
+                      <p className="text-sm text-muted-foreground">{displayServer}</p>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           <Card>
             <CardHeader>
-              <CardTitle>Step 2: Add verification code to your Lodestone bio</CardTitle>
+              <CardTitle>Add verification code to your Lodestone bio</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">
@@ -118,12 +228,13 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
               </p>
 
               <div className="flex items-center gap-2">
-                <code className="flex-1 font-mono text-lg font-bold tracking-widest border rounded-lg px-4 py-2 bg-muted text-center">
+                <code className="flex-1 font-mono text-sm font-bold border rounded-lg px-4 py-3 bg-muted break-all">
                   {code}
                 </code>
                 <Button
                   variant="outline"
                   size="sm"
+                  className="shrink-0"
                   onClick={() => {
                     navigator.clipboard.writeText(code)
                     toast.success("Copied!")
@@ -133,21 +244,13 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
                 </Button>
               </div>
 
+              <HowToModal />
+
               <ol className="text-sm space-y-1.5 text-muted-foreground list-decimal list-inside">
                 <li>Copy the code above</li>
-                <li>
-                  Open your character profile on{" "}
-                  <a
-                    href="https://na.finalfantasyxiv.com/lodestone/my/setting/profile/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline inline-flex items-center gap-0.5"
-                  >
-                    the Lodestone <ExternalLink className="h-3 w-3" />
-                  </a>
-                </li>
-                <li>Paste the code anywhere in your profile bio</li>
-                <li>Save the profile, then click Verify below</li>
+                <li>Log in to the Lodestone and open your Character Profile settings</li>
+                <li>Paste the code anywhere in your profile bio and save</li>
+                <li>Return here and click Verify below</li>
               </ol>
             </CardContent>
           </Card>

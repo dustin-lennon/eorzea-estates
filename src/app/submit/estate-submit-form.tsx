@@ -39,13 +39,24 @@ import {
 } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export function EstateSubmitForm() {
+interface Character {
+  id: string
+  characterName: string
+  server: string
+}
+
+interface Props {
+  characters: Character[]
+}
+
+export function EstateSubmitForm({ characters }: Props) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<EstateFormInput, unknown, EstateFormValues>({
     resolver: zodResolver(estateFormSchema),
     defaultValues: {
+      characterId: characters[0]?.id ?? "",
       name: "",
       description: "",
       inspiration: "",
@@ -112,6 +123,36 @@ export function EstateSubmitForm() {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      {/* Character */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Character *</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground mb-3">
+            Select the FFXIV character this estate belongs to. Housing limits are enforced per character.
+          </p>
+          <Select
+            value={form.watch("characterId")}
+            onValueChange={(v) => form.setValue("characterId", v, { shouldValidate: true })}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select character" />
+            </SelectTrigger>
+            <SelectContent>
+              {characters.map((c) => (
+                <SelectItem key={c.id} value={c.id}>
+                  {c.characterName} <span className="text-muted-foreground">({c.server})</span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {form.formState.errors.characterId && (
+            <p className="text-destructive text-sm mt-1">{form.formState.errors.characterId.message}</p>
+          )}
+        </CardContent>
+      </Card>
+
       {/* Screenshots */}
       <Card>
         <CardHeader>

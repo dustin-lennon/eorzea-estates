@@ -1,13 +1,13 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
-import { searchCharacter, generateVerificationCode } from "@/lib/lodestone"
+import { searchCharacter, getCharacterById, generateVerificationCode } from "@/lib/lodestone"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
-const schema = z.object({
-  characterName: z.string().min(1),
-  server: z.string().min(1),
-})
+const schema = z.union([
+  z.object({ characterName: z.string().min(1), server: z.string().min(1) }),
+  z.object({ lodestoneId: z.string().regex(/^\d+$/, "Lodestone ID must be a number") }),
+])
 
 export async function POST(req: Request) {
   const session = await auth()
@@ -21,23 +21,74 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 })
   }
 
-  const { characterName, server } = parsed.data
+  let character: Awaited<ReturnType<typeof getCharacterById>>
+  if ("lodestoneId" in parsed.data) {
+    character = await getCharacterById(parseInt(parsed.data.lodestoneId))
+    if (!character) {
+      return NextResponse.json(
+        { error: `Character with Lodestone ID ${parsed.data.lodestoneId} not found` },
+        { status: 404 }
+      )
+    }
+  } else {
+    const { characterName, server } = parsed.data
+    character = await searchCharacter(characterName, server)
+    if (!character) {
+      return NextResponse.json(
+        { error: `Character "${characterName}" not found on ${server}` },
+        { status: 404 }
+      )
+    }
+  }
 
-  const character = await searchCharacter(characterName, server)
-  if (!character) {
+  // Check if this Lodestone character is already claimed by another user
+  const existing = await prisma.ffxivCharacter.findFirst({
+    where: {
+      lodestoneId: String(character.ID),
+      verified: true,
+      NOT: { userId: session.user.id },
+    },
+  })
+  if (existing) {
     return NextResponse.json(
-      { error: `Character "${characterName}" not found on ${server}` },
-      { status: 404 }
+      { error: "This character is already claimed by another account." },
+      { status: 409 }
     )
   }
+
+  // Create or retrieve the (possibly unverified) character record for this user
+  const ffxivCharacter = await prisma.ffxivCharacter.upsert({
+    where: {
+      userId_lodestoneId: {
+        userId: session.user.id,
+        lodestoneId: String(character.ID),
+      },
+    },
+    create: {
+      userId: session.user.id,
+      lodestoneId: String(character.ID),
+      characterName: character.Name,
+      server: character.Server,
+      dataCenter: character.DC,
+      avatarUrl: character.Avatar,
+      verified: false,
+    },
+    update: {
+      characterName: character.Name,
+      server: character.Server,
+      dataCenter: character.DC,
+      avatarUrl: character.Avatar,
+      verified: false,
+    },
+  })
 
   const code = generateVerificationCode()
   const expiresAt = new Date(Date.now() + 30 * 60 * 1000) // 30 minutes
 
   await prisma.lodestoneVerification.upsert({
-    where: { userId: session.user.id },
+    where: { characterId: ffxivCharacter.id },
     create: {
-      userId: session.user.id,
+      characterId: ffxivCharacter.id,
       code,
       expiresAt,
       verified: false,
@@ -49,16 +100,13 @@ export async function POST(req: Request) {
     },
   })
 
-  // Store the character ID and name temporarily on the user
-  await prisma.user.update({
-    where: { id: session.user.id },
-    data: {
-      lodestoneCharacterId: String(character.ID),
-      lodestoneCharacterName: character.Name,
-      lodestoneServer: character.Server,
-      lodestoneVerified: false,
-    },
+  return NextResponse.json({
+    code,
+    characterId: ffxivCharacter.id,
+    lodestoneId: character.ID,
+    characterName: character.Name,
+    server: character.Server,
+    dataCenter: character.DC,
+    avatarUrl: character.Avatar,
   })
-
-  return NextResponse.json({ code, characterId: character.ID })
 }

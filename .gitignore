@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Ignore Claude worktrees
+.claude/worktrees
 # dependencies
 /node_modules
 /.pnp
@@ -45,3 +47,7 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Claude
+.claude/worktrees/
+.claude/settings.local.json
