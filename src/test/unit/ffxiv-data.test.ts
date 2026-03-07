@@ -103,9 +103,9 @@ describe("FFXIV static data", () => {
       expect(PLOT_BASED_TYPES).toContain("VENUE")
     })
 
-    it("does not include APARTMENT or FC_ROOM", () => {
+    it("includes FC_ROOM but not APARTMENT", () => {
+      expect(PLOT_BASED_TYPES).toContain("FC_ROOM")
       expect(PLOT_BASED_TYPES).not.toContain("APARTMENT")
-      expect(PLOT_BASED_TYPES).not.toContain("FC_ROOM")
     })
   })
 

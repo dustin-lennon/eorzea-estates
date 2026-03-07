@@ -12,15 +12,11 @@ import { z } from "zod"
 
 type EstateFormInput = z.input<typeof estateFormSchema>
 import {
-  REGIONS,
   ESTATE_TYPES,
   HOUSING_DISTRICTS,
   VENUE_TYPES,
   PREDEFINED_TAGS,
   DAYS_OF_WEEK,
-  PLOT_BASED_TYPES,
-  getDataCenters,
-  getServers,
 } from "@/lib/ffxiv-data"
 import { ImageUpload, type UploadedImage } from "@/components/image-upload"
 
@@ -28,7 +24,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
 import {
   Select,
@@ -61,9 +56,6 @@ export function EstateSubmitForm({ characters }: Props) {
       description: "",
       inspiration: "",
       type: "PRIVATE",
-      region: "",
-      dataCenter: "",
-      server: "",
       tags: [],
       images: [],
       venueStaff: [],
@@ -76,15 +68,9 @@ export function EstateSubmitForm({ characters }: Props) {
     name: "venueStaff",
   })
 
-  const watchedRegion = form.watch("region")
-  const watchedDC = form.watch("dataCenter")
   const watchedType = form.watch("type")
   const isVenue = watchedType === "VENUE"
-  const isPlotBased = PLOT_BASED_TYPES.includes(watchedType as typeof PLOT_BASED_TYPES[number])
-  const isApartmentOrRoom = watchedType === "APARTMENT" || watchedType === "FC_ROOM"
-
-  const dataCenters = getDataCenters(watchedRegion)
-  const servers = getServers(watchedRegion, watchedDC)
+  const isRoomType = watchedType === "APARTMENT" || watchedType === "FC_ROOM"
 
   const watchedTags = form.watch("tags") ?? []
 
@@ -192,9 +178,10 @@ export function EstateSubmitForm({ characters }: Props) {
               value={form.watch("type")}
               onValueChange={(v) => {
                 form.setValue("type", v as EstateFormValues["type"])
-                if (v === "APARTMENT" || v === "FC_ROOM") {
-                  form.setValue("district", undefined)
-                  form.setValue("ward", undefined)
+                if (v !== "APARTMENT" && v !== "FC_ROOM") {
+                  form.setValue("room", undefined)
+                }
+                if (v === "APARTMENT") {
                   form.setValue("plot", undefined)
                 }
               }}
@@ -243,112 +230,39 @@ export function EstateSubmitForm({ characters }: Props) {
           <CardTitle>Location</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <Label>Region *</Label>
-              <Select
-                value={watchedRegion}
-                onValueChange={(v) => {
-                  form.setValue("region", v)
-                  form.setValue("dataCenter", "")
-                  form.setValue("server", "")
-                }}
-              >
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Region" />
-                </SelectTrigger>
-                <SelectContent>
-                  {REGIONS.map((r) => (
-                    <SelectItem key={r.name} value={r.name}>{r.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {form.formState.errors.region && (
-                <p className="text-destructive text-sm mt-1">{form.formState.errors.region.message}</p>
-              )}
-            </div>
-
-            <div>
-              <Label>Data Center *</Label>
-              <Select
-                value={watchedDC}
-                disabled={!watchedRegion}
-                onValueChange={(v) => {
-                  form.setValue("dataCenter", v)
-                  form.setValue("server", "")
-                }}
-              >
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Data Center" />
-                </SelectTrigger>
-                <SelectContent>
-                  {dataCenters.map((dc) => (
-                    <SelectItem key={dc.name} value={dc.name}>{dc.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {form.formState.errors.dataCenter && (
-                <p className="text-destructive text-sm mt-1">{form.formState.errors.dataCenter.message}</p>
-              )}
-            </div>
-
-            <div>
-              <Label>Server *</Label>
-              <Select
-                value={form.watch("server")}
-                disabled={!watchedDC}
-                onValueChange={(v) => form.setValue("server", v)}
-              >
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Server" />
-                </SelectTrigger>
-                <SelectContent>
-                  {servers.map((s) => (
-                    <SelectItem key={s} value={s}>{s}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {form.formState.errors.server && (
-                <p className="text-destructive text-sm mt-1">{form.formState.errors.server.message}</p>
-              )}
-            </div>
+          <div>
+            <Label>Housing District</Label>
+            <Select
+              value={form.watch("district") ?? ""}
+              onValueChange={(v) => form.setValue("district", v as EstateFormValues["district"])}
+            >
+              <SelectTrigger className="mt-1">
+                <SelectValue placeholder="Select district (optional)" />
+              </SelectTrigger>
+              <SelectContent>
+                {HOUSING_DISTRICTS.map((d) => (
+                  <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          {!isApartmentOrRoom && (
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>Housing District</Label>
-              <Select
-                value={form.watch("district") ?? ""}
-                onValueChange={(v) => form.setValue("district", v as EstateFormValues["district"])}
-              >
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Select district (optional)" />
-                </SelectTrigger>
-                <SelectContent>
-                  {HOUSING_DISTRICTS.map((d) => (
-                    <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label htmlFor="ward">Ward (optional)</Label>
+              <Input
+                id="ward"
+                type="number"
+                min={1}
+                max={30}
+                placeholder="1–30"
+                className="mt-1"
+                onChange={(e) =>
+                  form.setValue("ward", e.target.value ? parseInt(e.target.value) : undefined)
+                }
+              />
             </div>
-          )}
-
-          {isPlotBased && (
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="ward">Ward (optional)</Label>
-                <Input
-                  id="ward"
-                  type="number"
-                  min={1}
-                  max={30}
-                  placeholder="1–30"
-                  className="mt-1"
-                  onChange={(e) =>
-                    form.setValue("ward", e.target.value ? parseInt(e.target.value) : undefined)
-                  }
-                />
-              </div>
+            {watchedType !== "APARTMENT" && (
               <div>
                 <Label htmlFor="plot">Plot (optional)</Label>
                 <Input
@@ -363,8 +277,23 @@ export function EstateSubmitForm({ characters }: Props) {
                   }
                 />
               </div>
-            </div>
-          )}
+            )}
+            {isRoomType && (
+              <div>
+                <Label htmlFor="room">Room Number (optional)</Label>
+                <Input
+                  id="room"
+                  type="number"
+                  min={1}
+                  placeholder="Room #"
+                  className="mt-1"
+                  onChange={(e) =>
+                    form.setValue("room", e.target.value ? parseInt(e.target.value) : undefined)
+                  }
+                />
+              </div>
+            )}
+          </div>
         </CardContent>
       </Card>
 

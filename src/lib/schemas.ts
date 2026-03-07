@@ -23,11 +23,9 @@ export const estateFormSchema = z.object({
   inspiration: z.string().max(5000).default(""),
   type: z.enum(["PRIVATE", "FC_ESTATE", "VENUE", "APARTMENT", "FC_ROOM"]),
   district: z.enum(["MIST", "LAVENDER_BEDS", "GOBLET", "SHIROGANE", "EMPYREUM"]).optional(),
-  region: z.string().min(1, "Region is required"),
-  dataCenter: z.string().min(1, "Data center is required"),
-  server: z.string().min(1, "Server is required"),
   ward: z.number().int().min(1).max(30).optional(),
   plot: z.number().int().min(1).max(60).optional(),
+  room: z.number().int().min(1).max(2048).optional(),
   tags: z.array(z.string()).max(10).default([]),
   images: z.array(
     z.object({ url: z.string().url(), publicId: z.string() })
