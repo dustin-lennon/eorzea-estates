@@ -63,20 +63,33 @@ model User {
   discordUsername String?
   discordId       String? @unique
 
-  // Lodestone character (optional, self-reported + verified)
-  lodestoneCharacterId   String?
-  lodestoneCharacterName String?
-  lodestoneServer        String?
-  lodestoneVerified      Boolean @default(false)
-
   accounts   Account[]
   sessions   Session[]
+  characters FfxivCharacter[]
   estates    Estate[]
   likes      Like[]
   comments   Comment[]
   venueStaff VenueStaff[] @relation("StaffUser")
+}
 
+// ---------------------------------------------------------------------------
+// FFXIV Characters
+// ---------------------------------------------------------------------------
+
+model FfxivCharacter {
+  id            String   @id @default(cuid())
+  userId        String
+  lodestoneId   String
+  characterName String
+  server        String
+  verified      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  estates Estate[]
   lodestoneVerification LodestoneVerification?
+
+  @@unique([userId, lodestoneId])
 }
 
 // ---------------------------------------------------------------------------
@@ -126,6 +139,9 @@ model Estate {
 
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  characterId String?
+  character   FfxivCharacter? @relation(fields: [characterId], references: [id], onDelete: SetNull)
 
   images       Image[]
   venueDetails VenueDetails?
@@ -224,11 +240,11 @@ model Comment {
 // ---------------------------------------------------------------------------
 
 model LodestoneVerification {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  code      String
-  expiresAt DateTime
-  verified  Boolean  @default(false)
+  id          String   @id @default(cuid())
+  characterId String   @unique
+  code        String
+  expiresAt   DateTime
+  verified    Boolean  @default(false)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  character FfxivCharacter @relation(fields: [characterId], references: [id], onDelete: Cascade)
 }

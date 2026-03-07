@@ -18,8 +18,7 @@ interface Comment {
     id: string
     name: string | null
     image: string | null
-    lodestoneCharacterName: string | null
-    lodestoneVerified: boolean
+    characters: { characterName: string }[]
   }
 }
 
@@ -90,9 +89,8 @@ export function CommentsSection({ estateId, initialComments, isLoggedIn }: Comme
       ) : (
         <div className="space-y-4">
           {comments.map((comment) => {
-            const displayName = comment.user.lodestoneVerified
-              ? comment.user.lodestoneCharacterName
-              : comment.user.name
+            const verifiedChar = comment.user.characters[0]
+            const displayName = verifiedChar?.characterName ?? comment.user.name
             return (
               <div key={comment.id} className="flex gap-3">
                 <Avatar className="h-8 w-8 shrink-0">
@@ -101,7 +99,7 @@ export function CommentsSection({ estateId, initialComments, isLoggedIn }: Comme
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-1 text-sm font-medium">
-                    {comment.user.lodestoneVerified && (
+                    {verifiedChar && (
                       <BadgeCheck className="h-3.5 w-3.5 text-blue-500" />
                     )}
                     {displayName}

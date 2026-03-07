@@ -11,16 +11,24 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getAllServers } from "@/lib/ffxiv-data"
 
 interface Props {
-  existingCode: string | null
-  existingCharacterName: string | null
+  pendingCharacterId: string | null
+  pendingCode: string | null
+  pendingCharacterName: string | null
 }
 
-export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Props) {
+export function LodestoneVerifyForm({
+  pendingCharacterId,
+  pendingCode,
+  pendingCharacterName,
+}: Props) {
   const router = useRouter()
-  const [step, setStep] = useState<"search" | "confirm">(existingCode ? "confirm" : "search")
-  const [characterName, setCharacterName] = useState(existingCharacterName ?? "")
+  const [step, setStep] = useState<"search" | "confirm">(
+    pendingCharacterId ? "confirm" : "search"
+  )
+  const [characterName, setCharacterName] = useState(pendingCharacterName ?? "")
   const [server, setServer] = useState("")
-  const [code, setCode] = useState(existingCode ?? "")
+  const [code, setCode] = useState(pendingCode ?? "")
+  const [characterId, setCharacterId] = useState(pendingCharacterId ?? "")
   const [loading, setLoading] = useState(false)
 
   async function handleSearch(e: React.FormEvent) {
@@ -35,6 +43,7 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       setCode(data.code)
+      setCharacterId(data.characterId)
       setStep("confirm")
       toast.success("Character found! Follow the steps below.")
     } catch (err) {
@@ -47,10 +56,14 @@ export function LodestoneVerifyForm({ existingCode, existingCharacterName }: Pro
   async function handleConfirm() {
     setLoading(true)
     try {
-      const res = await fetch("/api/lodestone/confirm", { method: "POST" })
+      const res = await fetch("/api/lodestone/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ characterId }),
+      })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      toast.success("Character verified successfully!")
+      toast.success(`${data.characterName} verified successfully!`)
       router.push("/dashboard")
       router.refresh()
     } catch (err) {
