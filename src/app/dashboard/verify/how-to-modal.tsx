@@ -29,6 +29,7 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Log in with your Square Enix account",
     description:
       "Enter your Square Enix ID and password. If you have a security token (authenticator), you will also need your one-time password.",
+    image: "/images/code_how_to/step_3.png",
   },
   {
     title: "Select your character",
