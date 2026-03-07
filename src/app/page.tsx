@@ -18,8 +18,11 @@ async function FeaturedEstates() {
         owner: {
           select: {
             name: true,
-            lodestoneCharacterName: true,
-            lodestoneVerified: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
           },
         },
         venueDetails: { select: { venueType: true } },
@@ -44,9 +47,8 @@ async function FeaturedEstates() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {estates.map((estate) => {
-          const ownerName = estate.owner.lodestoneVerified
-            ? estate.owner.lodestoneCharacterName
-            : estate.owner.name
+          const verifiedChar = estate.owner.characters[0]
+          const ownerName = verifiedChar?.characterName ?? estate.owner.name
           return (
             <EstateCard
               key={estate.id}
@@ -60,7 +62,7 @@ async function FeaturedEstates() {
               likeCount={estate.likeCount}
               coverImage={estate.images[0]?.cloudinaryUrl}
               ownerName={ownerName ?? null}
-              lodestoneVerified={estate.owner.lodestoneVerified}
+              lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}
             />
           )
@@ -111,7 +113,7 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-b from-muted/50 to-background py-20 text-center">
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
-            <Image src="/eorzea-estates-icon.svg" alt="Eorzea Estates icon" width={240} height={240} />
+            <Image src="/images/logo/eorzea-estates-icon.svg" alt="Eorzea Estates icon" width={240} height={240} />
           </div>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
             A community directory of Final Fantasy XIV player-owned estates. Venues, private homes,

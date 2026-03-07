@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import { estateFormSchema } from "@/lib/schemas"
 
 const validBase = {
+  characterId: "test-character-id",
   name: "The Wandering Hearth",
   description: "A cozy private estate tucked away in the Lavender Beds.",
   type: "PRIVATE" as const,

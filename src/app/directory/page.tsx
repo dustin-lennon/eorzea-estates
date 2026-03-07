@@ -73,8 +73,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         owner: {
           select: {
             name: true,
-            lodestoneCharacterName: true,
-            lodestoneVerified: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
           },
         },
         venueDetails: { select: { venueType: true } },
@@ -118,10 +121,8 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {estates.map((estate) => {
-                  const owner = estate.owner
-                  const ownerName = owner.lodestoneVerified
-                    ? owner.lodestoneCharacterName
-                    : owner.name
+                  const verifiedChar = estate.owner.characters[0]
+                  const ownerName = verifiedChar?.characterName ?? estate.owner.name
                   return (
                     <EstateCard
                       key={estate.id}
@@ -135,7 +136,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                       likeCount={estate.likeCount}
                       coverImage={estate.images[0]?.cloudinaryUrl}
                       ownerName={ownerName ?? null}
-                      lodestoneVerified={owner.lodestoneVerified}
+                      lodestoneVerified={!!verifiedChar}
                       venueType={estate.venueDetails?.venueType ?? null}
                     />
                   )

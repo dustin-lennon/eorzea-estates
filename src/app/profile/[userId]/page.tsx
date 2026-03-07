@@ -3,7 +3,6 @@ import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 import { BadgeCheck } from "lucide-react"
 
 interface PageProps {
@@ -16,12 +15,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     where: { id: userId },
     select: {
       name: true,
-      lodestoneCharacterName: true,
-      lodestoneVerified: true,
+      characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
     },
   })
   if (!user) return {}
-  const displayName = user.lodestoneVerified ? user.lodestoneCharacterName : user.name
+  const displayName = user.characters[0]?.characterName ?? user.name
   return { title: `${displayName}'s Profile` }
 }
 
@@ -34,9 +32,8 @@ export default async function ProfilePage({ params }: PageProps) {
       id: true,
       name: true,
       image: true,
-      lodestoneCharacterName: true,
-      lodestoneVerified: true,
       createdAt: true,
+      characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
     },
   })
 
@@ -51,7 +48,9 @@ export default async function ProfilePage({ params }: PageProps) {
     },
   })
 
-  const displayName = user.lodestoneVerified ? user.lodestoneCharacterName : user.name
+  const verifiedChar = user.characters[0]
+  const isVerified = !!verifiedChar
+  const displayName = verifiedChar?.characterName ?? user.name
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
@@ -65,11 +64,11 @@ export default async function ProfilePage({ params }: PageProps) {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{displayName}</h1>
-            {user.lodestoneVerified && (
+            {isVerified && (
               <BadgeCheck className="h-5 w-5 text-blue-500" aria-label="Verified FFXIV Character" />
             )}
           </div>
-          {user.lodestoneVerified && user.name && (
+          {isVerified && user.name && (
             <p className="text-sm text-muted-foreground">Discord: {user.name}</p>
           )}
           <p className="text-sm text-muted-foreground">{estates.length} estate{estates.length !== 1 ? "s" : ""}</p>
@@ -93,7 +92,7 @@ export default async function ProfilePage({ params }: PageProps) {
               likeCount={estate.likeCount}
               coverImage={estate.images[0]?.cloudinaryUrl}
               ownerName={displayName}
-              lodestoneVerified={user.lodestoneVerified}
+              lodestoneVerified={isVerified}
               venueType={estate.venueDetails?.venueType ?? null}
             />
           ))}

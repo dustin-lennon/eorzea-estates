@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
@@ -8,8 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { EstateCard } from "@/components/estate-card"
 import { DashboardEstateActions } from "./dashboard-estate-actions"
+import { CharacterActions } from "./character-actions"
 import { ESTATE_TYPES } from "@/lib/ffxiv-data"
-import { Plus, BadgeCheck } from "lucide-react"
+import { Plus, BadgeCheck, UserCircle2 } from "lucide-react"
 
 export const metadata: Metadata = { title: "Dashboard" }
 
@@ -17,16 +19,11 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const [user, estates, likedEstates] = await Promise.all([
-    prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: {
-        name: true,
-        image: true,
-        lodestoneCharacterName: true,
-        lodestoneVerified: true,
-        discordUsername: true,
-      },
+  const [characters, estates, likedEstates] = await Promise.all([
+    prisma.ffxivCharacter.findMany({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: "asc" },
+      include: { _count: { select: { estates: true } } },
     }),
     prisma.estate.findMany({
       where: { ownerId: session.user.id },
@@ -34,6 +31,7 @@ export default async function DashboardPage() {
       include: {
         images: { orderBy: { order: "asc" }, take: 1 },
         venueDetails: { select: { venueType: true } },
+        character: { select: { characterName: true, verified: true } },
       },
     }),
     prisma.like.findMany({
@@ -45,8 +43,11 @@ export default async function DashboardPage() {
             owner: {
               select: {
                 name: true,
-                lodestoneCharacterName: true,
-                lodestoneVerified: true,
+                characters: {
+                  where: { verified: true },
+                  select: { characterName: true },
+                  take: 1,
+                },
               },
             },
             venueDetails: { select: { venueType: true } },
@@ -57,6 +58,8 @@ export default async function DashboardPage() {
     }),
   ])
 
+  const hasVerifiedCharacter = characters.some((c) => c.verified)
+
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
       <div className="flex items-start justify-between mb-6">
@@ -66,7 +69,7 @@ export default async function DashboardPage() {
             Manage your estate listings and account settings.
           </p>
         </div>
-        <Button asChild>
+        <Button asChild disabled={!hasVerifiedCharacter}>
           <Link href="/submit">
             <Plus className="h-4 w-4 mr-1" />
             Submit Estate
@@ -74,42 +77,110 @@ export default async function DashboardPage() {
         </Button>
       </div>
 
-      {/* Lodestone Verification CTA */}
-      {!user?.lodestoneVerified && (
-        <div className="rounded-xl border border-blue-200 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-900 p-4 mb-6 flex items-center justify-between gap-4">
-          <div>
-            <p className="font-medium text-sm">Verify your FFXIV character</p>
-            <p className="text-sm text-muted-foreground">
-              Link your Lodestone character to get a verified badge on your listings.
-            </p>
-          </div>
+      {/* Characters */}
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold">My Characters ({characters.length})</h2>
           <Button variant="outline" size="sm" asChild>
             <Link href="/dashboard/verify">
-              <BadgeCheck className="h-4 w-4 mr-1" />
-              Verify
+              <Plus className="h-4 w-4 mr-1" />
+              Add Character
             </Link>
           </Button>
         </div>
-      )}
 
-      {user?.lodestoneVerified && (
-        <div className="rounded-xl border p-4 mb-6 flex items-center gap-2 text-sm">
-          <BadgeCheck className="h-4 w-4 text-blue-500" />
-          <span>
-            Verified as <strong>{user.lodestoneCharacterName}</strong>
-          </span>
-        </div>
-      )}
+        {characters.length === 0 ? (
+          <div className="text-center py-10 border rounded-xl text-muted-foreground">
+            <UserCircle2 className="h-8 w-8 mx-auto mb-2 opacity-40" />
+            <p>No characters linked yet.</p>
+            <Button asChild className="mt-4" variant="outline">
+              <Link href="/dashboard/verify">Add your first character</Link>
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {/* Group characters by data center */}
+            {Array.from(
+              characters.reduce((map, c) => {
+                const dc = c.dataCenter || "Unknown"
+                if (!map.has(dc)) map.set(dc, [])
+                map.get(dc)!.push(c)
+                return map
+              }, new Map<string, typeof characters>())
+            ).map(([dc, dcChars]) => (
+              <div key={dc}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {dc}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    · {dcChars.length} character{dcChars.length !== 1 ? "s" : ""}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {dcChars.map((character) => (
+                    <div
+                      key={character.id}
+                      className="rounded-xl border p-4 flex items-center gap-3"
+                    >
+                      {character.avatarUrl ? (
+                        <div className="relative h-14 w-14 rounded-full overflow-hidden border-2 border-muted shrink-0">
+                          <Image
+                            src={character.avatarUrl}
+                            alt={character.characterName}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-14 w-14 rounded-full bg-muted flex items-center justify-center shrink-0">
+                          <UserCircle2 className="h-7 w-7 text-muted-foreground" />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="font-medium truncate">{character.characterName}</span>
+                          {character.verified ? (
+                            <Badge variant="default" className="gap-1 shrink-0">
+                              <BadgeCheck className="h-3 w-3" />
+                              Verified
+                            </Badge>
+                          ) : (
+                            <Badge variant="secondary" className="shrink-0">Unverified</Badge>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {character.server} · {character._count.estates} estate{character._count.estates !== 1 ? "s" : ""}
+                        </p>
+                      </div>
+                      <CharacterActions
+                        characterId={character.id}
+                        verified={character.verified}
+                        estateCount={character._count.estates}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <Separator />
 
       {/* My Estates */}
-      <section className="mb-10">
+      <section className="my-10">
         <h2 className="text-xl font-semibold mb-4">My Estates ({estates.length})</h2>
         {estates.length === 0 ? (
           <div className="text-center py-12 border rounded-xl text-muted-foreground">
             <p>You haven&apos;t submitted any estates yet.</p>
-            <Button asChild className="mt-4" variant="outline">
-              <Link href="/submit">Submit your first estate</Link>
-            </Button>
+            {hasVerifiedCharacter && (
+              <Button asChild className="mt-4" variant="outline">
+                <Link href="/submit">Submit your first estate</Link>
+              </Button>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
@@ -127,6 +198,11 @@ export default async function DashboardPage() {
                   </div>
                   <p className="text-sm text-muted-foreground">
                     {estate.server} · {estate.likeCount} likes
+                    {estate.character && (
+                      <span className="ml-2 text-muted-foreground/70">
+                        · {estate.character.characterName}
+                      </span>
+                    )}
                   </p>
                 </div>
                 <DashboardEstateActions
@@ -149,9 +225,8 @@ export default async function DashboardPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {likedEstates.map(({ estate }) => {
-              const ownerName = estate.owner.lodestoneVerified
-                ? estate.owner.lodestoneCharacterName
-                : estate.owner.name
+              const verifiedChar = estate.owner.characters[0]
+              const ownerName = verifiedChar?.characterName ?? estate.owner.name
               return (
                 <EstateCard
                   key={estate.id}
@@ -165,7 +240,7 @@ export default async function DashboardPage() {
                   likeCount={estate.likeCount}
                   coverImage={estate.images[0]?.cloudinaryUrl}
                   ownerName={ownerName ?? null}
-                  lodestoneVerified={estate.owner.lodestoneVerified}
+                  lodestoneVerified={!!verifiedChar}
                   venueType={estate.venueDetails?.venueType ?? null}
                 />
               )

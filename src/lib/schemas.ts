@@ -17,6 +17,7 @@ export const staffMemberSchema = z.object({
 })
 
 export const estateFormSchema = z.object({
+  characterId: z.string().min(1, "A linked character is required"),
   name: z.string().min(1, "Estate name is required").max(100),
   description: z.string().min(10, "Description must be at least 10 characters").max(5000),
   inspiration: z.string().max(5000).default(""),
