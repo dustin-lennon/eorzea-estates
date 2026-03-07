@@ -8,6 +8,7 @@ jobs:
   check-linked-issue:
     name: Check for linked issue
     runs-on: ubuntu-latest
+    if: github.base_ref != 'main'
     permissions:
       pull-requests: read
     steps:
