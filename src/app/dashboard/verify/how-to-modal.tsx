@@ -53,16 +53,19 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Paste the verification code",
     description:
       "Paste your verification code anywhere in the text field. You can keep any existing bio — the code just needs to be present somewhere. Click 'Confirm' when done.",
+    image: "/images/code_how_to/step_7.png",
   },
   {
     title: "Confirm your changes",
     description:
       "A preview of your profile will appear. Click 'Confirm' again to publish the updated bio.",
+    image: "/images/code_how_to/step_8.png",
   },
   {
     title: "Return here and click Verify",
     description:
       "Come back to Eorzea Estates and click the 'Verify' button. Once verified, you can remove the code from your Lodestone bio.",
+    image: "/images/code_how_to/step_9.png",
   },
 ]
 
