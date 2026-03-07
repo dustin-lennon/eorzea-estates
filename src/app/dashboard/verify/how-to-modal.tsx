@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,11 +12,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-const STEPS = [
+const STEPS: { title: string; description: string; image?: string }[] = [
   {
     title: "Copy your verification code",
     description:
       "Click the copy button next to your verification code on the previous screen. The code will be copied to your clipboard.",
+    image: "/images/code_how_to/step_1.png",
   },
   {
     title: "Go to the Lodestone and log in",
@@ -101,10 +103,21 @@ export function HowToModal() {
             </p>
             <h3 className="font-semibold text-base">{STEPS[step].title}</h3>
 
-            {/* Screenshot placeholder */}
-            <div className="aspect-video rounded-lg bg-muted flex items-center justify-center border border-dashed">
-              <p className="text-sm text-muted-foreground">Screenshot — Step {step + 1}</p>
-            </div>
+            {/* Screenshot */}
+            {STEPS[step].image ? (
+              <div className="relative aspect-video rounded-lg overflow-hidden border">
+                <Image
+                  src={STEPS[step].image}
+                  alt={`Step ${step + 1}`}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            ) : (
+              <div className="aspect-video rounded-lg bg-muted flex items-center justify-center border border-dashed">
+                <p className="text-sm text-muted-foreground">Screenshot — Step {step + 1}</p>
+              </div>
+            )}
 
             <p className="text-sm text-muted-foreground leading-relaxed">
               {STEPS[step].description}
