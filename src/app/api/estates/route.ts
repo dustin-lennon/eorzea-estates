@@ -85,7 +85,7 @@ export async function POST(req: Request) {
                   create: (data.venueStaff ?? []).map((s) => ({
                     characterName: s.characterName,
                     role: s.role,
-                    linkedEstateId: s.linkedEstateId ?? null,
+                    linkedCharacterId: s.linkedCharacterId ?? null,
                   })),
                 },
               },
