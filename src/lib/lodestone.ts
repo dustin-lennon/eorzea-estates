@@ -17,6 +17,7 @@ export async function searchCharacter(
   server: string
 ): Promise<LodestoneCharacter | null> {
   const result = await characterSearchParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ query: { name, server } } as any)
     .catch(() => null) as { List?: { ID: number; Name: string; World: string; DC: string; Avatar: string }[] } | null
   if (!result) return null
@@ -35,6 +36,7 @@ export async function searchCharacter(
 
 export async function getCharacterById(lodestoneId: number): Promise<LodestoneCharacter | null> {
   const result = await characterParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
     .catch(() => null) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
   if (!result?.Name) return null
@@ -49,6 +51,7 @@ export async function getCharacterById(lodestoneId: number): Promise<LodestoneCh
 
 export async function getCharacterBio(lodestoneId: number): Promise<string> {
   const result = await characterParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
     .catch(() => null) as { Bio?: string } | null
   if (!result) return ""
