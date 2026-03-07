@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getAllServers } from "@/lib/ffxiv-data"
+import { REGIONS } from "@/lib/ffxiv-data"
 
 interface Props {
   pendingCharacterId: string | null
@@ -73,8 +73,6 @@ export function LodestoneVerifyForm({
     }
   }
 
-  const allServers = getAllServers()
-
   return (
     <div className="space-y-6">
       {step === "search" && (
@@ -96,19 +94,23 @@ export function LodestoneVerifyForm({
               </div>
               <div>
                 <Label>Home World</Label>
-                <Input
+                <select
                   value={server}
                   onChange={(e) => setServer(e.target.value)}
-                  placeholder="e.g. Balmung"
-                  list="servers-list"
-                  className="mt-1"
                   required
-                />
-                <datalist id="servers-list">
-                  {allServers.map((s) => (
-                    <option key={s} value={s} />
-                  ))}
-                </datalist>
+                  className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <option value="" disabled>Select home world</option>
+                  {REGIONS.flatMap((region) =>
+                    region.dataCenters.map((dc) => (
+                      <optgroup key={dc.name} label={dc.name}>
+                        {dc.servers.map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </optgroup>
+                    ))
+                  )}
+                </select>
               </div>
               <Button type="submit" disabled={loading}>
                 {loading ? "Searching..." : "Find Character"}
