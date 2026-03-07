@@ -21,7 +21,7 @@ export default async function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" aria-label="Eorzea Estates home">
-          <Image src="/eorzea-estates-navbar.svg" alt="Eorzea Estates" width={0} height={0} className="h-12 w-auto" />
+          <Image src="/images/logo/eorzea-estates-navbar.svg" alt="Eorzea Estates" width={0} height={0} className="h-12 w-auto" />
         </Link>
 
         <nav className="flex items-center gap-4">
