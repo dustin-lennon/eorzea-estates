@@ -47,6 +47,7 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Edit your profile bio",
     description:
       "Scroll down to the 'Character Profile' section. Click the pencil (edit) icon to open the bio editor.",
+    image: "/images/code_how_to/step_6.png",
   },
   {
     title: "Paste the verification code",
