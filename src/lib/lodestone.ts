@@ -33,6 +33,20 @@ export async function searchCharacter(
   return match ? { ID: match.ID, Name: match.Name, Server: match.World, DC: match.DC, Avatar: match.Avatar } : null
 }
 
+export async function getCharacterById(lodestoneId: number): Promise<LodestoneCharacter | null> {
+  const result = await characterParser
+    .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
+    .catch(() => null) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
+  if (!result?.Name) return null
+  return {
+    ID: lodestoneId,
+    Name: result.Name,
+    Server: result.World ?? "",
+    DC: result.DC ?? "",
+    Avatar: result.Avatar ?? "",
+  }
+}
+
 export async function getCharacterBio(lodestoneId: number): Promise<string> {
   const result = await characterParser
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
@@ -42,6 +56,5 @@ export async function getCharacterBio(lodestoneId: number): Promise<string> {
 }
 
 export function generateVerificationCode(): string {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
-  return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join("")
+  return `eorzea-${crypto.randomUUID()}`
 }

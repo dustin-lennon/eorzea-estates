@@ -82,6 +82,8 @@ model FfxivCharacter {
   lodestoneId   String
   characterName String
   server        String
+  dataCenter    String   @default("")
+  avatarUrl     String   @default("")
   verified      Boolean  @default(false)
   createdAt     DateTime @default(now())
 

@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
@@ -97,33 +98,70 @@ export default async function DashboardPage() {
             </Button>
           </div>
         ) : (
-          <div className="space-y-2">
-            {characters.map((character) => (
-              <div
-                key={character.id}
-                className="rounded-xl border p-4 flex items-center gap-4"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{character.characterName}</span>
-                    {character.verified ? (
-                      <Badge variant="default" className="gap-1">
-                        <BadgeCheck className="h-3 w-3" />
-                        Verified
-                      </Badge>
-                    ) : (
-                      <Badge variant="secondary">Unverified</Badge>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-0.5">
-                    {character.server} · {character._count.estates} estate{character._count.estates !== 1 ? "s" : ""}
-                  </p>
+          <div className="space-y-6">
+            {/* Group characters by data center */}
+            {Array.from(
+              characters.reduce((map, c) => {
+                const dc = c.dataCenter || "Unknown"
+                if (!map.has(dc)) map.set(dc, [])
+                map.get(dc)!.push(c)
+                return map
+              }, new Map<string, typeof characters>())
+            ).map(([dc, dcChars]) => (
+              <div key={dc}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {dc}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    · {dcChars.length} character{dcChars.length !== 1 ? "s" : ""}
+                  </span>
                 </div>
-                <CharacterActions
-                  characterId={character.id}
-                  verified={character.verified}
-                  estateCount={character._count.estates}
-                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {dcChars.map((character) => (
+                    <div
+                      key={character.id}
+                      className="rounded-xl border p-4 flex items-center gap-3"
+                    >
+                      {character.avatarUrl ? (
+                        <div className="relative h-14 w-14 rounded-full overflow-hidden border-2 border-muted shrink-0">
+                          <Image
+                            src={character.avatarUrl}
+                            alt={character.characterName}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-14 w-14 rounded-full bg-muted flex items-center justify-center shrink-0">
+                          <UserCircle2 className="h-7 w-7 text-muted-foreground" />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="font-medium truncate">{character.characterName}</span>
+                          {character.verified ? (
+                            <Badge variant="default" className="gap-1 shrink-0">
+                              <BadgeCheck className="h-3 w-3" />
+                              Verified
+                            </Badge>
+                          ) : (
+                            <Badge variant="secondary" className="shrink-0">Unverified</Badge>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {character.server} · {character._count.estates} estate{character._count.estates !== 1 ? "s" : ""}
+                        </p>
+                      </div>
+                      <CharacterActions
+                        characterId={character.id}
+                        verified={character.verified}
+                        estateCount={character._count.estates}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

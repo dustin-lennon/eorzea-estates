@@ -32,6 +32,7 @@ export default async function VerifyPage() {
         pendingCharacterId={pending && !isExpired ? pending.character.id : null}
         pendingCode={pending && !isExpired ? pending.code : null}
         pendingCharacterName={pending && !isExpired ? pending.character.characterName : null}
+        pendingAvatarUrl={pending && !isExpired ? pending.character.avatarUrl : null}
       />
     </div>
   )
