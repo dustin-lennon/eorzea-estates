@@ -133,6 +133,7 @@ model Estate {
 
   ward  Int?
   plot  Int?
+  room  Int?
 
   tags String[]
 
