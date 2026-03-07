@@ -1,7 +1,8 @@
-// Lodestone character verification via xivapi.com
-// xivapi provides a public API to look up FFXIV characters
+// Lodestone character lookup via @xivapi/nodestone (direct Lodestone HTML parser)
+import { CharacterSearch, Character } from "@xivapi/nodestone"
 
-const XIVAPI_BASE = "https://xivapi.com"
+const characterSearchParser = new CharacterSearch()
+const characterParser = new Character()
 
 export interface LodestoneCharacter {
   ID: number
@@ -9,38 +10,35 @@ export interface LodestoneCharacter {
   Server: string
   DC: string
   Avatar: string
-  Bio: string
 }
 
 export async function searchCharacter(
   name: string,
   server: string
 ): Promise<LodestoneCharacter | null> {
-  const url = `${XIVAPI_BASE}/character/search?name=${encodeURIComponent(name)}&server=${encodeURIComponent(server)}`
-  const res = await fetch(url, { next: { revalidate: 0 } })
-  if (!res.ok) return null
+  const result = await characterSearchParser
+    .parse({ query: { name, server } } as any)
+    .catch(() => null) as { List?: { ID: number; Name: string; World: string; DC: string; Avatar: string }[] } | null
+  if (!result) return null
 
-  const data = await res.json()
-  const results: { ID: number; Name: string; Server: string; DC: string; Avatar: string }[] =
-    data.Results ?? []
+  const entries = result.List ?? []
 
   // Find exact match (case-insensitive)
-  const match = results.find(
+  const match = entries.find(
     (r) =>
       r.Name.toLowerCase() === name.toLowerCase() &&
-      r.Server.toLowerCase() === server.toLowerCase()
+      r.World.toLowerCase() === server.toLowerCase()
   )
 
-  return match ? { ...match, Bio: "" } : null
+  return match ? { ID: match.ID, Name: match.Name, Server: match.World, DC: match.DC, Avatar: match.Avatar } : null
 }
 
 export async function getCharacterBio(lodestoneId: number): Promise<string> {
-  const url = `${XIVAPI_BASE}/character/${lodestoneId}?data=`
-  const res = await fetch(url, { next: { revalidate: 0 } })
-  if (!res.ok) return ""
-
-  const data = await res.json()
-  return data.Character?.Bio ?? ""
+  const result = await characterParser
+    .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
+    .catch(() => null) as { Bio?: string } | null
+  if (!result) return ""
+  return result.Bio ?? ""
 }
 
 export function generateVerificationCode(): string {
