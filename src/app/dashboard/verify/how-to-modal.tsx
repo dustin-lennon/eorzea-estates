@@ -23,6 +23,7 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Go to the Lodestone and log in",
     description:
       "Open na.finalfantasyxiv.com/lodestone in your browser. Click the 'Log In' button in the top-right corner of the page.",
+    image: "/images/code_how_to/step_2.png",
   },
   {
     title: "Log in with your Square Enix account",
