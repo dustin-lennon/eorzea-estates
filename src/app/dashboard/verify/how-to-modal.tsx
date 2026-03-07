@@ -35,6 +35,7 @@ const STEPS: { title: string; description: string; image?: string }[] = [
     title: "Select your character",
     description:
       "After logging in, you will be prompted to select a character. Choose the character you want to verify on Eorzea Estates.",
+    image: "/images/code_how_to/step_4.png",
   },
   {
     title: "Open Character Profile settings",
