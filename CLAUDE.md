@@ -57,25 +57,31 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 
 ### Key Patterns
 
-**Auth split** (`src/auth.config.ts` / `src/auth.ts`): Config is split so `auth.config.ts` can be imported in the Edge-compatible middleware without pulling in Node-only Prisma dependencies. `src/auth.ts` has the full adapter-based setup used in API routes and server components.
+**Auth split** (`src/auth.config.ts` / `src/auth.ts`): Config is split so `auth.config.ts` can be imported in the Edge-compatible auth/proxy layer without pulling in Node-only Prisma dependencies. `src/auth.ts` has the full adapter-based setup used in API routes and server components.
 
-**Protected routes**: `src/middleware.ts` protects `/submit`, `/dashboard`, `/estate` (except GET `/estate/[id]` which is public).
+**Protected routes**: `src/proxy.ts` protects `/submit`, `/dashboard`, `/estate` (except GET `/estate/[id]` which is public).
 
 **Prisma client**: Singleton in `src/lib/prisma.ts`, types from `src/generated/prisma/`. Run `pnpm prisma generate` after any schema change — the generated output is committed to the repo.
 
 **Lodestone verification**: Users can optionally verify their FFXIV character by placing a generated code in their Lodestone bio. Flow: `/api/lodestone/start` issues a code → user pastes it into Lodestone → `/api/lodestone/confirm` polls xivapi.com to verify.
 
-**FFXIV data** (`src/lib/ffxiv-data.ts`): Static data for regions, data centers, servers, housing districts, and ward/plot counts.
+**FFXIV characters and estates**: Estates are tied to verified `FfxivCharacter` records. The current schema supports estate types `PRIVATE`, `FC_ESTATE`, `VENUE`, `APARTMENT`, and `FC_ROOM`, plus venue staff/details and estate transfer flows.
+
+**FFXIV data** (`src/lib/ffxiv-data.ts`): Static data for regions, data centers, servers, housing districts, venue types, tags, and schedule helpers.
 
 **Zod schemas** (`src/lib/schemas.ts`): Shared form validation schemas used by both client forms and API route handlers.
 
 ### API Routes (`src/app/api/`)
 - `auth/[...nextauth]` — NextAuth handler
-- `estates/` — list/create estates; `estates/[id]` — read/update/delete
+- `estates/` — create estates; `estates/[id]` — read/update/delete
 - `comments/[estateId]` — list/post comments
 - `likes/[estateId]` — toggle like
 - `upload` — Cloudinary signed upload
 - `lodestone/start` + `lodestone/confirm` — character verification
+- `characters/` + `characters/[id]` — character management
+- `characters/[id]/reverify-fc` — re-verification flow for FC-related estates
+- `cron/verify-fc-estates` — background verification
+- `estate-transfer/confirm` — estate ownership transfer confirmation
 
 ### Branching and Release Flow
 

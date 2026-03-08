@@ -4,7 +4,6 @@ import { useState, useRef, useCallback } from "react"
 import Image from "next/image"
 import { toast } from "sonner"
 import { X, GripVertical, ImagePlus, Loader2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export interface UploadedImage {
