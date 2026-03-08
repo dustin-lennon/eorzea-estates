@@ -3,6 +3,19 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.3.0...v1.4.0) (2026-03-08)
+
+### ✨ Features
+
+* add character profile pages and link staff/dashboard to them ([ad4c010](https://github.com/dustin-lennon/eorzea-estates/commit/ad4c01060c3f5f62fdf140e34f502b4f4c2d3e24))
+* add FC estate ownership transfer and cron verification ([c4dacc5](https://github.com/dustin-lennon/eorzea-estates/commit/c4dacc577dafc4c96fb39fdb138d8a735a66cc46)), closes [#50](https://github.com/dustin-lennon/eorzea-estates/issues/50)
+* display app version in footer ([ca43a4b](https://github.com/dustin-lennon/eorzea-estates/commit/ca43a4bf4807dbdfcb8292363648c4946d6f8108)), closes [#52](https://github.com/dustin-lennon/eorzea-estates/issues/52)
+
+### 🐛 Bug Fixes
+
+* add @semantic-release/npm to update package.json version on release ([0a6cc8c](https://github.com/dustin-lennon/eorzea-estates/commit/0a6cc8c74ee728c5f5da60f144b1ecbabd9eeb91))
+* lazily initialize Resend client to avoid build-time crash ([03a3f48](https://github.com/dustin-lennon/eorzea-estates/commit/03a3f48da0e10da0bac2259ab9070f401266c9f6))
+
 ## [1.3.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.2.0...v1.3.0) (2026-03-07)
 
 ### ✨ Features
