@@ -140,7 +140,7 @@ export default async function DashboardPage() {
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <Link href={`/character/${character.id}`} className="font-medium truncate hover:underline">{character.characterName}</Link>
+                          <Link href={`/character/${character.id}`} className="brand-link truncate font-medium no-underline">{character.characterName}</Link>
                           {character.verified ? (
                             <Badge variant="default" className="gap-1 shrink-0">
                               <BadgeCheck className="h-3 w-3" />

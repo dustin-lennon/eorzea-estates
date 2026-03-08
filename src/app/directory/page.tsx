@@ -106,7 +106,6 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               estateTypes={ESTATE_TYPES}
               districts={HOUSING_DISTRICTS}
               tags={PREDEFINED_TAGS}
-              currentParams={params}
             />
           </Suspense>
         </aside>
