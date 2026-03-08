@@ -90,6 +90,7 @@ model FfxivCharacter {
   user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   estates Estate[]
   lodestoneVerification LodestoneVerification?
+  venueStaffLinks VenueStaff[] @relation("StaffCharacter")
 
   @@unique([userId, lodestoneId])
 }
@@ -146,11 +147,22 @@ model Estate {
   characterId String?
   character   FfxivCharacter? @relation(fields: [characterId], references: [id], onDelete: SetNull)
 
-  images       Image[]
-  venueDetails VenueDetails?
-  likes        Like[]
-  comments     Comment[]
-  staffLinks   VenueStaff[]  @relation("StaffLinkedEstate")
+  images          Image[]
+  venueDetails    VenueDetails?
+  likes           Like[]
+  comments        Comment[]
+  pendingTransfer EstatePendingTransfer?
+}
+
+model EstatePendingTransfer {
+  id             String   @id @default(cuid())
+  estateId       String   @unique
+  estate         Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  newOwnerId     String
+  newCharacterId String
+  token          String   @unique @default(cuid())
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
 }
 
 model Image {
@@ -206,9 +218,9 @@ model VenueStaff {
   linkedUserId String?
   linkedUser   User?  @relation("StaffUser", fields: [linkedUserId], references: [id], onDelete: SetNull)
 
-  // Optional: links to that user's estate entry on this site
-  linkedEstateId String?
-  linkedEstate   Estate? @relation("StaffLinkedEstate", fields: [linkedEstateId], references: [id], onDelete: SetNull)
+  // Optional: links to that staff member's character profile on this site
+  linkedCharacterId String?
+  linkedCharacter   FfxivCharacter? @relation("StaffCharacter", fields: [linkedCharacterId], references: [id], onDelete: SetNull)
 }
 
 // ---------------------------------------------------------------------------

@@ -1,3 +1,5 @@
+import { version } from "../../package.json"
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
@@ -7,8 +9,9 @@ export default function Footer() {
         <p>&copy; SQUARE ENIX CO., LTD. All Rights Reserved.</p>
         <p>FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.</p>
         <p>Created by Caspian Nightworth of Brynhildr</p>
-        <p>
-          &copy; {year} Eorzea Estates. All Rights Reserved. &middot;{" "}
+        <p className="flex items-center gap-3">
+          <span>&copy; {year} Eorzea Estates. All Rights Reserved.</span>
+          <span>&middot;</span>
           <a
             href="https://ko-fi.com/caspiannightworth"
             target="_blank"
@@ -17,6 +20,8 @@ export default function Footer() {
           >
             Support on Ko-fi
           </a>
+          <span>&middot;</span>
+          <span>v{version}</span>
         </p>
       </div>
     </footer>

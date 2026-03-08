@@ -140,7 +140,7 @@ export default async function DashboardPage() {
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="font-medium truncate">{character.characterName}</span>
+                          <Link href={`/character/${character.id}`} className="font-medium truncate hover:underline">{character.characterName}</Link>
                           {character.verified ? (
                             <Badge variant="default" className="gap-1 shrink-0">
                               <BadgeCheck className="h-3 w-3" />
@@ -158,6 +158,9 @@ export default async function DashboardPage() {
                         characterId={character.id}
                         verified={character.verified}
                         estateCount={character._count.estates}
+                        hasFcEstate={estates.some(
+                          (e) => e.characterId === character.id && e.type === "FC_ESTATE"
+                        )}
                       />
                     </div>
                   ))}
