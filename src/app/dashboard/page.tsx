@@ -158,6 +158,9 @@ export default async function DashboardPage() {
                         characterId={character.id}
                         verified={character.verified}
                         estateCount={character._count.estates}
+                        hasFcEstate={estates.some(
+                          (e) => e.characterId === character.id && e.type === "FC_ESTATE"
+                        )}
                       />
                     </div>
                   ))}
