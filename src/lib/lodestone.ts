@@ -1,8 +1,9 @@
 // Lodestone character lookup via @xivapi/nodestone (direct Lodestone HTML parser)
-import { CharacterSearch, Character } from "@xivapi/nodestone"
+import { CharacterSearch, Character, FCMembers } from "@xivapi/nodestone"
 
 const characterSearchParser = new CharacterSearch()
 const characterParser = new Character()
+const fcMembersParser = new FCMembers()
 
 export interface LodestoneCharacter {
   ID: number
@@ -56,6 +57,23 @@ export async function getCharacterBio(lodestoneId: number): Promise<string> {
     .catch(() => null) as { Bio?: string } | null
   if (!result) return ""
   return result.Bio ?? ""
+}
+
+export async function getCharacterFCId(lodestoneId: number): Promise<string | null> {
+  const result = await characterParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
+    .catch(() => null) as { FreeCompany?: { ID?: string } } | null
+  return result?.FreeCompany?.ID ?? null
+}
+
+export async function getFCMasterLodestoneId(fcId: string): Promise<string | null> {
+  const result = await fcMembersParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .parse({ params: { fcId }, query: {} } as any)
+    .catch(() => null) as { List?: Array<{ ID?: number }> } | null
+  const masterId = result?.List?.[0]?.ID
+  return masterId != null ? String(masterId) : null
 }
 
 export function generateVerificationCode(): string {

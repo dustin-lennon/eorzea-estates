@@ -147,10 +147,22 @@ model Estate {
   characterId String?
   character   FfxivCharacter? @relation(fields: [characterId], references: [id], onDelete: SetNull)
 
-  images       Image[]
-  venueDetails VenueDetails?
-  likes        Like[]
-  comments     Comment[]
+  images          Image[]
+  venueDetails    VenueDetails?
+  likes           Like[]
+  comments        Comment[]
+  pendingTransfer EstatePendingTransfer?
+}
+
+model EstatePendingTransfer {
+  id             String   @id @default(cuid())
+  estateId       String   @unique
+  estate         Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  newOwnerId     String
+  newCharacterId String
+  token          String   @unique @default(cuid())
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
 }
 
 model Image {
