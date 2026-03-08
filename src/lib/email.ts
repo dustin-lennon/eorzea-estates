@@ -1,7 +1,10 @@
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM = "Eorzea Estates <noreply@eorzea-estates.com>"
+
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function sendFCEstateUnpublishedEmail({
   to,
@@ -19,7 +22,7 @@ export async function sendFCEstateUnpublishedEmail({
       ? `The FC master of your Free Company has changed. Your listing has been unpublished and a transfer invitation has been sent to the new FC master.`
       : `The FC master of your Free Company has changed and the new master does not have an account on Eorzea Estates. Your listing has been unpublished. If the situation changes, the new master can create an account and re-submit the estate.`
 
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM,
     to,
     subject: `Your FC estate listing "${estateName}" has been unpublished`,
@@ -46,7 +49,7 @@ export async function sendFCEstateTransferInviteEmail({
   previousOwnerName: string
   confirmUrl: string
 }) {
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM,
     to,
     subject: `An FC estate listing has been transferred to you — action required`,
