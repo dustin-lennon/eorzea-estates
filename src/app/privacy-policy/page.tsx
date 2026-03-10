@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-lg font-semibold text-foreground mb-2">1. Who We Are</h2>
           <p>
-            Eorzea Estates is a fan-made housing directory for Final Fantasy XIV players. For privacy inquiries, contact us at <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>.
+            Eorzea Estates is a fan-made housing directory for Final Fantasy XIV players. For privacy inquiries, contact us at <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>.
           </p>
         </section>
 
@@ -71,13 +71,13 @@ export default function PrivacyPolicyPage() {
             <li><strong>Opt-out of sale</strong> — We do not sell data, so this right is already satisfied</li>
           </ul>
           <p className="mt-2">
-            <strong>California residents (CCPA/CPRA):</strong> You have the right to know what personal information is collected, to delete it, to correct it, and to opt out of its sale (we do not sell it). To exercise your rights, email <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>. We will respond within 45 days as required by law.
+            <strong>California residents (CCPA/CPRA):</strong> You have the right to know what personal information is collected, to delete it, to correct it, and to opt out of its sale (we do not sell it). To exercise your rights, email <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>. We will respond within 45 days as required by law.
           </p>
           <p className="mt-2">
             <strong>EU/EEA residents (GDPR):</strong> Legal basis for processing is consent (account creation), contract performance, and legitimate interest (service operation) per GDPR Art. 6. You also have the right to lodge a complaint with your local supervisory authority.
           </p>
           <p className="mt-2">
-            For all other requests, email <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>.
+            For all other requests, email <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>.
           </p>
         </section>
 
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-lg font-semibold text-foreground mb-2">10. Children&apos;s Privacy (COPPA)</h2>
           <p>
-            Eorzea Estates is not directed to children under 13 years of age and we do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a> and we will promptly delete the information. The service requires users to be at least 18 years old.
+            Eorzea Estates is not directed to children under 13 years of age and we do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a> and we will promptly delete the information. The service requires users to be at least 18 years old.
           </p>
         </section>
 
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-lg font-semibold text-foreground mb-2">12. Contact</h2>
           <p>
-            For any privacy-related questions or requests, contact us at <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>.
+            For any privacy-related questions or requests, contact us at <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>.
           </p>
         </section>
       </div>
