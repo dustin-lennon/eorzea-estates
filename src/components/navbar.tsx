@@ -16,6 +16,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Navbar() {
   const session = await auth()
+  console.log("Navbar session:", session)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background">
