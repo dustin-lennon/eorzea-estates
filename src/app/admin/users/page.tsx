@@ -35,7 +35,6 @@ export default async function AdminUsersPage() {
           <thead className="bg-muted/50 border-b">
             <tr>
               <th className="text-left px-4 py-3 font-medium">User</th>
-              <th className="text-left px-4 py-3 font-medium">Discord</th>
               <th className="text-left px-4 py-3 font-medium">Estates</th>
               <th className="text-left px-4 py-3 font-medium">Joined</th>
               <th className="text-left px-4 py-3 font-medium">Role</th>
@@ -61,7 +60,6 @@ export default async function AdminUsersPage() {
                     )}
                     <div>
                       <p className="font-medium">{user.name ?? "Unknown"}</p>
-                      <p className="text-xs text-muted-foreground">{user.email}</p>
                     </div>
                   </div>
                 </td>
