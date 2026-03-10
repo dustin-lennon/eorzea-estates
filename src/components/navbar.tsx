@@ -50,43 +50,55 @@ export default async function Navbar() {
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
+
                   <DropdownMenuContent align="end" className="w-48">
-                    <div className="px-2 py-1.5 text-sm font-medium">{session.user.name}</div>
+                    <div className="px-2 py-1.5 text-sm font-medium">
+                      {session.user.name}
+                    </div>
+
                     <DropdownMenuSeparator />
+
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard">
                         <LayoutDashboard className="h-4 w-4 mr-2" />
-                        Dashboard
+                        <span>Dashboard</span>
                       </Link>
                     </DropdownMenuItem>
+
                     <DropdownMenuItem asChild>
                       <Link href="/settings">
                         <SettingsIcon className="h-4 w-4 mr-2" />
-                        Settings
+                        <span>Settings</span>
                       </Link>
                     </DropdownMenuItem>
+
                     {session.user.role === "ADMIN" && (
                       <DropdownMenuItem asChild>
                         <Link href="/admin">
                           <ShieldCheck className="h-4 w-4 mr-2" />
-                          Admin Panel
+                          <span>Admin Panel</span>
                         </Link>
                       </DropdownMenuItem>
                     )}
+
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <form
+
+                    <form
                         action={async () => {
                           "use server"
                           await signOut({ redirectTo: "/" })
                         }}
                       >
-                        <button type="submit" className="flex w-full items-center">
-                          <LogOut className="h-4 w-4 mr-2" />
-                          Sign out
-                        </button>
+                        <DropdownMenuItem asChild>
+                          <button
+                            type="submit"
+                            className="flex w-full items-center"
+                          >
+                            <LogOut className="h-4 w-4 mr-2" />
+                              <span>Sign out</span>
+                          </button>
+                        </DropdownMenuItem>
                       </form>
-                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
