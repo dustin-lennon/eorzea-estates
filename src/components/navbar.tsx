@@ -65,14 +65,14 @@ export default async function Navbar() {
                         Settings
                       </Link>
                     </DropdownMenuItem>
-                    {/* {session.user.role === "ADMIN" && (
+                    {session.user.role === "ADMIN" && (
                       <DropdownMenuItem asChild>
                         <Link href="/admin">
-                          <ShieldCheck className="h-4 w-4 mr-2" />
+                          {/* <ShieldCheck className="h-4 w-4 mr-2" /> */}
                           Admin Panel
                         </Link>
                       </DropdownMenuItem>
-                    )} */}
+                    )}
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
                       <form
