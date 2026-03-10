@@ -111,7 +111,7 @@ export default function TermsOfServicePage() {
 
         <section>
           <h2 className="text-lg font-semibold text-foreground mb-2">13. Contact</h2>
-          <p>Questions about these terms? Contact us at <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>.</p>
+          <p>Questions about these terms? Contact us at <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>.</p>
         </section>
       </div>
     </div>

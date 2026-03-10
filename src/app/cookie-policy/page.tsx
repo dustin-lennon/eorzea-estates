@@ -73,7 +73,7 @@ export default function CookiePolicyPage() {
 
         <section>
           <h2 className="text-lg font-semibold text-foreground mb-2">6. Contact</h2>
-          <p>If you have any questions about this cookie policy, please contact us at <a href="mailto:privacy@example.com" className="brand-link">privacy@example.com</a>.</p>
+          <p>If you have any questions about this cookie policy, please contact us at <a href="mailto:privacy@eorzeaestates.com" className="brand-link">privacy@eorzeaestates.com</a>.</p>
         </section>
       </div>
     </div>
