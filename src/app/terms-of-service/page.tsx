@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import prisma from "@/lib/prisma"
-import { LEGAL_DEFAULTS } from "@/lib/legal-defaults"
-import { LegalPageRenderer } from "@/components/legal-page-renderer"
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import prisma from "@/lib/prisma";
+import { LEGAL_DEFAULTS } from "@/lib/legal-defaults";
+import { LegalPageRenderer } from "@/components/legal-page-renderer";
 
 export default async function TermsOfServicePage() {
   const saved = await prisma.legalPage.findUnique({ where: { slug: "terms-of-service" } })
@@ -28,5 +28,5 @@ export default async function TermsOfServicePage() {
 
       <LegalPageRenderer content={content} />
     </div>
-  )
+  );
 }
