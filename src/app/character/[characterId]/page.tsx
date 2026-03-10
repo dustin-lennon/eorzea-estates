@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
-import { BadgeCheck } from "lucide-react"
+import { BadgeCheck, ShieldCheck, Shield } from "lucide-react"
 
 interface PageProps {
   params: Promise<{ characterId: string }>
@@ -31,6 +31,7 @@ export default async function CharacterProfilePage({ params }: PageProps) {
       dataCenter: true,
       avatarUrl: true,
       verified: true,
+      user: { select: { role: true } },
     },
   })
 
@@ -44,6 +45,8 @@ export default async function CharacterProfilePage({ params }: PageProps) {
       venueDetails: { select: { venueType: true } },
     },
   })
+
+  const userRole = character.user?.role
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
@@ -62,10 +65,22 @@ export default async function CharacterProfilePage({ params }: PageProps) {
           </div>
         )}
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <h1 className="text-2xl font-bold">{character.characterName}</h1>
             {character.verified && (
               <BadgeCheck className="h-5 w-5 text-blue-500" aria-label="Verified character" />
+            )}
+            {userRole === "ADMIN" && (
+              <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
+                <ShieldCheck className="h-3 w-3" />
+                Admin
+              </span>
+            )}
+            {userRole === "MODERATOR" && (
+              <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">
+                <Shield className="h-3 w-3" />
+                Moderator
+              </span>
             )}
           </div>
           <p className="text-sm text-muted-foreground">

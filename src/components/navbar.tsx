@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "@/auth"
-import { Plus, LayoutDashboard, LogOut, Settings as SettingsIcon } from "lucide-react"
+import { Plus, LayoutDashboard, LogOut, Settings as SettingsIcon, ShieldCheck } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Navbar() {
@@ -64,6 +64,14 @@ export default async function Navbar() {
                       Settings
                     </Link>
                   </DropdownMenuItem>
+                  {session.user.role === "ADMIN" && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin">
+                        <ShieldCheck className="h-4 w-4 mr-2" />
+                        Admin Panel
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <form
