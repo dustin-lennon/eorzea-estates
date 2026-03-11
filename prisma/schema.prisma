@@ -303,3 +303,12 @@ model LegalPage {
   updatedById String?
   updatedBy   User?   @relation("LegalPageEditor", fields: [updatedById], references: [id], onDelete: SetNull)
 }
+
+// ---------------------------------------------------------------------------
+// Site Settings (singleton)
+// ---------------------------------------------------------------------------
+
+model SiteSettings {
+  id              String  @id @default("singleton")
+  maintenanceMode Boolean @default(false)
+}

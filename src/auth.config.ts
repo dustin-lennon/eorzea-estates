@@ -3,7 +3,7 @@ import Discord from "next-auth/providers/discord"
 import type { UserRole } from "@/types/roles"
 
 export const authConfig: NextAuthConfig = {
-  providers: [Discord],
+  providers: [Discord({ allowDangerousEmailAccountLinking: true })],
   session: {
     strategy: "jwt",
   },
