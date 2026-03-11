@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
-import { LayoutDashboard, Users, FileText, ShieldCheck, Flag } from "lucide-react"
+import { LayoutDashboard, Users, FileText, ShieldCheck, Flag, SlidersHorizontal } from "lucide-react"
 import { AdminNavLink } from "./admin-nav-link"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -36,10 +36,16 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             Moderation
           </AdminNavLink>
           {isAdmin && (
-            <AdminNavLink href="/admin/legal">
-              <FileText className="h-4 w-4" />
-              Legal Pages
-            </AdminNavLink>
+            <>
+              <AdminNavLink href="/admin/legal">
+                <FileText className="h-4 w-4" />
+                Legal Pages
+              </AdminNavLink>
+              <AdminNavLink href="/admin/settings">
+                <SlidersHorizontal className="h-4 w-4" />
+                Settings
+              </AdminNavLink>
+            </>
           )}
         </nav>
       </aside>

@@ -6,6 +6,9 @@ import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { headers } from "next/headers"
+import { auth, signOut } from "@/auth"
+import prisma from "@/lib/prisma"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,18 +33,41 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // DB-based maintenance mode (runtime toggle via admin settings)
+  const headersList = await headers()
+  const pathname = headersList.get("x-pathname") ?? ""
+  const bypassPaths = ["/login", "/api/auth", "/maintenance"]
+  if (!bypassPaths.some((p) => pathname.startsWith(p))) {
+    const [settings, session] = await Promise.all([
+      prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
+      auth(),
+    ])
+    // Signed-in non-admin users: sign out (middleware handles unauthenticated redirect via cookie)
+    if (settings?.maintenanceMode && session?.user && session.user.role !== "ADMIN") {
+      await signOut({ redirectTo: "/maintenance" })
+    }
+  }
+
+  const isMaintenancePage = pathname.startsWith("/maintenance")
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background flex flex-col`}>
         <Providers>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          {isMaintenancePage ? (
+            children
+          ) : (
+            <>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </>
+          )}
           <Toaster richColors position="bottom-right" />
         </Providers>
         <SpeedInsights />
