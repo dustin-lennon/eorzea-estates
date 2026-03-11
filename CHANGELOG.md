@@ -3,6 +3,20 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.4.0...v1.5.0) (2026-03-11)
+
+### ✨ Features
+
+* add admin panel with role system, moderator management, and legal CMS ([503c3ed](https://github.com/dustin-lennon/eorzea-estates/commit/503c3ed7a48522a6bd5271007a2310d57185a29a)), closes [#62](https://github.com/dustin-lennon/eorzea-estates/issues/62)
+* add legal pages, settings section, and brand-link utility ([1683eb2](https://github.com/dustin-lennon/eorzea-estates/commit/1683eb29a01838d2ccec6904da5ea3de7a23c33f)), closes [#56](https://github.com/dustin-lennon/eorzea-estates/issues/56)
+
+### 🐛 Bug Fixes
+
+* fix rendering of sign out button when logged in as Admin ([0ff8f36](https://github.com/dustin-lennon/eorzea-estates/commit/0ff8f36fb9e6f3dfad8b77f41a676be41747df17))
+* replace placeholder privacy email with real address ([bfaf273](https://github.com/dustin-lennon/eorzea-estates/commit/bfaf27351f1e512aeff177b42a030710f7606ee6)), closes [#60](https://github.com/dustin-lennon/eorzea-estates/issues/60)
+* Resolve image loading error and clean up unwanted fields and display in user page ([2d30523](https://github.com/dustin-lennon/eorzea-estates/commit/2d3052371cf1814c4ae1715124a69aafc0a02d7b))
+* update privacy policy for US compliance ([c228f0d](https://github.com/dustin-lennon/eorzea-estates/commit/c228f0d454b95686f744b43f12b1810a8aad940d)), closes [#58](https://github.com/dustin-lennon/eorzea-estates/issues/58)
+
 ## [1.4.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.3.0...v1.4.0) (2026-03-08)
 
 ### ✨ Features
