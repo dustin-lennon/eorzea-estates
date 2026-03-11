@@ -25,14 +25,16 @@ export default auth((req) => {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Admin routes require ADMIN role
+  // Admin routes require ADMIN role (moderation page also accessible to MODERATOR)
   if (req.nextUrl.pathname.startsWith("/admin")) {
     if (!req.auth) {
       const loginUrl = new URL("/login", req.nextUrl.origin)
       loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname)
       return NextResponse.redirect(loginUrl)
     }
-    if (req.auth.user?.role !== "ADMIN") {
+    const role = req.auth.user?.role
+    const isModerationPage = req.nextUrl.pathname.startsWith("/admin/moderation")
+    if (role !== "ADMIN" && !(isModerationPage && role === "MODERATOR")) {
       return NextResponse.redirect(new URL("/", req.nextUrl.origin))
     }
   }

@@ -11,6 +11,7 @@ import { CommentsSection } from "@/components/comments-section"
 import { ESTATE_TYPES, HOUSING_DISTRICTS, VENUE_TYPES, DAYS_OF_WEEK } from "@/lib/ffxiv-data"
 import type { HoursSchedule } from "@/lib/ffxiv-data"
 import { EstateImageGallery } from "./estate-image-gallery"
+import { FlagButton } from "@/components/flag-button"
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -94,6 +95,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
   if (!estate) notFound()
 
   const isLoggedIn = !!session?.user?.id
+  const isOwner = isLoggedIn && session?.user?.id === estate.owner.id
   const userLiked = isLoggedIn
     ? !!(await prisma.like.findUnique({
         where: { userId_estateId: { userId: session!.user!.id!, estateId: id } },
@@ -140,12 +142,17 @@ export default async function EstateDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <LikeButton
-          estateId={id}
-          initialLiked={userLiked}
-          initialCount={estate.likeCount}
-          isLoggedIn={isLoggedIn}
-        />
+        <div className="flex items-center gap-3">
+          {isLoggedIn && !isOwner && (
+            <FlagButton estateId={id} initialFlagged={estate.flagged} />
+          )}
+          <LikeButton
+            estateId={id}
+            initialLiked={userLiked}
+            initialCount={estate.likeCount}
+            isLoggedIn={isLoggedIn}
+          />
+        </div>
       </div>
 
       {/* Owner */}

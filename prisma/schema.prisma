@@ -77,8 +77,9 @@ model User {
   estates       Estate[]
   likes         Like[]
   comments      Comment[]
-  venueStaff    VenueStaff[]  @relation("StaffUser")
-  legalPageEdits LegalPage[]  @relation("LegalPageEditor")
+  venueStaff     VenueStaff[]  @relation("StaffUser")
+  legalPageEdits LegalPage[]   @relation("LegalPageEditor")
+  flaggedEstates Estate[]      @relation("FlaggedByUser")
 }
 
 // ---------------------------------------------------------------------------
@@ -156,11 +157,27 @@ model Estate {
   characterId String?
   character   FfxivCharacter? @relation(fields: [characterId], references: [id], onDelete: SetNull)
 
+  // Moderation/flagging fields
+  flagged           Boolean   @default(false)
+  flagReason        String?   @db.Text
+  flaggedById       String?
+  flaggedBy         User?     @relation("FlaggedByUser", fields: [flaggedById], references: [id], onDelete: SetNull)
+  flaggedAt         DateTime?
+  moderationStatus  ModerationStatus @default(PENDING)
+
   images          Image[]
   venueDetails    VenueDetails?
   likes           Like[]
   comments        Comment[]
   pendingTransfer EstatePendingTransfer?
+}
+
+// Moderation status for flagged estates
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REMOVED
 }
 
 model EstatePendingTransfer {
