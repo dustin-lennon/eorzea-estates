@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.5.0...v1.6.0) (2026-03-11)
+
+### ✨ Features
+
+* add estate moderation with flag system and moderator access ([d0505c2](https://github.com/dustin-lennon/eorzea-estates/commit/d0505c2875548f6973ec9bd45c0b19410447bb31))
+
+### 🐛 Bug Fixes
+
+* replace hardcoded back link with router.back() on legal pages ([f058e3b](https://github.com/dustin-lennon/eorzea-estates/commit/f058e3b3c5d6148c48d75a5349b8a6d1a4efce1a)), closes [#80](https://github.com/dustin-lennon/eorzea-estates/issues/80)
+
 ## [1.5.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.4.0...v1.5.0) (2026-03-11)
 
 ### ✨ Features
