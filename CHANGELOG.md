@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.6.0...v1.7.0) (2026-03-11)
+
+### ✨ Features
+
+* add maintenance mode with admin toggle and bypass ([2261524](https://github.com/dustin-lennon/eorzea-estates/commit/2261524a8ae2fc4a447aeb39a6f83086ce9c5329)), closes [#86](https://github.com/dustin-lennon/eorzea-estates/issues/86)
+
+### 🐛 Bug Fixes
+
+* skip maintenance db check gracefully when db is unavailable ([b5b3d89](https://github.com/dustin-lennon/eorzea-estates/commit/b5b3d89911eb611e0ee5520a3ef5bec399347dfe))
+
 ## [1.6.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.5.0...v1.6.0) (2026-03-11)
 
 ### ✨ Features
