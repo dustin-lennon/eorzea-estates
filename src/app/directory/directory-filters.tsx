@@ -25,12 +25,11 @@ interface Props {
   estateTypes: readonly { value: string; label: string }[]
   districts: readonly { value: string; label: string }[]
   tags: readonly string[]
-  currentParams: Record<string, string | undefined>
 }
 
 const EMPTY = "__all__"
 
-export function DirectoryFilters({ regions, estateTypes, districts, tags, currentParams }: Props) {
+export function DirectoryFilters({ regions, estateTypes, districts, tags }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
 

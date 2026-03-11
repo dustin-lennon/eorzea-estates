@@ -25,6 +25,18 @@ export default auth((req) => {
     return NextResponse.redirect(loginUrl)
   }
 
+  // Admin routes require ADMIN role
+  if (req.nextUrl.pathname.startsWith("/admin")) {
+    if (!req.auth) {
+      const loginUrl = new URL("/login", req.nextUrl.origin)
+      loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+    if (req.auth.user?.role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/", req.nextUrl.origin))
+    }
+  }
+
   return NextResponse.next()
 })
 

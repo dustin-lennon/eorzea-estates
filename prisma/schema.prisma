@@ -51,6 +51,12 @@ model VerificationToken {
 // Users
 // ---------------------------------------------------------------------------
 
+enum UserRole {
+  USER
+  MODERATOR
+  ADMIN
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -63,13 +69,16 @@ model User {
   discordUsername String?
   discordId       String? @unique
 
-  accounts   Account[]
-  sessions   Session[]
-  characters FfxivCharacter[]
-  estates    Estate[]
-  likes      Like[]
-  comments   Comment[]
-  venueStaff VenueStaff[] @relation("StaffUser")
+  role UserRole @default(USER)
+
+  accounts      Account[]
+  sessions      Session[]
+  characters    FfxivCharacter[]
+  estates       Estate[]
+  likes         Like[]
+  comments      Comment[]
+  venueStaff    VenueStaff[]  @relation("StaffUser")
+  legalPageEdits LegalPage[]  @relation("LegalPageEditor")
 }
 
 // ---------------------------------------------------------------------------
@@ -262,4 +271,18 @@ model LodestoneVerification {
   verified    Boolean  @default(false)
 
   character FfxivCharacter @relation(fields: [characterId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Legal Pages (admin-editable)
+// ---------------------------------------------------------------------------
+
+model LegalPage {
+  slug      String   @id  // privacy-policy | terms-of-service | cookie-policy
+  title     String
+  content   String   @db.Text  // markdown
+  updatedAt DateTime @updatedAt
+
+  updatedById String?
+  updatedBy   User?   @relation("LegalPageEditor", fields: [updatedById], references: [id], onDelete: SetNull)
 }

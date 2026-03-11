@@ -16,7 +16,7 @@ export default function Footer() {
             href="https://ko-fi.com/caspiannightworth"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline underline-offset-4 hover:text-foreground transition-colors"
+            className="brand-link"
           >
             Support on Ko-fi
           </a>

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
 import { BadgeCheck, MapPin, Clock, Users, ExternalLink } from "lucide-react"
 import prisma from "@/lib/prisma"
 import { auth } from "@/auth"
@@ -152,7 +151,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
       {/* Owner */}
       <div className="flex items-center gap-2 mt-4 text-sm">
         <span className="text-muted-foreground">Listed by</span>
-        <Link href={`/profile/${estate.owner.id}`} className="flex items-center gap-1 hover:underline font-medium">
+        <Link href={`/profile/${estate.owner.id}`} className="brand-link flex items-center gap-1 font-medium no-underline">
           {ownerIsVerified && (
             <BadgeCheck className="h-4 w-4 text-blue-500" />
           )}
@@ -223,7 +222,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
                       <div key={s.id} className="flex items-center justify-between text-sm">
                         <span className="font-medium">
                           {s.linkedCharacter ? (
-                            <Link href={`/character/${s.linkedCharacter.id}`} className="hover:underline flex items-center gap-1">
+                            <Link href={`/character/${s.linkedCharacter.id}`} className="brand-link flex items-center gap-1 no-underline">
                               {s.characterName}
                               <ExternalLink className="h-3 w-3" />
                             </Link>

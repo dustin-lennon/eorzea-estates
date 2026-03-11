@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "img2.finalfantasyxiv.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+      }
     ],
   },
 };

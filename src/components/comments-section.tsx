@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
 import { formatDistanceToNow } from "date-fns"
 import { toast } from "sonner"
 import { BadgeCheck } from "lucide-react"
