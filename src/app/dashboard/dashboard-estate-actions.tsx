@@ -58,9 +58,11 @@ export function DashboardEstateActions({ estateId, published }: Props) {
 
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outline" size="sm" asChild>
-        <Link href={`/estate/${estateId}`}>View</Link>
-      </Button>
+      {published && (
+        <Button variant="outline" size="sm" asChild>
+          <Link href={`/estate/${estateId}`}>View</Link>
+        </Button>
+      )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" disabled={loading}>
