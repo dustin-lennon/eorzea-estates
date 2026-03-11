@@ -21,6 +21,7 @@
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@uiw/react-md-editor": "^4.0.11",
+    "@vercel/speed-insights": "^2.0.0",
     "@xivapi/nodestone": "^0.2.7",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.9.0",
