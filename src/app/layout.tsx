@@ -44,22 +44,24 @@ export default async function RootLayout({
   const pathname = headersList.get("x-pathname") ?? ""
   const bypassPaths = ["/login", "/api/auth", "/maintenance"]
   if (!bypassPaths.some((p) => pathname.startsWith(p))) {
+    let maintenanceOn = false
+    let session = null
     try {
-      const [settings, session] = await Promise.all([
+      const [settings, s] = await Promise.all([
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
         auth(),
       ])
-      if (settings?.maintenanceMode && session?.user?.role !== "ADMIN") {
-        if (session?.user) {
-          // Signed-in non-admin: sign out and redirect to maintenance
-          await signOut({ redirectTo: "/maintenance" })
-        } else {
-          // Unauthenticated first-time visitors: redirect to maintenance
-          redirect("/maintenance")
-        }
-      }
+      maintenanceOn = settings?.maintenanceMode ?? false
+      session = s
     } catch {
       // DB unavailable (e.g. CI/test environment) — skip maintenance check
+    }
+    if (maintenanceOn && session?.user?.role !== "ADMIN") {
+      if (session?.user) {
+        await signOut({ redirectTo: "/maintenance" })
+      } else {
+        redirect("/maintenance")
+      }
     }
   }
 
