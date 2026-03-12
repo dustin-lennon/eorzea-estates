@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { redirect } from "next/navigation"
 import { headers } from "next/headers"
 import { auth, signOut } from "@/auth"
 import prisma from "@/lib/prisma"
@@ -43,17 +44,26 @@ export default async function RootLayout({
   const pathname = headersList.get("x-pathname") ?? ""
   const bypassPaths = ["/login", "/api/auth", "/maintenance"]
   if (!bypassPaths.some((p) => pathname.startsWith(p))) {
+    let maintenanceOn = false
+    let isAdmin = false
+    let hasUser = false
     try {
       const [settings, session] = await Promise.all([
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
         auth(),
       ])
-      // Signed-in non-admin users: sign out (middleware handles unauthenticated redirect via cookie)
-      if (settings?.maintenanceMode && session?.user && session.user.role !== "ADMIN") {
-        await signOut({ redirectTo: "/maintenance" })
-      }
+      maintenanceOn = settings?.maintenanceMode ?? false
+      isAdmin = session?.user?.role === "ADMIN"
+      hasUser = !!session?.user
     } catch {
       // DB unavailable (e.g. CI/test environment) — skip maintenance check
+    }
+    if (maintenanceOn && !isAdmin) {
+      if (hasUser) {
+        await signOut({ redirectTo: "/maintenance" })
+      } else {
+        redirect("/maintenance")
+      }
     }
   }
 

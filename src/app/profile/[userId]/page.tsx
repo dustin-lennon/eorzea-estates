@@ -40,7 +40,7 @@ export default async function ProfilePage({ params }: PageProps) {
   if (!user) notFound()
 
   const estates = await prisma.estate.findMany({
-    where: { ownerId: userId, published: true },
+    where: { ownerId: userId, published: true, deletedAt: null },
     orderBy: { createdAt: "desc" },
     include: {
       images: { orderBy: { order: "asc" }, take: 1 },
