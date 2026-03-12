@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { redirect } from "next/navigation"
 import { headers } from "next/headers"
 import { auth, signOut } from "@/auth"
 import prisma from "@/lib/prisma"
@@ -48,9 +49,14 @@ export default async function RootLayout({
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
         auth(),
       ])
-      // Signed-in non-admin users: sign out (middleware handles unauthenticated redirect via cookie)
-      if (settings?.maintenanceMode && session?.user && session.user.role !== "ADMIN") {
-        await signOut({ redirectTo: "/maintenance" })
+      if (settings?.maintenanceMode && session?.user?.role !== "ADMIN") {
+        if (session?.user) {
+          // Signed-in non-admin: sign out and redirect to maintenance
+          await signOut({ redirectTo: "/maintenance" })
+        } else {
+          // Unauthenticated first-time visitors: redirect to maintenance
+          redirect("/maintenance")
+        }
       }
     } catch {
       // DB unavailable (e.g. CI/test environment) — skip maintenance check
