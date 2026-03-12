@@ -10,7 +10,7 @@ const validBase = {
   dataCenter: "Crystal",
   server: "Balmung",
   tags: ["Cozy"],
-  images: [{ url: "https://res.cloudinary.com/test/image/upload/v1/test.jpg", publicId: "test/img1" }],
+  images: [{ url: "https://test.supabase.co/storage/v1/object/public/estate-images/test/img1.webp", storageKey: "test/img1.webp" }],
 }
 
 describe("estateFormSchema", () => {
@@ -36,8 +36,8 @@ describe("estateFormSchema", () => {
 
   it("rejects more than 10 images", () => {
     const images = Array.from({ length: 11 }, (_, i) => ({
-      url: `https://res.cloudinary.com/test/image/upload/v1/img${i}.jpg`,
-      publicId: `test/img${i}`,
+      url: `https://test.supabase.co/storage/v1/object/public/estate-images/test/img${i}.webp`,
+      storageKey: `test/img${i}.webp`,
     }))
     const result = estateFormSchema.safeParse({ ...validBase, images })
     expect(result.success).toBe(false)

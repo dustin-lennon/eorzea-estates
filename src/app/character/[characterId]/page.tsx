@@ -107,7 +107,7 @@ export default async function CharacterProfilePage({ params }: PageProps) {
               dataCenter={estate.dataCenter}
               tags={estate.tags}
               likeCount={estate.likeCount}
-              coverImage={estate.images[0]?.cloudinaryUrl}
+              coverImage={estate.images[0]?.imageUrl}
               ownerName={character.characterName}
               lodestoneVerified={character.verified}
               venueType={estate.venueDetails?.venueType ?? null}

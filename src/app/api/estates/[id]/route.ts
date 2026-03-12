@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
-import { deleteEstateImage } from "@/lib/cloudinary"
+import { deleteEstateImage } from "@/lib/storage"
 import { estateFormSchema } from "@/lib/schemas"
 import { NextResponse } from "next/server"
 
@@ -32,7 +32,7 @@ export async function GET(
       published: true,
       characterId: true,
       ownerId: true,
-      images: { orderBy: { order: "asc" }, select: { cloudinaryUrl: true, cloudinaryPublicId: true } },
+      images: { orderBy: { order: "asc" }, select: { imageUrl: true, storageKey: true } },
       venueDetails: {
         select: {
           venueType: true,
@@ -65,7 +65,7 @@ export async function DELETE(
 
   const estate = await prisma.estate.findUnique({
     where: { id, deletedAt: null },
-    select: { ownerId: true, images: { select: { cloudinaryPublicId: true } } },
+    select: { ownerId: true, images: { select: { storageKey: true } } },
   })
 
   if (!estate) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -73,8 +73,8 @@ export async function DELETE(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
-  // Delete images from Cloudinary
-  await Promise.allSettled(estate.images.map((img: { cloudinaryPublicId: string }) => deleteEstateImage(img.cloudinaryPublicId)))
+  // Delete images from storage
+  await Promise.allSettled(estate.images.map((img: { storageKey: string }) => deleteEstateImage(img.storageKey)))
 
   await prisma.estate.delete({ where: { id } })
 
@@ -122,14 +122,14 @@ export async function PATCH(
   const data = parsed.data
   const isVenue = data.type === "VENUE"
 
-  // Sync images: delete removed ones from Cloudinary, then replace all DB records
+  // Sync images: delete removed ones from storage, then replace all DB records
   const existing = await prisma.estate.findUnique({
     where: { id },
-    select: { images: { select: { cloudinaryPublicId: true } } },
+    select: { images: { select: { storageKey: true } } },
   })
-  const newPublicIds = new Set(data.images.map((img) => img.publicId))
-  const toDelete = (existing?.images ?? []).filter((img) => !newPublicIds.has(img.cloudinaryPublicId))
-  await Promise.allSettled(toDelete.map((img) => deleteEstateImage(img.cloudinaryPublicId)))
+  const newStorageKeys = new Set(data.images.map((img) => img.storageKey))
+  const toDelete = (existing?.images ?? []).filter((img) => !newStorageKeys.has(img.storageKey))
+  await Promise.allSettled(toDelete.map((img) => deleteEstateImage(img.storageKey)))
 
   const updated = await prisma.estate.update({
     where: { id },
@@ -146,8 +146,8 @@ export async function PATCH(
       images: {
         deleteMany: {},
         create: data.images.map((img, i) => ({
-          cloudinaryUrl: img.url,
-          cloudinaryPublicId: img.publicId,
+          imageUrl: img.url,
+          storageKey: img.storageKey,
           order: i,
         })),
       },

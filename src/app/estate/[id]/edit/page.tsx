@@ -36,7 +36,7 @@ export default async function EditEstatePage({
         tags: true,
         characterId: true,
         ownerId: true,
-        images: { orderBy: { order: "asc" }, select: { cloudinaryUrl: true, cloudinaryPublicId: true } },
+        images: { orderBy: { order: "asc" }, select: { imageUrl: true, storageKey: true } },
         venueDetails: {
           select: {
             venueType: true,
@@ -69,8 +69,8 @@ export default async function EditEstatePage({
     room: estate.room ?? undefined,
     tags: estate.tags,
     images: estate.images.map((img) => ({
-      url: img.cloudinaryUrl,
-      publicId: img.cloudinaryPublicId,
+      url: img.imageUrl,
+      storageKey: img.storageKey,
     })),
     ...(estate.venueDetails
       ? {
