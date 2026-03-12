@@ -22,7 +22,7 @@ export function ModerationActions({ estateId }: Props) {
         body: JSON.stringify({ action }),
       })
       if (!res.ok) throw new Error("Failed")
-      const labels = { approve: "Approved", reject: "Rejected", remove: "Removed" }
+      const labels = { approve: "Report dismissed", reject: "Estate unpublished", remove: "Estate removed" }
       toast.success(`${labels[action]} successfully`)
       router.refresh()
     } catch {
@@ -41,7 +41,7 @@ export function ModerationActions({ estateId }: Props) {
         disabled={!!loading}
         onClick={() => handleAction("approve")}
       >
-        {loading === "approve" ? "..." : "Approve"}
+        {loading === "approve" ? "..." : "Dismiss"}
       </Button>
       <Button
         size="sm"
@@ -50,7 +50,7 @@ export function ModerationActions({ estateId }: Props) {
         disabled={!!loading}
         onClick={() => handleAction("reject")}
       >
-        {loading === "reject" ? "..." : "Reject"}
+        {loading === "reject" ? "..." : "Unpublish"}
       </Button>
       <Button
         size="sm"

@@ -29,7 +29,7 @@ export default async function ModerationPage() {
     <div>
       <h1 className="text-2xl font-bold mb-2">Moderation Queue</h1>
       <p className="text-sm text-muted-foreground mb-6">
-        Review flagged estates. Approve to clear the flag, Reject to unpublish, Remove to delete.
+        Review flagged estates. Dismiss to clear the report, Unpublish to take it down, Remove to delete.
       </p>
 
       {flaggedEstates.length === 0 ? (
