@@ -37,24 +37,24 @@ export type ImageSumAggregateOutputType = {
 export type ImageMinAggregateOutputType = {
   id: string | null
   estateId: string | null
-  cloudinaryUrl: string | null
-  cloudinaryPublicId: string | null
+  imageUrl: string | null
+  storageKey: string | null
   order: number | null
 }
 
 export type ImageMaxAggregateOutputType = {
   id: string | null
   estateId: string | null
-  cloudinaryUrl: string | null
-  cloudinaryPublicId: string | null
+  imageUrl: string | null
+  storageKey: string | null
   order: number | null
 }
 
 export type ImageCountAggregateOutputType = {
   id: number
   estateId: number
-  cloudinaryUrl: number
-  cloudinaryPublicId: number
+  imageUrl: number
+  storageKey: number
   order: number
   _all: number
 }
@@ -71,24 +71,24 @@ export type ImageSumAggregateInputType = {
 export type ImageMinAggregateInputType = {
   id?: true
   estateId?: true
-  cloudinaryUrl?: true
-  cloudinaryPublicId?: true
+  imageUrl?: true
+  storageKey?: true
   order?: true
 }
 
 export type ImageMaxAggregateInputType = {
   id?: true
   estateId?: true
-  cloudinaryUrl?: true
-  cloudinaryPublicId?: true
+  imageUrl?: true
+  storageKey?: true
   order?: true
 }
 
 export type ImageCountAggregateInputType = {
   id?: true
   estateId?: true
-  cloudinaryUrl?: true
-  cloudinaryPublicId?: true
+  imageUrl?: true
+  storageKey?: true
   order?: true
   _all?: true
 }
@@ -182,8 +182,8 @@ export type ImageGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ImageGroupByOutputType = {
   id: string
   estateId: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order: number
   _count: ImageCountAggregateOutputType | null
   _avg: ImageAvgAggregateOutputType | null
@@ -213,8 +213,8 @@ export type ImageWhereInput = {
   NOT?: Prisma.ImageWhereInput | Prisma.ImageWhereInput[]
   id?: Prisma.StringFilter<"Image"> | string
   estateId?: Prisma.StringFilter<"Image"> | string
-  cloudinaryUrl?: Prisma.StringFilter<"Image"> | string
-  cloudinaryPublicId?: Prisma.StringFilter<"Image"> | string
+  imageUrl?: Prisma.StringFilter<"Image"> | string
+  storageKey?: Prisma.StringFilter<"Image"> | string
   order?: Prisma.IntFilter<"Image"> | number
   estate?: Prisma.XOR<Prisma.EstateScalarRelationFilter, Prisma.EstateWhereInput>
 }
@@ -222,8 +222,8 @@ export type ImageWhereInput = {
 export type ImageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  cloudinaryUrl?: Prisma.SortOrder
-  cloudinaryPublicId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
   estate?: Prisma.EstateOrderByWithRelationInput
 }
@@ -234,8 +234,8 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ImageWhereInput[]
   NOT?: Prisma.ImageWhereInput | Prisma.ImageWhereInput[]
   estateId?: Prisma.StringFilter<"Image"> | string
-  cloudinaryUrl?: Prisma.StringFilter<"Image"> | string
-  cloudinaryPublicId?: Prisma.StringFilter<"Image"> | string
+  imageUrl?: Prisma.StringFilter<"Image"> | string
+  storageKey?: Prisma.StringFilter<"Image"> | string
   order?: Prisma.IntFilter<"Image"> | number
   estate?: Prisma.XOR<Prisma.EstateScalarRelationFilter, Prisma.EstateWhereInput>
 }, "id">
@@ -243,8 +243,8 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
 export type ImageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  cloudinaryUrl?: Prisma.SortOrder
-  cloudinaryPublicId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
   _count?: Prisma.ImageCountOrderByAggregateInput
   _avg?: Prisma.ImageAvgOrderByAggregateInput
@@ -259,15 +259,15 @@ export type ImageScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ImageScalarWhereWithAggregatesInput | Prisma.ImageScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Image"> | string
   estateId?: Prisma.StringWithAggregatesFilter<"Image"> | string
-  cloudinaryUrl?: Prisma.StringWithAggregatesFilter<"Image"> | string
-  cloudinaryPublicId?: Prisma.StringWithAggregatesFilter<"Image"> | string
+  imageUrl?: Prisma.StringWithAggregatesFilter<"Image"> | string
+  storageKey?: Prisma.StringWithAggregatesFilter<"Image"> | string
   order?: Prisma.IntWithAggregatesFilter<"Image"> | number
 }
 
 export type ImageCreateInput = {
   id?: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
   estate: Prisma.EstateCreateNestedOneWithoutImagesInput
 }
@@ -275,15 +275,15 @@ export type ImageCreateInput = {
 export type ImageUncheckedCreateInput = {
   id?: string
   estateId: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
 }
 
 export type ImageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   estate?: Prisma.EstateUpdateOneRequiredWithoutImagesNestedInput
 }
@@ -291,31 +291,31 @@ export type ImageUpdateInput = {
 export type ImageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ImageCreateManyInput = {
   id?: string
   estateId: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
 }
 
 export type ImageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ImageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -332,8 +332,8 @@ export type ImageOrderByRelationAggregateInput = {
 export type ImageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  cloudinaryUrl?: Prisma.SortOrder
-  cloudinaryPublicId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
 }
 
@@ -344,16 +344,16 @@ export type ImageAvgOrderByAggregateInput = {
 export type ImageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  cloudinaryUrl?: Prisma.SortOrder
-  cloudinaryPublicId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
 }
 
 export type ImageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  cloudinaryUrl?: Prisma.SortOrder
-  cloudinaryPublicId?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   order?: Prisma.SortOrder
 }
 
@@ -405,15 +405,15 @@ export type ImageUncheckedUpdateManyWithoutEstateNestedInput = {
 
 export type ImageCreateWithoutEstateInput = {
   id?: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
 }
 
 export type ImageUncheckedCreateWithoutEstateInput = {
   id?: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
 }
 
@@ -449,36 +449,36 @@ export type ImageScalarWhereInput = {
   NOT?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
   id?: Prisma.StringFilter<"Image"> | string
   estateId?: Prisma.StringFilter<"Image"> | string
-  cloudinaryUrl?: Prisma.StringFilter<"Image"> | string
-  cloudinaryPublicId?: Prisma.StringFilter<"Image"> | string
+  imageUrl?: Prisma.StringFilter<"Image"> | string
+  storageKey?: Prisma.StringFilter<"Image"> | string
   order?: Prisma.IntFilter<"Image"> | number
 }
 
 export type ImageCreateManyEstateInput = {
   id?: string
-  cloudinaryUrl: string
-  cloudinaryPublicId: string
+  imageUrl: string
+  storageKey: string
   order?: number
 }
 
 export type ImageUpdateWithoutEstateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ImageUncheckedUpdateWithoutEstateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ImageUncheckedUpdateManyWithoutEstateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  cloudinaryPublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -487,8 +487,8 @@ export type ImageUncheckedUpdateManyWithoutEstateInput = {
 export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   estateId?: boolean
-  cloudinaryUrl?: boolean
-  cloudinaryPublicId?: boolean
+  imageUrl?: boolean
+  storageKey?: boolean
   order?: boolean
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -496,8 +496,8 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   estateId?: boolean
-  cloudinaryUrl?: boolean
-  cloudinaryPublicId?: boolean
+  imageUrl?: boolean
+  storageKey?: boolean
   order?: boolean
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -505,8 +505,8 @@ export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   estateId?: boolean
-  cloudinaryUrl?: boolean
-  cloudinaryPublicId?: boolean
+  imageUrl?: boolean
+  storageKey?: boolean
   order?: boolean
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -514,12 +514,12 @@ export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type ImageSelectScalar = {
   id?: boolean
   estateId?: boolean
-  cloudinaryUrl?: boolean
-  cloudinaryPublicId?: boolean
+  imageUrl?: boolean
+  storageKey?: boolean
   order?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "estateId" | "cloudinaryUrl" | "cloudinaryPublicId" | "order", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "estateId" | "imageUrl" | "storageKey" | "order", ExtArgs["result"]["image"]>
 export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
 }
@@ -538,8 +538,8 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     estateId: string
-    cloudinaryUrl: string
-    cloudinaryPublicId: string
+    imageUrl: string
+    storageKey: string
     order: number
   }, ExtArgs["result"]["image"]>
   composites: {}
@@ -967,8 +967,8 @@ export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface ImageFieldRefs {
   readonly id: Prisma.FieldRef<"Image", 'String'>
   readonly estateId: Prisma.FieldRef<"Image", 'String'>
-  readonly cloudinaryUrl: Prisma.FieldRef<"Image", 'String'>
-  readonly cloudinaryPublicId: Prisma.FieldRef<"Image", 'String'>
+  readonly imageUrl: Prisma.FieldRef<"Image", 'String'>
+  readonly storageKey: Prisma.FieldRef<"Image", 'String'>
   readonly order: Prisma.FieldRef<"Image", 'Int'>
 }
     

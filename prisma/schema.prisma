@@ -193,11 +193,11 @@ model EstatePendingTransfer {
 }
 
 model Image {
-  id               String @id @default(cuid())
-  estateId         String
-  cloudinaryUrl    String
-  cloudinaryPublicId String
-  order            Int    @default(0)
+  id         String @id @default(cuid())
+  estateId   String
+  imageUrl   String
+  storageKey String
+  order      Int    @default(0)
 
   estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
 }

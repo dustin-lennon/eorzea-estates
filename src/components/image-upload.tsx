@@ -8,16 +8,24 @@ import { cn } from "@/lib/utils"
 
 export interface UploadedImage {
   url: string
-  publicId: string
+  storageKey: string
+}
+
+export interface ImagePathContext {
+  characterId?: string
+  district?: string
+  ward?: number
+  plot?: number
 }
 
 interface ImageUploadProps {
   value: UploadedImage[]
   onChange: (images: UploadedImage[]) => void
   maxImages?: number
+  pathContext?: ImagePathContext
 }
 
-export function ImageUpload({ value, onChange, maxImages = 10 }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, maxImages = 10, pathContext }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null)
@@ -39,6 +47,10 @@ export function ImageUpload({ value, onChange, maxImages = 10 }: ImageUploadProp
           toUpload.map(async (file) => {
             const formData = new FormData()
             formData.append("file", file)
+            if (pathContext?.characterId) formData.append("characterId", pathContext.characterId)
+            if (pathContext?.district) formData.append("district", pathContext.district)
+            if (pathContext?.ward != null) formData.append("ward", String(pathContext.ward))
+            if (pathContext?.plot != null) formData.append("plot", String(pathContext.plot))
             const res = await fetch("/api/upload", { method: "POST", body: formData })
             if (!res.ok) {
               const err = await res.json()
@@ -54,7 +66,7 @@ export function ImageUpload({ value, onChange, maxImages = 10 }: ImageUploadProp
         setUploading(false)
       }
     },
-    [value, onChange, maxImages]
+    [value, onChange, maxImages, pathContext]
   )
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +103,7 @@ export function ImageUpload({ value, onChange, maxImages = 10 }: ImageUploadProp
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {value.map((img, index) => (
             <div
-              key={img.publicId}
+              key={img.storageKey}
               draggable
               onDragStart={() => handleDragStart(index)}
               onDragEnter={() => handleDragEnter(index)}

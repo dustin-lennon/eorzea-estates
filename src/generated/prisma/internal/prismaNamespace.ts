@@ -1682,8 +1682,8 @@ export type EstatePendingTransferScalarFieldEnum = (typeof EstatePendingTransfer
 export const ImageScalarFieldEnum = {
   id: 'id',
   estateId: 'estateId',
-  cloudinaryUrl: 'cloudinaryUrl',
-  cloudinaryPublicId: 'cloudinaryPublicId',
+  imageUrl: 'imageUrl',
+  storageKey: 'storageKey',
   order: 'order'
 } as const
 
