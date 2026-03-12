@@ -34,11 +34,9 @@ export interface StoragePathContext {
   plot?: number
 }
 
-function buildStoragePath(ctx: StoragePathContext, ext: string): string {
-  const uuid = randomUUID()
-
+function buildStorageDir(ctx: StoragePathContext): string {
   if (!ctx.characterName && !ctx.district) {
-    return `${ctx.userId}/uploads/${uuid}.${ext}`
+    return `${ctx.userId}/uploads`
   }
 
   const parts: string[] = [ctx.userId]
@@ -59,7 +57,11 @@ function buildStoragePath(ctx: StoragePathContext, ext: string): string {
         : null
   if (location) parts.push(location)
 
-  return `${parts.join("/")}/${uuid}.${ext}`
+  return parts.join("/")
+}
+
+function buildStoragePath(ctx: StoragePathContext, ext: string): string {
+  return `${buildStorageDir(ctx)}/${randomUUID()}.${ext}`
 }
 
 export async function uploadEstateImage(
@@ -86,6 +88,27 @@ export async function uploadEstateImage(
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
 
   return { url: data.publicUrl, storageKey }
+}
+
+export async function moveEstateImage(
+  oldKey: string,
+  ctx: StoragePathContext
+): Promise<{ url: string; storageKey: string }> {
+  const filename = oldKey.split("/").pop()!
+  const newKey = `${buildStorageDir(ctx)}/${filename}`
+
+  if (newKey === oldKey) {
+    const supabase = getSupabase()
+    const { data } = supabase.storage.from(BUCKET).getPublicUrl(oldKey)
+    return { url: data.publicUrl, storageKey: oldKey }
+  }
+
+  const supabase = getSupabase()
+  const { error } = await supabase.storage.from(BUCKET).move(oldKey, newKey)
+  if (error) throw new Error(`Storage move failed: ${error.message}`)
+
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(newKey)
+  return { url: data.publicUrl, storageKey: newKey }
 }
 
 export async function deleteEstateImage(storageKey: string): Promise<void> {
