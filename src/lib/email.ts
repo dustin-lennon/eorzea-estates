@@ -22,7 +22,7 @@ function baseTemplate(title: string, body: string) {
           <!-- Header -->
           <tr>
             <td style="background:#1a1a2e;padding:20px 32px;border-bottom:1px solid #262626;">
-              <img src="https://eorzeaestates.com/images/logo/navbar-email-dark.png" alt="Eorzea Estates" height="48" style="display:block;height:48px;width:auto;" />
+              <img src="https://eorzeaestates.com/images/logo/eorzea-estates-navbar.svg" alt="Eorzea Estates" height="48" style="display:block;height:48px;width:auto;" />
             </td>
           </tr>
           <!-- Body -->
