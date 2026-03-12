@@ -21,8 +21,8 @@ function baseTemplate(title: string, body: string) {
         <table width="600" cellpadding="0" cellspacing="0" style="background:#141414;border-radius:12px;border:1px solid #262626;overflow:hidden;max-width:600px;width:100%;">
           <!-- Header -->
           <tr>
-            <td style="background:#1a1a2e;padding:28px 32px;border-bottom:1px solid #262626;">
-              <span style="font-size:20px;font-weight:700;color:#c084fc;letter-spacing:-0.3px;">Eorzea Estates</span>
+            <td style="background:#1a1a2e;padding:20px 32px;border-bottom:1px solid #262626;">
+              <img src="https://eorzeaestates.com/images/logo/eorzea-estates-navbar.svg" alt="Eorzea Estates" height="48" style="display:block;height:48px;width:auto;" />
             </td>
           </tr>
           <!-- Body -->
