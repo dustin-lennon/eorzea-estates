@@ -5,7 +5,9 @@ permissions:
   pull-requests: write
 
 on:
-  push:
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -13,7 +15,7 @@ jobs:
   sync:
     name: Sync main to develop
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Checkout repository
