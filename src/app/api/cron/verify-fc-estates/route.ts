@@ -15,7 +15,7 @@ export async function GET(req: Request) {
   }
 
   const estates = await prisma.estate.findMany({
-    where: { type: "FC_ESTATE", published: true },
+    where: { type: "FC_ESTATE", published: true, deletedAt: null },
     select: {
       id: true,
       name: true,

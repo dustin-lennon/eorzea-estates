@@ -176,7 +176,8 @@ export const EstateScalarFieldEnum = {
   flagReason: 'flagReason',
   flaggedById: 'flaggedById',
   flaggedAt: 'flaggedAt',
-  moderationStatus: 'moderationStatus'
+  moderationStatus: 'moderationStatus',
+  deletedAt: 'deletedAt'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
@@ -273,7 +274,8 @@ export type LegalPageScalarFieldEnum = (typeof LegalPageScalarFieldEnum)[keyof t
 
 export const SiteSettingsScalarFieldEnum = {
   id: 'id',
-  maintenanceMode: 'maintenanceMode'
+  maintenanceMode: 'maintenanceMode',
+  disputeEmail: 'disputeEmail'
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]

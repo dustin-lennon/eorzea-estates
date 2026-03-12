@@ -164,6 +164,7 @@ model Estate {
   flaggedBy         User?     @relation("FlaggedByUser", fields: [flaggedById], references: [id], onDelete: SetNull)
   flaggedAt         DateTime?
   moderationStatus  ModerationStatus @default(PENDING)
+  deletedAt         DateTime?
 
   images          Image[]
   venueDetails    VenueDetails?
@@ -311,4 +312,5 @@ model LegalPage {
 model SiteSettings {
   id              String  @id @default("singleton")
   maintenanceMode Boolean @default(false)
+  disputeEmail    String  @default("dispute@eorzeaestates.com")
 }

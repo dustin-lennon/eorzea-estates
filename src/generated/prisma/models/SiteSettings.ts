@@ -27,16 +27,19 @@ export type AggregateSiteSettings = {
 export type SiteSettingsMinAggregateOutputType = {
   id: string | null
   maintenanceMode: boolean | null
+  disputeEmail: string | null
 }
 
 export type SiteSettingsMaxAggregateOutputType = {
   id: string | null
   maintenanceMode: boolean | null
+  disputeEmail: string | null
 }
 
 export type SiteSettingsCountAggregateOutputType = {
   id: number
   maintenanceMode: number
+  disputeEmail: number
   _all: number
 }
 
@@ -44,16 +47,19 @@ export type SiteSettingsCountAggregateOutputType = {
 export type SiteSettingsMinAggregateInputType = {
   id?: true
   maintenanceMode?: true
+  disputeEmail?: true
 }
 
 export type SiteSettingsMaxAggregateInputType = {
   id?: true
   maintenanceMode?: true
+  disputeEmail?: true
 }
 
 export type SiteSettingsCountAggregateInputType = {
   id?: true
   maintenanceMode?: true
+  disputeEmail?: true
   _all?: true
 }
 
@@ -132,6 +138,7 @@ export type SiteSettingsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type SiteSettingsGroupByOutputType = {
   id: string
   maintenanceMode: boolean
+  disputeEmail: string
   _count: SiteSettingsCountAggregateOutputType | null
   _min: SiteSettingsMinAggregateOutputType | null
   _max: SiteSettingsMaxAggregateOutputType | null
@@ -158,11 +165,13 @@ export type SiteSettingsWhereInput = {
   NOT?: Prisma.SiteSettingsWhereInput | Prisma.SiteSettingsWhereInput[]
   id?: Prisma.StringFilter<"SiteSettings"> | string
   maintenanceMode?: Prisma.BoolFilter<"SiteSettings"> | boolean
+  disputeEmail?: Prisma.StringFilter<"SiteSettings"> | string
 }
 
 export type SiteSettingsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   maintenanceMode?: Prisma.SortOrder
+  disputeEmail?: Prisma.SortOrder
 }
 
 export type SiteSettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -171,11 +180,13 @@ export type SiteSettingsWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SiteSettingsWhereInput[]
   NOT?: Prisma.SiteSettingsWhereInput | Prisma.SiteSettingsWhereInput[]
   maintenanceMode?: Prisma.BoolFilter<"SiteSettings"> | boolean
+  disputeEmail?: Prisma.StringFilter<"SiteSettings"> | string
 }, "id">
 
 export type SiteSettingsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   maintenanceMode?: Prisma.SortOrder
+  disputeEmail?: Prisma.SortOrder
   _count?: Prisma.SiteSettingsCountOrderByAggregateInput
   _max?: Prisma.SiteSettingsMaxOrderByAggregateInput
   _min?: Prisma.SiteSettingsMinOrderByAggregateInput
@@ -187,56 +198,67 @@ export type SiteSettingsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SiteSettingsScalarWhereWithAggregatesInput | Prisma.SiteSettingsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SiteSettings"> | string
   maintenanceMode?: Prisma.BoolWithAggregatesFilter<"SiteSettings"> | boolean
+  disputeEmail?: Prisma.StringWithAggregatesFilter<"SiteSettings"> | string
 }
 
 export type SiteSettingsCreateInput = {
   id?: string
   maintenanceMode?: boolean
+  disputeEmail?: string
 }
 
 export type SiteSettingsUncheckedCreateInput = {
   id?: string
   maintenanceMode?: boolean
+  disputeEmail?: string
 }
 
 export type SiteSettingsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   maintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  disputeEmail?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteSettingsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   maintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  disputeEmail?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteSettingsCreateManyInput = {
   id?: string
   maintenanceMode?: boolean
+  disputeEmail?: string
 }
 
 export type SiteSettingsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   maintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  disputeEmail?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteSettingsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   maintenanceMode?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  disputeEmail?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteSettingsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   maintenanceMode?: Prisma.SortOrder
+  disputeEmail?: Prisma.SortOrder
 }
 
 export type SiteSettingsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   maintenanceMode?: Prisma.SortOrder
+  disputeEmail?: Prisma.SortOrder
 }
 
 export type SiteSettingsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   maintenanceMode?: Prisma.SortOrder
+  disputeEmail?: Prisma.SortOrder
 }
 
 
@@ -244,24 +266,28 @@ export type SiteSettingsMinOrderByAggregateInput = {
 export type SiteSettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   maintenanceMode?: boolean
+  disputeEmail?: boolean
 }, ExtArgs["result"]["siteSettings"]>
 
 export type SiteSettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   maintenanceMode?: boolean
+  disputeEmail?: boolean
 }, ExtArgs["result"]["siteSettings"]>
 
 export type SiteSettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   maintenanceMode?: boolean
+  disputeEmail?: boolean
 }, ExtArgs["result"]["siteSettings"]>
 
 export type SiteSettingsSelectScalar = {
   id?: boolean
   maintenanceMode?: boolean
+  disputeEmail?: boolean
 }
 
-export type SiteSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "maintenanceMode", ExtArgs["result"]["siteSettings"]>
+export type SiteSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "maintenanceMode" | "disputeEmail", ExtArgs["result"]["siteSettings"]>
 
 export type $SiteSettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteSettings"
@@ -269,6 +295,7 @@ export type $SiteSettingsPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     maintenanceMode: boolean
+    disputeEmail: string
   }, ExtArgs["result"]["siteSettings"]>
   composites: {}
 }
@@ -694,6 +721,7 @@ export interface Prisma__SiteSettingsClient<T, Null = never, ExtArgs extends run
 export interface SiteSettingsFieldRefs {
   readonly id: Prisma.FieldRef<"SiteSettings", 'String'>
   readonly maintenanceMode: Prisma.FieldRef<"SiteSettings", 'Boolean'>
+  readonly disputeEmail: Prisma.FieldRef<"SiteSettings", 'String'>
 }
     
 

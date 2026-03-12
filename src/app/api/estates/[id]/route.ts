@@ -17,7 +17,7 @@ export async function GET(
 
   const { id } = await params
   const estate = await prisma.estate.findUnique({
-    where: { id },
+    where: { id, deletedAt: null },
     select: {
       id: true,
       name: true,
@@ -64,7 +64,7 @@ export async function DELETE(
   const { id } = await params
 
   const estate = await prisma.estate.findUnique({
-    where: { id },
+    where: { id, deletedAt: null },
     select: { ownerId: true, images: { select: { cloudinaryPublicId: true } } },
   })
 
@@ -92,7 +92,7 @@ export async function PATCH(
 
   const { id } = await params
   const estate = await prisma.estate.findUnique({
-    where: { id },
+    where: { id, deletedAt: null },
     select: { ownerId: true },
   })
 

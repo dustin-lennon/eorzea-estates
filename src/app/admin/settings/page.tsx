@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { MaintenanceToggle } from "./maintenance-toggle"
+import { DisputeEmailInput } from "./dispute-email-input"
 
 export default async function AdminSettingsPage() {
   const session = await auth()
@@ -12,6 +13,7 @@ export default async function AdminSettingsPage() {
   })
 
   const maintenanceMode = settings?.maintenanceMode ?? false
+  const disputeEmail = settings?.disputeEmail ?? "dispute@eorzeaestates.com"
 
   return (
     <div>
@@ -22,6 +24,7 @@ export default async function AdminSettingsPage() {
 
       <div className="max-w-xl space-y-4">
         <MaintenanceToggle initialValue={maintenanceMode} />
+        <DisputeEmailInput initialValue={disputeEmail} />
 
         {process.env.MAINTENANCE_MODE === "true" && (
           <div className="rounded-xl border border-destructive/50 bg-destructive/5 p-4 text-sm text-destructive">
