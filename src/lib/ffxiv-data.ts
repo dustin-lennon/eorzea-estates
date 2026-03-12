@@ -132,6 +132,7 @@ export const PREDEFINED_TAGS = [
   "Gallery",
   "Studio",
   "Lounge",
+  "Message Book",
 ] as const
 
 export const DAYS_OF_WEEK = [
