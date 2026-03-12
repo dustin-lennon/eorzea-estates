@@ -90,7 +90,7 @@ export default async function ProfilePage({ params }: PageProps) {
               dataCenter={estate.dataCenter}
               tags={estate.tags}
               likeCount={estate.likeCount}
-              coverImage={estate.images[0]?.cloudinaryUrl}
+              coverImage={estate.images[0]?.imageUrl}
               ownerName={displayName}
               lodestoneVerified={isVerified}
               venueType={estate.venueDetails?.venueType ?? null}

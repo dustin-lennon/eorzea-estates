@@ -42,7 +42,7 @@ export default async function RootLayout({
   // DB-based maintenance mode (runtime toggle via admin settings)
   const headersList = await headers()
   const pathname = headersList.get("x-pathname") ?? ""
-  const bypassPaths = ["/login", "/api/auth", "/maintenance"]
+  const bypassPaths = ["/login", "/api/auth", "/maintenance", "/images"]
   if (!bypassPaths.some((p) => pathname.startsWith(p))) {
     let maintenanceOn = false
     let isAdmin = false

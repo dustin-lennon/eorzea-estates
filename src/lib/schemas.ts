@@ -28,7 +28,7 @@ export const estateFormSchema = z.object({
   room: z.number().int().min(1).max(2048).optional(),
   tags: z.array(z.string()).max(10).default([]),
   images: z.array(
-    z.object({ url: z.string().url(), publicId: z.string() })
+    z.object({ url: z.string().url(), storageKey: z.string() })
   ).min(1, "At least one screenshot is required").max(10),
   // Venue-specific
   venueType: z.enum(["BAR", "NIGHTCLUB", "CAFE", "RESTAURANT", "GALLERY", "LIBRARY", "SHOP", "BATHHOUSE", "INN", "OTHER"]).optional(),

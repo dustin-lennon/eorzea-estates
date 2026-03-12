@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
-import { deleteEstateImage } from "@/lib/cloudinary"
+import { deleteEstateImage, moveEstateImage } from "@/lib/storage"
 import { estateFormSchema } from "@/lib/schemas"
 import { NextResponse } from "next/server"
 
@@ -32,7 +32,7 @@ export async function GET(
       published: true,
       characterId: true,
       ownerId: true,
-      images: { orderBy: { order: "asc" }, select: { cloudinaryUrl: true, cloudinaryPublicId: true } },
+      images: { orderBy: { order: "asc" }, select: { imageUrl: true, storageKey: true } },
       venueDetails: {
         select: {
           venueType: true,
@@ -65,7 +65,7 @@ export async function DELETE(
 
   const estate = await prisma.estate.findUnique({
     where: { id, deletedAt: null },
-    select: { ownerId: true, images: { select: { cloudinaryPublicId: true } } },
+    select: { ownerId: true, images: { select: { storageKey: true } } },
   })
 
   if (!estate) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -73,8 +73,8 @@ export async function DELETE(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
-  // Delete images from Cloudinary
-  await Promise.allSettled(estate.images.map((img: { cloudinaryPublicId: string }) => deleteEstateImage(img.cloudinaryPublicId)))
+  // Delete images from storage
+  await Promise.allSettled(estate.images.map((img: { storageKey: string }) => deleteEstateImage(img.storageKey)))
 
   await prisma.estate.delete({ where: { id } })
 
@@ -93,7 +93,14 @@ export async function PATCH(
   const { id } = await params
   const estate = await prisma.estate.findUnique({
     where: { id, deletedAt: null },
-    select: { ownerId: true },
+    select: {
+      ownerId: true,
+      district: true,
+      ward: true,
+      plot: true,
+      character: { select: { characterName: true, server: true } },
+      images: { select: { storageKey: true } },
+    },
   })
 
   if (!estate) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -122,14 +129,37 @@ export async function PATCH(
   const data = parsed.data
   const isVenue = data.type === "VENUE"
 
-  // Sync images: delete removed ones from Cloudinary, then replace all DB records
-  const existing = await prisma.estate.findUnique({
-    where: { id },
-    select: { images: { select: { cloudinaryPublicId: true } } },
-  })
-  const newPublicIds = new Set(data.images.map((img) => img.publicId))
-  const toDelete = (existing?.images ?? []).filter((img) => !newPublicIds.has(img.cloudinaryPublicId))
-  await Promise.allSettled(toDelete.map((img) => deleteEstateImage(img.cloudinaryPublicId)))
+  // Sync images: delete removed ones, move kept ones if location changed
+  const newStorageKeys = new Set(data.images.map((img) => img.storageKey))
+  const toDelete = estate.images.filter((img) => !newStorageKeys.has(img.storageKey))
+  await Promise.allSettled(toDelete.map((img) => deleteEstateImage(img.storageKey)))
+
+  const locationChanged =
+    data.district !== estate.district ||
+    (data.ward ?? null) !== estate.ward ||
+    (data.plot ?? null) !== estate.plot
+
+  let finalImages = data.images
+  if (locationChanged) {
+    const ctx = {
+      userId: session.user.id,
+      characterName: estate.character?.characterName,
+      server: estate.character?.server,
+      district: data.district,
+      ward: data.ward,
+      plot: data.plot,
+    }
+    finalImages = await Promise.all(
+      data.images.map(async (img) => {
+        try {
+          const moved = await moveEstateImage(img.storageKey, ctx)
+          return { ...img, url: moved.url, storageKey: moved.storageKey }
+        } catch {
+          return img
+        }
+      })
+    )
+  }
 
   const updated = await prisma.estate.update({
     where: { id },
@@ -145,9 +175,9 @@ export async function PATCH(
       tags: data.tags,
       images: {
         deleteMany: {},
-        create: data.images.map((img, i) => ({
-          cloudinaryUrl: img.url,
-          cloudinaryPublicId: img.publicId,
+        create: finalImages.map((img, i) => ({
+          imageUrl: img.url,
+          storageKey: img.storageKey,
           order: i,
         })),
       },

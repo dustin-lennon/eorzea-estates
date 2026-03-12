@@ -70,7 +70,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         dataCenter: true,
         tags: true,
         likeCount: true,
-        images: { orderBy: { order: "asc" }, take: 1, select: { cloudinaryUrl: true } },
+        images: { orderBy: { order: "asc" }, take: 1, select: { imageUrl: true } },
         owner: {
           select: {
             name: true,
@@ -134,7 +134,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                       dataCenter={estate.dataCenter}
                       tags={estate.tags}
                       likeCount={estate.likeCount}
-                      coverImage={estate.images[0]?.cloudinaryUrl}
+                      coverImage={estate.images[0]?.imageUrl}
                       ownerName={ownerName ?? null}
                       lodestoneVerified={!!verifiedChar}
                       venueType={estate.venueDetails?.venueType ?? null}

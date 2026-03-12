@@ -164,6 +164,12 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
           <ImageUpload
             value={form.watch("images") as UploadedImage[]}
             onChange={(imgs) => form.setValue("images", imgs, { shouldValidate: true })}
+            pathContext={{
+              characterId: form.watch("characterId"),
+              district: form.watch("district"),
+              ward: form.watch("ward"),
+              plot: form.watch("plot"),
+            }}
           />
           {form.formState.errors.images && (
             <p className="text-destructive text-sm mt-1">{form.formState.errors.images.message}</p>
