@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.9.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.9.0...v1.9.1) (2026-03-12)
+
+### 🐛 Bug Fixes
+
+* revert email logo to eorzea-estates-navbar.svg ([eb860e9](https://github.com/dustin-lennon/eorzea-estates/commit/eb860e994641442905e3ce39ca90a8c39e3eb618))
+
 ## [1.9.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.8.0...v1.9.0) (2026-03-12)
 
 ### ✨ Features
