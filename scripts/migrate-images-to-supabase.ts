@@ -6,7 +6,7 @@
  * then updates the DB row with the new imageUrl and storageKey.
  *
  * Run with:
- *   node --experimental-strip-types scripts/migrate-images-to-supabase.ts
+ *   pnpm migrate:images
  *
  * Requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env
  */
@@ -14,12 +14,14 @@
 import { config } from "dotenv"
 config()
 
-import { PrismaClient } from "../src/generated/prisma/index.js"
+import { PrismaClient } from "../src/generated/prisma/client"
+import { PrismaPg } from "@prisma/adapter-pg"
 import { createClient } from "@supabase/supabase-js"
 import sharp from "sharp"
 import { randomUUID } from "crypto"
 
-const prisma = new PrismaClient()
+const adapter = new PrismaPg({ connectionString: process.env.DIRECT_URL! })
+const prisma = new PrismaClient({ adapter })
 const BUCKET = "estate-images"
 
 function getSupabase() {
