@@ -158,9 +158,13 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags }: Prop
         <Select
           value={selectedRegion || EMPTY}
           onValueChange={(v) => {
-            update("region", v === EMPTY ? null : v)
-            update("dataCenter", null)
-            update("server", null)
+            const params = new URLSearchParams(searchParams.toString())
+            params.delete("page")
+            if (v === EMPTY) params.delete("region")
+            else params.set("region", v)
+            params.delete("dataCenter")
+            params.delete("server")
+            router.push(`/directory?${params.toString()}`)
           }}
         >
           <SelectTrigger>
@@ -178,8 +182,12 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags }: Prop
           <Select
             value={selectedDC || EMPTY}
             onValueChange={(v) => {
-              update("dataCenter", v === EMPTY ? null : v)
-              update("server", null)
+              const params = new URLSearchParams(searchParams.toString())
+              params.delete("page")
+              if (v === EMPTY) params.delete("dataCenter")
+              else params.set("dataCenter", v)
+              params.delete("server")
+              router.push(`/directory?${params.toString()}`)
             }}
           >
             <SelectTrigger>
