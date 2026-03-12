@@ -22,7 +22,7 @@ export default async function EditEstatePage({
 
   const [estate, characters] = await Promise.all([
     prisma.estate.findUnique({
-      where: { id },
+      where: { id, deletedAt: null },
       select: {
         id: true,
         name: true,

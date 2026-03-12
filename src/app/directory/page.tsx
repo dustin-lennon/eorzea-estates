@@ -31,6 +31,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
 
   const where = {
     published: true,
+    deletedAt: null,
     ...(params.region ? { region: params.region } : {}),
     ...(params.dataCenter ? { dataCenter: params.dataCenter } : {}),
     ...(params.server ? { server: params.server } : {}),

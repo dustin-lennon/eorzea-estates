@@ -26,7 +26,7 @@ export default async function DashboardPage() {
       include: { _count: { select: { estates: true } } },
     }),
     prisma.estate.findMany({
-      where: { ownerId: session.user.id },
+      where: { ownerId: session.user.id, deletedAt: null },
       orderBy: { createdAt: "desc" },
       include: {
         images: { orderBy: { order: "asc" }, take: 1 },

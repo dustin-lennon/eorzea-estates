@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   // Enforce per-character housing limits
   if ((SINGLE_LIMIT_TYPES as readonly string[]).includes(data.type)) {
     const existing = await prisma.estate.findFirst({
-      where: { characterId: data.characterId, type: data.type },
+      where: { characterId: data.characterId, type: data.type, deletedAt: null },
       select: { id: true },
     })
     if (existing) {

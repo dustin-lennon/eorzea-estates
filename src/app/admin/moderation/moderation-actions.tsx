@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button"
 
 interface Props {
   estateId: string
+  showRestore?: boolean
 }
 
-export function ModerationActions({ estateId }: Props) {
+export function ModerationActions({ estateId, showRestore }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState<string | null>(null)
 
-  async function handleAction(action: "approve" | "reject" | "remove") {
+  async function handleAction(action: "approve" | "reject" | "remove" | "restore") {
     setLoading(action)
     try {
       const res = await fetch(`/api/moderation/${estateId}`, {
@@ -22,14 +23,33 @@ export function ModerationActions({ estateId }: Props) {
         body: JSON.stringify({ action }),
       })
       if (!res.ok) throw new Error("Failed")
-      const labels = { approve: "Report dismissed", reject: "Estate unpublished", remove: "Estate removed" }
-      toast.success(`${labels[action]} successfully`)
+      const labels: Record<string, string> = {
+        approve: "Report dismissed",
+        reject: "Estate unpublished",
+        remove: "Estate removed",
+        restore: "Estate restored",
+      }
+      toast.success(labels[action])
       router.refresh()
     } catch {
       toast.error("Action failed")
     } finally {
       setLoading(null)
     }
+  }
+
+  if (showRestore) {
+    return (
+      <Button
+        size="sm"
+        variant="outline"
+        className="text-green-600 border-green-600 hover:bg-green-50 dark:hover:bg-green-950"
+        disabled={!!loading}
+        onClick={() => handleAction("restore")}
+      >
+        {loading === "restore" ? "..." : "Restore"}
+      </Button>
+    )
   }
 
   return (
