@@ -45,19 +45,21 @@ export default async function RootLayout({
   const bypassPaths = ["/login", "/api/auth", "/maintenance"]
   if (!bypassPaths.some((p) => pathname.startsWith(p))) {
     let maintenanceOn = false
-    let session = null
+    let isAdmin = false
+    let hasUser = false
     try {
-      const [settings, s] = await Promise.all([
+      const [settings, session] = await Promise.all([
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
         auth(),
       ])
       maintenanceOn = settings?.maintenanceMode ?? false
-      session = s
+      isAdmin = session?.user?.role === "ADMIN"
+      hasUser = !!session?.user
     } catch {
       // DB unavailable (e.g. CI/test environment) — skip maintenance check
     }
-    if (maintenanceOn && session?.user?.role !== "ADMIN") {
-      if (session?.user) {
+    if (maintenanceOn && !isAdmin) {
+      if (hasUser) {
         await signOut({ redirectTo: "/maintenance" })
       } else {
         redirect("/maintenance")
