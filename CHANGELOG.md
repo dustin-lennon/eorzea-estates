@@ -3,6 +3,18 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.9.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.8.0...v1.9.0) (2026-03-12)
+
+### ✨ Features
+
+* migrate image storage from Cloudinary to Supabase Storage ([6cdfffa](https://github.com/dustin-lennon/eorzea-estates/commit/6cdfffa1ff4e12f84e75bdf6f6029d4887545bea)), closes [#112](https://github.com/dustin-lennon/eorzea-estates/issues/112)
+* move estate images in storage when location changes on edit ([0f8d9c5](https://github.com/dustin-lennon/eorzea-estates/commit/0f8d9c54d26411ac583a0a1873bb0b8dd4302e97))
+
+### 🐛 Bug Fixes
+
+* bypass maintenance mode check for /images paths in root layout ([35d0917](https://github.com/dustin-lennon/eorzea-estates/commit/35d09178ed14360519b0f77773f762a795e37d0b)), closes [#114](https://github.com/dustin-lennon/eorzea-estates/issues/114)
+* correct prisma import path and use tsx runner in migration script ([7e2b95f](https://github.com/dustin-lennon/eorzea-estates/commit/7e2b95f1f2f303ea7a8dcd75e12eafa50441c15a))
+
 ## [1.8.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.7.0...v1.8.0) (2026-03-12)
 
 ### ✨ Features
