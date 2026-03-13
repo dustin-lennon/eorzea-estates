@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { formatDistanceToNow } from "date-fns"
 import { toast } from "sonner"
-import { BadgeCheck } from "lucide-react"
+import { BadgeCheck, Crown, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -17,6 +18,7 @@ interface Comment {
     id: string
     name: string | null
     image: string | null
+    role: string
     characters: { characterName: string }[]
   }
 }
@@ -98,10 +100,18 @@ export function CommentsSection({ estateId, initialComments, isLoggedIn }: Comme
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-1 text-sm font-medium">
-                    {verifiedChar && (
+                    {comment.user.role === "ADMIN" && (
+                      <Crown className="h-3.5 w-3.5 text-yellow-500" />
+                    )}
+                    {comment.user.role === "MODERATOR" && (
+                      <Shield className="h-3.5 w-3.5 text-blue-500" />
+                    )}
+                    {verifiedChar && comment.user.role === "USER" && (
                       <BadgeCheck className="h-3.5 w-3.5 text-blue-500" />
                     )}
-                    {displayName}
+                    <Link href={`/profile/${comment.user.id}`} className="hover:underline">
+                      {displayName}
+                    </Link>
                     <span className="text-xs text-muted-foreground font-normal ml-1">
                       {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </span>
