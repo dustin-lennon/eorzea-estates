@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { BadgeCheck } from "lucide-react"
+import { BadgeCheck, Crown, Shield } from "lucide-react"
 
 interface PageProps {
   params: Promise<{ userId: string }>
@@ -32,6 +32,7 @@ export default async function ProfilePage({ params }: PageProps) {
       id: true,
       name: true,
       image: true,
+      role: true,
       createdAt: true,
       characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
     },
@@ -64,13 +65,17 @@ export default async function ProfilePage({ params }: PageProps) {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{displayName}</h1>
+            {user.role === "ADMIN" && (
+              <Crown className="h-5 w-5 text-yellow-500" aria-label="Admin" />
+            )}
+            {user.role === "MODERATOR" && (
+              <Shield className="h-5 w-5 text-blue-500" aria-label="Moderator" />
+            )}
             {isVerified && (
               <BadgeCheck className="h-5 w-5 text-blue-500" aria-label="Verified FFXIV Character" />
             )}
           </div>
-          {isVerified && user.name && (
-            <p className="text-sm text-muted-foreground">Discord: {user.name}</p>
-          )}
+
           <p className="text-sm text-muted-foreground">{estates.length} estate{estates.length !== 1 ? "s" : ""}</p>
         </div>
       </div>
