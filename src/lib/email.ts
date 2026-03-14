@@ -160,6 +160,105 @@ export async function sendFCEstateUnpublishedEmail({
   })
 }
 
+export async function sendVerificationApprovedEmail({
+  to,
+  ownerName,
+  estateName,
+}: {
+  to: string
+  ownerName: string
+  estateName: string
+}) {
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Ownership verified!</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${ownerName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      Ownership of <strong style="color:#f5f5f5;">${estateName}</strong> has been verified.
+      You can now publish your estate listing from your dashboard.
+    </p>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `Ownership verified — "${estateName}" is ready to publish`,
+    html: baseTemplate(`Ownership verified — ${estateName}`, body),
+  })
+}
+
+export async function sendVerificationQueuedEmail({
+  to,
+  ownerName,
+  estateName,
+}: {
+  to: string
+  ownerName: string
+  estateName: string
+}) {
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Your verification is under review</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${ownerName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      We received your ownership screenshot for <strong style="color:#f5f5f5;">${estateName}</strong>.
+      Our automated system was unable to make a confident determination, so your submission has been passed to our moderation team for manual review.
+    </p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      No action is needed on your part — we will notify you by email once a decision has been made.
+    </p>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `Your verification for "${estateName}" is under review`,
+    html: baseTemplate(`Verification under review — ${estateName}`, body),
+  })
+}
+
+export async function sendVerificationRejectedEmail({
+  to,
+  ownerName,
+  estateName,
+  reason,
+  screenshotUrl,
+}: {
+  to: string
+  ownerName: string
+  estateName: string
+  reason: string
+  screenshotUrl: string
+}) {
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Verification not approved</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${ownerName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      We were unable to verify ownership of <strong style="color:#f5f5f5;">${estateName}</strong>.
+    </p>
+    <div style="background:#1f1f1f;border-left:3px solid #ef4444;border-radius:4px;padding:16px;margin:0 0 20px;">
+      <p style="margin:0;font-size:13px;font-weight:600;color:#a3a3a3;text-transform:uppercase;letter-spacing:0.5px;">Reason</p>
+      <p style="margin:8px 0 0;color:#e5e5e5;line-height:1.6;">${reason}</p>
+    </div>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">
+      The screenshot you submitted is attached to this email for your reference.
+      You can re-submit a new screenshot from your dashboard at any time.
+    </p>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `Verification not approved — "${estateName}"`,
+    html: baseTemplate(`Verification rejected — ${estateName}`, body),
+    attachments: [
+      {
+        filename: "verification-screenshot.webp",
+        path: screenshotUrl,
+        contentType: "image/webp",
+      },
+    ],
+  })
+}
+
 export async function sendFCEstateTransferInviteEmail({
   to,
   newOwnerName,

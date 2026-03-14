@@ -11,9 +11,53 @@ import { EstateCard } from "@/components/estate-card"
 import { DashboardEstateActions } from "./dashboard-estate-actions"
 import { CharacterActions } from "./character-actions"
 import { ESTATE_TYPES } from "@/lib/ffxiv-data"
-import { Plus, BadgeCheck, UserCircle2 } from "lucide-react"
+import { Plus, BadgeCheck, UserCircle2, ShieldCheck } from "lucide-react"
 
 export const metadata: Metadata = { title: "Dashboard" }
+
+function VerificationBadge({
+  verified,
+  verificationStatus,
+}: {
+  verified: boolean
+  verificationStatus: string | null
+}) {
+  if (verified && !verificationStatus) {
+    return (
+      <Badge variant="secondary" className="gap-1 shrink-0 text-xs">
+        <ShieldCheck className="h-3 w-3" />
+        Verified (Legacy)
+      </Badge>
+    )
+  }
+  if (verified && (verificationStatus === "AI_APPROVED" || verificationStatus === "MOD_APPROVED")) {
+    return (
+      <Badge variant="default" className="gap-1 shrink-0 text-xs">
+        <ShieldCheck className="h-3 w-3" />
+        Verified
+      </Badge>
+    )
+  }
+  if (verificationStatus === "QUEUED" || verificationStatus === "PENDING") {
+    return (
+      <Badge variant="outline" className="shrink-0 text-xs border-yellow-500 text-yellow-600 dark:text-yellow-400">
+        Pending Review
+      </Badge>
+    )
+  }
+  if (verificationStatus === "MOD_REJECTED") {
+    return (
+      <Badge variant="destructive" className="shrink-0 text-xs">
+        Rejected
+      </Badge>
+    )
+  }
+  return (
+    <Badge variant="secondary" className="shrink-0 text-xs">
+      Unverified
+    </Badge>
+  )
+}
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -32,6 +76,7 @@ export default async function DashboardPage() {
         images: { orderBy: { order: "asc" }, take: 1 },
         venueDetails: { select: { venueType: true } },
         character: { select: { characterName: true, verified: true } },
+        verification: { select: { status: true, modReason: true } },
       },
     }),
     prisma.like.findMany({
@@ -190,7 +235,7 @@ export default async function DashboardPage() {
             {estates.map((estate) => (
               <div key={estate.id} className="rounded-xl border p-4 flex items-center gap-4">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <span className="font-medium truncate">{estate.name}</span>
                     <Badge variant={estate.published ? "default" : "secondary"}>
                       {estate.published ? "Published" : "Draft"}
@@ -198,6 +243,10 @@ export default async function DashboardPage() {
                     <Badge variant="outline">
                       {ESTATE_TYPES.find((t) => t.value === estate.type)?.label}
                     </Badge>
+                    <VerificationBadge
+                      verified={estate.verified}
+                      verificationStatus={estate.verificationStatus}
+                    />
                   </div>
                   <p className="text-sm text-muted-foreground">
                     {estate.server} · {estate.likeCount} likes
@@ -210,7 +259,13 @@ export default async function DashboardPage() {
                 </div>
                 <DashboardEstateActions
                   estateId={estate.id}
+                  estateName={estate.name}
+                  estateType={estate.type}
+                  characterName={estate.character?.characterName ?? ""}
                   published={estate.published}
+                  verified={estate.verified}
+                  verificationStatus={estate.verificationStatus}
+                  modReason={estate.verification?.modReason}
                 />
               </div>
             ))}

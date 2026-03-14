@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       plot: data.plot ?? null,
       room: data.room ?? null,
       tags: data.tags,
-      published: true,
+      published: false,
       ownerId: session.user.id,
       characterId: data.characterId,
       images: {
