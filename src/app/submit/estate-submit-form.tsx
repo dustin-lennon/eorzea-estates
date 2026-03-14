@@ -38,6 +38,8 @@ interface Character {
   id: string
   characterName: string
   server: string
+  isFcMember: boolean
+  isFcOwner: boolean
 }
 
 interface Props {
@@ -66,6 +68,15 @@ export function EstateSubmitForm({ characters }: Props) {
   const { fields: staffFields, append: appendStaff, remove: removeStaff } = useFieldArray({
     control: form.control,
     name: "venueStaff",
+  })
+
+  const watchedCharacterId = form.watch("characterId")
+  const selectedCharacter = characters.find((c) => c.id === watchedCharacterId)
+
+  const availableTypes = ESTATE_TYPES.filter((t) => {
+    if (t.value === "FC_ESTATE") return selectedCharacter?.isFcOwner ?? false
+    if (t.value === "FC_ROOM") return selectedCharacter?.isFcMember ?? false
+    return true
   })
 
   const watchedType = form.watch("type")
@@ -120,7 +131,15 @@ export function EstateSubmitForm({ characters }: Props) {
           </p>
           <Select
             value={form.watch("characterId")}
-            onValueChange={(v) => form.setValue("characterId", v, { shouldValidate: true })}
+            onValueChange={(v) => {
+              form.setValue("characterId", v, { shouldValidate: true })
+              const char = characters.find((c) => c.id === v)
+              const currentType = form.getValues("type")
+              const typeStillValid =
+                (currentType !== "FC_ESTATE" || (char?.isFcOwner ?? false)) &&
+                (currentType !== "FC_ROOM" || (char?.isFcMember ?? false))
+              if (!typeStillValid) form.setValue("type", "PRIVATE")
+            }}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select character" />
@@ -190,7 +209,7 @@ export function EstateSubmitForm({ characters }: Props) {
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>
               <SelectContent>
-                {ESTATE_TYPES.map((t) => (
+                {availableTypes.map((t) => (
                   <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
                 ))}
               </SelectContent>
