@@ -51,3 +51,8 @@ next-env.d.ts
 # Claude
 .claude/worktrees/
 .claude/settings.local.json
+
+# Misc
+prod.dump
+sync_prod_to_develop.sh
+supabase/
