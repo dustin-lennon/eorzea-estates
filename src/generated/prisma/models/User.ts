@@ -223,6 +223,7 @@ export type UserWhereInput = {
   likes?: Prisma.LikeListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   venueStaff?: Prisma.VenueStaffListRelationFilter
+  verificationReviews?: Prisma.EstateVerificationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -244,6 +245,7 @@ export type UserOrderByWithRelationInput = {
   likes?: Prisma.LikeOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   venueStaff?: Prisma.VenueStaffOrderByRelationAggregateInput
+  verificationReviews?: Prisma.EstateVerificationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -268,6 +270,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   likes?: Prisma.LikeListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   venueStaff?: Prisma.VenueStaffListRelationFilter
+  verificationReviews?: Prisma.EstateVerificationListRelationFilter
 }, "id" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -319,6 +322,7 @@ export type UserCreateInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -340,6 +344,7 @@ export type UserUncheckedCreateInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -361,6 +366,7 @@ export type UserUpdateInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -382,6 +388,7 @@ export type UserUncheckedUpdateInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -546,6 +553,22 @@ export type UserUpdateOneRequiredWithoutEstatesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEstatesInput, Prisma.UserUpdateWithoutEstatesInput>, Prisma.UserUncheckedUpdateWithoutEstatesInput>
 }
 
+export type UserCreateNestedOneWithoutVerificationReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVerificationReviewsInput, Prisma.UserUncheckedCreateWithoutVerificationReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVerificationReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutVerificationReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVerificationReviewsInput, Prisma.UserUncheckedCreateWithoutVerificationReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVerificationReviewsInput
+  upsert?: Prisma.UserUpsertWithoutVerificationReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVerificationReviewsInput, Prisma.UserUpdateWithoutVerificationReviewsInput>, Prisma.UserUncheckedUpdateWithoutVerificationReviewsInput>
+}
+
 export type UserCreateNestedOneWithoutVenueStaffInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVenueStaffInput, Prisma.UserUncheckedCreateWithoutVenueStaffInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVenueStaffInput
@@ -624,6 +647,7 @@ export type UserCreateWithoutAccountsInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -644,6 +668,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -680,6 +705,7 @@ export type UserUpdateWithoutAccountsInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -700,6 +726,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -720,6 +747,7 @@ export type UserCreateWithoutSessionsInput = {
   legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -740,6 +768,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -776,6 +805,7 @@ export type UserUpdateWithoutSessionsInput = {
   legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -796,6 +826,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -816,6 +847,7 @@ export type UserCreateWithoutCharactersInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -836,6 +868,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -872,6 +905,7 @@ export type UserUpdateWithoutCharactersInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -892,6 +926,7 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutFlaggedEstatesInput = {
@@ -912,6 +947,7 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
@@ -932,6 +968,7 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
@@ -957,6 +994,7 @@ export type UserCreateWithoutEstatesInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutEstatesInput = {
@@ -977,6 +1015,7 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutEstatesInput = {
@@ -1013,6 +1052,7 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
@@ -1033,6 +1073,7 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutEstatesInput = {
@@ -1064,6 +1105,7 @@ export type UserUpdateWithoutEstatesInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEstatesInput = {
@@ -1079,6 +1121,107 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutVerificationReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+}
+
+export type UserUncheckedCreateWithoutVerificationReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+}
+
+export type UserCreateOrConnectWithoutVerificationReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVerificationReviewsInput, Prisma.UserUncheckedCreateWithoutVerificationReviewsInput>
+}
+
+export type UserUpsertWithoutVerificationReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVerificationReviewsInput, Prisma.UserUncheckedUpdateWithoutVerificationReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVerificationReviewsInput, Prisma.UserUncheckedCreateWithoutVerificationReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVerificationReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVerificationReviewsInput, Prisma.UserUncheckedUpdateWithoutVerificationReviewsInput>
+}
+
+export type UserUpdateWithoutVerificationReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
   characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
   legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
@@ -1104,6 +1247,7 @@ export type UserCreateWithoutVenueStaffInput = {
   legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutVenueStaffInput = {
@@ -1124,6 +1268,7 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutVenueStaffInput = {
@@ -1160,6 +1305,7 @@ export type UserUpdateWithoutVenueStaffInput = {
   legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVenueStaffInput = {
@@ -1180,6 +1326,7 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutLikesInput = {
@@ -1200,6 +1347,7 @@ export type UserCreateWithoutLikesInput = {
   legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutLikesInput = {
@@ -1220,6 +1368,7 @@ export type UserUncheckedCreateWithoutLikesInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutLikesInput = {
@@ -1256,6 +1405,7 @@ export type UserUpdateWithoutLikesInput = {
   legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLikesInput = {
@@ -1276,6 +1426,7 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -1296,6 +1447,7 @@ export type UserCreateWithoutCommentsInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1316,6 +1468,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1352,6 +1505,7 @@ export type UserUpdateWithoutCommentsInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1372,6 +1526,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutLegalPageEditsInput = {
@@ -1392,6 +1547,7 @@ export type UserCreateWithoutLegalPageEditsInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutLegalPageEditsInput = {
@@ -1412,6 +1568,7 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutLegalPageEditsInput = {
@@ -1448,6 +1605,7 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
@@ -1468,6 +1626,7 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 
@@ -1485,6 +1644,7 @@ export type UserCountOutputType = {
   likes: number
   sessions: number
   venueStaff: number
+  verificationReviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1497,6 +1657,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   likes?: boolean | UserCountOutputTypeCountLikesArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   venueStaff?: boolean | UserCountOutputTypeCountVenueStaffArgs
+  verificationReviews?: boolean | UserCountOutputTypeCountVerificationReviewsArgs
 }
 
 /**
@@ -1572,6 +1733,13 @@ export type UserCountOutputTypeCountVenueStaffArgs<ExtArgs extends runtime.Types
   where?: Prisma.VenueStaffWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVerificationReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateVerificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1592,6 +1760,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   likes?: boolean | Prisma.User$likesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
+  verificationReviews?: boolean | Prisma.User$verificationReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1642,6 +1811,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   likes?: boolean | Prisma.User$likesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
+  verificationReviews?: boolean | Prisma.User$verificationReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1659,6 +1829,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     likes: Prisma.$LikePayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     venueStaff: Prisma.$VenueStaffPayload<ExtArgs>[]
+    verificationReviews: Prisma.$EstateVerificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2073,6 +2244,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   likes<T extends Prisma.User$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   venueStaff<T extends Prisma.User$venueStaffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$venueStaffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  verificationReviews<T extends Prisma.User$verificationReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$verificationReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2712,6 +2884,30 @@ export type User$venueStaffArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.VenueStaffScalarFieldEnum | Prisma.VenueStaffScalarFieldEnum[]
+}
+
+/**
+ * User.verificationReviews
+ */
+export type User$verificationReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EstateVerification
+   */
+  select?: Prisma.EstateVerificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EstateVerification
+   */
+  omit?: Prisma.EstateVerificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstateVerificationInclude<ExtArgs> | null
+  where?: Prisma.EstateVerificationWhereInput
+  orderBy?: Prisma.EstateVerificationOrderByWithRelationInput | Prisma.EstateVerificationOrderByWithRelationInput[]
+  cursor?: Prisma.EstateVerificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EstateVerificationScalarFieldEnum | Prisma.EstateVerificationScalarFieldEnum[]
 }
 
 /**

@@ -58,3 +58,4 @@ prod.dump
 
 # Misc scripts
 sync_prod_to_develop.sh
+.env*.local

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
-import { BadgeCheck, MapPin, Clock, Users, ExternalLink } from "lucide-react"
+import { BadgeCheck, MapPin, Clock, Users, ExternalLink, ShieldCheck } from "lucide-react"
 import prisma from "@/lib/prisma"
 import { auth } from "@/auth"
 import { Badge } from "@/components/ui/badge"
@@ -293,6 +293,15 @@ export default async function EstateDetailPage({ params }: PageProps) {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Plot</span>
                   <span>{estate.plot}</span>
+                </div>
+              )}
+              {estate.verified && (
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Ownership</span>
+                  <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-medium">
+                    <ShieldCheck className="h-4 w-4" />
+                    Verified
+                  </span>
                 </div>
               )}
             </div>

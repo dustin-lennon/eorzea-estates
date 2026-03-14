@@ -1,9 +1,10 @@
 // Lodestone character lookup via @xivapi/nodestone (direct Lodestone HTML parser)
-import { CharacterSearch, Character, FCMembers } from "@xivapi/nodestone"
+import { CharacterSearch, Character, FCMembers, FreeCompany } from "@xivapi/nodestone"
 
 const characterSearchParser = new CharacterSearch()
 const characterParser = new Character()
 const fcMembersParser = new FCMembers()
+const fcParser = new FreeCompany()
 
 export interface LodestoneCharacter {
   ID: number
@@ -74,6 +75,14 @@ export async function getFCMasterLodestoneId(fcId: string): Promise<string | nul
     .catch(() => null) as { List?: Array<{ ID?: number }> } | null
   const masterId = result?.List?.[0]?.ID
   return masterId != null ? String(masterId) : null
+}
+
+export async function getFCName(fcId: string): Promise<string | null> {
+  const result = await fcParser
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .parse({ params: { fcId }, query: {} } as any)
+    .catch(() => null) as { NAME?: string } | null
+  return result?.NAME ?? null
 }
 
 export function generateVerificationCode(): string {

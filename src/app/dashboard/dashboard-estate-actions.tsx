@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { toast } from "sonner"
-import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2 } from "lucide-react"
+import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,15 +13,33 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { EstateVerifyModal } from "@/components/estate-verify-modal"
+import type { VerificationStatus } from "@/generated/prisma/client"
 
 interface Props {
   estateId: string
+  estateName: string
+  estateType: string
+  characterName: string
   published: boolean
+  verified: boolean
+  verificationStatus: VerificationStatus | null
+  modReason?: string | null
 }
 
-export function DashboardEstateActions({ estateId, published }: Props) {
+export function DashboardEstateActions({
+  estateId,
+  estateName,
+  estateType,
+  characterName,
+  published,
+  verified,
+  verificationStatus,
+  modReason,
+}: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [verifyOpen, setVerifyOpen] = useState(false)
 
   async function togglePublished() {
     setLoading(true)
@@ -31,11 +49,14 @@ export function DashboardEstateActions({ estateId, published }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ published: !published }),
       })
-      if (!res.ok) throw new Error()
+      if (!res.ok) {
+        const data = await res.json() as { error?: string }
+        throw new Error(data.error ?? "Failed to update estate")
+      }
       toast.success(published ? "Estate unpublished" : "Estate published")
       router.refresh()
-    } catch {
-      toast.error("Failed to update estate")
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to update estate")
     } finally {
       setLoading(false)
     }
@@ -56,49 +77,95 @@ export function DashboardEstateActions({ estateId, published }: Props) {
     }
   }
 
+  const canPublish = verified
+  const showVerifyItem =
+    !verified &&
+    verificationStatus !== "QUEUED" &&
+    verificationStatus !== "AI_APPROVED" &&
+    verificationStatus !== "MOD_APPROVED" &&
+    verificationStatus !== "MOD_REJECTED"
+
+  const showRetryItem = verificationStatus === "MOD_REJECTED"
+
   return (
-    <div className="flex items-center gap-2">
-      {published && (
-        <Button variant="outline" size="sm" asChild>
-          <Link href={`/estate/${estateId}`}>View</Link>
-        </Button>
-      )}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" disabled={loading}>
-            <MoreHorizontal className="h-4 w-4" />
+    <>
+      <EstateVerifyModal
+        open={verifyOpen}
+        onOpenChange={setVerifyOpen}
+        estateId={estateId}
+        estateName={estateName}
+        estateType={estateType}
+        characterName={characterName}
+        verificationStatus={verificationStatus}
+        modReason={modReason}
+      />
+
+      <div className="flex items-center gap-2">
+        {published && (
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/estate/${estateId}`}>View</Link>
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem asChild>
-            <Link href={`/estate/${estateId}/edit`}>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={togglePublished}>
-            {published ? (
-              <>
-                <EyeOff className="h-4 w-4 mr-2" />
-                Unpublish
-              </>
+        )}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" disabled={loading}>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem asChild>
+              <Link href={`/estate/${estateId}/edit`}>
+                <Pencil className="h-4 w-4 mr-2" />
+                Edit
+              </Link>
+            </DropdownMenuItem>
+
+            {showVerifyItem && (
+              <DropdownMenuItem onClick={() => setVerifyOpen(true)}>
+                <ShieldCheck className="h-4 w-4 mr-2" />
+                Verify Ownership
+              </DropdownMenuItem>
+            )}
+
+            {showRetryItem && (
+              <DropdownMenuItem onClick={() => setVerifyOpen(true)}>
+                <ShieldCheck className="h-4 w-4 mr-2" />
+                Retry Verification
+              </DropdownMenuItem>
+            )}
+
+            {canPublish ? (
+              <DropdownMenuItem onClick={togglePublished}>
+                {published ? (
+                  <>
+                    <EyeOff className="h-4 w-4 mr-2" />
+                    Unpublish
+                  </>
+                ) : (
+                  <>
+                    <Eye className="h-4 w-4 mr-2" />
+                    Publish
+                  </>
+                )}
+              </DropdownMenuItem>
             ) : (
-              <>
+              <DropdownMenuItem disabled title="Verify ownership before publishing">
                 <Eye className="h-4 w-4 mr-2" />
                 Publish
-              </>
+              </DropdownMenuItem>
             )}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={handleDelete}
-            className="text-destructive focus:text-destructive"
-          >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={handleDelete}
+              className="text-destructive focus:text-destructive"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </>
   )
 }

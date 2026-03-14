@@ -116,3 +116,30 @@ export async function deleteEstateImage(storageKey: string): Promise<void> {
   const { error } = await supabase.storage.from(BUCKET).remove([storageKey])
   if (error) throw new Error(`Storage delete failed: ${error.message}`)
 }
+
+export async function uploadVerificationScreenshot(
+  buffer: Buffer,
+  userId: string,
+  estateId: string
+): Promise<{ url: string; storageKey: string }> {
+  const processed = await sharp(buffer)
+    .resize(1920, 1080, { fit: "inside", withoutEnlargement: true })
+    .webp({ quality: 85 })
+    .toBuffer()
+
+  const storageKey = `verification/${userId}/${estateId}/${randomUUID()}.webp`
+  const supabase = getSupabase()
+
+  const { error } = await supabase.storage
+    .from(BUCKET)
+    .upload(storageKey, processed, {
+      contentType: "image/webp",
+      upsert: false,
+    })
+
+  if (error) throw new Error(`Storage upload failed: ${error.message}`)
+
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
+
+  return { url: data.publicUrl, storageKey }
+}
