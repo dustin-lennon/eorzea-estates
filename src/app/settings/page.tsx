@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
+import { DeleteAccountButton } from "@/components/delete-account-button";
 
 export default function SettingsPage() {
   return (
@@ -70,6 +71,16 @@ export default function SettingsPage() {
             </Link>
           </li>
         </ul>
+      </section>
+      <section className="bg-card rounded-xl p-6 border border-destructive/40">
+        <div className="flex items-center mb-4">
+          <TriangleAlert className="text-destructive mr-3 h-5 w-5" />
+          <h2 className="text-lg font-semibold text-destructive">Danger Zone</h2>
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">
+          Permanently delete your account and all associated data. This cannot be undone.
+        </p>
+        <DeleteAccountButton />
       </section>
     </div>
   );
