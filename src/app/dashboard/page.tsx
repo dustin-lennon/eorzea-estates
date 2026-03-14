@@ -35,7 +35,7 @@ export default async function DashboardPage() {
       },
     }),
     prisma.like.findMany({
-      where: { userId: session.user.id },
+      where: { userId: session.user.id, estate: { deletedAt: null } },
       include: {
         estate: {
           include: {
@@ -245,6 +245,7 @@ export default async function DashboardPage() {
                   ownerName={ownerName ?? null}
                   lodestoneVerified={!!verifiedChar}
                   venueType={estate.venueDetails?.venueType ?? null}
+                  published={estate.published}
                 />
               )
             })}

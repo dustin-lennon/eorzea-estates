@@ -18,6 +18,7 @@ interface EstateCardProps {
   ownerImage?: string | null
   lodestoneVerified?: boolean
   venueType?: string | null
+  published?: boolean
 }
 
 export function EstateCard({
@@ -33,22 +34,20 @@ export function EstateCard({
   ownerName,
   lodestoneVerified,
   venueType,
+  published = true,
 }: EstateCardProps) {
   const typeLabel = ESTATE_TYPES.find((t) => t.value === type)?.label ?? type
   const districtLabel = HOUSING_DISTRICTS.find((d) => d.value === district)?.label
 
-  return (
-    <Link
-      href={`/estate/${id}`}
-      className="group rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow flex flex-col"
-    >
+  const inner = (
+    <>
       <div className="relative aspect-video bg-muted overflow-hidden">
         {coverImage ? (
           <Image
             src={coverImage}
             alt={name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`object-cover${published ? " group-hover:scale-105 transition-transform duration-300" : ""}`}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
@@ -63,6 +62,11 @@ export function EstateCard({
           {venueType && (
             <Badge variant="outline" className="text-xs bg-background/80">
               {venueType.charAt(0) + venueType.slice(1).toLowerCase()}
+            </Badge>
+          )}
+          {!published && (
+            <Badge variant="outline" className="text-xs bg-background/80">
+              Unavailable
             </Badge>
           )}
         </div>
@@ -106,6 +110,23 @@ export function EstateCard({
           </span>
         </div>
       </div>
+    </>
+  )
+
+  if (!published) {
+    return (
+      <div className="rounded-xl border bg-card overflow-hidden flex flex-col opacity-60 cursor-default">
+        {inner}
+      </div>
+    )
+  }
+
+  return (
+    <Link
+      href={`/estate/${id}`}
+      className="group rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow flex flex-col"
+    >
+      {inner}
     </Link>
   )
 }
