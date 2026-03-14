@@ -164,6 +164,7 @@ model Estate {
   flaggedBy         User?     @relation("FlaggedByUser", fields: [flaggedById], references: [id], onDelete: SetNull)
   flaggedAt         DateTime?
   moderationStatus  ModerationStatus @default(PENDING)
+  deletedAt         DateTime?
 
   images          Image[]
   venueDetails    VenueDetails?
@@ -192,11 +193,11 @@ model EstatePendingTransfer {
 }
 
 model Image {
-  id               String @id @default(cuid())
-  estateId         String
-  cloudinaryUrl    String
-  cloudinaryPublicId String
-  order            Int    @default(0)
+  id         String @id @default(cuid())
+  estateId   String
+  imageUrl   String
+  storageKey String
+  order      Int    @default(0)
 
   estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
 }
@@ -311,4 +312,5 @@ model LegalPage {
 model SiteSettings {
   id              String  @id @default("singleton")
   maintenanceMode Boolean @default(false)
+  disputeEmail    String  @default("dispute@eorzeaestates.com")
 }
