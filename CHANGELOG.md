@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.11.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.10.0...v1.11.0) (2026-03-14)
+
+### ✨ Features
+
+* estate ownership verification system ([#98](https://github.com/dustin-lennon/eorzea-estates/issues/98)) ([2055174](https://github.com/dustin-lennon/eorzea-estates/commit/205517449e2289333146be72b6d7772ddbd10c0d))
+
+### 🐛 Bug Fixes
+
+* liked estates show unavailable card instead of linking to 404 ([#129](https://github.com/dustin-lennon/eorzea-estates/issues/129)) ([be82862](https://github.com/dustin-lennon/eorzea-estates/commit/be82862a7f3e042bf4b9585e9984ed8a2c614d5b))
+
 ## [1.10.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.9.1...v1.10.0) (2026-03-14)
 
 ### ✨ Features
