@@ -50,6 +50,17 @@ export const ModerationStatus = {
 export type ModerationStatus = (typeof ModerationStatus)[keyof typeof ModerationStatus]
 
 
+export const VerificationStatus = {
+  PENDING: 'PENDING',
+  AI_APPROVED: 'AI_APPROVED',
+  QUEUED: 'QUEUED',
+  MOD_APPROVED: 'MOD_APPROVED',
+  MOD_REJECTED: 'MOD_REJECTED'
+} as const
+
+export type VerificationStatus = (typeof VerificationStatus)[keyof typeof VerificationStatus]
+
+
 export const VenueType = {
   BAR: 'BAR',
   NIGHTCLUB: 'NIGHTCLUB',

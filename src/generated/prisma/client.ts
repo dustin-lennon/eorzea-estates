@@ -72,6 +72,11 @@ export type FfxivCharacter = Prisma.FfxivCharacterModel
  */
 export type Estate = Prisma.EstateModel
 /**
+ * Model EstateVerification
+ * 
+ */
+export type EstateVerification = Prisma.EstateVerificationModel
+/**
  * Model EstatePendingTransfer
  * 
  */

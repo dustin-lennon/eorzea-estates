@@ -57,6 +57,7 @@ export const ModelName = {
   User: 'User',
   FfxivCharacter: 'FfxivCharacter',
   Estate: 'Estate',
+  EstateVerification: 'EstateVerification',
   EstatePendingTransfer: 'EstatePendingTransfer',
   Image: 'Image',
   VenueDetails: 'VenueDetails',
@@ -177,10 +178,29 @@ export const EstateScalarFieldEnum = {
   flaggedAt: 'flaggedAt',
   flaggedById: 'flaggedById',
   moderationStatus: 'moderationStatus',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  verified: 'verified',
+  verificationStatus: 'verificationStatus'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
+
+
+export const EstateVerificationScalarFieldEnum = {
+  id: 'id',
+  estateId: 'estateId',
+  screenshotUrl: 'screenshotUrl',
+  storageKey: 'storageKey',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  status: 'status',
+  aiConfidence: 'aiConfidence',
+  aiReason: 'aiReason',
+  modReason: 'modReason',
+  reviewedById: 'reviewedById'
+} as const
+
+export type EstateVerificationScalarFieldEnum = (typeof EstateVerificationScalarFieldEnum)[keyof typeof EstateVerificationScalarFieldEnum]
 
 
 export const EstatePendingTransferScalarFieldEnum = {

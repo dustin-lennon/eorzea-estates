@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@xivapi/nodestone", "regex-translator"],
+  serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
   images: {
     remotePatterns: [
       {

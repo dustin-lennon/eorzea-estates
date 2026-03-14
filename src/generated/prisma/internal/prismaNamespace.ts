@@ -390,6 +390,7 @@ export const ModelName = {
   User: 'User',
   FfxivCharacter: 'FfxivCharacter',
   Estate: 'Estate',
+  EstateVerification: 'EstateVerification',
   EstatePendingTransfer: 'EstatePendingTransfer',
   Image: 'Image',
   VenueDetails: 'VenueDetails',
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -859,6 +860,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.EstateCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EstateCountAggregateOutputType> | number
+        }
+      }
+    }
+    EstateVerification: {
+      payload: Prisma.$EstateVerificationPayload<ExtArgs>
+      fields: Prisma.EstateVerificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstateVerificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstateVerificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        findFirst: {
+          args: Prisma.EstateVerificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstateVerificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        findMany: {
+          args: Prisma.EstateVerificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>[]
+        }
+        create: {
+          args: Prisma.EstateVerificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        createMany: {
+          args: Prisma.EstateVerificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EstateVerificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>[]
+        }
+        delete: {
+          args: Prisma.EstateVerificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        update: {
+          args: Prisma.EstateVerificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstateVerificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstateVerificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EstateVerificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.EstateVerificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateVerificationPayload>
+        }
+        aggregate: {
+          args: Prisma.EstateVerificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstateVerification>
+        }
+        groupBy: {
+          args: Prisma.EstateVerificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstateVerificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstateVerificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstateVerificationCountAggregateOutputType> | number
         }
       }
     }
@@ -1660,10 +1735,29 @@ export const EstateScalarFieldEnum = {
   flaggedAt: 'flaggedAt',
   flaggedById: 'flaggedById',
   moderationStatus: 'moderationStatus',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  verified: 'verified',
+  verificationStatus: 'verificationStatus'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
+
+
+export const EstateVerificationScalarFieldEnum = {
+  id: 'id',
+  estateId: 'estateId',
+  screenshotUrl: 'screenshotUrl',
+  storageKey: 'storageKey',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  status: 'status',
+  aiConfidence: 'aiConfidence',
+  aiReason: 'aiReason',
+  modReason: 'modReason',
+  reviewedById: 'reviewedById'
+} as const
+
+export type EstateVerificationScalarFieldEnum = (typeof EstateVerificationScalarFieldEnum)[keyof typeof EstateVerificationScalarFieldEnum]
 
 
 export const EstatePendingTransferScalarFieldEnum = {
@@ -1917,6 +2011,20 @@ export type ListEnumModerationStatusFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'VerificationStatus'
+ */
+export type EnumVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VerificationStatus[]'
+ */
+export type ListEnumVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'VenueType'
  */
 export type EnumVenueTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VenueType'>
@@ -2058,6 +2166,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   ffxivCharacter?: Prisma.FfxivCharacterOmit
   estate?: Prisma.EstateOmit
+  estateVerification?: Prisma.EstateVerificationOmit
   estatePendingTransfer?: Prisma.EstatePendingTransferOmit
   image?: Prisma.ImageOmit
   venueDetails?: Prisma.VenueDetailsOmit
