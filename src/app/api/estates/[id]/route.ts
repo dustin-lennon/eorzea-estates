@@ -98,8 +98,10 @@ export async function PATCH(
       district: true,
       ward: true,
       plot: true,
+      verified: true,
       character: { select: { characterName: true, server: true } },
       images: { select: { storageKey: true } },
+      verification: { select: { storageKey: true } },
     },
   })
 
@@ -112,6 +114,12 @@ export async function PATCH(
 
   // Toggle published (used by dashboard)
   if (typeof body.published === "boolean") {
+    if (body.published && !estate.verified) {
+      return NextResponse.json(
+        { error: "Estate must be verified before publishing" },
+        { status: 403 }
+      )
+    }
     const updated = await prisma.estate.update({
       where: { id },
       data: { published: body.published },
@@ -138,6 +146,18 @@ export async function PATCH(
     data.district !== estate.district ||
     (data.ward ?? null) !== estate.ward ||
     (data.plot ?? null) !== estate.plot
+
+  // Reset verification if location changed
+  if (locationChanged) {
+    if (estate.verification?.storageKey) {
+      await deleteEstateImage(estate.verification.storageKey).catch(() => undefined)
+    }
+    await prisma.estateVerification.deleteMany({ where: { estateId: id } })
+    await prisma.estate.update({
+      where: { id },
+      data: { verified: false, verificationStatus: null, published: false },
+    })
+  }
 
   let finalImages = data.images
   if (locationChanged) {
