@@ -3,6 +3,24 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.10.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.9.1...v1.10.0) (2026-03-14)
+
+### ✨ Features
+
+* add message book tag to predefined estate tags ([13592ff](https://github.com/dustin-lennon/eorzea-estates/commit/13592ff53b64fa7c0c499a4e79dc7b8bda3e45c0))
+* add user data export on settings page ([d40e4e7](https://github.com/dustin-lennon/eorzea-estates/commit/d40e4e764a4a21c52aedacbef256a3aabb2775b8)), closes [#96](https://github.com/dustin-lennon/eorzea-estates/issues/96)
+* extend FC estate type filtering to unverified characters ([d3b6b21](https://github.com/dustin-lennon/eorzea-estates/commit/d3b6b214d8ac3fed345c719961ba15ab31ad0af7))
+* link comments to user profiles with role badges ([d5585d1](https://github.com/dustin-lennon/eorzea-estates/commit/d5585d1c04eac4539d3f4cd10095dfadf4347a7f))
+* link comments to user profiles with role badges ([24ce482](https://github.com/dustin-lennon/eorzea-estates/commit/24ce482d79bf2d6a1c4e0204b141f025888a58ab))
+* restrict FC estate types based on character FC status ([aa89b04](https://github.com/dustin-lennon/eorzea-estates/commit/aa89b04f0ff456fb90c31bb6f463af97277e67e3))
+
+### 🐛 Bug Fixes
+
+* align schema and code with actual DB column names for Image model ([e9e92cc](https://github.com/dustin-lennon/eorzea-estates/commit/e9e92cccc6aeafbe5e1cd7400105b848f35862ca))
+* allow Supabase storage hostname for next/image ([0ceee23](https://github.com/dustin-lennon/eorzea-estates/commit/0ceee2347ccde50d24d5e1c579320038a56ed1a2))
+* remove duplicate model definitions from schema and add FC enrichment to edit page ([4f50ab8](https://github.com/dustin-lennon/eorzea-estates/commit/4f50ab8ad41d6bc052e249549233650d9e23893b))
+* use deleteMany to avoid P2025 when saving non-venue estate ([181a858](https://github.com/dustin-lennon/eorzea-estates/commit/181a858daf129b0c7aefa88f569507b38953ae53))
+
 ## [1.9.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.9.0...v1.9.1) (2026-03-12)
 
 ### 🐛 Bug Fixes
