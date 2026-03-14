@@ -16,7 +16,7 @@ export async function DELETE(
 
   const estate = await prisma.estate.findUnique({
     where: { id },
-    select: { ownerId: true, images: { select: { cloudinaryPublicId: true } } },
+    select: { ownerId: true, images: { select: { storageKey: true } } },
   })
 
   if (!estate) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -25,7 +25,7 @@ export async function DELETE(
   }
 
   // Delete images from Cloudinary
-  await Promise.allSettled(estate.images.map((img: { cloudinaryPublicId: string }) => deleteEstateImage(img.cloudinaryPublicId)))
+  await Promise.allSettled(estate.images.map((img: { storageKey: string }) => deleteEstateImage(img.storageKey)))
 
   await prisma.estate.delete({ where: { id } })
 

@@ -7,25 +7,20 @@ datasource db {
   provider = "postgresql"
 }
 
-// ---------------------------------------------------------------------------
-// Auth.js required models
-// ---------------------------------------------------------------------------
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -35,8 +30,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -47,67 +41,173 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// ---------------------------------------------------------------------------
-// Users
-// ---------------------------------------------------------------------------
+model User {
+  id              String           @id @default(cuid())
+  name            String?
+  email           String?          @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime         @default(now())
+  discordUsername String?
+  discordId       String?          @unique
+  role            UserRole         @default(USER)
+  accounts        Account[]
+  comments        Comment[]
+  flaggedEstates  Estate[]         @relation("FlaggedByUser")
+  estates         Estate[]
+  characters      FfxivCharacter[]
+  legalPageEdits  LegalPage[]      @relation("LegalPageEditor")
+  likes           Like[]
+  sessions        Session[]
+  venueStaff      VenueStaff[]     @relation("StaffUser")
+}
+
+model FfxivCharacter {
+  id                    String                 @id @default(cuid())
+  userId                String
+  lodestoneId           String
+  characterName         String
+  server                String
+  verified              Boolean                @default(false)
+  createdAt             DateTime               @default(now())
+  avatarUrl             String                 @default("")
+  dataCenter            String                 @default("")
+  estates               Estate[]
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lodestoneVerification LodestoneVerification?
+  venueStaffLinks       VenueStaff[]           @relation("StaffCharacter")
+
+  @@unique([userId, lodestoneId])
+}
+
+model Estate {
+  id               String                 @id @default(cuid())
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+  published        Boolean                @default(false)
+  name             String
+  description      String
+  inspiration      String
+  type             EstateType
+  district         HousingDistrict?
+  region           String
+  dataCenter       String
+  server           String
+  ward             Int?
+  plot             Int?
+  tags             String[]
+  likeCount        Int                    @default(0)
+  commentCount     Int                    @default(0)
+  ownerId          String
+  characterId      String?
+  room             Int?
+  flagReason       String?
+  flagged          Boolean                @default(false)
+  flaggedAt        DateTime?
+  flaggedById      String?
+  moderationStatus ModerationStatus       @default(PENDING)
+  deletedAt        DateTime?
+  comments         Comment[]
+  character        FfxivCharacter?        @relation(fields: [characterId], references: [id])
+  flaggedBy        User?                  @relation("FlaggedByUser", fields: [flaggedById], references: [id])
+  owner            User                   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pendingTransfer  EstatePendingTransfer?
+  images           Image[]
+  likes            Like[]
+  venueDetails     VenueDetails?
+}
+
+model EstatePendingTransfer {
+  id             String   @id @default(cuid())
+  estateId       String   @unique
+  newOwnerId     String
+  newCharacterId String
+  token          String   @unique @default(cuid())
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
+  estate         Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
+}
+
+model Image {
+  id         String @id @default(cuid())
+  estateId   String
+  imageUrl   String
+  storageKey String
+  order      Int    @default(0)
+  estate     Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
+}
+
+model VenueDetails {
+  id        String       @id @default(cuid())
+  estateId  String       @unique
+  venueType VenueType
+  timezone  String       @default("UTC")
+  hours     Json?
+  estate    Estate       @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  staff     VenueStaff[]
+}
+
+model VenueStaff {
+  id                String          @id @default(cuid())
+  venueId           String
+  characterName     String
+  role              String
+  linkedUserId      String?
+  linkedCharacterId String?
+  linkedCharacter   FfxivCharacter? @relation("StaffCharacter", fields: [linkedCharacterId], references: [id])
+  linkedUser        User?           @relation("StaffUser", fields: [linkedUserId], references: [id])
+  venue             VenueDetails    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  userId    String
+  estateId  String
+  createdAt DateTime @default(now())
+  estate    Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, estateId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  createdAt DateTime @default(now())
+  userId    String
+  estateId  String
+  estate    Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LodestoneVerification {
+  id          String         @id @default(cuid())
+  code        String
+  expiresAt   DateTime
+  verified    Boolean        @default(false)
+  characterId String         @unique
+  character   FfxivCharacter @relation(fields: [characterId], references: [id], onDelete: Cascade)
+}
+
+model LegalPage {
+  slug        String   @id
+  title       String
+  content     String
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+  updatedBy   User?    @relation("LegalPageEditor", fields: [updatedById], references: [id])
+}
+
+model SiteSettings {
+  id              String  @id @default("singleton")
+  maintenanceMode Boolean @default(false)
+  disputeEmail    String  @default("dispute@eorzeaestates.com")
+}
 
 enum UserRole {
   USER
   MODERATOR
   ADMIN
 }
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-
-  // Discord-specific fields (populated from OAuth profile)
-  discordUsername String?
-  discordId       String? @unique
-
-  role UserRole @default(USER)
-
-  accounts      Account[]
-  sessions      Session[]
-  characters    FfxivCharacter[]
-  estates       Estate[]
-  likes         Like[]
-  comments      Comment[]
-  venueStaff     VenueStaff[]  @relation("StaffUser")
-  legalPageEdits LegalPage[]   @relation("LegalPageEditor")
-  flaggedEstates Estate[]      @relation("FlaggedByUser")
-}
-
-// ---------------------------------------------------------------------------
-// FFXIV Characters
-// ---------------------------------------------------------------------------
-
-model FfxivCharacter {
-  id            String   @id @default(cuid())
-  userId        String
-  lodestoneId   String
-  characterName String
-  server        String
-  dataCenter    String   @default("")
-  avatarUrl     String   @default("")
-  verified      Boolean  @default(false)
-  createdAt     DateTime @default(now())
-
-  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  estates Estate[]
-  lodestoneVerification LodestoneVerification?
-  venueStaffLinks VenueStaff[] @relation("StaffCharacter")
-
-  @@unique([userId, lodestoneId])
-}
-
-// ---------------------------------------------------------------------------
-// Estates
-// ---------------------------------------------------------------------------
 
 enum EstateType {
   PRIVATE
@@ -125,85 +225,12 @@ enum HousingDistrict {
   EMPYREUM
 }
 
-model Estate {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  published   Boolean  @default(false)
-
-  name        String
-  description String   @db.Text
-  inspiration String   @db.Text
-
-  type     EstateType
-  district HousingDistrict?
-
-  region     String
-  dataCenter String
-  server     String
-
-  ward  Int?
-  plot  Int?
-  room  Int?
-
-  tags String[]
-
-  likeCount    Int @default(0)
-  commentCount Int @default(0)
-
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-
-  characterId String?
-  character   FfxivCharacter? @relation(fields: [characterId], references: [id], onDelete: SetNull)
-
-  // Moderation/flagging fields
-  flagged           Boolean   @default(false)
-  flagReason        String?   @db.Text
-  flaggedById       String?
-  flaggedBy         User?     @relation("FlaggedByUser", fields: [flaggedById], references: [id], onDelete: SetNull)
-  flaggedAt         DateTime?
-  moderationStatus  ModerationStatus @default(PENDING)
-
-  images          Image[]
-  venueDetails    VenueDetails?
-  likes           Like[]
-  comments        Comment[]
-  pendingTransfer EstatePendingTransfer?
-}
-
-// Moderation status for flagged estates
 enum ModerationStatus {
   PENDING
   APPROVED
   REJECTED
   REMOVED
 }
-
-model EstatePendingTransfer {
-  id             String   @id @default(cuid())
-  estateId       String   @unique
-  estate         Estate   @relation(fields: [estateId], references: [id], onDelete: Cascade)
-  newOwnerId     String
-  newCharacterId String
-  token          String   @unique @default(cuid())
-  expiresAt      DateTime
-  createdAt      DateTime @default(now())
-}
-
-model Image {
-  id               String @id @default(cuid())
-  estateId         String
-  cloudinaryUrl    String
-  cloudinaryPublicId String
-  order            Int    @default(0)
-
-  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
-}
-
-// ---------------------------------------------------------------------------
-// Venue Details (only for VENUE estates)
-// ---------------------------------------------------------------------------
 
 enum VenueType {
   BAR
@@ -216,99 +243,4 @@ enum VenueType {
   BATHHOUSE
   INN
   OTHER
-}
-
-model VenueDetails {
-  id       String    @id @default(cuid())
-  estateId String    @unique
-  estate   Estate    @relation(fields: [estateId], references: [id], onDelete: Cascade)
-
-  venueType VenueType
-  timezone  String    @default("UTC")
-
-  // Hours stored as JSON: { mon: "8pm-11pm" | null, tue: ..., ... }
-  hours Json?
-
-  staff VenueStaff[]
-}
-
-model VenueStaff {
-  id      String @id @default(cuid())
-  venueId String
-  venue   VenueDetails @relation(fields: [venueId], references: [id], onDelete: Cascade)
-
-  characterName String
-  role          String
-
-  // Optional: links to a registered user
-  linkedUserId String?
-  linkedUser   User?  @relation("StaffUser", fields: [linkedUserId], references: [id], onDelete: SetNull)
-
-  // Optional: links to that staff member's character profile on this site
-  linkedCharacterId String?
-  linkedCharacter   FfxivCharacter? @relation("StaffCharacter", fields: [linkedCharacterId], references: [id], onDelete: SetNull)
-}
-
-// ---------------------------------------------------------------------------
-// Social
-// ---------------------------------------------------------------------------
-
-model Like {
-  userId    String
-  estateId  String
-  createdAt DateTime @default(now())
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
-
-  @@id([userId, estateId])
-}
-
-model Comment {
-  id        String   @id @default(cuid())
-  body      String   @db.Text
-  createdAt DateTime @default(now())
-
-  userId   String
-  estateId String
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
-}
-
-// ---------------------------------------------------------------------------
-// Lodestone Verification
-// ---------------------------------------------------------------------------
-
-model LodestoneVerification {
-  id          String   @id @default(cuid())
-  characterId String   @unique
-  code        String
-  expiresAt   DateTime
-  verified    Boolean  @default(false)
-
-  character FfxivCharacter @relation(fields: [characterId], references: [id], onDelete: Cascade)
-}
-
-// ---------------------------------------------------------------------------
-// Legal Pages (admin-editable)
-// ---------------------------------------------------------------------------
-
-model LegalPage {
-  slug      String   @id  // privacy-policy | terms-of-service | cookie-policy
-  title     String
-  content   String   @db.Text  // markdown
-  updatedAt DateTime @updatedAt
-
-  updatedById String?
-  updatedBy   User?   @relation("LegalPageEditor", fields: [updatedById], references: [id], onDelete: SetNull)
-}
-
-// ---------------------------------------------------------------------------
-// Site Settings (singleton)
-// ---------------------------------------------------------------------------
-
-model SiteSettings {
-  id              String  @id @default("singleton")
-  maintenanceMode Boolean @default(false)
 }

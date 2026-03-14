@@ -241,7 +241,7 @@ export default async function DashboardPage() {
                   dataCenter={estate.dataCenter}
                   tags={estate.tags}
                   likeCount={estate.likeCount}
-                  coverImage={estate.images[0]?.cloudinaryUrl}
+                  coverImage={estate.images[0]?.imageUrl}
                   ownerName={ownerName ?? null}
                   lodestoneVerified={!!verifiedChar}
                   venueType={estate.venueDetails?.venueType ?? null}

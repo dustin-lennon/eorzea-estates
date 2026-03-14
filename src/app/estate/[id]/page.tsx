@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params
   const estate = await prisma.estate.findUnique({
     where: { id, published: true },
-    select: { name: true, description: true, images: { take: 1, select: { cloudinaryUrl: true } } },
+    select: { name: true, description: true, images: { take: 1, select: { imageUrl: true } } },
   })
   if (!estate) return {}
   return {
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: estate.name,
       description: estate.description.slice(0, 160),
-      images: estate.images[0]?.cloudinaryUrl ? [estate.images[0].cloudinaryUrl] : [],
+      images: estate.images[0]?.imageUrl ? [estate.images[0].imageUrl] : [],
     },
   }
 }
@@ -117,7 +117,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8">
       {/* Gallery */}
-      <EstateImageGallery images={estate.images.map((i) => i.cloudinaryUrl)} name={estate.name} />
+      <EstateImageGallery images={estate.images.map((i) => i.imageUrl)} name={estate.name} />
 
       {/* Header */}
       <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">

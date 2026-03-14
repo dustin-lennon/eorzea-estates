@@ -26,7 +26,7 @@ export async function PATCH(
 
   const estate = await prisma.estate.findUnique({
     where: { id: estateId },
-    select: { id: true, images: { select: { cloudinaryPublicId: true } } },
+    select: { id: true, images: { select: { storageKey: true } } },
   })
 
   if (!estate) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -55,7 +55,7 @@ export async function PATCH(
     })
   } else if (action === "remove") {
     await Promise.allSettled(
-      estate.images.map((img) => deleteEstateImage(img.cloudinaryPublicId))
+      estate.images.map((img) => deleteEstateImage(img.storageKey))
     )
     await prisma.estate.delete({ where: { id: estateId } })
   }

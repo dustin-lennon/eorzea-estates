@@ -60,7 +60,7 @@ async function FeaturedEstates() {
               dataCenter={estate.dataCenter}
               tags={estate.tags}
               likeCount={estate.likeCount}
-              coverImage={estate.images[0]?.cloudinaryUrl}
+              coverImage={estate.images[0]?.imageUrl}
               ownerName={ownerName ?? null}
               lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}

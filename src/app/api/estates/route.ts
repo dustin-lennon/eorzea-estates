@@ -90,8 +90,8 @@ export async function POST(req: Request) {
       characterId: data.characterId,
       images: {
         create: data.images.map((img, i) => ({
-          cloudinaryUrl: img.url,
-          cloudinaryPublicId: img.publicId,
+          imageUrl: img.url,
+          storageKey: img.publicId,
           order: i,
         })),
       },
