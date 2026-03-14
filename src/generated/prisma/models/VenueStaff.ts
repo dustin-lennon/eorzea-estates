@@ -190,9 +190,9 @@ export type VenueStaffWhereInput = {
   role?: Prisma.StringFilter<"VenueStaff"> | string
   linkedUserId?: Prisma.StringNullableFilter<"VenueStaff"> | string | null
   linkedCharacterId?: Prisma.StringNullableFilter<"VenueStaff"> | string | null
-  venue?: Prisma.XOR<Prisma.VenueDetailsScalarRelationFilter, Prisma.VenueDetailsWhereInput>
-  linkedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   linkedCharacter?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
+  linkedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  venue?: Prisma.XOR<Prisma.VenueDetailsScalarRelationFilter, Prisma.VenueDetailsWhereInput>
 }
 
 export type VenueStaffOrderByWithRelationInput = {
@@ -202,9 +202,9 @@ export type VenueStaffOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   linkedUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   linkedCharacterId?: Prisma.SortOrderInput | Prisma.SortOrder
-  venue?: Prisma.VenueDetailsOrderByWithRelationInput
-  linkedUser?: Prisma.UserOrderByWithRelationInput
   linkedCharacter?: Prisma.FfxivCharacterOrderByWithRelationInput
+  linkedUser?: Prisma.UserOrderByWithRelationInput
+  venue?: Prisma.VenueDetailsOrderByWithRelationInput
 }
 
 export type VenueStaffWhereUniqueInput = Prisma.AtLeast<{
@@ -217,9 +217,9 @@ export type VenueStaffWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.StringFilter<"VenueStaff"> | string
   linkedUserId?: Prisma.StringNullableFilter<"VenueStaff"> | string | null
   linkedCharacterId?: Prisma.StringNullableFilter<"VenueStaff"> | string | null
-  venue?: Prisma.XOR<Prisma.VenueDetailsScalarRelationFilter, Prisma.VenueDetailsWhereInput>
-  linkedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   linkedCharacter?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
+  linkedUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  venue?: Prisma.XOR<Prisma.VenueDetailsScalarRelationFilter, Prisma.VenueDetailsWhereInput>
 }, "id">
 
 export type VenueStaffOrderByWithAggregationInput = {
@@ -250,9 +250,9 @@ export type VenueStaffCreateInput = {
   id?: string
   characterName: string
   role: string
-  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
-  linkedUser?: Prisma.UserCreateNestedOneWithoutVenueStaffInput
   linkedCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutVenueStaffLinksInput
+  linkedUser?: Prisma.UserCreateNestedOneWithoutVenueStaffInput
+  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
 }
 
 export type VenueStaffUncheckedCreateInput = {
@@ -268,9 +268,9 @@ export type VenueStaffUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
-  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
-  linkedUser?: Prisma.UserUpdateOneWithoutVenueStaffNestedInput
   linkedCharacter?: Prisma.FfxivCharacterUpdateOneWithoutVenueStaffLinksNestedInput
+  linkedUser?: Prisma.UserUpdateOneWithoutVenueStaffNestedInput
+  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
 }
 
 export type VenueStaffUncheckedUpdateInput = {
@@ -473,8 +473,8 @@ export type VenueStaffCreateWithoutLinkedUserInput = {
   id?: string
   characterName: string
   role: string
-  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
   linkedCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutVenueStaffLinksInput
+  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
 }
 
 export type VenueStaffUncheckedCreateWithoutLinkedUserInput = {
@@ -527,8 +527,8 @@ export type VenueStaffCreateWithoutLinkedCharacterInput = {
   id?: string
   characterName: string
   role: string
-  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
   linkedUser?: Prisma.UserCreateNestedOneWithoutVenueStaffInput
+  venue: Prisma.VenueDetailsCreateNestedOneWithoutStaffInput
 }
 
 export type VenueStaffUncheckedCreateWithoutLinkedCharacterInput = {
@@ -569,8 +569,8 @@ export type VenueStaffCreateWithoutVenueInput = {
   id?: string
   characterName: string
   role: string
-  linkedUser?: Prisma.UserCreateNestedOneWithoutVenueStaffInput
   linkedCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutVenueStaffLinksInput
+  linkedUser?: Prisma.UserCreateNestedOneWithoutVenueStaffInput
 }
 
 export type VenueStaffUncheckedCreateWithoutVenueInput = {
@@ -619,8 +619,8 @@ export type VenueStaffUpdateWithoutLinkedUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
-  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
   linkedCharacter?: Prisma.FfxivCharacterUpdateOneWithoutVenueStaffLinksNestedInput
+  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
 }
 
 export type VenueStaffUncheckedUpdateWithoutLinkedUserInput = {
@@ -651,8 +651,8 @@ export type VenueStaffUpdateWithoutLinkedCharacterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
-  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
   linkedUser?: Prisma.UserUpdateOneWithoutVenueStaffNestedInput
+  venue?: Prisma.VenueDetailsUpdateOneRequiredWithoutStaffNestedInput
 }
 
 export type VenueStaffUncheckedUpdateWithoutLinkedCharacterInput = {
@@ -683,8 +683,8 @@ export type VenueStaffUpdateWithoutVenueInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
-  linkedUser?: Prisma.UserUpdateOneWithoutVenueStaffNestedInput
   linkedCharacter?: Prisma.FfxivCharacterUpdateOneWithoutVenueStaffLinksNestedInput
+  linkedUser?: Prisma.UserUpdateOneWithoutVenueStaffNestedInput
 }
 
 export type VenueStaffUncheckedUpdateWithoutVenueInput = {
@@ -712,9 +712,9 @@ export type VenueStaffSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   role?: boolean
   linkedUserId?: boolean
   linkedCharacterId?: boolean
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["venueStaff"]>
 
 export type VenueStaffSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -724,9 +724,9 @@ export type VenueStaffSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   role?: boolean
   linkedUserId?: boolean
   linkedCharacterId?: boolean
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["venueStaff"]>
 
 export type VenueStaffSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -736,9 +736,9 @@ export type VenueStaffSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   role?: boolean
   linkedUserId?: boolean
   linkedCharacterId?: boolean
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["venueStaff"]>
 
 export type VenueStaffSelectScalar = {
@@ -752,27 +752,27 @@ export type VenueStaffSelectScalar = {
 
 export type VenueStaffOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "venueId" | "characterName" | "role" | "linkedUserId" | "linkedCharacterId", ExtArgs["result"]["venueStaff"]>
 export type VenueStaffInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }
 export type VenueStaffIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }
 export type VenueStaffIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
-  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
   linkedCharacter?: boolean | Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>
+  linkedUser?: boolean | Prisma.VenueStaff$linkedUserArgs<ExtArgs>
+  venue?: boolean | Prisma.VenueDetailsDefaultArgs<ExtArgs>
 }
 
 export type $VenueStaffPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VenueStaff"
   objects: {
-    venue: Prisma.$VenueDetailsPayload<ExtArgs>
-    linkedUser: Prisma.$UserPayload<ExtArgs> | null
     linkedCharacter: Prisma.$FfxivCharacterPayload<ExtArgs> | null
+    linkedUser: Prisma.$UserPayload<ExtArgs> | null
+    venue: Prisma.$VenueDetailsPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1175,9 +1175,9 @@ readonly fields: VenueStaffFieldRefs;
  */
 export interface Prisma__VenueStaffClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  venue<T extends Prisma.VenueDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VenueDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__VenueDetailsClient<runtime.Types.Result.GetResult<Prisma.$VenueDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  linkedUser<T extends Prisma.VenueStaff$linkedUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VenueStaff$linkedUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   linkedCharacter<T extends Prisma.VenueStaff$linkedCharacterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VenueStaff$linkedCharacterArgs<ExtArgs>>): Prisma.Prisma__FfxivCharacterClient<runtime.Types.Result.GetResult<Prisma.$FfxivCharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  linkedUser<T extends Prisma.VenueStaff$linkedUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VenueStaff$linkedUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  venue<T extends Prisma.VenueDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VenueDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__VenueDetailsClient<runtime.Types.Result.GetResult<Prisma.$VenueDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1609,25 +1609,6 @@ export type VenueStaffDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * VenueStaff.linkedUser
- */
-export type VenueStaff$linkedUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * VenueStaff.linkedCharacter
  */
 export type VenueStaff$linkedCharacterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1644,6 +1625,25 @@ export type VenueStaff$linkedCharacterArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.FfxivCharacterInclude<ExtArgs> | null
   where?: Prisma.FfxivCharacterWhereInput
+}
+
+/**
+ * VenueStaff.linkedUser
+ */
+export type VenueStaff$linkedUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

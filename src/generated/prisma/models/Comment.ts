@@ -182,8 +182,8 @@ export type CommentWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Comment"> | Date | string
   userId?: Prisma.StringFilter<"Comment"> | string
   estateId?: Prisma.StringFilter<"Comment"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   estate?: Prisma.XOR<Prisma.EstateScalarRelationFilter, Prisma.EstateWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type CommentOrderByWithRelationInput = {
@@ -192,8 +192,8 @@ export type CommentOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   estate?: Prisma.EstateOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type CommentWhereUniqueInput = Prisma.AtLeast<{
@@ -205,8 +205,8 @@ export type CommentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Comment"> | Date | string
   userId?: Prisma.StringFilter<"Comment"> | string
   estateId?: Prisma.StringFilter<"Comment"> | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   estate?: Prisma.XOR<Prisma.EstateScalarRelationFilter, Prisma.EstateWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type CommentOrderByWithAggregationInput = {
@@ -235,8 +235,8 @@ export type CommentCreateInput = {
   id?: string
   body: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCommentsInput
   estate: Prisma.EstateCreateNestedOneWithoutCommentsInput
+  user: Prisma.UserCreateNestedOneWithoutCommentsInput
 }
 
 export type CommentUncheckedCreateInput = {
@@ -251,8 +251,8 @@ export type CommentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCommentsNestedInput
   estate?: Prisma.EstateUpdateOneRequiredWithoutCommentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCommentsNestedInput
 }
 
 export type CommentUncheckedUpdateInput = {
@@ -558,8 +558,8 @@ export type CommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   userId?: boolean
   estateId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -568,8 +568,8 @@ export type CommentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   userId?: boolean
   estateId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -578,8 +578,8 @@ export type CommentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   userId?: boolean
   estateId?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comment"]>
 
 export type CommentSelectScalar = {
@@ -592,23 +592,23 @@ export type CommentSelectScalar = {
 
 export type CommentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "body" | "createdAt" | "userId" | "estateId", ExtArgs["result"]["comment"]>
 export type CommentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CommentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CommentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estate?: boolean | Prisma.EstateDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $CommentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Comment"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     estate: Prisma.$EstatePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1010,8 +1010,8 @@ readonly fields: CommentFieldRefs;
  */
 export interface Prisma__CommentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   estate<T extends Prisma.EstateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EstateDefaultArgs<ExtArgs>>): Prisma.Prisma__EstateClient<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -215,14 +215,14 @@ export type UserWhereInput = {
   discordId?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  characters?: Prisma.FfxivCharacterListRelationFilter
-  estates?: Prisma.EstateListRelationFilter
-  likes?: Prisma.LikeListRelationFilter
   comments?: Prisma.CommentListRelationFilter
-  venueStaff?: Prisma.VenueStaffListRelationFilter
-  legalPageEdits?: Prisma.LegalPageListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
+  estates?: Prisma.EstateListRelationFilter
+  characters?: Prisma.FfxivCharacterListRelationFilter
+  legalPageEdits?: Prisma.LegalPageListRelationFilter
+  likes?: Prisma.LikeListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  venueStaff?: Prisma.VenueStaffListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -236,14 +236,14 @@ export type UserOrderByWithRelationInput = {
   discordId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
-  characters?: Prisma.FfxivCharacterOrderByRelationAggregateInput
-  estates?: Prisma.EstateOrderByRelationAggregateInput
-  likes?: Prisma.LikeOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
-  venueStaff?: Prisma.VenueStaffOrderByRelationAggregateInput
-  legalPageEdits?: Prisma.LegalPageOrderByRelationAggregateInput
   flaggedEstates?: Prisma.EstateOrderByRelationAggregateInput
+  estates?: Prisma.EstateOrderByRelationAggregateInput
+  characters?: Prisma.FfxivCharacterOrderByRelationAggregateInput
+  legalPageEdits?: Prisma.LegalPageOrderByRelationAggregateInput
+  likes?: Prisma.LikeOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
+  venueStaff?: Prisma.VenueStaffOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -260,14 +260,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  characters?: Prisma.FfxivCharacterListRelationFilter
-  estates?: Prisma.EstateListRelationFilter
-  likes?: Prisma.LikeListRelationFilter
   comments?: Prisma.CommentListRelationFilter
-  venueStaff?: Prisma.VenueStaffListRelationFilter
-  legalPageEdits?: Prisma.LegalPageListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
+  estates?: Prisma.EstateListRelationFilter
+  characters?: Prisma.FfxivCharacterListRelationFilter
+  legalPageEdits?: Prisma.LegalPageListRelationFilter
+  likes?: Prisma.LikeListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  venueStaff?: Prisma.VenueStaffListRelationFilter
 }, "id" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -311,14 +311,14 @@ export type UserCreateInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -332,14 +332,14 @@ export type UserUncheckedCreateInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUpdateInput = {
@@ -353,14 +353,14 @@ export type UserUpdateInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -374,14 +374,14 @@ export type UserUncheckedUpdateInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -516,24 +516,16 @@ export type UserUpdateOneRequiredWithoutCharactersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCharactersInput, Prisma.UserUpdateWithoutCharactersInput>, Prisma.UserUncheckedUpdateWithoutCharactersInput>
 }
 
-export type UserCreateNestedOneWithoutEstatesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEstatesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
 export type UserCreateNestedOneWithoutFlaggedEstatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutFlaggedEstatesInput, Prisma.UserUncheckedCreateWithoutFlaggedEstatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutFlaggedEstatesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutEstatesNestedInput = {
+export type UserCreateNestedOneWithoutEstatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutEstatesInput
-  upsert?: Prisma.UserUpsertWithoutEstatesInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEstatesInput, Prisma.UserUpdateWithoutEstatesInput>, Prisma.UserUncheckedUpdateWithoutEstatesInput>
 }
 
 export type UserUpdateOneWithoutFlaggedEstatesNestedInput = {
@@ -544,6 +536,14 @@ export type UserUpdateOneWithoutFlaggedEstatesNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFlaggedEstatesInput, Prisma.UserUpdateWithoutFlaggedEstatesInput>, Prisma.UserUncheckedUpdateWithoutFlaggedEstatesInput>
+}
+
+export type UserUpdateOneRequiredWithoutEstatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEstatesInput
+  upsert?: Prisma.UserUpsertWithoutEstatesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEstatesInput, Prisma.UserUpdateWithoutEstatesInput>, Prisma.UserUncheckedUpdateWithoutEstatesInput>
 }
 
 export type UserCreateNestedOneWithoutVenueStaffInput = {
@@ -616,14 +616,14 @@ export type UserCreateWithoutAccountsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -636,14 +636,14 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -672,14 +672,14 @@ export type UserUpdateWithoutAccountsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -692,14 +692,14 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -713,13 +713,13 @@ export type UserCreateWithoutSessionsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -733,13 +733,13 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -769,13 +769,13 @@ export type UserUpdateWithoutSessionsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -789,13 +789,13 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -809,13 +809,13 @@ export type UserCreateWithoutCharactersInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -829,13 +829,13 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -865,13 +865,13 @@ export type UserUpdateWithoutCharactersInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -885,58 +885,13 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
-}
-
-export type UserCreateWithoutEstatesInput = {
-  id?: string
-  name?: string | null
-  email?: string | null
-  emailVerified?: Date | string | null
-  image?: string | null
-  createdAt?: Date | string
-  discordUsername?: string | null
-  discordId?: string | null
-  role?: $Enums.UserRole
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
-  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
-}
-
-export type UserUncheckedCreateWithoutEstatesInput = {
-  id?: string
-  name?: string | null
-  email?: string | null
-  emailVerified?: Date | string | null
-  image?: string | null
-  createdAt?: Date | string
-  discordUsername?: string | null
-  discordId?: string | null
-  role?: $Enums.UserRole
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
-  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
-}
-
-export type UserCreateOrConnectWithoutEstatesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutFlaggedEstatesInput = {
@@ -950,13 +905,13 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
   legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
@@ -970,13 +925,13 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
   legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
@@ -984,55 +939,49 @@ export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutFlaggedEstatesInput, Prisma.UserUncheckedCreateWithoutFlaggedEstatesInput>
 }
 
-export type UserUpsertWithoutEstatesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutEstatesInput, Prisma.UserUncheckedUpdateWithoutEstatesInput>
+export type UserCreateWithoutEstatesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+}
+
+export type UserUncheckedCreateWithoutEstatesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+}
+
+export type UserCreateOrConnectWithoutEstatesInput = {
+  where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutEstatesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutEstatesInput, Prisma.UserUncheckedUpdateWithoutEstatesInput>
-}
-
-export type UserUpdateWithoutEstatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
-  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutEstatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
-  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
 }
 
 export type UserUpsertWithoutFlaggedEstatesInput = {
@@ -1057,13 +1006,13 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
   legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
@@ -1077,13 +1026,64 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
   legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+}
+
+export type UserUpsertWithoutEstatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEstatesInput, Prisma.UserUncheckedUpdateWithoutEstatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEstatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEstatesInput, Prisma.UserUncheckedUpdateWithoutEstatesInput>
+}
+
+export type UserUpdateWithoutEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutVenueStaffInput = {
@@ -1097,13 +1097,13 @@ export type UserCreateWithoutVenueStaffInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVenueStaffInput = {
@@ -1117,13 +1117,13 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVenueStaffInput = {
@@ -1153,13 +1153,13 @@ export type UserUpdateWithoutVenueStaffInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVenueStaffInput = {
@@ -1173,13 +1173,13 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLikesInput = {
@@ -1193,13 +1193,13 @@ export type UserCreateWithoutLikesInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutLikesInput = {
@@ -1213,13 +1213,13 @@ export type UserUncheckedCreateWithoutLikesInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutLikesInput = {
@@ -1249,13 +1249,13 @@ export type UserUpdateWithoutLikesInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLikesInput = {
@@ -1269,13 +1269,13 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -1289,13 +1289,13 @@ export type UserCreateWithoutCommentsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1309,13 +1309,13 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
-  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1345,13 +1345,13 @@ export type UserUpdateWithoutCommentsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1365,13 +1365,13 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
-  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserCreateWithoutLegalPageEditsInput = {
@@ -1385,13 +1385,13 @@ export type UserCreateWithoutLegalPageEditsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserUncheckedCreateWithoutLegalPageEditsInput = {
@@ -1405,13 +1405,13 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   discordId?: string | null
   role?: $Enums.UserRole
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
-  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
 }
 
 export type UserCreateOrConnectWithoutLegalPageEditsInput = {
@@ -1441,13 +1441,13 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
@@ -1461,13 +1461,13 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
-  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
 }
 
 
@@ -1477,26 +1477,26 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
 
 export type UserCountOutputType = {
   accounts: number
-  sessions: number
-  characters: number
-  estates: number
-  likes: number
   comments: number
-  venueStaff: number
-  legalPageEdits: number
   flaggedEstates: number
+  estates: number
+  characters: number
+  legalPageEdits: number
+  likes: number
+  sessions: number
+  venueStaff: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-  characters?: boolean | UserCountOutputTypeCountCharactersArgs
-  estates?: boolean | UserCountOutputTypeCountEstatesArgs
-  likes?: boolean | UserCountOutputTypeCountLikesArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
-  venueStaff?: boolean | UserCountOutputTypeCountVenueStaffArgs
-  legalPageEdits?: boolean | UserCountOutputTypeCountLegalPageEditsArgs
   flaggedEstates?: boolean | UserCountOutputTypeCountFlaggedEstatesArgs
+  estates?: boolean | UserCountOutputTypeCountEstatesArgs
+  characters?: boolean | UserCountOutputTypeCountCharactersArgs
+  legalPageEdits?: boolean | UserCountOutputTypeCountLegalPageEditsArgs
+  likes?: boolean | UserCountOutputTypeCountLikesArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  venueStaff?: boolean | UserCountOutputTypeCountVenueStaffArgs
 }
 
 /**
@@ -1519,15 +1519,15 @@ export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionWhereInput
+export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCharactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FfxivCharacterWhereInput
+export type UserCountOutputTypeCountFlaggedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateWhereInput
 }
 
 /**
@@ -1540,22 +1540,8 @@ export type UserCountOutputTypeCountEstatesArgs<ExtArgs extends runtime.Types.Ex
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LikeWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CommentWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountVenueStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VenueStaffWhereInput
+export type UserCountOutputTypeCountCharactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FfxivCharacterWhereInput
 }
 
 /**
@@ -1568,8 +1554,22 @@ export type UserCountOutputTypeCountLegalPageEditsArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountFlaggedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EstateWhereInput
+export type UserCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LikeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVenueStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VenueStaffWhereInput
 }
 
 
@@ -1584,14 +1584,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   discordId?: boolean
   role?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
-  estates?: boolean | Prisma.User$estatesArgs<ExtArgs>
-  likes?: boolean | Prisma.User$likesArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
-  legalPageEdits?: boolean | Prisma.User$legalPageEditsArgs<ExtArgs>
   flaggedEstates?: boolean | Prisma.User$flaggedEstatesArgs<ExtArgs>
+  estates?: boolean | Prisma.User$estatesArgs<ExtArgs>
+  characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
+  legalPageEdits?: boolean | Prisma.User$legalPageEditsArgs<ExtArgs>
+  likes?: boolean | Prisma.User$likesArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1634,14 +1634,14 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
-  estates?: boolean | Prisma.User$estatesArgs<ExtArgs>
-  likes?: boolean | Prisma.User$likesArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
-  legalPageEdits?: boolean | Prisma.User$legalPageEditsArgs<ExtArgs>
   flaggedEstates?: boolean | Prisma.User$flaggedEstatesArgs<ExtArgs>
+  estates?: boolean | Prisma.User$estatesArgs<ExtArgs>
+  characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
+  legalPageEdits?: boolean | Prisma.User$legalPageEditsArgs<ExtArgs>
+  likes?: boolean | Prisma.User$likesArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1651,14 +1651,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     accounts: Prisma.$AccountPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
-    characters: Prisma.$FfxivCharacterPayload<ExtArgs>[]
-    estates: Prisma.$EstatePayload<ExtArgs>[]
-    likes: Prisma.$LikePayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
-    venueStaff: Prisma.$VenueStaffPayload<ExtArgs>[]
-    legalPageEdits: Prisma.$LegalPagePayload<ExtArgs>[]
     flaggedEstates: Prisma.$EstatePayload<ExtArgs>[]
+    estates: Prisma.$EstatePayload<ExtArgs>[]
+    characters: Prisma.$FfxivCharacterPayload<ExtArgs>[]
+    legalPageEdits: Prisma.$LegalPagePayload<ExtArgs>[]
+    likes: Prisma.$LikePayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
+    venueStaff: Prisma.$VenueStaffPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2065,14 +2065,14 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  characters<T extends Prisma.User$charactersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FfxivCharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  estates<T extends Prisma.User$estatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$estatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  likes<T extends Prisma.User$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  venueStaff<T extends Prisma.User$venueStaffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$venueStaffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  legalPageEdits<T extends Prisma.User$legalPageEditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$legalPageEditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LegalPagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   flaggedEstates<T extends Prisma.User$flaggedEstatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$flaggedEstatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  estates<T extends Prisma.User$estatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$estatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  characters<T extends Prisma.User$charactersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FfxivCharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  legalPageEdits<T extends Prisma.User$legalPageEditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$legalPageEditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LegalPagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  likes<T extends Prisma.User$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  venueStaff<T extends Prisma.User$venueStaffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$venueStaffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2523,51 +2523,51 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.sessions
+ * User.comments
  */
-export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Session
+   * Select specific fields to fetch from the Comment
    */
-  select?: Prisma.SessionSelect<ExtArgs> | null
+  select?: Prisma.CommentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Session
+   * Omit specific fields from the Comment
    */
-  omit?: Prisma.SessionOmit<ExtArgs> | null
+  omit?: Prisma.CommentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SessionInclude<ExtArgs> | null
-  where?: Prisma.SessionWhereInput
-  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
-  cursor?: Prisma.SessionWhereUniqueInput
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
 }
 
 /**
- * User.characters
+ * User.flaggedEstates
  */
-export type User$charactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$flaggedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FfxivCharacter
+   * Select specific fields to fetch from the Estate
    */
-  select?: Prisma.FfxivCharacterSelect<ExtArgs> | null
+  select?: Prisma.EstateSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FfxivCharacter
+   * Omit specific fields from the Estate
    */
-  omit?: Prisma.FfxivCharacterOmit<ExtArgs> | null
+  omit?: Prisma.EstateOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FfxivCharacterInclude<ExtArgs> | null
-  where?: Prisma.FfxivCharacterWhereInput
-  orderBy?: Prisma.FfxivCharacterOrderByWithRelationInput | Prisma.FfxivCharacterOrderByWithRelationInput[]
-  cursor?: Prisma.FfxivCharacterWhereUniqueInput
+  include?: Prisma.EstateInclude<ExtArgs> | null
+  where?: Prisma.EstateWhereInput
+  orderBy?: Prisma.EstateOrderByWithRelationInput | Prisma.EstateOrderByWithRelationInput[]
+  cursor?: Prisma.EstateWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FfxivCharacterScalarFieldEnum | Prisma.FfxivCharacterScalarFieldEnum[]
+  distinct?: Prisma.EstateScalarFieldEnum | Prisma.EstateScalarFieldEnum[]
 }
 
 /**
@@ -2595,75 +2595,27 @@ export type User$estatesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * User.likes
+ * User.characters
  */
-export type User$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$charactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Like
+   * Select specific fields to fetch from the FfxivCharacter
    */
-  select?: Prisma.LikeSelect<ExtArgs> | null
+  select?: Prisma.FfxivCharacterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Like
+   * Omit specific fields from the FfxivCharacter
    */
-  omit?: Prisma.LikeOmit<ExtArgs> | null
+  omit?: Prisma.FfxivCharacterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LikeInclude<ExtArgs> | null
-  where?: Prisma.LikeWhereInput
-  orderBy?: Prisma.LikeOrderByWithRelationInput | Prisma.LikeOrderByWithRelationInput[]
-  cursor?: Prisma.LikeWhereUniqueInput
+  include?: Prisma.FfxivCharacterInclude<ExtArgs> | null
+  where?: Prisma.FfxivCharacterWhereInput
+  orderBy?: Prisma.FfxivCharacterOrderByWithRelationInput | Prisma.FfxivCharacterOrderByWithRelationInput[]
+  cursor?: Prisma.FfxivCharacterWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LikeScalarFieldEnum | Prisma.LikeScalarFieldEnum[]
-}
-
-/**
- * User.comments
- */
-export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Comment
-   */
-  select?: Prisma.CommentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Comment
-   */
-  omit?: Prisma.CommentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CommentInclude<ExtArgs> | null
-  where?: Prisma.CommentWhereInput
-  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
-  cursor?: Prisma.CommentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
-}
-
-/**
- * User.venueStaff
- */
-export type User$venueStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the VenueStaff
-   */
-  select?: Prisma.VenueStaffSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the VenueStaff
-   */
-  omit?: Prisma.VenueStaffOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VenueStaffInclude<ExtArgs> | null
-  where?: Prisma.VenueStaffWhereInput
-  orderBy?: Prisma.VenueStaffOrderByWithRelationInput | Prisma.VenueStaffOrderByWithRelationInput[]
-  cursor?: Prisma.VenueStaffWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.VenueStaffScalarFieldEnum | Prisma.VenueStaffScalarFieldEnum[]
+  distinct?: Prisma.FfxivCharacterScalarFieldEnum | Prisma.FfxivCharacterScalarFieldEnum[]
 }
 
 /**
@@ -2691,27 +2643,75 @@ export type User$legalPageEditsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * User.flaggedEstates
+ * User.likes
  */
-export type User$flaggedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Estate
+   * Select specific fields to fetch from the Like
    */
-  select?: Prisma.EstateSelect<ExtArgs> | null
+  select?: Prisma.LikeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Estate
+   * Omit specific fields from the Like
    */
-  omit?: Prisma.EstateOmit<ExtArgs> | null
+  omit?: Prisma.LikeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.EstateInclude<ExtArgs> | null
-  where?: Prisma.EstateWhereInput
-  orderBy?: Prisma.EstateOrderByWithRelationInput | Prisma.EstateOrderByWithRelationInput[]
-  cursor?: Prisma.EstateWhereUniqueInput
+  include?: Prisma.LikeInclude<ExtArgs> | null
+  where?: Prisma.LikeWhereInput
+  orderBy?: Prisma.LikeOrderByWithRelationInput | Prisma.LikeOrderByWithRelationInput[]
+  cursor?: Prisma.LikeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.EstateScalarFieldEnum | Prisma.EstateScalarFieldEnum[]
+  distinct?: Prisma.LikeScalarFieldEnum | Prisma.LikeScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+}
+
+/**
+ * User.venueStaff
+ */
+export type User$venueStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VenueStaff
+   */
+  select?: Prisma.VenueStaffSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VenueStaff
+   */
+  omit?: Prisma.VenueStaffOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VenueStaffInclude<ExtArgs> | null
+  where?: Prisma.VenueStaffWhereInput
+  orderBy?: Prisma.VenueStaffOrderByWithRelationInput | Prisma.VenueStaffOrderByWithRelationInput[]
+  cursor?: Prisma.VenueStaffWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VenueStaffScalarFieldEnum | Prisma.VenueStaffScalarFieldEnum[]
 }
 
 /**
