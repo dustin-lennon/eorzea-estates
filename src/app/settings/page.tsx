@@ -1,10 +1,23 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database } from "lucide-react";
+import { DataExportButton } from "@/components/data-export-button";
 
 export default function SettingsPage() {
   return (
     <div className="max-w-xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-8 text-primary">Settings</h1>
+
+      <section className="bg-card rounded-xl p-6 mb-8">
+        <div className="flex items-center mb-6">
+          <Database className="brand-link mr-3" />
+          <h2 className="text-lg font-semibold text-primary">Data & Privacy</h2>
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">
+          Per our Privacy Policy, you can request a copy of all personal data we hold on your account — including your profile, estates, characters, comments, and likes.
+        </p>
+        <DataExportButton />
+      </section>
+
       <section className="bg-card rounded-xl p-6 mb-8">
         <div className="flex items-center mb-6">
           <Shield className="brand-link mr-3" />
@@ -40,7 +53,6 @@ export default function SettingsPage() {
           </li>
         </ul>
       </section>
-      {/* More settings sections can be added here */}
     </div>
   );
 }
