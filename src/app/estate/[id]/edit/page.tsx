@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
+import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { EstateSubmitForm } from "@/app/submit/estate-submit-form"
 import type { EstateFormValues } from "@/lib/schemas"
 import type { z } from "zod"
@@ -20,7 +21,7 @@ export default async function EditEstatePage({
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const [estate, characters] = await Promise.all([
+  const [estate, rawCharacters] = await Promise.all([
     prisma.estate.findUnique({
       where: { id, deletedAt: null },
       select: {
@@ -48,14 +49,32 @@ export default async function EditEstatePage({
       },
     }),
     prisma.ffxivCharacter.findMany({
-      where: { userId: session.user.id, verified: true },
+      where: { userId: session.user.id },
       orderBy: { createdAt: "asc" },
-      select: { id: true, characterName: true, server: true },
+      select: { id: true, characterName: true, server: true, lodestoneId: true },
     }),
   ])
 
   if (!estate) notFound()
   if (estate.ownerId !== session.user.id) redirect("/")
+
+  const characters = await Promise.all(
+    rawCharacters.map(async (char) => {
+      const fcId = await getCharacterFCId(parseInt(char.lodestoneId)).catch(() => null)
+      let isFcOwner = false
+      if (fcId) {
+        const masterId = await getFCMasterLodestoneId(fcId).catch(() => null)
+        isFcOwner = masterId === char.lodestoneId
+      }
+      return {
+        id: char.id,
+        characterName: char.characterName,
+        server: char.server,
+        isFcMember: fcId !== null,
+        isFcOwner,
+      }
+    })
+  )
 
   const defaultValues: Partial<EstateFormInput> = {
     characterId: estate.characterId ?? "",

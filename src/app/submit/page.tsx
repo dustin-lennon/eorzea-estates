@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
+import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { Button } from "@/components/ui/button"
 import { EstateSubmitForm } from "./estate-submit-form"
 
@@ -12,25 +13,43 @@ export default async function SubmitPage() {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const characters = await prisma.ffxivCharacter.findMany({
-    where: { userId: session.user.id, verified: true },
+  const rawCharacters = await prisma.ffxivCharacter.findMany({
+    where: { userId: session.user.id },
     orderBy: { createdAt: "asc" },
-    select: { id: true, characterName: true, server: true },
+    select: { id: true, characterName: true, server: true, lodestoneId: true },
   })
 
-  if (characters.length === 0) {
+  if (rawCharacters.length === 0) {
     return (
       <div className="container mx-auto max-w-xl px-4 py-20 text-center">
-        <h1 className="text-2xl font-bold mb-2">No Verified Characters</h1>
+        <h1 className="text-2xl font-bold mb-2">No Characters Found</h1>
         <p className="text-muted-foreground mb-6">
-          You need at least one verified FFXIV character before submitting an estate.
+          You need to add an FFXIV character before submitting an estate.
         </p>
         <Button asChild>
-          <Link href="/dashboard/verify">Verify a Character</Link>
+          <Link href="/dashboard/verify">Add a Character</Link>
         </Button>
       </div>
     )
   }
+
+  const characters = await Promise.all(
+    rawCharacters.map(async (char) => {
+      const fcId = await getCharacterFCId(parseInt(char.lodestoneId)).catch(() => null)
+      let isFcOwner = false
+      if (fcId) {
+        const masterId = await getFCMasterLodestoneId(fcId).catch(() => null)
+        isFcOwner = masterId === char.lodestoneId
+      }
+      return {
+        id: char.id,
+        characterName: char.characterName,
+        server: char.server,
+        isFcMember: fcId !== null,
+        isFcOwner,
+      }
+    })
+  )
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-10">

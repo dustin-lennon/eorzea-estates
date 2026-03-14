@@ -161,6 +161,10 @@ export async function PATCH(
     )
   }
 
+  if (!isVenue || !data.venueType) {
+    await prisma.venueDetails.deleteMany({ where: { estateId: id } })
+  }
+
   const updated = await prisma.estate.update({
     where: { id },
     data: {
@@ -181,37 +185,39 @@ export async function PATCH(
           order: i,
         })),
       },
-      venueDetails: isVenue && data.venueType
+      ...(isVenue && data.venueType
         ? {
-            upsert: {
-              create: {
-                venueType: data.venueType,
-                timezone: data.venueTimezone ?? "UTC",
-                hours: data.venueHours ?? {},
-                staff: {
-                  create: (data.venueStaff ?? []).map((s) => ({
-                    characterName: s.characterName,
-                    role: s.role,
-                    linkedCharacterId: s.linkedCharacterId ?? null,
-                  })),
+            venueDetails: {
+              upsert: {
+                create: {
+                  venueType: data.venueType,
+                  timezone: data.venueTimezone ?? "UTC",
+                  hours: data.venueHours ?? {},
+                  staff: {
+                    create: (data.venueStaff ?? []).map((s) => ({
+                      characterName: s.characterName,
+                      role: s.role,
+                      linkedCharacterId: s.linkedCharacterId ?? null,
+                    })),
+                  },
                 },
-              },
-              update: {
-                venueType: data.venueType,
-                timezone: data.venueTimezone ?? "UTC",
-                hours: data.venueHours ?? {},
-                staff: {
-                  deleteMany: {},
-                  create: (data.venueStaff ?? []).map((s) => ({
-                    characterName: s.characterName,
-                    role: s.role,
-                    linkedCharacterId: s.linkedCharacterId ?? null,
-                  })),
+                update: {
+                  venueType: data.venueType,
+                  timezone: data.venueTimezone ?? "UTC",
+                  hours: data.venueHours ?? {},
+                  staff: {
+                    deleteMany: {},
+                    create: (data.venueStaff ?? []).map((s) => ({
+                      characterName: s.characterName,
+                      role: s.role,
+                      linkedCharacterId: s.linkedCharacterId ?? null,
+                    })),
+                  },
                 },
               },
             },
           }
-        : { delete: true },
+        : {}),
     },
     select: { id: true },
   })
