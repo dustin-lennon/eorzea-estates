@@ -23,13 +23,13 @@ export async function POST(req: Request) {
 
   const data = parsed.data
 
-  // Verify the character belongs to this user and is verified
+  // Verify the character belongs to this user
   const character = await prisma.ffxivCharacter.findFirst({
-    where: { id: data.characterId, userId: session.user.id, verified: true },
+    where: { id: data.characterId, userId: session.user.id },
   })
   if (!character) {
     return NextResponse.json(
-      { error: "Character not found or not verified." },
+      { error: { message: "Character not found." } },
       { status: 400 }
     )
   }
