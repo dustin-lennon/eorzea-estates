@@ -29,17 +29,17 @@ export type AggregateEstate = {
 export type EstateAvgAggregateOutputType = {
   ward: number | null
   plot: number | null
-  room: number | null
   likeCount: number | null
   commentCount: number | null
+  room: number | null
 }
 
 export type EstateSumAggregateOutputType = {
   ward: number | null
   plot: number | null
-  room: number | null
   likeCount: number | null
   commentCount: number | null
+  room: number | null
 }
 
 export type EstateMinAggregateOutputType = {
@@ -57,15 +57,15 @@ export type EstateMinAggregateOutputType = {
   server: string | null
   ward: number | null
   plot: number | null
-  room: number | null
   likeCount: number | null
   commentCount: number | null
   ownerId: string | null
   characterId: string | null
-  flagged: boolean | null
+  room: number | null
   flagReason: string | null
-  flaggedById: string | null
+  flagged: boolean | null
   flaggedAt: Date | null
+  flaggedById: string | null
   moderationStatus: $Enums.ModerationStatus | null
   deletedAt: Date | null
 }
@@ -85,15 +85,15 @@ export type EstateMaxAggregateOutputType = {
   server: string | null
   ward: number | null
   plot: number | null
-  room: number | null
   likeCount: number | null
   commentCount: number | null
   ownerId: string | null
   characterId: string | null
-  flagged: boolean | null
+  room: number | null
   flagReason: string | null
-  flaggedById: string | null
+  flagged: boolean | null
   flaggedAt: Date | null
+  flaggedById: string | null
   moderationStatus: $Enums.ModerationStatus | null
   deletedAt: Date | null
 }
@@ -113,16 +113,16 @@ export type EstateCountAggregateOutputType = {
   server: number
   ward: number
   plot: number
-  room: number
   tags: number
   likeCount: number
   commentCount: number
   ownerId: number
   characterId: number
-  flagged: number
+  room: number
   flagReason: number
-  flaggedById: number
+  flagged: number
   flaggedAt: number
+  flaggedById: number
   moderationStatus: number
   deletedAt: number
   _all: number
@@ -132,17 +132,17 @@ export type EstateCountAggregateOutputType = {
 export type EstateAvgAggregateInputType = {
   ward?: true
   plot?: true
-  room?: true
   likeCount?: true
   commentCount?: true
+  room?: true
 }
 
 export type EstateSumAggregateInputType = {
   ward?: true
   plot?: true
-  room?: true
   likeCount?: true
   commentCount?: true
+  room?: true
 }
 
 export type EstateMinAggregateInputType = {
@@ -160,15 +160,15 @@ export type EstateMinAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
-  room?: true
   likeCount?: true
   commentCount?: true
   ownerId?: true
   characterId?: true
-  flagged?: true
+  room?: true
   flagReason?: true
-  flaggedById?: true
+  flagged?: true
   flaggedAt?: true
+  flaggedById?: true
   moderationStatus?: true
   deletedAt?: true
 }
@@ -188,15 +188,15 @@ export type EstateMaxAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
-  room?: true
   likeCount?: true
   commentCount?: true
   ownerId?: true
   characterId?: true
-  flagged?: true
+  room?: true
   flagReason?: true
-  flaggedById?: true
+  flagged?: true
   flaggedAt?: true
+  flaggedById?: true
   moderationStatus?: true
   deletedAt?: true
 }
@@ -216,16 +216,16 @@ export type EstateCountAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
-  room?: true
   tags?: true
   likeCount?: true
   commentCount?: true
   ownerId?: true
   characterId?: true
-  flagged?: true
+  room?: true
   flagReason?: true
-  flaggedById?: true
+  flagged?: true
   flaggedAt?: true
+  flaggedById?: true
   moderationStatus?: true
   deletedAt?: true
   _all?: true
@@ -332,16 +332,16 @@ export type EstateGroupByOutputType = {
   server: string
   ward: number | null
   plot: number | null
-  room: number | null
   tags: string[]
   likeCount: number
   commentCount: number
   ownerId: string
   characterId: string | null
-  flagged: boolean
+  room: number | null
   flagReason: string | null
-  flaggedById: string | null
+  flagged: boolean
   flaggedAt: Date | null
+  flaggedById: string | null
   moderationStatus: $Enums.ModerationStatus
   deletedAt: Date | null
   _count: EstateCountAggregateOutputType | null
@@ -384,26 +384,26 @@ export type EstateWhereInput = {
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
-  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flagged?: Prisma.BoolFilter<"Estate"> | boolean
+  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
+  flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
   moderationStatus?: Prisma.EnumModerationStatusFilter<"Estate"> | $Enums.ModerationStatus
   deletedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
-  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  comments?: Prisma.CommentListRelationFilter
   character?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   flaggedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  images?: Prisma.ImageListRelationFilter
-  venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
-  likes?: Prisma.LikeListRelationFilter
-  comments?: Prisma.CommentListRelationFilter
+  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   pendingTransfer?: Prisma.XOR<Prisma.EstatePendingTransferNullableScalarRelationFilter, Prisma.EstatePendingTransferWhereInput> | null
+  images?: Prisma.ImageListRelationFilter
+  likes?: Prisma.LikeListRelationFilter
+  venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
 }
 
 export type EstateOrderByWithRelationInput = {
@@ -421,26 +421,26 @@ export type EstateOrderByWithRelationInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrderInput | Prisma.SortOrder
   plot?: Prisma.SortOrderInput | Prisma.SortOrder
-  room?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrderInput | Prisma.SortOrder
-  flagged?: Prisma.SortOrder
+  room?: Prisma.SortOrderInput | Prisma.SortOrder
   flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
-  flaggedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  flaggedById?: Prisma.SortOrderInput | Prisma.SortOrder
   moderationStatus?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  owner?: Prisma.UserOrderByWithRelationInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
   character?: Prisma.FfxivCharacterOrderByWithRelationInput
   flaggedBy?: Prisma.UserOrderByWithRelationInput
-  images?: Prisma.ImageOrderByRelationAggregateInput
-  venueDetails?: Prisma.VenueDetailsOrderByWithRelationInput
-  likes?: Prisma.LikeOrderByRelationAggregateInput
-  comments?: Prisma.CommentOrderByRelationAggregateInput
+  owner?: Prisma.UserOrderByWithRelationInput
   pendingTransfer?: Prisma.EstatePendingTransferOrderByWithRelationInput
+  images?: Prisma.ImageOrderByRelationAggregateInput
+  likes?: Prisma.LikeOrderByRelationAggregateInput
+  venueDetails?: Prisma.VenueDetailsOrderByWithRelationInput
 }
 
 export type EstateWhereUniqueInput = Prisma.AtLeast<{
@@ -461,26 +461,26 @@ export type EstateWhereUniqueInput = Prisma.AtLeast<{
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
-  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flagged?: Prisma.BoolFilter<"Estate"> | boolean
+  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
+  flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
   moderationStatus?: Prisma.EnumModerationStatusFilter<"Estate"> | $Enums.ModerationStatus
   deletedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
-  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  comments?: Prisma.CommentListRelationFilter
   character?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   flaggedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  images?: Prisma.ImageListRelationFilter
-  venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
-  likes?: Prisma.LikeListRelationFilter
-  comments?: Prisma.CommentListRelationFilter
+  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   pendingTransfer?: Prisma.XOR<Prisma.EstatePendingTransferNullableScalarRelationFilter, Prisma.EstatePendingTransferWhereInput> | null
+  images?: Prisma.ImageListRelationFilter
+  likes?: Prisma.LikeListRelationFilter
+  venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
 }, "id">
 
 export type EstateOrderByWithAggregationInput = {
@@ -498,16 +498,16 @@ export type EstateOrderByWithAggregationInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrderInput | Prisma.SortOrder
   plot?: Prisma.SortOrderInput | Prisma.SortOrder
-  room?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrderInput | Prisma.SortOrder
-  flagged?: Prisma.SortOrder
+  room?: Prisma.SortOrderInput | Prisma.SortOrder
   flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
-  flaggedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  flaggedById?: Prisma.SortOrderInput | Prisma.SortOrder
   moderationStatus?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EstateCountOrderByAggregateInput
@@ -535,16 +535,16 @@ export type EstateScalarWhereWithAggregatesInput = {
   server?: Prisma.StringWithAggregatesFilter<"Estate"> | string
   ward?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
-  room?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntWithAggregatesFilter<"Estate"> | number
   commentCount?: Prisma.IntWithAggregatesFilter<"Estate"> | number
   ownerId?: Prisma.StringWithAggregatesFilter<"Estate"> | string
   characterId?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
-  flagged?: Prisma.BoolWithAggregatesFilter<"Estate"> | boolean
+  room?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
   flagReason?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
-  flaggedById?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
+  flagged?: Prisma.BoolWithAggregatesFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Estate"> | Date | string | null
+  flaggedById?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
   moderationStatus?: Prisma.EnumModerationStatusWithAggregatesFilter<"Estate"> | $Enums.ModerationStatus
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Estate"> | Date | string | null
 }
@@ -564,23 +564,23 @@ export type EstateCreateInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
-  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateInput = {
@@ -598,23 +598,23 @@ export type EstateUncheckedCreateInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUpdateInput = {
@@ -632,23 +632,23 @@ export type EstateUpdateInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
-  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateInput = {
@@ -666,23 +666,23 @@ export type EstateUncheckedUpdateInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateCreateManyInput = {
@@ -700,16 +700,16 @@ export type EstateCreateManyInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
 }
@@ -729,12 +729,12 @@ export type EstateUpdateManyMutationInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -755,16 +755,16 @@ export type EstateUncheckedUpdateManyInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -802,16 +802,16 @@ export type EstateCountOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
-  room?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
-  flagged?: Prisma.SortOrder
+  room?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
-  flaggedById?: Prisma.SortOrder
+  flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
+  flaggedById?: Prisma.SortOrder
   moderationStatus?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -819,9 +819,9 @@ export type EstateCountOrderByAggregateInput = {
 export type EstateAvgOrderByAggregateInput = {
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
-  room?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
+  room?: Prisma.SortOrder
 }
 
 export type EstateMaxOrderByAggregateInput = {
@@ -839,15 +839,15 @@ export type EstateMaxOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
-  room?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
-  flagged?: Prisma.SortOrder
+  room?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
-  flaggedById?: Prisma.SortOrder
+  flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
+  flaggedById?: Prisma.SortOrder
   moderationStatus?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -867,15 +867,15 @@ export type EstateMinOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
-  room?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
-  flagged?: Prisma.SortOrder
+  room?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
-  flaggedById?: Prisma.SortOrder
+  flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
+  flaggedById?: Prisma.SortOrder
   moderationStatus?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -883,21 +883,14 @@ export type EstateMinOrderByAggregateInput = {
 export type EstateSumOrderByAggregateInput = {
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
-  room?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
+  room?: Prisma.SortOrder
 }
 
 export type EstateScalarRelationFilter = {
   is?: Prisma.EstateWhereInput
   isNot?: Prisma.EstateWhereInput
-}
-
-export type EstateCreateNestedManyWithoutOwnerInput = {
-  create?: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput> | Prisma.EstateCreateWithoutOwnerInput[] | Prisma.EstateUncheckedCreateWithoutOwnerInput[]
-  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutOwnerInput | Prisma.EstateCreateOrConnectWithoutOwnerInput[]
-  createMany?: Prisma.EstateCreateManyOwnerInputEnvelope
-  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
 }
 
 export type EstateCreateNestedManyWithoutFlaggedByInput = {
@@ -907,7 +900,7 @@ export type EstateCreateNestedManyWithoutFlaggedByInput = {
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
 }
 
-export type EstateUncheckedCreateNestedManyWithoutOwnerInput = {
+export type EstateCreateNestedManyWithoutOwnerInput = {
   create?: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput> | Prisma.EstateCreateWithoutOwnerInput[] | Prisma.EstateUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.EstateCreateOrConnectWithoutOwnerInput | Prisma.EstateCreateOrConnectWithoutOwnerInput[]
   createMany?: Prisma.EstateCreateManyOwnerInputEnvelope
@@ -921,18 +914,11 @@ export type EstateUncheckedCreateNestedManyWithoutFlaggedByInput = {
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
 }
 
-export type EstateUpdateManyWithoutOwnerNestedInput = {
+export type EstateUncheckedCreateNestedManyWithoutOwnerInput = {
   create?: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput> | Prisma.EstateCreateWithoutOwnerInput[] | Prisma.EstateUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.EstateCreateOrConnectWithoutOwnerInput | Prisma.EstateCreateOrConnectWithoutOwnerInput[]
-  upsert?: Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput | Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput[]
   createMany?: Prisma.EstateCreateManyOwnerInputEnvelope
-  set?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
-  disconnect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
-  delete?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
-  update?: Prisma.EstateUpdateWithWhereUniqueWithoutOwnerInput | Prisma.EstateUpdateWithWhereUniqueWithoutOwnerInput[]
-  updateMany?: Prisma.EstateUpdateManyWithWhereWithoutOwnerInput | Prisma.EstateUpdateManyWithWhereWithoutOwnerInput[]
-  deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
 }
 
 export type EstateUpdateManyWithoutFlaggedByNestedInput = {
@@ -949,7 +935,7 @@ export type EstateUpdateManyWithoutFlaggedByNestedInput = {
   deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
 }
 
-export type EstateUncheckedUpdateManyWithoutOwnerNestedInput = {
+export type EstateUpdateManyWithoutOwnerNestedInput = {
   create?: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput> | Prisma.EstateCreateWithoutOwnerInput[] | Prisma.EstateUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.EstateCreateOrConnectWithoutOwnerInput | Prisma.EstateCreateOrConnectWithoutOwnerInput[]
   upsert?: Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput | Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput[]
@@ -974,6 +960,20 @@ export type EstateUncheckedUpdateManyWithoutFlaggedByNestedInput = {
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
   update?: Prisma.EstateUpdateWithWhereUniqueWithoutFlaggedByInput | Prisma.EstateUpdateWithWhereUniqueWithoutFlaggedByInput[]
   updateMany?: Prisma.EstateUpdateManyWithWhereWithoutFlaggedByInput | Prisma.EstateUpdateManyWithWhereWithoutFlaggedByInput[]
+  deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
+}
+
+export type EstateUncheckedUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput> | Prisma.EstateCreateWithoutOwnerInput[] | Prisma.EstateUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutOwnerInput | Prisma.EstateCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput | Prisma.EstateUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.EstateCreateManyOwnerInputEnvelope
+  set?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  disconnect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  delete?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  update?: Prisma.EstateUpdateWithWhereUniqueWithoutOwnerInput | Prisma.EstateUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.EstateUpdateManyWithWhereWithoutOwnerInput | Prisma.EstateUpdateManyWithWhereWithoutOwnerInput[]
   deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
 }
 
@@ -1118,82 +1118,6 @@ export type EstateUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EstateUpdateToOneWithWhereWithoutCommentsInput, Prisma.EstateUpdateWithoutCommentsInput>, Prisma.EstateUncheckedUpdateWithoutCommentsInput>
 }
 
-export type EstateCreateWithoutOwnerInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  published?: boolean
-  name: string
-  description: string
-  inspiration: string
-  type: $Enums.EstateType
-  district?: $Enums.HousingDistrict | null
-  region: string
-  dataCenter: string
-  server: string
-  ward?: number | null
-  plot?: number | null
-  room?: number | null
-  tags?: Prisma.EstateCreatetagsInput | string[]
-  likeCount?: number
-  commentCount?: number
-  flagged?: boolean
-  flagReason?: string | null
-  flaggedAt?: Date | string | null
-  moderationStatus?: $Enums.ModerationStatus
-  deletedAt?: Date | string | null
-  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
-  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
-  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
-  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
-}
-
-export type EstateUncheckedCreateWithoutOwnerInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  published?: boolean
-  name: string
-  description: string
-  inspiration: string
-  type: $Enums.EstateType
-  district?: $Enums.HousingDistrict | null
-  region: string
-  dataCenter: string
-  server: string
-  ward?: number | null
-  plot?: number | null
-  room?: number | null
-  tags?: Prisma.EstateCreatetagsInput | string[]
-  likeCount?: number
-  commentCount?: number
-  characterId?: string | null
-  flagged?: boolean
-  flagReason?: string | null
-  flaggedById?: string | null
-  flaggedAt?: Date | string | null
-  moderationStatus?: $Enums.ModerationStatus
-  deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
-  pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
-}
-
-export type EstateCreateOrConnectWithoutOwnerInput = {
-  where: Prisma.EstateWhereUniqueInput
-  create: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput>
-}
-
-export type EstateCreateManyOwnerInputEnvelope = {
-  data: Prisma.EstateCreateManyOwnerInput | Prisma.EstateCreateManyOwnerInput[]
-  skipDuplicates?: boolean
-}
-
 export type EstateCreateWithoutFlaggedByInput = {
   id?: string
   createdAt?: Date | string
@@ -1209,22 +1133,22 @@ export type EstateCreateWithoutFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
-  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
-  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutFlaggedByInput = {
@@ -1242,22 +1166,22 @@ export type EstateUncheckedCreateWithoutFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutFlaggedByInput = {
@@ -1270,20 +1194,96 @@ export type EstateCreateManyFlaggedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type EstateUpsertWithWhereUniqueWithoutOwnerInput = {
+export type EstateCreateWithoutOwnerInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  room?: number | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
+  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
+}
+
+export type EstateUncheckedCreateWithoutOwnerInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  characterId?: string | null
+  room?: number | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  flaggedById?: string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
+}
+
+export type EstateCreateOrConnectWithoutOwnerInput = {
   where: Prisma.EstateWhereUniqueInput
-  update: Prisma.XOR<Prisma.EstateUpdateWithoutOwnerInput, Prisma.EstateUncheckedUpdateWithoutOwnerInput>
   create: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput>
 }
 
-export type EstateUpdateWithWhereUniqueWithoutOwnerInput = {
-  where: Prisma.EstateWhereUniqueInput
-  data: Prisma.XOR<Prisma.EstateUpdateWithoutOwnerInput, Prisma.EstateUncheckedUpdateWithoutOwnerInput>
+export type EstateCreateManyOwnerInputEnvelope = {
+  data: Prisma.EstateCreateManyOwnerInput | Prisma.EstateCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
-export type EstateUpdateManyWithWhereWithoutOwnerInput = {
+export type EstateUpsertWithWhereUniqueWithoutFlaggedByInput = {
+  where: Prisma.EstateWhereUniqueInput
+  update: Prisma.XOR<Prisma.EstateUpdateWithoutFlaggedByInput, Prisma.EstateUncheckedUpdateWithoutFlaggedByInput>
+  create: Prisma.XOR<Prisma.EstateCreateWithoutFlaggedByInput, Prisma.EstateUncheckedCreateWithoutFlaggedByInput>
+}
+
+export type EstateUpdateWithWhereUniqueWithoutFlaggedByInput = {
+  where: Prisma.EstateWhereUniqueInput
+  data: Prisma.XOR<Prisma.EstateUpdateWithoutFlaggedByInput, Prisma.EstateUncheckedUpdateWithoutFlaggedByInput>
+}
+
+export type EstateUpdateManyWithWhereWithoutFlaggedByInput = {
   where: Prisma.EstateScalarWhereInput
-  data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutOwnerInput>
+  data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutFlaggedByInput>
 }
 
 export type EstateScalarWhereInput = {
@@ -1304,34 +1304,34 @@ export type EstateScalarWhereInput = {
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
-  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flagged?: Prisma.BoolFilter<"Estate"> | boolean
+  room?: Prisma.IntNullableFilter<"Estate"> | number | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
-  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
+  flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  flaggedById?: Prisma.StringNullableFilter<"Estate"> | string | null
   moderationStatus?: Prisma.EnumModerationStatusFilter<"Estate"> | $Enums.ModerationStatus
   deletedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
 }
 
-export type EstateUpsertWithWhereUniqueWithoutFlaggedByInput = {
+export type EstateUpsertWithWhereUniqueWithoutOwnerInput = {
   where: Prisma.EstateWhereUniqueInput
-  update: Prisma.XOR<Prisma.EstateUpdateWithoutFlaggedByInput, Prisma.EstateUncheckedUpdateWithoutFlaggedByInput>
-  create: Prisma.XOR<Prisma.EstateCreateWithoutFlaggedByInput, Prisma.EstateUncheckedCreateWithoutFlaggedByInput>
+  update: Prisma.XOR<Prisma.EstateUpdateWithoutOwnerInput, Prisma.EstateUncheckedUpdateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.EstateCreateWithoutOwnerInput, Prisma.EstateUncheckedCreateWithoutOwnerInput>
 }
 
-export type EstateUpdateWithWhereUniqueWithoutFlaggedByInput = {
+export type EstateUpdateWithWhereUniqueWithoutOwnerInput = {
   where: Prisma.EstateWhereUniqueInput
-  data: Prisma.XOR<Prisma.EstateUpdateWithoutFlaggedByInput, Prisma.EstateUncheckedUpdateWithoutFlaggedByInput>
+  data: Prisma.XOR<Prisma.EstateUpdateWithoutOwnerInput, Prisma.EstateUncheckedUpdateWithoutOwnerInput>
 }
 
-export type EstateUpdateManyWithWhereWithoutFlaggedByInput = {
+export type EstateUpdateManyWithWhereWithoutOwnerInput = {
   where: Prisma.EstateScalarWhereInput
-  data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutFlaggedByInput>
+  data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutOwnerInput>
 }
 
 export type EstateCreateWithoutCharacterInput = {
@@ -1349,22 +1349,22 @@ export type EstateCreateWithoutCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
-  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
-  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutCharacterInput = {
@@ -1382,22 +1382,22 @@ export type EstateUncheckedCreateWithoutCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutCharacterInput = {
@@ -1441,22 +1441,22 @@ export type EstateCreateWithoutPendingTransferInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutPendingTransferInput = {
@@ -1474,22 +1474,22 @@ export type EstateUncheckedCreateWithoutPendingTransferInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutPendingTransferInput = {
@@ -1523,22 +1523,22 @@ export type EstateUpdateWithoutPendingTransferInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutPendingTransferInput = {
@@ -1556,22 +1556,22 @@ export type EstateUncheckedUpdateWithoutPendingTransferInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutImagesInput = {
@@ -1589,22 +1589,22 @@ export type EstateCreateWithoutImagesInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutImagesInput = {
@@ -1622,22 +1622,22 @@ export type EstateUncheckedCreateWithoutImagesInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutImagesInput = {
@@ -1671,22 +1671,22 @@ export type EstateUpdateWithoutImagesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutImagesInput = {
@@ -1704,22 +1704,22 @@ export type EstateUncheckedUpdateWithoutImagesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutVenueDetailsInput = {
@@ -1737,22 +1737,22 @@ export type EstateCreateWithoutVenueDetailsInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
   likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
-  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutVenueDetailsInput = {
@@ -1770,22 +1770,22 @@ export type EstateUncheckedCreateWithoutVenueDetailsInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutVenueDetailsInput = {
@@ -1819,22 +1819,22 @@ export type EstateUpdateWithoutVenueDetailsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
   likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
-  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
@@ -1852,22 +1852,22 @@ export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutLikesInput = {
@@ -1885,22 +1885,22 @@ export type EstateCreateWithoutLikesInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
-  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutLikesInput = {
@@ -1918,22 +1918,22 @@ export type EstateUncheckedCreateWithoutLikesInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutLikesInput = {
@@ -1967,22 +1967,22 @@ export type EstateUpdateWithoutLikesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
-  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutLikesInput = {
@@ -2000,22 +2000,22 @@ export type EstateUncheckedUpdateWithoutLikesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutCommentsInput = {
@@ -2033,22 +2033,22 @@ export type EstateCreateWithoutCommentsInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
-  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutCommentsInput = {
@@ -2066,22 +2066,22 @@ export type EstateUncheckedCreateWithoutCommentsInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
-  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
-  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
-  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutCommentsInput = {
@@ -2115,22 +2115,22 @@ export type EstateUpdateWithoutCommentsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
-  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutCommentsInput = {
@@ -2148,50 +2148,22 @@ export type EstateUncheckedUpdateWithoutCommentsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
-}
-
-export type EstateCreateManyOwnerInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  published?: boolean
-  name: string
-  description: string
-  inspiration: string
-  type: $Enums.EstateType
-  district?: $Enums.HousingDistrict | null
-  region: string
-  dataCenter: string
-  server: string
-  ward?: number | null
-  plot?: number | null
-  room?: number | null
-  tags?: Prisma.EstateCreatetagsInput | string[]
-  likeCount?: number
-  commentCount?: number
-  characterId?: string | null
-  flagged?: boolean
-  flagReason?: string | null
-  flaggedById?: string | null
-  flaggedAt?: Date | string | null
-  moderationStatus?: $Enums.ModerationStatus
-  deletedAt?: Date | string | null
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateCreateManyFlaggedByInput = {
@@ -2209,111 +2181,45 @@ export type EstateCreateManyFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
   characterId?: string | null
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
 }
 
-export type EstateUpdateWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
-  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
-  region?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  server?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  tags?: Prisma.EstateUpdatetagsInput | string[]
-  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
-  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
-  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
-  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
-  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
-}
-
-export type EstateUncheckedUpdateWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
-  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
-  region?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  server?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  tags?: Prisma.EstateUpdatetagsInput | string[]
-  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
-  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
-  pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
-}
-
-export type EstateUncheckedUpdateManyWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
-  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
-  region?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  server?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  tags?: Prisma.EstateUpdatetagsInput | string[]
-  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
-  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+export type EstateCreateManyOwnerInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  characterId?: string | null
+  room?: number | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  flaggedById?: string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
 }
 
 export type EstateUpdateWithoutFlaggedByInput = {
@@ -2331,22 +2237,22 @@ export type EstateUpdateWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
-  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
-  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutFlaggedByInput = {
@@ -2364,22 +2270,22 @@ export type EstateUncheckedUpdateWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
@@ -2397,15 +2303,109 @@ export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type EstateUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
+  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
+}
+
+export type EstateUncheckedUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
+}
+
+export type EstateUncheckedUpdateManyWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2425,15 +2425,15 @@ export type EstateCreateManyCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
-  room?: number | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
   ownerId: string
-  flagged?: boolean
+  room?: number | null
   flagReason?: string | null
-  flaggedById?: string | null
+  flagged?: boolean
   flaggedAt?: Date | string | null
+  flaggedById?: string | null
   moderationStatus?: $Enums.ModerationStatus
   deletedAt?: Date | string | null
 }
@@ -2453,22 +2453,22 @@ export type EstateUpdateWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
-  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
-  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutCharacterInput = {
@@ -2486,22 +2486,22 @@ export type EstateUncheckedUpdateWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
-  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
-  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutCharacterInput = {
@@ -2519,15 +2519,15 @@ export type EstateUncheckedUpdateManyWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2538,15 +2538,15 @@ export type EstateUncheckedUpdateManyWithoutCharacterInput = {
  */
 
 export type EstateCountOutputType = {
+  comments: number
   images: number
   likes: number
-  comments: number
 }
 
 export type EstateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  comments?: boolean | EstateCountOutputTypeCountCommentsArgs
   images?: boolean | EstateCountOutputTypeCountImagesArgs
   likes?: boolean | EstateCountOutputTypeCountLikesArgs
-  comments?: boolean | EstateCountOutputTypeCountCommentsArgs
 }
 
 /**
@@ -2562,6 +2562,13 @@ export type EstateCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * EstateCountOutputType without action
  */
+export type EstateCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
+}
+
+/**
+ * EstateCountOutputType without action
+ */
 export type EstateCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ImageWhereInput
 }
@@ -2571,13 +2578,6 @@ export type EstateCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.E
  */
 export type EstateCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LikeWhereInput
-}
-
-/**
- * EstateCountOutputType without action
- */
-export type EstateCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CommentWhereInput
 }
 
 
@@ -2596,26 +2596,26 @@ export type EstateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   server?: boolean
   ward?: boolean
   plot?: boolean
-  room?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
   ownerId?: boolean
   characterId?: boolean
-  flagged?: boolean
+  room?: boolean
   flagReason?: boolean
-  flaggedById?: boolean
+  flagged?: boolean
   flaggedAt?: boolean
+  flaggedById?: boolean
   moderationStatus?: boolean
   deletedAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
-  images?: boolean | Prisma.Estate$imagesArgs<ExtArgs>
-  venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
-  likes?: boolean | Prisma.Estate$likesArgs<ExtArgs>
-  comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   pendingTransfer?: boolean | Prisma.Estate$pendingTransferArgs<ExtArgs>
+  images?: boolean | Prisma.Estate$imagesArgs<ExtArgs>
+  likes?: boolean | Prisma.Estate$likesArgs<ExtArgs>
+  venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.EstateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
@@ -2634,21 +2634,21 @@ export type EstateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   server?: boolean
   ward?: boolean
   plot?: boolean
-  room?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
   ownerId?: boolean
   characterId?: boolean
-  flagged?: boolean
+  room?: boolean
   flagReason?: boolean
-  flaggedById?: boolean
+  flagged?: boolean
   flaggedAt?: boolean
+  flaggedById?: boolean
   moderationStatus?: boolean
   deletedAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
 export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2666,21 +2666,21 @@ export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   server?: boolean
   ward?: boolean
   plot?: boolean
-  room?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
   ownerId?: boolean
   characterId?: boolean
-  flagged?: boolean
+  room?: boolean
   flagReason?: boolean
-  flaggedById?: boolean
+  flagged?: boolean
   flaggedAt?: boolean
+  flaggedById?: boolean
   moderationStatus?: boolean
   deletedAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
 export type EstateSelectScalar = {
@@ -2698,54 +2698,54 @@ export type EstateSelectScalar = {
   server?: boolean
   ward?: boolean
   plot?: boolean
-  room?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
   ownerId?: boolean
   characterId?: boolean
-  flagged?: boolean
+  room?: boolean
   flagReason?: boolean
-  flaggedById?: boolean
+  flagged?: boolean
   flaggedAt?: boolean
+  flaggedById?: boolean
   moderationStatus?: boolean
   deletedAt?: boolean
 }
 
-export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "room" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "flagged" | "flagReason" | "flaggedById" | "flaggedAt" | "moderationStatus" | "deletedAt", ExtArgs["result"]["estate"]>
+export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt", ExtArgs["result"]["estate"]>
 export type EstateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
-  images?: boolean | Prisma.Estate$imagesArgs<ExtArgs>
-  venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
-  likes?: boolean | Prisma.Estate$likesArgs<ExtArgs>
-  comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   pendingTransfer?: boolean | Prisma.Estate$pendingTransferArgs<ExtArgs>
+  images?: boolean | Prisma.Estate$imagesArgs<ExtArgs>
+  likes?: boolean | Prisma.Estate$likesArgs<ExtArgs>
+  venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.EstateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EstateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type EstateIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
+  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Estate"
   objects: {
-    owner: Prisma.$UserPayload<ExtArgs>
+    comments: Prisma.$CommentPayload<ExtArgs>[]
     character: Prisma.$FfxivCharacterPayload<ExtArgs> | null
     flaggedBy: Prisma.$UserPayload<ExtArgs> | null
-    images: Prisma.$ImagePayload<ExtArgs>[]
-    venueDetails: Prisma.$VenueDetailsPayload<ExtArgs> | null
-    likes: Prisma.$LikePayload<ExtArgs>[]
-    comments: Prisma.$CommentPayload<ExtArgs>[]
+    owner: Prisma.$UserPayload<ExtArgs>
     pendingTransfer: Prisma.$EstatePendingTransferPayload<ExtArgs> | null
+    images: Prisma.$ImagePayload<ExtArgs>[]
+    likes: Prisma.$LikePayload<ExtArgs>[]
+    venueDetails: Prisma.$VenueDetailsPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2762,16 +2762,16 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     server: string
     ward: number | null
     plot: number | null
-    room: number | null
     tags: string[]
     likeCount: number
     commentCount: number
     ownerId: string
     characterId: string | null
-    flagged: boolean
+    room: number | null
     flagReason: string | null
-    flaggedById: string | null
+    flagged: boolean
     flaggedAt: Date | null
+    flaggedById: string | null
     moderationStatus: $Enums.ModerationStatus
     deletedAt: Date | null
   }, ExtArgs["result"]["estate"]>
@@ -3168,14 +3168,14 @@ readonly fields: EstateFieldRefs;
  */
 export interface Prisma__EstateClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  comments<T extends Prisma.Estate$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   character<T extends Prisma.Estate$characterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$characterArgs<ExtArgs>>): Prisma.Prisma__FfxivCharacterClient<runtime.Types.Result.GetResult<Prisma.$FfxivCharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   flaggedBy<T extends Prisma.Estate$flaggedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$flaggedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  images<T extends Prisma.Estate$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  venueDetails<T extends Prisma.Estate$venueDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$venueDetailsArgs<ExtArgs>>): Prisma.Prisma__VenueDetailsClient<runtime.Types.Result.GetResult<Prisma.$VenueDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  likes<T extends Prisma.Estate$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  comments<T extends Prisma.Estate$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   pendingTransfer<T extends Prisma.Estate$pendingTransferArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$pendingTransferArgs<ExtArgs>>): Prisma.Prisma__EstatePendingTransferClient<runtime.Types.Result.GetResult<Prisma.$EstatePendingTransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  images<T extends Prisma.Estate$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  likes<T extends Prisma.Estate$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  venueDetails<T extends Prisma.Estate$venueDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$venueDetailsArgs<ExtArgs>>): Prisma.Prisma__VenueDetailsClient<runtime.Types.Result.GetResult<Prisma.$VenueDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3219,16 +3219,16 @@ export interface EstateFieldRefs {
   readonly server: Prisma.FieldRef<"Estate", 'String'>
   readonly ward: Prisma.FieldRef<"Estate", 'Int'>
   readonly plot: Prisma.FieldRef<"Estate", 'Int'>
-  readonly room: Prisma.FieldRef<"Estate", 'Int'>
   readonly tags: Prisma.FieldRef<"Estate", 'String[]'>
   readonly likeCount: Prisma.FieldRef<"Estate", 'Int'>
   readonly commentCount: Prisma.FieldRef<"Estate", 'Int'>
   readonly ownerId: Prisma.FieldRef<"Estate", 'String'>
   readonly characterId: Prisma.FieldRef<"Estate", 'String'>
-  readonly flagged: Prisma.FieldRef<"Estate", 'Boolean'>
+  readonly room: Prisma.FieldRef<"Estate", 'Int'>
   readonly flagReason: Prisma.FieldRef<"Estate", 'String'>
-  readonly flaggedById: Prisma.FieldRef<"Estate", 'String'>
+  readonly flagged: Prisma.FieldRef<"Estate", 'Boolean'>
   readonly flaggedAt: Prisma.FieldRef<"Estate", 'DateTime'>
+  readonly flaggedById: Prisma.FieldRef<"Estate", 'String'>
   readonly moderationStatus: Prisma.FieldRef<"Estate", 'ModerationStatus'>
   readonly deletedAt: Prisma.FieldRef<"Estate", 'DateTime'>
 }
@@ -3627,6 +3627,30 @@ export type EstateDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Estate.comments
+ */
+export type Estate$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comment
+   */
+  select?: Prisma.CommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comment
+   */
+  omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
  * Estate.character
  */
 export type Estate$characterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3665,6 +3689,25 @@ export type Estate$flaggedByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Estate.pendingTransfer
+ */
+export type Estate$pendingTransferArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EstatePendingTransfer
+   */
+  select?: Prisma.EstatePendingTransferSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EstatePendingTransfer
+   */
+  omit?: Prisma.EstatePendingTransferOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstatePendingTransferInclude<ExtArgs> | null
+  where?: Prisma.EstatePendingTransferWhereInput
+}
+
+/**
  * Estate.images
  */
 export type Estate$imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3686,25 +3729,6 @@ export type Estate$imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ImageScalarFieldEnum | Prisma.ImageScalarFieldEnum[]
-}
-
-/**
- * Estate.venueDetails
- */
-export type Estate$venueDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the VenueDetails
-   */
-  select?: Prisma.VenueDetailsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the VenueDetails
-   */
-  omit?: Prisma.VenueDetailsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VenueDetailsInclude<ExtArgs> | null
-  where?: Prisma.VenueDetailsWhereInput
 }
 
 /**
@@ -3732,46 +3756,22 @@ export type Estate$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Estate.comments
+ * Estate.venueDetails
  */
-export type Estate$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Estate$venueDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Comment
+   * Select specific fields to fetch from the VenueDetails
    */
-  select?: Prisma.CommentSelect<ExtArgs> | null
+  select?: Prisma.VenueDetailsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Comment
+   * Omit specific fields from the VenueDetails
    */
-  omit?: Prisma.CommentOmit<ExtArgs> | null
+  omit?: Prisma.VenueDetailsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CommentInclude<ExtArgs> | null
-  where?: Prisma.CommentWhereInput
-  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
-  cursor?: Prisma.CommentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
-}
-
-/**
- * Estate.pendingTransfer
- */
-export type Estate$pendingTransferArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the EstatePendingTransfer
-   */
-  select?: Prisma.EstatePendingTransferSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the EstatePendingTransfer
-   */
-  omit?: Prisma.EstatePendingTransferOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EstatePendingTransferInclude<ExtArgs> | null
-  where?: Prisma.EstatePendingTransferWhereInput
+  include?: Prisma.VenueDetailsInclude<ExtArgs> | null
+  where?: Prisma.VenueDetailsWhereInput
 }
 
 /**

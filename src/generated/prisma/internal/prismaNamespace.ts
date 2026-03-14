@@ -1625,10 +1625,10 @@ export const FfxivCharacterScalarFieldEnum = {
   lodestoneId: 'lodestoneId',
   characterName: 'characterName',
   server: 'server',
-  dataCenter: 'dataCenter',
-  avatarUrl: 'avatarUrl',
   verified: 'verified',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  avatarUrl: 'avatarUrl',
+  dataCenter: 'dataCenter'
 } as const
 
 export type FfxivCharacterScalarFieldEnum = (typeof FfxivCharacterScalarFieldEnum)[keyof typeof FfxivCharacterScalarFieldEnum]
@@ -1649,16 +1649,16 @@ export const EstateScalarFieldEnum = {
   server: 'server',
   ward: 'ward',
   plot: 'plot',
-  room: 'room',
   tags: 'tags',
   likeCount: 'likeCount',
   commentCount: 'commentCount',
   ownerId: 'ownerId',
   characterId: 'characterId',
-  flagged: 'flagged',
+  room: 'room',
   flagReason: 'flagReason',
-  flaggedById: 'flaggedById',
+  flagged: 'flagged',
   flaggedAt: 'flaggedAt',
+  flaggedById: 'flaggedById',
   moderationStatus: 'moderationStatus',
   deletedAt: 'deletedAt'
 } as const
@@ -1735,10 +1735,10 @@ export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeo
 
 export const LodestoneVerificationScalarFieldEnum = {
   id: 'id',
-  characterId: 'characterId',
   code: 'code',
   expiresAt: 'expiresAt',
-  verified: 'verified'
+  verified: 'verified',
+  characterId: 'characterId'
 } as const
 
 export type LodestoneVerificationScalarFieldEnum = (typeof LodestoneVerificationScalarFieldEnum)[keyof typeof LodestoneVerificationScalarFieldEnum]

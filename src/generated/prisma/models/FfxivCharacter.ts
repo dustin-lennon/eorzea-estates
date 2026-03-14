@@ -30,10 +30,10 @@ export type FfxivCharacterMinAggregateOutputType = {
   lodestoneId: string | null
   characterName: string | null
   server: string | null
-  dataCenter: string | null
-  avatarUrl: string | null
   verified: boolean | null
   createdAt: Date | null
+  avatarUrl: string | null
+  dataCenter: string | null
 }
 
 export type FfxivCharacterMaxAggregateOutputType = {
@@ -42,10 +42,10 @@ export type FfxivCharacterMaxAggregateOutputType = {
   lodestoneId: string | null
   characterName: string | null
   server: string | null
-  dataCenter: string | null
-  avatarUrl: string | null
   verified: boolean | null
   createdAt: Date | null
+  avatarUrl: string | null
+  dataCenter: string | null
 }
 
 export type FfxivCharacterCountAggregateOutputType = {
@@ -54,10 +54,10 @@ export type FfxivCharacterCountAggregateOutputType = {
   lodestoneId: number
   characterName: number
   server: number
-  dataCenter: number
-  avatarUrl: number
   verified: number
   createdAt: number
+  avatarUrl: number
+  dataCenter: number
   _all: number
 }
 
@@ -68,10 +68,10 @@ export type FfxivCharacterMinAggregateInputType = {
   lodestoneId?: true
   characterName?: true
   server?: true
-  dataCenter?: true
-  avatarUrl?: true
   verified?: true
   createdAt?: true
+  avatarUrl?: true
+  dataCenter?: true
 }
 
 export type FfxivCharacterMaxAggregateInputType = {
@@ -80,10 +80,10 @@ export type FfxivCharacterMaxAggregateInputType = {
   lodestoneId?: true
   characterName?: true
   server?: true
-  dataCenter?: true
-  avatarUrl?: true
   verified?: true
   createdAt?: true
+  avatarUrl?: true
+  dataCenter?: true
 }
 
 export type FfxivCharacterCountAggregateInputType = {
@@ -92,10 +92,10 @@ export type FfxivCharacterCountAggregateInputType = {
   lodestoneId?: true
   characterName?: true
   server?: true
-  dataCenter?: true
-  avatarUrl?: true
   verified?: true
   createdAt?: true
+  avatarUrl?: true
+  dataCenter?: true
   _all?: true
 }
 
@@ -177,10 +177,10 @@ export type FfxivCharacterGroupByOutputType = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter: string
-  avatarUrl: string
   verified: boolean
   createdAt: Date
+  avatarUrl: string
+  dataCenter: string
   _count: FfxivCharacterCountAggregateOutputType | null
   _min: FfxivCharacterMinAggregateOutputType | null
   _max: FfxivCharacterMaxAggregateOutputType | null
@@ -210,12 +210,12 @@ export type FfxivCharacterWhereInput = {
   lodestoneId?: Prisma.StringFilter<"FfxivCharacter"> | string
   characterName?: Prisma.StringFilter<"FfxivCharacter"> | string
   server?: Prisma.StringFilter<"FfxivCharacter"> | string
-  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
-  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
   verified?: Prisma.BoolFilter<"FfxivCharacter"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FfxivCharacter"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
+  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
   estates?: Prisma.EstateListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   lodestoneVerification?: Prisma.XOR<Prisma.LodestoneVerificationNullableScalarRelationFilter, Prisma.LodestoneVerificationWhereInput> | null
   venueStaffLinks?: Prisma.VenueStaffListRelationFilter
 }
@@ -226,12 +226,12 @@ export type FfxivCharacterOrderByWithRelationInput = {
   lodestoneId?: Prisma.SortOrder
   characterName?: Prisma.SortOrder
   server?: Prisma.SortOrder
-  dataCenter?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  avatarUrl?: Prisma.SortOrder
+  dataCenter?: Prisma.SortOrder
   estates?: Prisma.EstateOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
   lodestoneVerification?: Prisma.LodestoneVerificationOrderByWithRelationInput
   venueStaffLinks?: Prisma.VenueStaffOrderByRelationAggregateInput
 }
@@ -246,12 +246,12 @@ export type FfxivCharacterWhereUniqueInput = Prisma.AtLeast<{
   lodestoneId?: Prisma.StringFilter<"FfxivCharacter"> | string
   characterName?: Prisma.StringFilter<"FfxivCharacter"> | string
   server?: Prisma.StringFilter<"FfxivCharacter"> | string
-  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
-  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
   verified?: Prisma.BoolFilter<"FfxivCharacter"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FfxivCharacter"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
+  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
   estates?: Prisma.EstateListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   lodestoneVerification?: Prisma.XOR<Prisma.LodestoneVerificationNullableScalarRelationFilter, Prisma.LodestoneVerificationWhereInput> | null
   venueStaffLinks?: Prisma.VenueStaffListRelationFilter
 }, "id" | "userId_lodestoneId">
@@ -262,10 +262,10 @@ export type FfxivCharacterOrderByWithAggregationInput = {
   lodestoneId?: Prisma.SortOrder
   characterName?: Prisma.SortOrder
   server?: Prisma.SortOrder
-  dataCenter?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
+  dataCenter?: Prisma.SortOrder
   _count?: Prisma.FfxivCharacterCountOrderByAggregateInput
   _max?: Prisma.FfxivCharacterMaxOrderByAggregateInput
   _min?: Prisma.FfxivCharacterMinOrderByAggregateInput
@@ -280,10 +280,10 @@ export type FfxivCharacterScalarWhereWithAggregatesInput = {
   lodestoneId?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
   characterName?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
   server?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
-  dataCenter?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
-  avatarUrl?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
   verified?: Prisma.BoolWithAggregatesFilter<"FfxivCharacter"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FfxivCharacter"> | Date | string
+  avatarUrl?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
+  dataCenter?: Prisma.StringWithAggregatesFilter<"FfxivCharacter"> | string
 }
 
 export type FfxivCharacterCreateInput = {
@@ -291,12 +291,12 @@ export type FfxivCharacterCreateInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCharactersInput
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateCreateNestedManyWithoutCharacterInput
+  user: Prisma.UserCreateNestedOneWithoutCharactersInput
   lodestoneVerification?: Prisma.LodestoneVerificationCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
 }
@@ -307,10 +307,10 @@ export type FfxivCharacterUncheckedCreateInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutCharacterInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
@@ -321,12 +321,12 @@ export type FfxivCharacterUpdateInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUpdateManyWithoutCharacterNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
 }
@@ -337,10 +337,10 @@ export type FfxivCharacterUncheckedUpdateInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUncheckedUpdateManyWithoutCharacterNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
@@ -352,10 +352,10 @@ export type FfxivCharacterCreateManyInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
 }
 
 export type FfxivCharacterUpdateManyMutationInput = {
@@ -363,10 +363,10 @@ export type FfxivCharacterUpdateManyMutationInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FfxivCharacterUncheckedUpdateManyInput = {
@@ -375,10 +375,10 @@ export type FfxivCharacterUncheckedUpdateManyInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FfxivCharacterListRelationFilter = {
@@ -402,10 +402,10 @@ export type FfxivCharacterCountOrderByAggregateInput = {
   lodestoneId?: Prisma.SortOrder
   characterName?: Prisma.SortOrder
   server?: Prisma.SortOrder
-  dataCenter?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
+  dataCenter?: Prisma.SortOrder
 }
 
 export type FfxivCharacterMaxOrderByAggregateInput = {
@@ -414,10 +414,10 @@ export type FfxivCharacterMaxOrderByAggregateInput = {
   lodestoneId?: Prisma.SortOrder
   characterName?: Prisma.SortOrder
   server?: Prisma.SortOrder
-  dataCenter?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
+  dataCenter?: Prisma.SortOrder
 }
 
 export type FfxivCharacterMinOrderByAggregateInput = {
@@ -426,10 +426,10 @@ export type FfxivCharacterMinOrderByAggregateInput = {
   lodestoneId?: Prisma.SortOrder
   characterName?: Prisma.SortOrder
   server?: Prisma.SortOrder
-  dataCenter?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
+  dataCenter?: Prisma.SortOrder
 }
 
 export type FfxivCharacterNullableScalarRelationFilter = {
@@ -539,10 +539,10 @@ export type FfxivCharacterCreateWithoutUserInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateCreateNestedManyWithoutCharacterInput
   lodestoneVerification?: Prisma.LodestoneVerificationCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
@@ -553,10 +553,10 @@ export type FfxivCharacterUncheckedCreateWithoutUserInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutCharacterInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
@@ -597,10 +597,10 @@ export type FfxivCharacterScalarWhereInput = {
   lodestoneId?: Prisma.StringFilter<"FfxivCharacter"> | string
   characterName?: Prisma.StringFilter<"FfxivCharacter"> | string
   server?: Prisma.StringFilter<"FfxivCharacter"> | string
-  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
-  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
   verified?: Prisma.BoolFilter<"FfxivCharacter"> | boolean
   createdAt?: Prisma.DateTimeFilter<"FfxivCharacter"> | Date | string
+  avatarUrl?: Prisma.StringFilter<"FfxivCharacter"> | string
+  dataCenter?: Prisma.StringFilter<"FfxivCharacter"> | string
 }
 
 export type FfxivCharacterCreateWithoutEstatesInput = {
@@ -608,10 +608,10 @@ export type FfxivCharacterCreateWithoutEstatesInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   user: Prisma.UserCreateNestedOneWithoutCharactersInput
   lodestoneVerification?: Prisma.LodestoneVerificationCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
@@ -623,10 +623,10 @@ export type FfxivCharacterUncheckedCreateWithoutEstatesInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedCreateNestedOneWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
 }
@@ -652,10 +652,10 @@ export type FfxivCharacterUpdateWithoutEstatesInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
@@ -667,10 +667,10 @@ export type FfxivCharacterUncheckedUpdateWithoutEstatesInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
 }
@@ -680,12 +680,12 @@ export type FfxivCharacterCreateWithoutVenueStaffLinksInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCharactersInput
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateCreateNestedManyWithoutCharacterInput
+  user: Prisma.UserCreateNestedOneWithoutCharactersInput
   lodestoneVerification?: Prisma.LodestoneVerificationCreateNestedOneWithoutCharacterInput
 }
 
@@ -695,10 +695,10 @@ export type FfxivCharacterUncheckedCreateWithoutVenueStaffLinksInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutCharacterInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedCreateNestedOneWithoutCharacterInput
 }
@@ -724,12 +724,12 @@ export type FfxivCharacterUpdateWithoutVenueStaffLinksInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUpdateManyWithoutCharacterNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUpdateOneWithoutCharacterNestedInput
 }
 
@@ -739,10 +739,10 @@ export type FfxivCharacterUncheckedUpdateWithoutVenueStaffLinksInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUncheckedUpdateManyWithoutCharacterNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
 }
@@ -752,12 +752,12 @@ export type FfxivCharacterCreateWithoutLodestoneVerificationInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCharactersInput
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateCreateNestedManyWithoutCharacterInput
+  user: Prisma.UserCreateNestedOneWithoutCharactersInput
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
 }
 
@@ -767,10 +767,10 @@ export type FfxivCharacterUncheckedCreateWithoutLodestoneVerificationInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutCharacterInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
 }
@@ -796,12 +796,12 @@ export type FfxivCharacterUpdateWithoutLodestoneVerificationInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUpdateManyWithoutCharacterNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
 }
 
@@ -811,10 +811,10 @@ export type FfxivCharacterUncheckedUpdateWithoutLodestoneVerificationInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUncheckedUpdateManyWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
 }
@@ -824,10 +824,10 @@ export type FfxivCharacterCreateManyUserInput = {
   lodestoneId: string
   characterName: string
   server: string
-  dataCenter?: string
-  avatarUrl?: string
   verified?: boolean
   createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
 }
 
 export type FfxivCharacterUpdateWithoutUserInput = {
@@ -835,10 +835,10 @@ export type FfxivCharacterUpdateWithoutUserInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUpdateManyWithoutCharacterNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
@@ -849,10 +849,10 @@ export type FfxivCharacterUncheckedUpdateWithoutUserInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
   estates?: Prisma.EstateUncheckedUpdateManyWithoutCharacterNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
@@ -863,10 +863,10 @@ export type FfxivCharacterUncheckedUpdateManyWithoutUserInput = {
   lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
   characterName?: Prisma.StringFieldUpdateOperationsInput | string
   server?: Prisma.StringFieldUpdateOperationsInput | string
-  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -915,12 +915,12 @@ export type FfxivCharacterSelect<ExtArgs extends runtime.Types.Extensions.Intern
   lodestoneId?: boolean
   characterName?: boolean
   server?: boolean
-  dataCenter?: boolean
-  avatarUrl?: boolean
   verified?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  avatarUrl?: boolean
+  dataCenter?: boolean
   estates?: boolean | Prisma.FfxivCharacter$estatesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lodestoneVerification?: boolean | Prisma.FfxivCharacter$lodestoneVerificationArgs<ExtArgs>
   venueStaffLinks?: boolean | Prisma.FfxivCharacter$venueStaffLinksArgs<ExtArgs>
   _count?: boolean | Prisma.FfxivCharacterCountOutputTypeDefaultArgs<ExtArgs>
@@ -932,10 +932,10 @@ export type FfxivCharacterSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   lodestoneId?: boolean
   characterName?: boolean
   server?: boolean
-  dataCenter?: boolean
-  avatarUrl?: boolean
   verified?: boolean
   createdAt?: boolean
+  avatarUrl?: boolean
+  dataCenter?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ffxivCharacter"]>
 
@@ -945,10 +945,10 @@ export type FfxivCharacterSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   lodestoneId?: boolean
   characterName?: boolean
   server?: boolean
-  dataCenter?: boolean
-  avatarUrl?: boolean
   verified?: boolean
   createdAt?: boolean
+  avatarUrl?: boolean
+  dataCenter?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ffxivCharacter"]>
 
@@ -958,16 +958,16 @@ export type FfxivCharacterSelectScalar = {
   lodestoneId?: boolean
   characterName?: boolean
   server?: boolean
-  dataCenter?: boolean
-  avatarUrl?: boolean
   verified?: boolean
   createdAt?: boolean
+  avatarUrl?: boolean
+  dataCenter?: boolean
 }
 
-export type FfxivCharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "lodestoneId" | "characterName" | "server" | "dataCenter" | "avatarUrl" | "verified" | "createdAt", ExtArgs["result"]["ffxivCharacter"]>
+export type FfxivCharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "lodestoneId" | "characterName" | "server" | "verified" | "createdAt" | "avatarUrl" | "dataCenter", ExtArgs["result"]["ffxivCharacter"]>
 export type FfxivCharacterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   estates?: boolean | Prisma.FfxivCharacter$estatesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   lodestoneVerification?: boolean | Prisma.FfxivCharacter$lodestoneVerificationArgs<ExtArgs>
   venueStaffLinks?: boolean | Prisma.FfxivCharacter$venueStaffLinksArgs<ExtArgs>
   _count?: boolean | Prisma.FfxivCharacterCountOutputTypeDefaultArgs<ExtArgs>
@@ -982,8 +982,8 @@ export type FfxivCharacterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type $FfxivCharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FfxivCharacter"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     estates: Prisma.$EstatePayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
     lodestoneVerification: Prisma.$LodestoneVerificationPayload<ExtArgs> | null
     venueStaffLinks: Prisma.$VenueStaffPayload<ExtArgs>[]
   }
@@ -993,10 +993,10 @@ export type $FfxivCharacterPayload<ExtArgs extends runtime.Types.Extensions.Inte
     lodestoneId: string
     characterName: string
     server: string
-    dataCenter: string
-    avatarUrl: string
     verified: boolean
     createdAt: Date
+    avatarUrl: string
+    dataCenter: string
   }, ExtArgs["result"]["ffxivCharacter"]>
   composites: {}
 }
@@ -1391,8 +1391,8 @@ readonly fields: FfxivCharacterFieldRefs;
  */
 export interface Prisma__FfxivCharacterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   estates<T extends Prisma.FfxivCharacter$estatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$estatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lodestoneVerification<T extends Prisma.FfxivCharacter$lodestoneVerificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$lodestoneVerificationArgs<ExtArgs>>): Prisma.Prisma__LodestoneVerificationClient<runtime.Types.Result.GetResult<Prisma.$LodestoneVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   venueStaffLinks<T extends Prisma.FfxivCharacter$venueStaffLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$venueStaffLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1429,10 +1429,10 @@ export interface FfxivCharacterFieldRefs {
   readonly lodestoneId: Prisma.FieldRef<"FfxivCharacter", 'String'>
   readonly characterName: Prisma.FieldRef<"FfxivCharacter", 'String'>
   readonly server: Prisma.FieldRef<"FfxivCharacter", 'String'>
-  readonly dataCenter: Prisma.FieldRef<"FfxivCharacter", 'String'>
-  readonly avatarUrl: Prisma.FieldRef<"FfxivCharacter", 'String'>
   readonly verified: Prisma.FieldRef<"FfxivCharacter", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"FfxivCharacter", 'DateTime'>
+  readonly avatarUrl: Prisma.FieldRef<"FfxivCharacter", 'String'>
+  readonly dataCenter: Prisma.FieldRef<"FfxivCharacter", 'String'>
 }
     
 

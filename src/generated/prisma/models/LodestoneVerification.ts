@@ -26,52 +26,52 @@ export type AggregateLodestoneVerification = {
 
 export type LodestoneVerificationMinAggregateOutputType = {
   id: string | null
-  characterId: string | null
   code: string | null
   expiresAt: Date | null
   verified: boolean | null
+  characterId: string | null
 }
 
 export type LodestoneVerificationMaxAggregateOutputType = {
   id: string | null
-  characterId: string | null
   code: string | null
   expiresAt: Date | null
   verified: boolean | null
+  characterId: string | null
 }
 
 export type LodestoneVerificationCountAggregateOutputType = {
   id: number
-  characterId: number
   code: number
   expiresAt: number
   verified: number
+  characterId: number
   _all: number
 }
 
 
 export type LodestoneVerificationMinAggregateInputType = {
   id?: true
-  characterId?: true
   code?: true
   expiresAt?: true
   verified?: true
+  characterId?: true
 }
 
 export type LodestoneVerificationMaxAggregateInputType = {
   id?: true
-  characterId?: true
   code?: true
   expiresAt?: true
   verified?: true
+  characterId?: true
 }
 
 export type LodestoneVerificationCountAggregateInputType = {
   id?: true
-  characterId?: true
   code?: true
   expiresAt?: true
   verified?: true
+  characterId?: true
   _all?: true
 }
 
@@ -149,10 +149,10 @@ export type LodestoneVerificationGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type LodestoneVerificationGroupByOutputType = {
   id: string
-  characterId: string
   code: string
   expiresAt: Date
   verified: boolean
+  characterId: string
   _count: LodestoneVerificationCountAggregateOutputType | null
   _min: LodestoneVerificationMinAggregateOutputType | null
   _max: LodestoneVerificationMaxAggregateOutputType | null
@@ -178,19 +178,19 @@ export type LodestoneVerificationWhereInput = {
   OR?: Prisma.LodestoneVerificationWhereInput[]
   NOT?: Prisma.LodestoneVerificationWhereInput | Prisma.LodestoneVerificationWhereInput[]
   id?: Prisma.StringFilter<"LodestoneVerification"> | string
-  characterId?: Prisma.StringFilter<"LodestoneVerification"> | string
   code?: Prisma.StringFilter<"LodestoneVerification"> | string
   expiresAt?: Prisma.DateTimeFilter<"LodestoneVerification"> | Date | string
   verified?: Prisma.BoolFilter<"LodestoneVerification"> | boolean
+  characterId?: Prisma.StringFilter<"LodestoneVerification"> | string
   character?: Prisma.XOR<Prisma.FfxivCharacterScalarRelationFilter, Prisma.FfxivCharacterWhereInput>
 }
 
 export type LodestoneVerificationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  characterId?: Prisma.SortOrder
   code?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   verified?: Prisma.SortOrder
+  characterId?: Prisma.SortOrder
   character?: Prisma.FfxivCharacterOrderByWithRelationInput
 }
 
@@ -208,10 +208,10 @@ export type LodestoneVerificationWhereUniqueInput = Prisma.AtLeast<{
 
 export type LodestoneVerificationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  characterId?: Prisma.SortOrder
   code?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   verified?: Prisma.SortOrder
+  characterId?: Prisma.SortOrder
   _count?: Prisma.LodestoneVerificationCountOrderByAggregateInput
   _max?: Prisma.LodestoneVerificationMaxOrderByAggregateInput
   _min?: Prisma.LodestoneVerificationMinOrderByAggregateInput
@@ -222,10 +222,10 @@ export type LodestoneVerificationScalarWhereWithAggregatesInput = {
   OR?: Prisma.LodestoneVerificationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LodestoneVerificationScalarWhereWithAggregatesInput | Prisma.LodestoneVerificationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"LodestoneVerification"> | string
-  characterId?: Prisma.StringWithAggregatesFilter<"LodestoneVerification"> | string
   code?: Prisma.StringWithAggregatesFilter<"LodestoneVerification"> | string
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"LodestoneVerification"> | Date | string
   verified?: Prisma.BoolWithAggregatesFilter<"LodestoneVerification"> | boolean
+  characterId?: Prisma.StringWithAggregatesFilter<"LodestoneVerification"> | string
 }
 
 export type LodestoneVerificationCreateInput = {
@@ -238,10 +238,10 @@ export type LodestoneVerificationCreateInput = {
 
 export type LodestoneVerificationUncheckedCreateInput = {
   id?: string
-  characterId: string
   code: string
   expiresAt: Date | string
   verified?: boolean
+  characterId: string
 }
 
 export type LodestoneVerificationUpdateInput = {
@@ -254,18 +254,18 @@ export type LodestoneVerificationUpdateInput = {
 
 export type LodestoneVerificationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  characterId?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  characterId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type LodestoneVerificationCreateManyInput = {
   id?: string
-  characterId: string
   code: string
   expiresAt: Date | string
   verified?: boolean
+  characterId: string
 }
 
 export type LodestoneVerificationUpdateManyMutationInput = {
@@ -277,10 +277,10 @@ export type LodestoneVerificationUpdateManyMutationInput = {
 
 export type LodestoneVerificationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  characterId?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  characterId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type LodestoneVerificationNullableScalarRelationFilter = {
@@ -290,26 +290,26 @@ export type LodestoneVerificationNullableScalarRelationFilter = {
 
 export type LodestoneVerificationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  characterId?: Prisma.SortOrder
   code?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   verified?: Prisma.SortOrder
+  characterId?: Prisma.SortOrder
 }
 
 export type LodestoneVerificationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  characterId?: Prisma.SortOrder
   code?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   verified?: Prisma.SortOrder
+  characterId?: Prisma.SortOrder
 }
 
 export type LodestoneVerificationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  characterId?: Prisma.SortOrder
   code?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   verified?: Prisma.SortOrder
+  characterId?: Prisma.SortOrder
 }
 
 export type LodestoneVerificationCreateNestedOneWithoutCharacterInput = {
@@ -392,40 +392,40 @@ export type LodestoneVerificationUncheckedUpdateWithoutCharacterInput = {
 
 export type LodestoneVerificationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  characterId?: boolean
   code?: boolean
   expiresAt?: boolean
   verified?: boolean
+  characterId?: boolean
   character?: boolean | Prisma.FfxivCharacterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lodestoneVerification"]>
 
 export type LodestoneVerificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  characterId?: boolean
   code?: boolean
   expiresAt?: boolean
   verified?: boolean
+  characterId?: boolean
   character?: boolean | Prisma.FfxivCharacterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lodestoneVerification"]>
 
 export type LodestoneVerificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  characterId?: boolean
   code?: boolean
   expiresAt?: boolean
   verified?: boolean
+  characterId?: boolean
   character?: boolean | Prisma.FfxivCharacterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lodestoneVerification"]>
 
 export type LodestoneVerificationSelectScalar = {
   id?: boolean
-  characterId?: boolean
   code?: boolean
   expiresAt?: boolean
   verified?: boolean
+  characterId?: boolean
 }
 
-export type LodestoneVerificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "characterId" | "code" | "expiresAt" | "verified", ExtArgs["result"]["lodestoneVerification"]>
+export type LodestoneVerificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "expiresAt" | "verified" | "characterId", ExtArgs["result"]["lodestoneVerification"]>
 export type LodestoneVerificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   character?: boolean | Prisma.FfxivCharacterDefaultArgs<ExtArgs>
 }
@@ -443,10 +443,10 @@ export type $LodestoneVerificationPayload<ExtArgs extends runtime.Types.Extensio
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    characterId: string
     code: string
     expiresAt: Date
     verified: boolean
+    characterId: string
   }, ExtArgs["result"]["lodestoneVerification"]>
   composites: {}
 }
@@ -872,10 +872,10 @@ export interface Prisma__LodestoneVerificationClient<T, Null = never, ExtArgs ex
  */
 export interface LodestoneVerificationFieldRefs {
   readonly id: Prisma.FieldRef<"LodestoneVerification", 'String'>
-  readonly characterId: Prisma.FieldRef<"LodestoneVerification", 'String'>
   readonly code: Prisma.FieldRef<"LodestoneVerification", 'String'>
   readonly expiresAt: Prisma.FieldRef<"LodestoneVerification", 'DateTime'>
   readonly verified: Prisma.FieldRef<"LodestoneVerification", 'Boolean'>
+  readonly characterId: Prisma.FieldRef<"LodestoneVerification", 'String'>
 }
     
 
