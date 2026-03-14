@@ -1,6 +1,7 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { getCharacterBio } from "@/lib/lodestone"
+import { maybeGrantPathfinder } from "@/lib/pathfinder"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -66,6 +67,8 @@ export async function POST(req: Request) {
       data: { verified: true },
     }),
   ])
+
+  await maybeGrantPathfinder(session.user.id)
 
   return NextResponse.json({ success: true, characterName: character.characterName })
 }

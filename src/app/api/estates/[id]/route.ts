@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { deleteEstateImage, moveEstateImage } from "@/lib/storage"
 import { estateFormSchema } from "@/lib/schemas"
+import { maybeGrantPathfinder } from "@/lib/pathfinder"
 import { NextResponse } from "next/server"
 
 const editEstateSchema = estateFormSchema.omit({ characterId: true })
@@ -125,6 +126,9 @@ export async function PATCH(
       data: { published: body.published },
       select: { id: true, published: true },
     })
+    if (body.published) {
+      await maybeGrantPathfinder(session.user.id)
+    }
     return NextResponse.json(updated)
   }
 
