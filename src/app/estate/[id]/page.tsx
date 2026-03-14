@@ -20,7 +20,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params
   const estate = await prisma.estate.findUnique({
-    where: { id, published: true },
+    where: { id, published: true, deletedAt: null },
     select: { name: true, description: true, images: { take: 1, select: { imageUrl: true } } },
   })
   if (!estate) return {}
@@ -41,7 +41,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
 
   const [estate, comments] = await Promise.all([
     prisma.estate.findUnique({
-      where: { id, published: true },
+      where: { id, published: true, deletedAt: null },
       include: {
         images: { orderBy: { order: "asc" } },
         owner: {
@@ -81,6 +81,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
             id: true,
             name: true,
             image: true,
+            role: true,
             characters: {
               where: { verified: true },
               select: { characterName: true },

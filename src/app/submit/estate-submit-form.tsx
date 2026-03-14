@@ -44,11 +44,14 @@ interface Character {
 
 interface Props {
   characters: Character[]
+  estateId?: string
+  defaultValues?: Partial<EstateFormInput>
 }
 
-export function EstateSubmitForm({ characters }: Props) {
+export function EstateSubmitForm({ characters, estateId, defaultValues }: Props) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const isEditing = !!estateId
 
   const form = useForm<EstateFormInput, unknown, EstateFormValues>({
     resolver: zodResolver(estateFormSchema),
@@ -62,6 +65,7 @@ export function EstateSubmitForm({ characters }: Props) {
       images: [],
       venueStaff: [],
       venueTimezone: "UTC",
+      ...defaultValues,
     },
   })
 
@@ -97,22 +101,22 @@ export function EstateSubmitForm({ characters }: Props) {
   async function onSubmit(values: EstateFormValues) {
     setIsSubmitting(true)
     try {
-      const res = await fetch("/api/estates", {
-        method: "POST",
+      const res = await fetch(isEditing ? `/api/estates/${estateId}` : "/api/estates", {
+        method: isEditing ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       })
 
       if (!res.ok) {
         const err = await res.json()
-        throw new Error(err.error?.message ?? "Submission failed")
+        throw new Error(err.error?.message ?? (isEditing ? "Update failed" : "Submission failed"))
       }
 
       const { id } = await res.json()
-      toast.success("Estate submitted successfully!")
-      router.push(`/estate/${id}`)
+      toast.success(isEditing ? "Estate updated!" : "Estate submitted successfully!")
+      router.push(`/estate/${isEditing ? estateId : id}`)
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Submission failed")
+      toast.error(err instanceof Error ? err.message : (isEditing ? "Update failed" : "Submission failed"))
     } finally {
       setIsSubmitting(false)
     }
@@ -126,34 +130,38 @@ export function EstateSubmitForm({ characters }: Props) {
           <CardTitle>Character *</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground mb-3">
-            Select the FFXIV character this estate belongs to. Housing limits are enforced per character.
-          </p>
-          <Select
-            value={form.watch("characterId")}
-            onValueChange={(v) => {
-              form.setValue("characterId", v, { shouldValidate: true })
-              const char = characters.find((c) => c.id === v)
-              const currentType = form.getValues("type")
-              const typeStillValid =
-                (currentType !== "FC_ESTATE" || (char?.isFcOwner ?? false)) &&
-                (currentType !== "FC_ROOM" || (char?.isFcMember ?? false))
-              if (!typeStillValid) form.setValue("type", "PRIVATE")
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select character" />
-            </SelectTrigger>
-            <SelectContent>
-              {characters.map((c) => (
-                <SelectItem key={c.id} value={c.id}>
-                  {c.characterName} <span className="text-muted-foreground">({c.server})</span>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {form.formState.errors.characterId && (
-            <p className="text-destructive text-sm mt-1">{form.formState.errors.characterId.message}</p>
+          {isEditing ? (
+            <p className="text-sm text-muted-foreground">
+              {characters.find((c) => c.id === form.watch("characterId"))?.characterName ?? "Unknown"}{" "}
+              <span className="opacity-60">
+                ({characters.find((c) => c.id === form.watch("characterId"))?.server ?? ""})
+              </span>
+              <span className="block mt-1 text-xs">Character cannot be changed after submission.</span>
+            </p>
+          ) : (
+            <>
+              <p className="text-sm text-muted-foreground mb-3">
+                Select the FFXIV character this estate belongs to. Housing limits are enforced per character.
+              </p>
+              <Select
+                value={form.watch("characterId")}
+                onValueChange={(v) => form.setValue("characterId", v, { shouldValidate: true })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select character" />
+                </SelectTrigger>
+                <SelectContent>
+                  {characters.map((c) => (
+                    <SelectItem key={c.id} value={c.id}>
+                      {c.characterName} <span className="text-muted-foreground">({c.server})</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {form.formState.errors.characterId && (
+                <p className="text-destructive text-sm mt-1">{form.formState.errors.characterId.message}</p>
+              )}
+            </>
           )}
         </CardContent>
       </Card>
@@ -167,6 +175,12 @@ export function EstateSubmitForm({ characters }: Props) {
           <ImageUpload
             value={form.watch("images") as UploadedImage[]}
             onChange={(imgs) => form.setValue("images", imgs, { shouldValidate: true })}
+            pathContext={{
+              characterId: form.watch("characterId"),
+              district: form.watch("district"),
+              ward: form.watch("ward"),
+              plot: form.watch("plot"),
+            }}
           />
           {form.formState.errors.images && (
             <p className="text-destructive text-sm mt-1">{form.formState.errors.images.message}</p>
@@ -276,6 +290,7 @@ export function EstateSubmitForm({ characters }: Props) {
                 max={30}
                 placeholder="1–30"
                 className="mt-1"
+                value={form.watch("ward") ?? ""}
                 onChange={(e) =>
                   form.setValue("ward", e.target.value ? parseInt(e.target.value) : undefined)
                 }
@@ -291,6 +306,7 @@ export function EstateSubmitForm({ characters }: Props) {
                   max={60}
                   placeholder="1–60"
                   className="mt-1"
+                  value={form.watch("plot") ?? ""}
                   onChange={(e) =>
                     form.setValue("plot", e.target.value ? parseInt(e.target.value) : undefined)
                   }
@@ -306,6 +322,7 @@ export function EstateSubmitForm({ characters }: Props) {
                   min={1}
                   placeholder="Room #"
                   className="mt-1"
+                  value={form.watch("room") ?? ""}
                   onChange={(e) =>
                     form.setValue("room", e.target.value ? parseInt(e.target.value) : undefined)
                   }
@@ -391,6 +408,7 @@ export function EstateSubmitForm({ characters }: Props) {
                     <Input
                       placeholder="e.g. 8pm–11pm or Closed"
                       className="max-w-xs"
+                      value={form.watch(`venueHours.${day.key}`) ?? ""}
                       onChange={(e) =>
                         form.setValue(`venueHours.${day.key}`, e.target.value || null)
                       }
@@ -472,7 +490,9 @@ export function EstateSubmitForm({ characters }: Props) {
       )}
 
       <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Submit Estate"}
+        {isSubmitting
+          ? isEditing ? "Saving..." : "Submitting..."
+          : isEditing ? "Save Changes" : "Submit Estate"}
       </Button>
     </form>
   )
