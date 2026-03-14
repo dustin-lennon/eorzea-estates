@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 
 export default function SettingsPage() {
@@ -16,6 +16,24 @@ export default function SettingsPage() {
           Per our Privacy Policy, you can request a copy of all personal data we hold on your account — including your profile, estates, characters, comments, and likes.
         </p>
         <DataExportButton />
+      </section>
+
+      <section className="bg-card rounded-xl p-6 mb-8">
+        <div className="flex items-center mb-6">
+          <ScrollText className="brand-link mr-3" />
+          <h2 className="text-lg font-semibold text-primary">About</h2>
+        </div>
+        <ul className="space-y-4">
+          <li>
+            <Link href="/changelog" className="flex items-center group justify-between hover:bg-accent rounded-lg px-3 py-2 transition">
+              <span className="flex items-center">
+                <ScrollText className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+                <span className="text-foreground">Changelog</span>
+              </span>
+              <ChevronRight className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+            </Link>
+          </li>
+        </ul>
       </section>
 
       <section className="bg-card rounded-xl p-6 mb-8">
