@@ -3,6 +3,44 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.9.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.9.0...v1.9.1) (2026-03-12)
+
+### 🐛 Bug Fixes
+
+* revert email logo to eorzea-estates-navbar.svg ([eb860e9](https://github.com/dustin-lennon/eorzea-estates/commit/eb860e994641442905e3ce39ca90a8c39e3eb618))
+
+## [1.9.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.8.0...v1.9.0) (2026-03-12)
+
+### ✨ Features
+
+* migrate image storage from Cloudinary to Supabase Storage ([6cdfffa](https://github.com/dustin-lennon/eorzea-estates/commit/6cdfffa1ff4e12f84e75bdf6f6029d4887545bea)), closes [#112](https://github.com/dustin-lennon/eorzea-estates/issues/112)
+* move estate images in storage when location changes on edit ([0f8d9c5](https://github.com/dustin-lennon/eorzea-estates/commit/0f8d9c54d26411ac583a0a1873bb0b8dd4302e97))
+
+### 🐛 Bug Fixes
+
+* bypass maintenance mode check for /images paths in root layout ([35d0917](https://github.com/dustin-lennon/eorzea-estates/commit/35d09178ed14360519b0f77773f762a795e37d0b)), closes [#114](https://github.com/dustin-lennon/eorzea-estates/issues/114)
+* correct prisma import path and use tsx runner in migration script ([7e2b95f](https://github.com/dustin-lennon/eorzea-estates/commit/7e2b95f1f2f303ea7a8dcd75e12eafa50441c15a))
+
+## [1.8.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.7.0...v1.8.0) (2026-03-12)
+
+### ✨ Features
+
+* add estate edit page for estate owners ([e321ba6](https://github.com/dustin-lennon/eorzea-estates/commit/e321ba6741dacfbac0d6d7ee3a12529ea377ccf8)), closes [#93](https://github.com/dustin-lennon/eorzea-estates/issues/93)
+* moderation emails, soft deletes, dispute email setting ([2280557](https://github.com/dustin-lennon/eorzea-estates/commit/2280557038ed0d0bdfcf737367922d17a42a2d75)), closes [#109](https://github.com/dustin-lennon/eorzea-estates/issues/109)
+
+### 🐛 Bug Fixes
+
+* clarify moderation action button labels ([6c1e79a](https://github.com/dustin-lennon/eorzea-estates/commit/6c1e79a16533af95532394b9f45029824291bcf4)), closes [#107](https://github.com/dustin-lennon/eorzea-estates/issues/107)
+* commit generated prisma client to resolve moderation page error ([c943517](https://github.com/dustin-lennon/eorzea-estates/commit/c943517c683f1b1032464f90d36d1cbac5551c92)), closes [#105](https://github.com/dustin-lennon/eorzea-estates/issues/105)
+* db maintenance mode not shown to first-time visitors ([aa37d7b](https://github.com/dustin-lennon/eorzea-estates/commit/aa37d7b91a2295612c36013aa9a02a6fef8ee4ed)), closes [#100](https://github.com/dustin-lennon/eorzea-estates/issues/100)
+* hide View button for unpublished estates on dashboard ([51e086f](https://github.com/dustin-lennon/eorzea-estates/commit/51e086f3250d0543058763137c247f0fbfcc6da0)), closes [#91](https://github.com/dustin-lennon/eorzea-estates/issues/91)
+* redirect was swallowed by try/catch in root layout ([25b238a](https://github.com/dustin-lennon/eorzea-estates/commit/25b238ab3f361be05dc036b50bf8d465cdb576ea))
+* region and data center filters not updating URL correctly ([67fca22](https://github.com/dustin-lennon/eorzea-estates/commit/67fca2231333eab4e8ba0b1ebbe81ee5357f6038)), closes [#92](https://github.com/dustin-lennon/eorzea-estates/issues/92)
+* resolve type error from session variable initialization ([ba53d94](https://github.com/dustin-lennon/eorzea-estates/commit/ba53d94095b00c92b3fa2750449a98b3adec5758))
+* run sync-develop after release workflow completes ([3926de2](https://github.com/dustin-lennon/eorzea-estates/commit/3926de2dc13edd790fc246f05f85df688b10e798))
+* use navbar logo image in moderation email header ([202d878](https://github.com/dustin-lennon/eorzea-estates/commit/202d878805cff9616d582a68dcdae2340f392d94))
+* use PNG logo in email header instead of SVG ([a4c5a70](https://github.com/dustin-lennon/eorzea-estates/commit/a4c5a7032c4dee65c9e1c42426fa685319f0bb93))
+
 ## [1.7.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.6.0...v1.7.0) (2026-03-11)
 
 ### ✨ Features

@@ -24,6 +24,7 @@ export async function GET(
           id: true,
           name: true,
           image: true,
+          role: true,
           characters: {
             where: { verified: true },
             select: { characterName: true },
@@ -66,6 +67,7 @@ export async function POST(
             id: true,
             name: true,
             image: true,
+            role: true,
             characters: {
               where: { verified: true },
               select: { characterName: true },

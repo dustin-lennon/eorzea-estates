@@ -10,7 +10,7 @@ async function FeaturedEstates() {
   let estates
   try {
     estates = await prisma.estate.findMany({
-      where: { published: true },
+      where: { published: true, deletedAt: null },
       orderBy: { likeCount: "desc" },
       take: 6,
       include: {
@@ -60,7 +60,7 @@ async function FeaturedEstates() {
               dataCenter={estate.dataCenter}
               tags={estate.tags}
               likeCount={estate.likeCount}
-              coverImage={estate.images[0]?.cloudinaryUrl}
+              coverImage={estate.images[0]?.imageUrl}
               ownerName={ownerName ?? null}
               lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}
@@ -76,11 +76,11 @@ async function StatsRow() {
   let total = 0, venues = 0, byType: unknown[] = []
   try {
     ;[total, venues, byType] = await Promise.all([
-      prisma.estate.count({ where: { published: true } }),
-      prisma.estate.count({ where: { published: true, type: "VENUE" } }),
+      prisma.estate.count({ where: { published: true, deletedAt: null } }),
+      prisma.estate.count({ where: { published: true, type: "VENUE", deletedAt: null } }),
       prisma.estate.groupBy({
         by: ["type"],
-        where: { published: true },
+        where: { published: true, deletedAt: null },
         _count: true,
       }),
     ])

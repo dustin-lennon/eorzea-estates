@@ -23,8 +23,8 @@ export async function POST(
     return NextResponse.json({ error: "Invalid request" }, { status: 400 })
   }
 
-  const estate = await prisma.estate.findUnique({
-    where: { id: estateId },
+  const estate = await prisma.estate.findFirst({
+    where: { id: estateId, deletedAt: null },
     select: { id: true, ownerId: true, flagged: true },
   })
 

@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { estateFormSchema } from "@/lib/schemas"
 import { getRegionByDataCenter } from "@/lib/ffxiv-data"
+import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { NextResponse } from "next/server"
 
 // Per-character housing limits (only one of each type allowed)
@@ -22,21 +23,41 @@ export async function POST(req: Request) {
 
   const data = parsed.data
 
-  // Verify the character belongs to this user and is verified
+  // Verify the character belongs to this user
   const character = await prisma.ffxivCharacter.findFirst({
-    where: { id: data.characterId, userId: session.user.id, verified: true },
+    where: { id: data.characterId, userId: session.user.id },
   })
   if (!character) {
     return NextResponse.json(
-      { error: "Character not found or not verified." },
+      { error: { message: "Character not found." } },
       { status: 400 }
     )
+  }
+
+  // Enforce FC estate type restrictions via Lodestone
+  if (data.type === "FC_ESTATE" || data.type === "FC_ROOM") {
+    const fcId = await getCharacterFCId(parseInt(character.lodestoneId)).catch(() => null)
+    if (!fcId) {
+      return NextResponse.json(
+        { error: { message: "Character is not a member of a Free Company." } },
+        { status: 403 }
+      )
+    }
+    if (data.type === "FC_ESTATE") {
+      const masterId = await getFCMasterLodestoneId(fcId).catch(() => null)
+      if (masterId !== character.lodestoneId) {
+        return NextResponse.json(
+          { error: { message: "Character is not the owner of a Free Company." } },
+          { status: 403 }
+        )
+      }
+    }
   }
 
   // Enforce per-character housing limits
   if ((SINGLE_LIMIT_TYPES as readonly string[]).includes(data.type)) {
     const existing = await prisma.estate.findFirst({
-      where: { characterId: data.characterId, type: data.type },
+      where: { characterId: data.characterId, type: data.type, deletedAt: null },
       select: { id: true },
     })
     if (existing) {
@@ -69,8 +90,8 @@ export async function POST(req: Request) {
       characterId: data.characterId,
       images: {
         create: data.images.map((img, i) => ({
-          cloudinaryUrl: img.url,
-          cloudinaryPublicId: img.publicId,
+          imageUrl: img.url,
+          storageKey: img.storageKey,
           order: i,
         })),
       },

@@ -46,13 +46,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/generated/prisma
+# /src/generated/prisma
 
 # Claude
 .claude/worktrees/
 .claude/settings.local.json
 
-# Misc
+# Supabase
+supabase/*
 prod.dump
+
+# Misc scripts
 sync_prod_to_develop.sh
-supabase/
