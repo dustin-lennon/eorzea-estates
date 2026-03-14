@@ -1,1 +1,1 @@
-export const PATHFINDER_LIMIT = 50
+export const PATHFINDER_LIMIT = 150
