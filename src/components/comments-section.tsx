@@ -9,6 +9,7 @@ import { BadgeCheck, Crown, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { PathfinderBadge } from "@/components/pathfinder-badge"
 
 interface Comment {
   id: string
@@ -19,6 +20,7 @@ interface Comment {
     name: string | null
     image: string | null
     role: string
+    pathfinder: boolean
     characters: { characterName: string }[]
   }
 }
@@ -100,6 +102,7 @@ export function CommentsSection({ estateId, initialComments, isLoggedIn }: Comme
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-1 text-sm font-medium">
+                    {comment.user.pathfinder && <PathfinderBadge size="sm" />}
                     {comment.user.role === "ADMIN" && (
                       <Crown className="h-3.5 w-3.5 text-yellow-500" />
                     )}

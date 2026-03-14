@@ -484,10 +484,6 @@ export type FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.FfxivCharacterScalarWhereInput | Prisma.FfxivCharacterScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type FfxivCharacterCreateNestedOneWithoutEstatesInput = {
   create?: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutEstatesInput>
   connectOrCreate?: Prisma.FfxivCharacterCreateOrConnectWithoutEstatesInput
