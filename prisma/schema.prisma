@@ -51,6 +51,7 @@ model User {
   discordUsername      String?
   discordId            String?               @unique
   role                 UserRole              @default(USER)
+  pathfinder           Boolean               @default(false)
   accounts             Account[]
   comments             Comment[]
   flaggedEstates       Estate[]              @relation("FlaggedByUser")

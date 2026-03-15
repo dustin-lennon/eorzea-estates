@@ -25,6 +25,7 @@ export async function GET(
           name: true,
           image: true,
           role: true,
+          pathfinder: true,
           characters: {
             where: { verified: true },
             select: { characterName: true },
@@ -68,6 +69,7 @@ export async function POST(
             name: true,
             image: true,
             role: true,
+            pathfinder: true,
             characters: {
               where: { verified: true },
               select: { characterName: true },

@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
+import { PathfinderBadge } from "@/components/pathfinder-badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BadgeCheck, Crown, Shield } from "lucide-react"
 
@@ -33,6 +34,7 @@ export default async function ProfilePage({ params }: PageProps) {
       name: true,
       image: true,
       role: true,
+      pathfinder: true,
       createdAt: true,
       characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
     },
@@ -65,6 +67,7 @@ export default async function ProfilePage({ params }: PageProps) {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{displayName}</h1>
+            {user.pathfinder && <PathfinderBadge size="md" />}
             {user.role === "ADMIN" && (
               <Crown className="h-5 w-5 text-yellow-500" aria-label="Admin" />
             )}

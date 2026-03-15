@@ -34,6 +34,7 @@ export type UserMinAggregateOutputType = {
   discordUsername: string | null
   discordId: string | null
   role: $Enums.UserRole | null
+  pathfinder: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -46,6 +47,7 @@ export type UserMaxAggregateOutputType = {
   discordUsername: string | null
   discordId: string | null
   role: $Enums.UserRole | null
+  pathfinder: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type UserCountAggregateOutputType = {
   discordUsername: number
   discordId: number
   role: number
+  pathfinder: number
   _all: number
 }
 
@@ -72,6 +75,7 @@ export type UserMinAggregateInputType = {
   discordUsername?: true
   discordId?: true
   role?: true
+  pathfinder?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -84,6 +88,7 @@ export type UserMaxAggregateInputType = {
   discordUsername?: true
   discordId?: true
   role?: true
+  pathfinder?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -96,6 +101,7 @@ export type UserCountAggregateInputType = {
   discordUsername?: true
   discordId?: true
   role?: true
+  pathfinder?: true
   _all?: true
 }
 
@@ -181,6 +187,7 @@ export type UserGroupByOutputType = {
   discordUsername: string | null
   discordId: string | null
   role: $Enums.UserRole
+  pathfinder: boolean
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -214,6 +221,7 @@ export type UserWhereInput = {
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   discordId?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  pathfinder?: Prisma.BoolFilter<"User"> | boolean
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -236,6 +244,7 @@ export type UserOrderByWithRelationInput = {
   discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
   discordId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  pathfinder?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   flaggedEstates?: Prisma.EstateOrderByRelationAggregateInput
@@ -261,6 +270,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  pathfinder?: Prisma.BoolFilter<"User"> | boolean
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -283,6 +293,7 @@ export type UserOrderByWithAggregationInput = {
   discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
   discordId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  pathfinder?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -301,6 +312,7 @@ export type UserScalarWhereWithAggregatesInput = {
   discordUsername?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   discordId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+  pathfinder?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -313,6 +325,7 @@ export type UserCreateInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -335,6 +348,7 @@ export type UserUncheckedCreateInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -357,6 +371,7 @@ export type UserUpdateInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -379,6 +394,7 @@ export type UserUncheckedUpdateInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -401,6 +417,7 @@ export type UserCreateManyInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -413,6 +430,7 @@ export type UserUpdateManyMutationInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -425,6 +443,7 @@ export type UserUncheckedUpdateManyInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserScalarRelationFilter = {
@@ -442,6 +461,7 @@ export type UserCountOrderByAggregateInput = {
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  pathfinder?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -454,6 +474,7 @@ export type UserMaxOrderByAggregateInput = {
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  pathfinder?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -466,6 +487,7 @@ export type UserMinOrderByAggregateInput = {
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  pathfinder?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -507,6 +529,10 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
   set?: $Enums.UserRole
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type UserCreateNestedOneWithoutCharactersInput = {
@@ -639,6 +665,7 @@ export type UserCreateWithoutAccountsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -660,6 +687,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -697,6 +725,7 @@ export type UserUpdateWithoutAccountsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -718,6 +747,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -739,6 +769,7 @@ export type UserCreateWithoutSessionsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -760,6 +791,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -797,6 +829,7 @@ export type UserUpdateWithoutSessionsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -818,6 +851,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -839,6 +873,7 @@ export type UserCreateWithoutCharactersInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -860,6 +895,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -897,6 +933,7 @@ export type UserUpdateWithoutCharactersInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -918,6 +955,7 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -939,6 +977,7 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -960,6 +999,7 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -986,6 +1026,7 @@ export type UserCreateWithoutEstatesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1007,6 +1048,7 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1044,6 +1086,7 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -1065,6 +1108,7 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1097,6 +1141,7 @@ export type UserUpdateWithoutEstatesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1118,6 +1163,7 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1139,6 +1185,7 @@ export type UserCreateWithoutVerificationReviewsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1160,6 +1207,7 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1197,6 +1245,7 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1218,6 +1267,7 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1239,6 +1289,7 @@ export type UserCreateWithoutVenueStaffInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1260,6 +1311,7 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1297,6 +1349,7 @@ export type UserUpdateWithoutVenueStaffInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1318,6 +1371,7 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1339,6 +1393,7 @@ export type UserCreateWithoutLikesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1360,6 +1415,7 @@ export type UserUncheckedCreateWithoutLikesInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1397,6 +1453,7 @@ export type UserUpdateWithoutLikesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1418,6 +1475,7 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1439,6 +1497,7 @@ export type UserCreateWithoutCommentsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -1460,6 +1519,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -1497,6 +1557,7 @@ export type UserUpdateWithoutCommentsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -1518,6 +1579,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1539,6 +1601,7 @@ export type UserCreateWithoutLegalPageEditsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1560,6 +1623,7 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   discordUsername?: string | null
   discordId?: string | null
   role?: $Enums.UserRole
+  pathfinder?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1597,6 +1661,7 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1618,6 +1683,7 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1751,6 +1817,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   discordUsername?: boolean
   discordId?: boolean
   role?: boolean
+  pathfinder?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   flaggedEstates?: boolean | Prisma.User$flaggedEstatesArgs<ExtArgs>
@@ -1774,6 +1841,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordUsername?: boolean
   discordId?: boolean
   role?: boolean
+  pathfinder?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1786,6 +1854,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   discordUsername?: boolean
   discordId?: boolean
   role?: boolean
+  pathfinder?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1798,9 +1867,10 @@ export type UserSelectScalar = {
   discordUsername?: boolean
   discordId?: boolean
   role?: boolean
+  pathfinder?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
@@ -1841,6 +1911,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     discordUsername: string | null
     discordId: string | null
     role: $Enums.UserRole
+    pathfinder: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2283,6 +2354,7 @@ export interface UserFieldRefs {
   readonly discordUsername: Prisma.FieldRef<"User", 'String'>
   readonly discordId: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
+  readonly pathfinder: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 

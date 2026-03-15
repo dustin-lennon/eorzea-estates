@@ -82,6 +82,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
             name: true,
             image: true,
             role: true,
+            pathfinder: true,
             characters: {
               where: { verified: true },
               select: { characterName: true },
