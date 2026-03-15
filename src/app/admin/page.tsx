@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma"
 import { Users, FileText, ShieldCheck, Flag } from "lucide-react"
 
 export default async function AdminDashboardPage() {
-  const [userCount, estateCount, moderatorCount, flaggedCount] = await Promise.all([
+  const [userCount, estateCount, moderatorCount, flaggedCount] = await prisma.$transaction([
     prisma.user.count(),
     prisma.estate.count(),
     prisma.user.count({ where: { role: "MODERATOR" } }),

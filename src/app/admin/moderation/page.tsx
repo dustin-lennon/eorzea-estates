@@ -21,7 +21,7 @@ export default async function ModerationPage({ searchParams }: PageProps) {
   const { tab } = await searchParams
   const activeTab = tab === "deleted" ? "deleted" : tab === "verification" ? "verification" : tab === "claims" ? "claims" : "flagged"
 
-  const [flaggedEstates, deletedEstates, verificationQueue, claimQueue] = await Promise.all([
+  const [flaggedEstates, deletedEstates, verificationQueue, claimQueue] = await prisma.$transaction([
     prisma.estate.findMany({
       where: { flagged: true, deletedAt: null },
       orderBy: { flaggedAt: "asc" },
