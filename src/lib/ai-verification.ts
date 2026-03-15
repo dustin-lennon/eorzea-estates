@@ -1,29 +1,29 @@
 import { generateText } from "ai"
 import { createAnthropic } from "@ai-sdk/anthropic"
+import { getVercelOidcToken } from "@vercel/functions/oidc"
 
-// Vercel AI Gateway authentication uses OIDC only (not API keys):
-//   - In production/preview on Vercel: VERCEL_OIDC_TOKEN is auto-provided
-//   - Locally: run `vercel env pull` to write VERCEL_OIDC_TOKEN to .env.local
-// The gateway handles BYOK (forwarding your Anthropic key), so we don't send ANTHROPIC_API_KEY
-// when routing through the gateway. The model name needs the "anthropic/" provider prefix.
-// @ai-sdk/anthropic appends /messages to baseURL, so we append /v1 to reach /v1/messages.
-function getAnthropic() {
+// Uses Vercel AI Gateway when VERCEL_AI_GATEWAY_URL is set.
+// OIDC token is fetched at runtime via getVercelOidcToken() — not an env var.
+// Falls back to direct Anthropic API (ANTHROPIC_API_KEY) if OIDC is unavailable.
+async function buildProvider(): Promise<{ model: ReturnType<ReturnType<typeof createAnthropic>> }> {
   const gatewayUrl = process.env.VERCEL_AI_GATEWAY_URL
-  if (!gatewayUrl) {
-    return createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+  if (gatewayUrl) {
+    try {
+      const token = await getVercelOidcToken()
+      const anthropic = createAnthropic({
+        baseURL: `${gatewayUrl}/v1`,
+        apiKey: "not-used",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      return { model: anthropic("anthropic/claude-opus-4-5") }
+    } catch {
+      // OIDC unavailable — fall through to direct API
+    }
   }
 
-  return createAnthropic({
-    baseURL: `${gatewayUrl}/v1`,
-    apiKey: "not-used", // provider key is managed by the gateway (BYOK)
-    headers: { Authorization: `Bearer ${process.env.VERCEL_OIDC_TOKEN ?? ""}` },
-  })
-}
-
-function getModel() {
-  return process.env.VERCEL_AI_GATEWAY_URL
-    ? `anthropic/claude-opus-4-5`
-    : `claude-opus-4-5`
+  const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+  return { model: anthropic("claude-opus-4-5") }
 }
 
 interface VerificationContext {
@@ -117,10 +117,10 @@ export async function analyzeVerificationScreenshot(
   imageUrl: string,
   ctx: VerificationContext
 ): Promise<VerificationResult> {
-  const anthropic = getAnthropic()
+  const { model } = await buildProvider()
 
   const { text } = await generateText({
-    model: anthropic(getModel()),
+    model,
     experimental_telemetry: {
       isEnabled: true,
       functionId: "verify-estate-screenshot",
