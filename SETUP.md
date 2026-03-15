@@ -135,7 +135,8 @@ CLOUDINARY_API_SECRET="your-api-secret"
 NEXTAUTH_URL="http://localhost:3000"
 
 # Sentry (optional — errors only captured in production)
-NEXT_PUBLIC_SENTRY_DSN="https://your-dsn@sentry.io/project-id"
+NEXT_PUBLIC_SENTRY_DSN="https://your-dsn@sentry.io/project-id"  # client-side
+SENTRY_DSN="https://your-dsn@sentry.io/project-id"               # server-side (same value)
 SENTRY_ORG="your-sentry-org-slug"
 SENTRY_PROJECT="your-sentry-project-slug"
 SENTRY_AUTH_TOKEN="your-sentry-auth-token"

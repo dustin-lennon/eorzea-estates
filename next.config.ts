@@ -28,8 +28,10 @@ export default withSentryConfig(nextConfig, {
   // Upload source maps only in CI/production builds; suppress output locally
   silent: !process.env.CI,
 
-  // Disable source map upload if auth token is not set
   authToken: process.env.SENTRY_AUTH_TOKEN,
+
+  // Proxy Sentry requests through the app to avoid ad blockers
+  tunnelRoute: "/monitoring",
 
   // Tree-shake Sentry debug code in production
   disableLogger: true,
