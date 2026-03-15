@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.15.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.14.0...v1.15.0) (2026-03-15)
+
+### ✨ Features
+
+* add Discord icon link to footer ([8a0c68b](https://github.com/dustin-lennon/eorzea-estates/commit/8a0c68b7d33dfd399fcab40807a5ce63530e7d35)), closes [#138](https://github.com/dustin-lennon/eorzea-estates/issues/138)
+
 ## [1.14.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.13.0...v1.14.0) (2026-03-15)
 
 ### ✨ Features
