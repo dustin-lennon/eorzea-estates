@@ -25,7 +25,7 @@ interface ImageUploadProps {
   pathContext?: ImagePathContext
 }
 
-export function ImageUpload({ value, onChange, maxImages = 10, pathContext }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, maxImages = 50, pathContext }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null)
