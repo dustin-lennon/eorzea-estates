@@ -66,7 +66,6 @@ export default async function ProfilePage({ params }: PageProps) {
         </Avatar>
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">{displayName}</h1>
             {user.pathfinder && <PathfinderBadge size="md" />}
             {user.role === "ADMIN" && (
               <Crown className="h-5 w-5 text-yellow-500" aria-label="Admin" />
@@ -77,6 +76,7 @@ export default async function ProfilePage({ params }: PageProps) {
             {isVerified && (
               <BadgeCheck className="h-5 w-5 text-blue-500" aria-label="Verified FFXIV Character" />
             )}
+            <h1 className="text-2xl font-bold">{displayName}</h1>
           </div>
 
           <p className="text-sm text-muted-foreground">{estates.length} estate{estates.length !== 1 ? "s" : ""}</p>
