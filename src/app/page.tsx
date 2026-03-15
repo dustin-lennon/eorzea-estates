@@ -4,7 +4,9 @@ import { Suspense } from "react"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
 import { Button } from "@/components/ui/button"
-import { Search, Star } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { DesignerBadge } from "@/components/designer-badge"
+import { Search, Star, Heart, Palette } from "lucide-react"
 
 async function FeaturedEstates() {
   let estates
@@ -65,6 +67,82 @@ async function FeaturedEstates() {
               lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}
             />
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+async function FeaturedDesigners() {
+  let designers
+  try {
+    const users = await prisma.user.findMany({
+      where: { designer: true },
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        characters: {
+          where: { verified: true },
+          select: { characterName: true },
+          take: 1,
+        },
+        estates: {
+          where: { published: true, deletedAt: null },
+          select: { likeCount: true },
+        },
+        _count: { select: { estates: { where: { published: true, deletedAt: null } } } },
+      },
+    })
+    designers = users
+      .map((u) => ({
+        ...u,
+        totalLikes: u.estates.reduce((sum, e) => sum + e.likeCount, 0),
+      }))
+      .sort((a, b) => b.totalLikes - a.totalLikes)
+      .slice(0, 6)
+  } catch {
+    return null
+  }
+
+  if (!designers || designers.length === 0) return null
+
+  return (
+    <section className="container mx-auto px-4 pb-16">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          <Palette className="h-5 w-5 text-purple-500" />
+          Featured Designers
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {designers.map((designer) => {
+          const displayName = designer.characters[0]?.characterName ?? designer.name
+          return (
+            <Link
+              key={designer.id}
+              href={`/profile/${designer.id}`}
+              className="rounded-xl border p-4 flex items-center gap-4 hover:bg-accent transition"
+            >
+              <Avatar className="h-12 w-12 shrink-0">
+                <AvatarImage src={designer.image ?? undefined} alt={displayName ?? ""} />
+                <AvatarFallback>{displayName?.charAt(0).toUpperCase() ?? "?"}</AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <DesignerBadge size="sm" />
+                  <span className="font-medium truncate">{displayName}</span>
+                </div>
+                <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                  <span>{designer._count.estates} estate{designer._count.estates !== 1 ? "s" : ""}</span>
+                  <span className="flex items-center gap-0.5">
+                    <Heart className="h-3 w-3" />
+                    {designer.totalLikes}
+                  </span>
+                </div>
+              </div>
+            </Link>
           )
         })}
       </div>
@@ -157,6 +235,21 @@ export default function HomePage() {
           }
         >
           <FeaturedEstates />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="container mx-auto px-4 pb-16">
+              <div className="h-8 w-56 bg-muted rounded animate-pulse mb-6" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-20 bg-muted rounded-xl animate-pulse" />
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <FeaturedDesigners />
         </Suspense>
       </div>
     </div>
