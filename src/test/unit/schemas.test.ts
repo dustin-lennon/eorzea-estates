@@ -34,8 +34,8 @@ describe("estateFormSchema", () => {
     expect(result.success).toBe(false)
   })
 
-  it("rejects more than 10 images", () => {
-    const images = Array.from({ length: 11 }, (_, i) => ({
+  it("rejects more than 50 images", () => {
+    const images = Array.from({ length: 51 }, (_, i) => ({
       url: `https://test.supabase.co/storage/v1/object/public/estate-images/test/img${i}.webp`,
       storageKey: `test/img${i}.webp`,
     }))
