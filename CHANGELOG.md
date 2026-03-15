@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.4...v1.16.5) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* correct FC room verification how-to image paths ([ecfee88](https://github.com/dustin-lennon/eorzea-estates/commit/ecfee881b085d1c831fc26c41d680d57caef2c89))
+
 ## [1.16.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.3...v1.16.4) (2026-03-15)
 
 ### 🐛 Bug Fixes
