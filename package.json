@@ -27,6 +27,7 @@
     "@prisma/client": "^7.4.2",
     "@supabase/supabase-js": "^2.99.1",
     "@uiw/react-md-editor": "^4.0.11",
+    "@vercel/functions": "^3.4.3",
     "@vercel/speed-insights": "^2.0.0",
     "@xivapi/nodestone": "^0.2.7",
     "ai": "^6.0.116",
