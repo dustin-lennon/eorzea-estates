@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.2...v1.16.3) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* use AI_GATEWAY_API_KEY for Vercel AI Gateway auth fallback ([6f7e87f](https://github.com/dustin-lennon/eorzea-estates/commit/6f7e87fa772577a017fedc1fa759152c21d18fb6))
+
 ## [1.16.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.1...v1.16.2) (2026-03-15)
 
 ### 🐛 Bug Fixes
