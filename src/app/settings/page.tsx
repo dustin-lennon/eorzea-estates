@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass, ShieldCheck } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 
@@ -81,6 +81,16 @@ export default function SettingsPage() {
             <div>
               <p className="font-medium text-sm">Admin</p>
               <p className="text-xs text-muted-foreground">Eorzea Estates team member</p>
+            </div>
+          </li>
+        </ul>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mt-6 mb-4">Estate Badges</p>
+        <ul className="divide-y divide-border">
+          <li className="flex items-center gap-4 py-4">
+            <ShieldCheck className="h-5 w-5 text-green-500 shrink-0" aria-hidden="true" />
+            <div>
+              <p className="font-medium text-sm">Ownership Verified</p>
+              <p className="text-xs text-muted-foreground">Estate ownership confirmed via screenshot review</p>
             </div>
           </li>
         </ul>
