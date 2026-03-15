@@ -114,7 +114,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
 
       const { id } = await res.json()
       toast.success(isEditing ? "Estate updated!" : "Estate submitted! Verify ownership from your dashboard to publish.")
-      router.push(isEditing ? `/estate/${estateId}` : "/dashboard")
+      router.push("/dashboard")
     } catch (err) {
       toast.error(err instanceof Error ? err.message : (isEditing ? "Update failed" : "Submission failed"))
     } finally {
