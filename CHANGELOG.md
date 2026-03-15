@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.13.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.12.0...v1.13.0) (2026-03-15)
+
+### ✨ Features
+
+* auto-grant Pathfinder badge when conditions are met ([8d85140](https://github.com/dustin-lennon/eorzea-estates/commit/8d85140624d6a9a236dfa45c5389667bad3c1a3c))
+* Pathfinder badge for beta testers ([#134](https://github.com/dustin-lennon/eorzea-estates/issues/134)) ([94ad4de](https://github.com/dustin-lennon/eorzea-estates/commit/94ad4deeaa7fcb993df674e89af1606609329ae5))
+
 ## [1.12.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.11.0...v1.12.0) (2026-03-14)
 
 ### ✨ Features
