@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
-import { estateFormSchema } from "@/lib/schemas"
+import { estateFormSchema, designerEstateFormSchema } from "@/lib/schemas"
 import { getRegionByDataCenter } from "@/lib/ffxiv-data"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { NextResponse } from "next/server"
@@ -15,6 +15,75 @@ export async function POST(req: Request) {
   }
 
   const body = await req.json()
+
+  // Designer submission path
+  if (body.designerSubmission) {
+    const dbUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { designer: true },
+    })
+    if (!dbUser?.designer) {
+      return NextResponse.json({ error: "Designer status required" }, { status: 403 })
+    }
+
+    const parsed = designerEstateFormSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
+    }
+
+    const data = parsed.data
+    const region = getRegionByDataCenter(data.dataCenter)
+    const isVenue = data.type === "VENUE"
+
+    const estate = await prisma.estate.create({
+      data: {
+        name: data.name,
+        description: data.description,
+        inspiration: data.inspiration ?? "",
+        type: data.type,
+        district: data.district ?? null,
+        region,
+        dataCenter: data.dataCenter,
+        server: data.server,
+        ward: data.ward ?? null,
+        plot: data.plot ?? null,
+        room: data.room ?? null,
+        tags: data.tags,
+        published: true,
+        ownerId: session.user.id,
+        designerId: session.user.id,
+        images: {
+          create: data.images.map((img, i) => ({
+            imageUrl: img.url,
+            storageKey: img.storageKey,
+            order: i,
+          })),
+        },
+        ...(isVenue && data.venueType
+          ? {
+              venueDetails: {
+                create: {
+                  venueType: data.venueType,
+                  timezone: data.venueTimezone ?? "UTC",
+                  hours: data.venueHours ?? {},
+                  staff: {
+                    create: (data.venueStaff ?? []).map((s) => ({
+                      characterName: s.characterName,
+                      role: s.role,
+                      linkedCharacterId: s.linkedCharacterId ?? null,
+                    })),
+                  },
+                },
+              },
+            }
+          : {}),
+      },
+      select: { id: true },
+    })
+
+    return NextResponse.json({ id: estate.id }, { status: 201 })
+  }
+
   const parsed = estateFormSchema.safeParse(body)
 
   if (!parsed.success) {

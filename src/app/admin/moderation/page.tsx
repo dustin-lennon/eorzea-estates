@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
 import { ModerationActions } from "./moderation-actions"
 import { VerificationActions } from "./verification-actions"
+import { ClaimActions } from "./claim-actions"
 
 interface PageProps {
   searchParams: Promise<{ tab?: string }>
@@ -18,9 +19,9 @@ export default async function ModerationPage({ searchParams }: PageProps) {
   }
 
   const { tab } = await searchParams
-  const activeTab = tab === "deleted" ? "deleted" : tab === "verification" ? "verification" : "flagged"
+  const activeTab = tab === "deleted" ? "deleted" : tab === "verification" ? "verification" : tab === "claims" ? "claims" : "flagged"
 
-  const [flaggedEstates, deletedEstates, verificationQueue] = await Promise.all([
+  const [flaggedEstates, deletedEstates, verificationQueue, claimQueue] = await Promise.all([
     prisma.estate.findMany({
       where: { flagged: true, deletedAt: null },
       orderBy: { flaggedAt: "asc" },
@@ -59,6 +60,15 @@ export default async function ModerationPage({ searchParams }: PageProps) {
             owner: { select: { name: true, discordUsername: true } },
           },
         },
+      },
+    }),
+    prisma.estateClaimRequest.findMany({
+      where: { status: "PENDING" },
+      orderBy: { submittedAt: "asc" },
+      include: {
+        estate: { select: { id: true, name: true, server: true, dataCenter: true } },
+        claimant: { select: { name: true, discordUsername: true } },
+        character: { select: { characterName: true, server: true } },
       },
     }),
   ])
@@ -114,6 +124,21 @@ export default async function ModerationPage({ searchParams }: PageProps) {
           {verificationQueue.length > 0 && (
             <span className="ml-2 text-xs bg-destructive text-destructive-foreground rounded-full px-1.5 py-0.5">
               {verificationQueue.length}
+            </span>
+          )}
+        </Link>
+        <Link
+          href="/admin/moderation?tab=claims"
+          className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+            activeTab === "claims"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Claims
+          {claimQueue.length > 0 && (
+            <span className="ml-2 text-xs bg-destructive text-destructive-foreground rounded-full px-1.5 py-0.5">
+              {claimQueue.length}
             </span>
           )}
         </Link>
@@ -324,6 +349,62 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                     </td>
                     <td className="px-4 py-3">
                       <VerificationActions verificationId={v.id} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      )}
+      {activeTab === "claims" && (
+        claimQueue.length === 0 ? (
+          <div className="border rounded-xl p-10 text-center text-muted-foreground">
+            No pending claims. All clear!
+          </div>
+        ) : (
+          <div className="border rounded-xl overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50 border-b">
+                <tr>
+                  <th className="text-left px-4 py-3 font-medium">Estate</th>
+                  <th className="text-left px-4 py-3 font-medium">Server</th>
+                  <th className="text-left px-4 py-3 font-medium">Claimant</th>
+                  <th className="text-left px-4 py-3 font-medium">Character</th>
+                  <th className="text-left px-4 py-3 font-medium">Screenshot</th>
+                  <th className="text-left px-4 py-3 font-medium">Submitted</th>
+                  <th className="text-left px-4 py-3 font-medium">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {claimQueue.map((claim) => (
+                  <tr key={claim.id} className="hover:bg-muted/30 transition-colors align-top">
+                    <td className="px-4 py-3">
+                      <Link href={`/estate/${claim.estate.id}`} className="font-medium hover:underline text-primary" target="_blank">
+                        {claim.estate.name}
+                      </Link>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {claim.estate.server} ({claim.estate.dataCenter})
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {claim.claimant.discordUsername ?? claim.claimant.name ?? "Unknown"}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {claim.character.characterName} · {claim.character.server}
+                    </td>
+                    <td className="px-4 py-3">
+                      <a href={claim.screenshotUrl} target="_blank" rel="noopener noreferrer" className="block">
+                        <div className="relative h-16 w-28 rounded overflow-hidden border hover:opacity-80 transition-opacity">
+                          <Image src={claim.screenshotUrl} alt="Claim screenshot" fill className="object-cover" unoptimized />
+                        </div>
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                      {new Date(claim.submittedAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-3">
+                      <ClaimActions claimId={claim.id} />
                     </td>
                   </tr>
                 ))}

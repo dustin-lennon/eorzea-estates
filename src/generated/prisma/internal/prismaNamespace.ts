@@ -400,6 +400,7 @@ export const ModelName = {
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
   SiteSettings: 'SiteSettings',
+  EstateClaimRequest: 'EstateClaimRequest',
   Collection: 'Collection',
   CollectionEstate: 'CollectionEstate'
 } as const
@@ -417,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "collection" | "collectionEstate"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1605,6 +1606,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EstateClaimRequest: {
+      payload: Prisma.$EstateClaimRequestPayload<ExtArgs>
+      fields: Prisma.EstateClaimRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EstateClaimRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EstateClaimRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.EstateClaimRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EstateClaimRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        findMany: {
+          args: Prisma.EstateClaimRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>[]
+        }
+        create: {
+          args: Prisma.EstateClaimRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        createMany: {
+          args: Prisma.EstateClaimRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EstateClaimRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.EstateClaimRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        update: {
+          args: Prisma.EstateClaimRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.EstateClaimRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EstateClaimRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EstateClaimRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.EstateClaimRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EstateClaimRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.EstateClaimRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEstateClaimRequest>
+        }
+        groupBy: {
+          args: Prisma.EstateClaimRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstateClaimRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EstateClaimRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EstateClaimRequestCountAggregateOutputType> | number
+        }
+      }
+    }
     Collection: {
       payload: Prisma.$CollectionPayload<ExtArgs>
       fields: Prisma.CollectionFieldRefs
@@ -1893,7 +1968,9 @@ export const EstateScalarFieldEnum = {
   moderationStatus: 'moderationStatus',
   deletedAt: 'deletedAt',
   verified: 'verified',
-  verificationStatus: 'verificationStatus'
+  verificationStatus: 'verificationStatus',
+  designerId: 'designerId',
+  claimedAt: 'claimedAt'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
@@ -2012,6 +2089,23 @@ export const SiteSettingsScalarFieldEnum = {
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const EstateClaimRequestScalarFieldEnum = {
+  id: 'id',
+  estateId: 'estateId',
+  claimantId: 'claimantId',
+  characterId: 'characterId',
+  screenshotUrl: 'screenshotUrl',
+  storageKey: 'storageKey',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  modReason: 'modReason'
+} as const
+
+export type EstateClaimRequestScalarFieldEnum = (typeof EstateClaimRequestScalarFieldEnum)[keyof typeof EstateClaimRequestScalarFieldEnum]
 
 
 export const CollectionScalarFieldEnum = {
@@ -2353,6 +2447,7 @@ export type GlobalOmitConfig = {
   lodestoneVerification?: Prisma.LodestoneVerificationOmit
   legalPage?: Prisma.LegalPageOmit
   siteSettings?: Prisma.SiteSettingsOmit
+  estateClaimRequest?: Prisma.EstateClaimRequestOmit
   collection?: Prisma.CollectionOmit
   collectionEstate?: Prisma.CollectionEstateOmit
 }

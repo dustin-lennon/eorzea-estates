@@ -5,18 +5,20 @@ import { useRouter } from "next/navigation"
 import { useForm, useFieldArray } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
-import { Plus, Trash2 } from "lucide-react"
+import { Plus, Trash2, Palette } from "lucide-react"
 
-import { estateFormSchema, type EstateFormValues } from "@/lib/schemas"
+import { estateFormSchema, designerEstateFormSchema, type EstateFormValues, type DesignerEstateFormValues } from "@/lib/schemas"
 import { z } from "zod"
 
 type EstateFormInput = z.input<typeof estateFormSchema>
+type DesignerEstateFormInput = z.input<typeof designerEstateFormSchema>
 import {
   ESTATE_TYPES,
   HOUSING_DISTRICTS,
   VENUE_TYPES,
   PREDEFINED_TAGS,
   DAYS_OF_WEEK,
+  REGIONS,
 } from "@/lib/ffxiv-data"
 import { ImageUpload, type UploadedImage } from "@/components/image-upload"
 
@@ -46,12 +48,15 @@ interface Props {
   characters: Character[]
   estateId?: string
   defaultValues?: Partial<EstateFormInput>
+  isDesigner?: boolean
 }
 
-export function EstateSubmitForm({ characters, estateId, defaultValues }: Props) {
+export function EstateSubmitForm({ characters, estateId, defaultValues, isDesigner = false }: Props) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [designerMode, setDesignerMode] = useState(false)
   const isEditing = !!estateId
+  const useDesignerFlow = isDesigner && designerMode && !isEditing
 
   const form = useForm<EstateFormInput, unknown, EstateFormValues>({
     resolver: zodResolver(estateFormSchema),
@@ -69,25 +74,57 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
     },
   })
 
+  const designerForm = useForm<DesignerEstateFormInput, unknown, DesignerEstateFormValues>({
+    resolver: zodResolver(designerEstateFormSchema),
+    defaultValues: {
+      dataCenter: "",
+      server: "",
+      name: "",
+      description: "",
+      inspiration: "",
+      type: "PRIVATE",
+      tags: [],
+      images: [],
+      venueStaff: [],
+      venueTimezone: "UTC",
+    },
+  })
+
+  // Standard form helpers
   const { fields: staffFields, append: appendStaff, remove: removeStaff } = useFieldArray({
     control: form.control,
+    name: "venueStaff",
+  })
+  const { fields: _dStaffFields, append: _dAppendStaff, remove: _dRemoveStaff } = useFieldArray({
+    control: designerForm.control,
     name: "venueStaff",
   })
 
   const watchedCharacterId = form.watch("characterId")
   const selectedCharacter = characters.find((c) => c.id === watchedCharacterId)
 
-  const availableTypes = ESTATE_TYPES.filter((t) => {
+  const stdAvailableTypes = ESTATE_TYPES.filter((t) => {
     if (t.value === "FC_ESTATE") return selectedCharacter?.isFcOwner ?? false
     if (t.value === "FC_ROOM") return selectedCharacter?.isFcMember ?? false
     return true
   })
+  const designerAvailableTypes = ESTATE_TYPES.filter(
+    (t) => t.value !== "FC_ESTATE" && t.value !== "FC_ROOM"
+  )
+  const availableTypes = useDesignerFlow ? designerAvailableTypes : stdAvailableTypes
 
-  const watchedType = form.watch("type")
+  const stdWatchedType = form.watch("type")
+  const dWatchedType = designerForm.watch("type")
+  const watchedType = useDesignerFlow ? dWatchedType : stdWatchedType
   const isVenue = watchedType === "VENUE"
   const isRoomType = watchedType === "APARTMENT" || watchedType === "FC_ROOM"
 
-  const watchedTags = form.watch("tags") ?? []
+  const stdWatchedTags = form.watch("tags") ?? []
+  const dWatchedTags = designerForm.watch("tags") ?? []
+  const watchedTags = useDesignerFlow ? dWatchedTags : stdWatchedTags
+
+  const watchedDC = designerForm.watch("dataCenter")
+  const dcServers = REGIONS.flatMap((r) => r.dataCenters).find((dc) => dc.name === watchedDC)?.servers ?? []
 
   function toggleTag(tag: string) {
     const current = form.getValues("tags") ?? []
@@ -95,6 +132,15 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
       form.setValue("tags", current.filter((t: string) => t !== tag))
     } else if (current.length < 10) {
       form.setValue("tags", [...current, tag])
+    }
+  }
+
+  function dToggleTag(tag: string) {
+    const current = designerForm.getValues("tags") ?? []
+    if (current.includes(tag)) {
+      designerForm.setValue("tags", current.filter((t: string) => t !== tag))
+    } else if (current.length < 10) {
+      designerForm.setValue("tags", [...current, tag])
     }
   }
 
@@ -112,7 +158,6 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
         throw new Error(err.error?.message ?? (isEditing ? "Update failed" : "Submission failed"))
       }
 
-      const { id } = await res.json()
       toast.success(isEditing ? "Estate updated!" : "Estate submitted! Verify ownership from your dashboard to publish.")
       router.push("/dashboard")
     } catch (err) {
@@ -122,7 +167,234 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
     }
   }
 
+  async function onDesignerSubmit(values: DesignerEstateFormValues) {
+    setIsSubmitting(true)
+    try {
+      const res = await fetch("/api/estates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, designerSubmission: true }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(err.error?.message ?? "Submission failed")
+      }
+
+      toast.success("Designer estate submitted and published!")
+      router.push("/dashboard")
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Submission failed")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (useDesignerFlow) {
+    return (
+      <div className="space-y-4">
+        {isDesigner && !isEditing && (
+          <div className="flex items-center gap-3 p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
+            <Palette className="h-5 w-5 text-purple-500 shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm font-medium">Submitting as Designer</p>
+              <p className="text-xs text-muted-foreground">No character required. This estate will publish immediately and can be claimed by the owner.</p>
+            </div>
+            <button type="button" onClick={() => setDesignerMode(false)} className="text-xs text-muted-foreground hover:text-foreground transition">Switch to standard</button>
+          </div>
+        )}
+        <form onSubmit={designerForm.handleSubmit(onDesignerSubmit)} className="space-y-8">
+          {/* Server */}
+          <Card>
+            <CardHeader><CardTitle>Server *</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">Select the data center and server this estate is on.</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Data Center</Label>
+                  <Select
+                    value={designerForm.watch("dataCenter")}
+                    onValueChange={(v) => { designerForm.setValue("dataCenter", v, { shouldValidate: true }); designerForm.setValue("server", "") }}
+                  >
+                    <SelectTrigger className="mt-1"><SelectValue placeholder="Select data center" /></SelectTrigger>
+                    <SelectContent>
+                      {REGIONS.flatMap((r) => r.dataCenters).map((dc) => (
+                        <SelectItem key={dc.name} value={dc.name}>{dc.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {designerForm.formState.errors.dataCenter && (
+                    <p className="text-destructive text-sm mt-1">{designerForm.formState.errors.dataCenter.message}</p>
+                  )}
+                </div>
+                <div>
+                  <Label>Server</Label>
+                  <Select
+                    value={designerForm.watch("server")}
+                    onValueChange={(v) => designerForm.setValue("server", v, { shouldValidate: true })}
+                    disabled={!watchedDC}
+                  >
+                    <SelectTrigger className="mt-1"><SelectValue placeholder="Select server" /></SelectTrigger>
+                    <SelectContent>
+                      {dcServers.map((s) => (
+                        <SelectItem key={s} value={s}>{s}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {designerForm.formState.errors.server && (
+                    <p className="text-destructive text-sm mt-1">{designerForm.formState.errors.server.message}</p>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Screenshots */}
+          <Card>
+            <CardHeader><CardTitle>Screenshots *</CardTitle></CardHeader>
+            <CardContent>
+              <ImageUpload
+                value={designerForm.watch("images") as UploadedImage[]}
+                onChange={(imgs) => designerForm.setValue("images", imgs, { shouldValidate: true })}
+                pathContext={{ characterId: "designer", district: designerForm.watch("district"), ward: designerForm.watch("ward"), plot: designerForm.watch("plot") }}
+              />
+              {designerForm.formState.errors.images && (
+                <p className="text-destructive text-sm mt-1">{designerForm.formState.errors.images.message}</p>
+              )}
+              <p className="text-xs text-muted-foreground mt-2">The first image will be used as the cover photo.</p>
+            </CardContent>
+          </Card>
+
+          {/* Basic Info */}
+          <Card>
+            <CardHeader><CardTitle>Basic Information</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="d-name">Estate Name *</Label>
+                <Input id="d-name" {...designerForm.register("name")} placeholder="e.g. The Wandering Hearth" className="mt-1" />
+                {designerForm.formState.errors.name && (
+                  <p className="text-destructive text-sm mt-1">{designerForm.formState.errors.name.message}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="d-type">Estate Type *</Label>
+                <Select
+                  value={designerForm.watch("type")}
+                  onValueChange={(v) => {
+                    designerForm.setValue("type", v as DesignerEstateFormValues["type"])
+                    if (v !== "APARTMENT" && v !== "FC_ROOM") designerForm.setValue("room", undefined)
+                    if (v === "APARTMENT") designerForm.setValue("plot", undefined)
+                  }}
+                >
+                  <SelectTrigger className="mt-1"><SelectValue placeholder="Select type" /></SelectTrigger>
+                  <SelectContent>
+                    {availableTypes.map((t) => (
+                      <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="d-description">Description *</Label>
+                <Textarea id="d-description" {...designerForm.register("description")} placeholder="Describe your estate…" rows={5} className="mt-1" />
+                {designerForm.formState.errors.description && (
+                  <p className="text-destructive text-sm mt-1">{designerForm.formState.errors.description.message}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="d-inspiration">Design Inspiration</Label>
+                <Textarea id="d-inspiration" {...designerForm.register("inspiration")} placeholder="What inspired your design?" rows={3} className="mt-1" />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Location */}
+          <Card>
+            <CardHeader><CardTitle>Location</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Housing District</Label>
+                <Select
+                  value={designerForm.watch("district") ?? ""}
+                  onValueChange={(v) => designerForm.setValue("district", v as DesignerEstateFormValues["district"])}
+                >
+                  <SelectTrigger className="mt-1"><SelectValue placeholder="Select district (optional)" /></SelectTrigger>
+                  <SelectContent>
+                    {HOUSING_DISTRICTS.map((d) => (
+                      <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="d-ward">Ward (optional)</Label>
+                  <Input id="d-ward" type="number" min={1} max={30} placeholder="1–30" className="mt-1"
+                    value={designerForm.watch("ward") ?? ""}
+                    onChange={(e) => designerForm.setValue("ward", e.target.value ? parseInt(e.target.value) : undefined)}
+                  />
+                </div>
+                {watchedType !== "APARTMENT" && (
+                  <div>
+                    <Label htmlFor="d-plot">Plot (optional)</Label>
+                    <Input id="d-plot" type="number" min={1} max={60} placeholder="1–60" className="mt-1"
+                      value={designerForm.watch("plot") ?? ""}
+                      onChange={(e) => designerForm.setValue("plot", e.target.value ? parseInt(e.target.value) : undefined)}
+                    />
+                  </div>
+                )}
+                {isRoomType && (
+                  <div>
+                    <Label htmlFor="d-room">Room Number (optional)</Label>
+                    <Input id="d-room" type="number" min={1} placeholder="Room #" className="mt-1"
+                      value={designerForm.watch("room") ?? ""}
+                      onChange={(e) => designerForm.setValue("room", e.target.value ? parseInt(e.target.value) : undefined)}
+                    />
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Tags */}
+          <Card>
+            <CardHeader><CardTitle>Tags</CardTitle></CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-3">Select up to 10 tags that describe your estate.</p>
+              <div className="flex flex-wrap gap-2">
+                {PREDEFINED_TAGS.map((tag) => {
+                  const selected = dWatchedTags.includes(tag)
+                  return (
+                    <button key={tag} type="button" onClick={() => dToggleTag(tag)}
+                      className={`px-3 py-1 rounded-full text-sm border transition-colors ${selected ? "bg-primary text-primary-foreground border-primary" : "bg-background border-border hover:border-primary/50"}`}
+                    >{tag}</button>
+                  )
+                })}
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">{dWatchedTags.length}/10 selected</p>
+            </CardContent>
+          </Card>
+
+          <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting…" : "Publish Designer Estate"}
+          </Button>
+        </form>
+      </div>
+    )
+  }
+
   return (
+    <div className="space-y-4">
+      {isDesigner && !isEditing && (
+        <div className="flex items-center gap-3 p-4 rounded-xl border border-border">
+          <Palette className="h-5 w-5 text-purple-500 shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm font-medium">Designer? Submit without a character</p>
+            <p className="text-xs text-muted-foreground">Publish your portfolio work directly. The estate owner can claim it later.</p>
+          </div>
+          <button type="button" onClick={() => setDesignerMode(true)} className="text-xs text-primary hover:underline transition">Use designer mode →</button>
+        </div>
+      )}
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       {/* Character */}
       <Card>
@@ -495,5 +767,6 @@ export function EstateSubmitForm({ characters, estateId, defaultValues }: Props)
           : isEditing ? "Save Changes" : "Submit Estate"}
       </Button>
     </form>
+    </div>
   )
 }
