@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 
@@ -98,6 +98,25 @@ export default function SettingsPage() {
           </li>
         </ul>
         <p className="text-xs text-muted-foreground mt-4 px-3">Found a bug? Have a suggestion? We&apos;d love to hear from you!</p>
+      </section>
+
+      <section className="bg-card rounded-xl p-6 mb-8">
+        <div className="flex items-center mb-4">
+          <Heart className="text-rose-500 mr-3 h-5 w-5 fill-rose-500" />
+          <h2 className="text-lg font-semibold text-primary">Support Eorzea Estates</h2>
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">
+          Eorzea Estates is built with love for the FFXIV community. If you enjoy the site and find it useful, consider buying me a coffee ☕ — it helps keep the servers running and the lights on!
+        </p>
+        <a
+          href="https://ko-fi.com/caspiannightworth"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full rounded-lg border border-rose-500/50 px-4 py-2.5 text-sm font-medium text-rose-500 hover:bg-rose-500/10 transition"
+        >
+          <Heart className="h-4 w-4 fill-rose-500" />
+          Buy Me a Coffee on Ko-fi
+        </a>
       </section>
 
       <section className="bg-card rounded-xl p-6 border border-destructive/40">
