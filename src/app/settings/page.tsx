@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 
@@ -33,6 +33,55 @@ export default function SettingsPage() {
               </span>
               <ChevronRight className="mr-3 text-muted-foreground group-hover:text-primary transition" />
             </Link>
+          </li>
+        </ul>
+      </section>
+
+      <section className="bg-card rounded-xl p-6 mb-8">
+        <div className="flex items-center mb-6">
+          <HelpCircle className="brand-link mr-3" />
+          <h2 className="text-lg font-semibold text-primary">Icon Guide</h2>
+        </div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Profile Badges</p>
+        <ul className="divide-y divide-border">
+          <li className="flex items-center gap-4 py-4">
+            <span className="shrink-0">
+              <svg width="0" height="0" className="absolute">
+                <defs>
+                  <linearGradient id="ig-pf-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#fbbf24" />
+                    <stop offset="50%" stopColor="#f59e0b" />
+                    <stop offset="100%" stopColor="#d97706" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <Compass className="h-5 w-5" style={{ stroke: "url(#ig-pf-gradient)" }} aria-hidden="true" />
+            </span>
+            <div>
+              <p className="font-medium text-sm">Pathfinder</p>
+              <p className="text-xs text-muted-foreground">One of the first 150 Pathfinders to explore Eorzea Estates</p>
+            </div>
+          </li>
+          <li className="flex items-center gap-4 py-4">
+            <BadgeCheck className="h-5 w-5 text-blue-500 shrink-0" aria-hidden="true" />
+            <div>
+              <p className="font-medium text-sm">Verified</p>
+              <p className="text-xs text-muted-foreground">FFXIV character verified via Lodestone</p>
+            </div>
+          </li>
+          <li className="flex items-center gap-4 py-4">
+            <Shield className="h-5 w-5 text-blue-500 shrink-0" aria-hidden="true" />
+            <div>
+              <p className="font-medium text-sm">Moderator</p>
+              <p className="text-xs text-muted-foreground">Eorzea Estates community moderator</p>
+            </div>
+          </li>
+          <li className="flex items-center gap-4 py-4">
+            <Crown className="h-5 w-5 text-yellow-500 shrink-0" aria-hidden="true" />
+            <div>
+              <p className="font-medium text-sm">Admin</p>
+              <p className="text-xs text-muted-foreground">Eorzea Estates team member</p>
+            </div>
           </li>
         </ul>
       </section>
