@@ -3,6 +3,21 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.18.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.17.0...v1.18.0) (2026-03-15)
+
+### ✨ Features
+
+* add admin sentry test page for verifying error capture ([ec9703b](https://github.com/dustin-lennon/eorzea-estates/commit/ec9703b341d75b1c9a597f9eb7f742c7c445ad5b))
+* add designer attribution conflict resolution and profile nav link ([1e8d051](https://github.com/dustin-lennon/eorzea-estates/commit/1e8d051fea4407998db1056684b6725f38cf9878))
+* add designer showcase features ([7620094](https://github.com/dustin-lennon/eorzea-estates/commit/762009488173feebdd2c2895775173a01a3cd331)), closes [#164](https://github.com/dustin-lennon/eorzea-estates/issues/164)
+* designer-submitted estates with owner claim flow ([7b82140](https://github.com/dustin-lennon/eorzea-estates/commit/7b8214036fd96521c2b59fcc4f1eae1237207956)), closes [#166](https://github.com/dustin-lennon/eorzea-estates/issues/166)
+* integrate Sentry for error monitoring and logging ([63f4042](https://github.com/dustin-lennon/eorzea-estates/commit/63f4042af083abc74fd0096dffeffe7749f50a10)), closes [#168](https://github.com/dustin-lennon/eorzea-estates/issues/168)
+
+### 🐛 Bug Fixes
+
+* correct Sentry Next.js App Router setup ([e1983ab](https://github.com/dustin-lennon/eorzea-estates/commit/e1983ab2c5fe365df7b782255ada84143b505983))
+* make designer flag self-service via settings page ([891909e](https://github.com/dustin-lennon/eorzea-estates/commit/891909e66afb5f2cc7642e7b8fcc35fabae4f8fa))
+
 ## [1.17.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.6...v1.17.0) (2026-03-15)
 
 ### ✨ Features
