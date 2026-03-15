@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.6](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.5...v1.16.6) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* remove redundant verified text and move profile badges left of name ([b489887](https://github.com/dustin-lennon/eorzea-estates/commit/b4898877d55e119890e934a34a153d5a69640677))
+
 ## [1.16.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.4...v1.16.5) (2026-03-15)
 
 ### 🐛 Bug Fixes
