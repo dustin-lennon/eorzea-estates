@@ -151,6 +151,7 @@ export default async function ProfilePage({ params }: PageProps) {
               ownerName={displayName}
               lodestoneVerified={isVerified}
               venueType={pinnedEstate.venueDetails?.venueType ?? null}
+              updatedAt={pinnedEstate.updatedAt}
             />
           </div>
         </div>
@@ -175,6 +176,7 @@ export default async function ProfilePage({ params }: PageProps) {
               ownerName={displayName}
               lodestoneVerified={isVerified}
               venueType={estate.venueDetails?.venueType ?? null}
+              updatedAt={estate.updatedAt}
             />
           ))}
         </div>
