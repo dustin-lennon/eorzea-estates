@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.0...v1.16.1) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* redirect to dashboard after editing an estate ([986b0e7](https://github.com/dustin-lennon/eorzea-estates/commit/986b0e7033dea4fa6fc6281a64ad98a46d23074f)), closes [#144](https://github.com/dustin-lennon/eorzea-estates/issues/144)
+
 ## [1.16.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.15.0...v1.16.0) (2026-03-15)
 
 ### ✨ Features
