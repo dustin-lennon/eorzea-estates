@@ -166,9 +166,6 @@ export default async function EstateDetailPage({ params }: PageProps) {
           )}
           {ownerDisplayName}
         </Link>
-        {ownerIsVerified && (
-          <span className="text-xs text-muted-foreground">(verified character)</span>
-        )}
       </div>
 
       <Separator className="my-6" />
