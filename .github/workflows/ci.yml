@@ -115,6 +115,10 @@ jobs:
       CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME || 'placeholder' }}
       CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY || 'placeholder' }}
       CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET || 'placeholder' }}
+      NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN || '' }}
+      SENTRY_ORG: ${{ secrets.SENTRY_ORG || '' }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT || '' }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN || '' }}
       AUTH_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v4
