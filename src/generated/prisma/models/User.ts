@@ -274,6 +274,9 @@ export type UserWhereInput = {
   venueStaff?: Prisma.VenueStaffListRelationFilter
   verificationReviews?: Prisma.EstateVerificationListRelationFilter
   pinnedEstate?: Prisma.XOR<Prisma.EstateNullableScalarRelationFilter, Prisma.EstateWhereInput> | null
+  designedEstates?: Prisma.EstateListRelationFilter
+  claimRequests?: Prisma.EstateClaimRequestListRelationFilter
+  claimReviews?: Prisma.EstateClaimRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -304,6 +307,9 @@ export type UserOrderByWithRelationInput = {
   venueStaff?: Prisma.VenueStaffOrderByRelationAggregateInput
   verificationReviews?: Prisma.EstateVerificationOrderByRelationAggregateInput
   pinnedEstate?: Prisma.EstateOrderByWithRelationInput
+  designedEstates?: Prisma.EstateOrderByRelationAggregateInput
+  claimRequests?: Prisma.EstateClaimRequestOrderByRelationAggregateInput
+  claimReviews?: Prisma.EstateClaimRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -337,6 +343,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   venueStaff?: Prisma.VenueStaffListRelationFilter
   verificationReviews?: Prisma.EstateVerificationListRelationFilter
   pinnedEstate?: Prisma.XOR<Prisma.EstateNullableScalarRelationFilter, Prisma.EstateWhereInput> | null
+  designedEstates?: Prisma.EstateListRelationFilter
+  claimRequests?: Prisma.EstateClaimRequestListRelationFilter
+  claimReviews?: Prisma.EstateClaimRequestListRelationFilter
 }, "id" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -408,6 +417,9 @@ export type UserCreateInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -437,6 +449,9 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -466,6 +481,9 @@ export type UserUpdateInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -495,6 +513,9 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -690,6 +711,12 @@ export type UserCreateNestedOneWithoutEstatesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedOneWithoutDesignedEstatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDesignedEstatesInput, Prisma.UserUncheckedCreateWithoutDesignedEstatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDesignedEstatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserCreateNestedManyWithoutPinnedEstateInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPinnedEstateInput, Prisma.UserUncheckedCreateWithoutPinnedEstateInput> | Prisma.UserCreateWithoutPinnedEstateInput[] | Prisma.UserUncheckedCreateWithoutPinnedEstateInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPinnedEstateInput | Prisma.UserCreateOrConnectWithoutPinnedEstateInput[]
@@ -720,6 +747,16 @@ export type UserUpdateOneRequiredWithoutEstatesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutEstatesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEstatesInput, Prisma.UserUpdateWithoutEstatesInput>, Prisma.UserUncheckedUpdateWithoutEstatesInput>
+}
+
+export type UserUpdateOneWithoutDesignedEstatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDesignedEstatesInput, Prisma.UserUncheckedCreateWithoutDesignedEstatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDesignedEstatesInput
+  upsert?: Prisma.UserUpsertWithoutDesignedEstatesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDesignedEstatesInput, Prisma.UserUpdateWithoutDesignedEstatesInput>, Prisma.UserUncheckedUpdateWithoutDesignedEstatesInput>
 }
 
 export type UserUpdateManyWithoutPinnedEstateNestedInput = {
@@ -826,6 +863,36 @@ export type UserUpdateOneWithoutLegalPageEditsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLegalPageEditsInput, Prisma.UserUpdateWithoutLegalPageEditsInput>, Prisma.UserUncheckedUpdateWithoutLegalPageEditsInput>
 }
 
+export type UserCreateNestedOneWithoutClaimRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClaimRequestsInput, Prisma.UserUncheckedCreateWithoutClaimRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClaimRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutClaimReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClaimReviewsInput, Prisma.UserUncheckedCreateWithoutClaimReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClaimReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutClaimRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClaimRequestsInput, Prisma.UserUncheckedCreateWithoutClaimRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClaimRequestsInput
+  upsert?: Prisma.UserUpsertWithoutClaimRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutClaimRequestsInput, Prisma.UserUpdateWithoutClaimRequestsInput>, Prisma.UserUncheckedUpdateWithoutClaimRequestsInput>
+}
+
+export type UserUpdateOneWithoutClaimReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClaimReviewsInput, Prisma.UserUncheckedCreateWithoutClaimReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClaimReviewsInput
+  upsert?: Prisma.UserUpsertWithoutClaimReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutClaimReviewsInput, Prisma.UserUpdateWithoutClaimReviewsInput>, Prisma.UserUncheckedUpdateWithoutClaimReviewsInput>
+}
+
 export type UserCreateNestedOneWithoutCollectionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCollectionsInput, Prisma.UserUncheckedCreateWithoutCollectionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCollectionsInput
@@ -866,6 +933,9 @@ export type UserCreateWithoutAccountsInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -894,6 +964,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -938,6 +1011,9 @@ export type UserUpdateWithoutAccountsInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -966,6 +1042,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -994,6 +1073,9 @@ export type UserCreateWithoutSessionsInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1022,6 +1104,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1066,6 +1151,9 @@ export type UserUpdateWithoutSessionsInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1094,6 +1182,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -1122,6 +1213,9 @@ export type UserCreateWithoutCharactersInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -1150,6 +1244,9 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -1194,6 +1291,9 @@ export type UserUpdateWithoutCharactersInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1222,6 +1322,9 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutFlaggedEstatesInput = {
@@ -1250,6 +1353,9 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
@@ -1278,6 +1384,9 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
@@ -1311,6 +1420,9 @@ export type UserCreateWithoutEstatesInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutEstatesInput = {
@@ -1339,11 +1451,81 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutEstatesInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutEstatesInput, Prisma.UserUncheckedCreateWithoutEstatesInput>
+}
+
+export type UserCreateWithoutDesignedEstatesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutDesignedEstatesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutDesignedEstatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDesignedEstatesInput, Prisma.UserUncheckedCreateWithoutDesignedEstatesInput>
 }
 
 export type UserCreateWithoutPinnedEstateInput = {
@@ -1372,6 +1554,9 @@ export type UserCreateWithoutPinnedEstateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutPinnedEstateInput = {
@@ -1400,6 +1585,9 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutPinnedEstateInput = {
@@ -1449,6 +1637,9 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
@@ -1477,6 +1668,9 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutEstatesInput = {
@@ -1516,6 +1710,9 @@ export type UserUpdateWithoutEstatesInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEstatesInput = {
@@ -1544,6 +1741,82 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutDesignedEstatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDesignedEstatesInput, Prisma.UserUncheckedUpdateWithoutDesignedEstatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDesignedEstatesInput, Prisma.UserUncheckedCreateWithoutDesignedEstatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDesignedEstatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDesignedEstatesInput, Prisma.UserUncheckedUpdateWithoutDesignedEstatesInput>
+}
+
+export type UserUpdateWithoutDesignedEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutPinnedEstateInput = {
@@ -1609,6 +1882,9 @@ export type UserCreateWithoutVerificationReviewsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutVerificationReviewsInput = {
@@ -1637,6 +1913,9 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutVerificationReviewsInput = {
@@ -1681,6 +1960,9 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
@@ -1709,6 +1991,9 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutVenueStaffInput = {
@@ -1737,6 +2022,9 @@ export type UserCreateWithoutVenueStaffInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutVenueStaffInput = {
@@ -1765,6 +2053,9 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutVenueStaffInput = {
@@ -1809,6 +2100,9 @@ export type UserUpdateWithoutVenueStaffInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVenueStaffInput = {
@@ -1837,6 +2131,9 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutLikesInput = {
@@ -1865,6 +2162,9 @@ export type UserCreateWithoutLikesInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutLikesInput = {
@@ -1893,6 +2193,9 @@ export type UserUncheckedCreateWithoutLikesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutLikesInput = {
@@ -1937,6 +2240,9 @@ export type UserUpdateWithoutLikesInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLikesInput = {
@@ -1965,6 +2271,9 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -1993,6 +2302,9 @@ export type UserCreateWithoutCommentsInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -2021,6 +2333,9 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2065,6 +2380,9 @@ export type UserUpdateWithoutCommentsInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2093,6 +2411,9 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutLegalPageEditsInput = {
@@ -2121,6 +2442,9 @@ export type UserCreateWithoutLegalPageEditsInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutLegalPageEditsInput = {
@@ -2149,6 +2473,9 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutLegalPageEditsInput = {
@@ -2193,6 +2520,9 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
@@ -2221,6 +2551,289 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutClaimRequestsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutClaimRequestsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutClaimRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutClaimRequestsInput, Prisma.UserUncheckedCreateWithoutClaimRequestsInput>
+}
+
+export type UserCreateWithoutClaimReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+}
+
+export type UserUncheckedCreateWithoutClaimReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+}
+
+export type UserCreateOrConnectWithoutClaimReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutClaimReviewsInput, Prisma.UserUncheckedCreateWithoutClaimReviewsInput>
+}
+
+export type UserUpsertWithoutClaimRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutClaimRequestsInput, Prisma.UserUncheckedUpdateWithoutClaimRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutClaimRequestsInput, Prisma.UserUncheckedCreateWithoutClaimRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutClaimRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutClaimRequestsInput, Prisma.UserUncheckedUpdateWithoutClaimRequestsInput>
+}
+
+export type UserUpdateWithoutClaimRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutClaimRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutClaimReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutClaimReviewsInput, Prisma.UserUncheckedUpdateWithoutClaimReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutClaimReviewsInput, Prisma.UserUncheckedCreateWithoutClaimReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutClaimReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutClaimReviewsInput, Prisma.UserUncheckedUpdateWithoutClaimReviewsInput>
+}
+
+export type UserUpdateWithoutClaimReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+}
+
+export type UserUncheckedUpdateWithoutClaimReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -2249,6 +2862,9 @@ export type UserCreateWithoutCollectionsInput = {
   venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -2277,6 +2893,9 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -2321,6 +2940,9 @@ export type UserUpdateWithoutCollectionsInput = {
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -2349,6 +2971,9 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyPinnedEstateInput = {
@@ -2394,6 +3019,9 @@ export type UserUpdateWithoutPinnedEstateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPinnedEstateInput = {
@@ -2422,6 +3050,9 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
@@ -2458,6 +3089,9 @@ export type UserCountOutputType = {
   sessions: number
   venueStaff: number
   verificationReviews: number
+  designedEstates: number
+  claimRequests: number
+  claimReviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2472,6 +3106,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   venueStaff?: boolean | UserCountOutputTypeCountVenueStaffArgs
   verificationReviews?: boolean | UserCountOutputTypeCountVerificationReviewsArgs
+  designedEstates?: boolean | UserCountOutputTypeCountDesignedEstatesArgs
+  claimRequests?: boolean | UserCountOutputTypeCountClaimRequestsArgs
+  claimReviews?: boolean | UserCountOutputTypeCountClaimReviewsArgs
 }
 
 /**
@@ -2561,6 +3198,27 @@ export type UserCountOutputTypeCountVerificationReviewsArgs<ExtArgs extends runt
   where?: Prisma.EstateVerificationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDesignedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountClaimRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateClaimRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountClaimReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateClaimRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2590,6 +3248,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
   verificationReviews?: boolean | Prisma.User$verificationReviewsArgs<ExtArgs>
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
+  designedEstates?: boolean | Prisma.User$designedEstatesArgs<ExtArgs>
+  claimRequests?: boolean | Prisma.User$claimRequestsArgs<ExtArgs>
+  claimReviews?: boolean | Prisma.User$claimReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2663,6 +3324,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   venueStaff?: boolean | Prisma.User$venueStaffArgs<ExtArgs>
   verificationReviews?: boolean | Prisma.User$verificationReviewsArgs<ExtArgs>
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
+  designedEstates?: boolean | Prisma.User$designedEstatesArgs<ExtArgs>
+  claimRequests?: boolean | Prisma.User$claimRequestsArgs<ExtArgs>
+  claimReviews?: boolean | Prisma.User$claimReviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2687,6 +3351,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     venueStaff: Prisma.$VenueStaffPayload<ExtArgs>[]
     verificationReviews: Prisma.$EstateVerificationPayload<ExtArgs>[]
     pinnedEstate: Prisma.$EstatePayload<ExtArgs> | null
+    designedEstates: Prisma.$EstatePayload<ExtArgs>[]
+    claimRequests: Prisma.$EstateClaimRequestPayload<ExtArgs>[]
+    claimReviews: Prisma.$EstateClaimRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3110,6 +3777,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   venueStaff<T extends Prisma.User$venueStaffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$venueStaffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VenueStaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   verificationReviews<T extends Prisma.User$verificationReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$verificationReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pinnedEstate<T extends Prisma.User$pinnedEstateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pinnedEstateArgs<ExtArgs>>): Prisma.Prisma__EstateClient<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  designedEstates<T extends Prisma.User$designedEstatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$designedEstatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  claimRequests<T extends Prisma.User$claimRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$claimRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  claimReviews<T extends Prisma.User$claimReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$claimReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3830,6 +4500,78 @@ export type User$pinnedEstateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.EstateInclude<ExtArgs> | null
   where?: Prisma.EstateWhereInput
+}
+
+/**
+ * User.designedEstates
+ */
+export type User$designedEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Estate
+   */
+  select?: Prisma.EstateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Estate
+   */
+  omit?: Prisma.EstateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstateInclude<ExtArgs> | null
+  where?: Prisma.EstateWhereInput
+  orderBy?: Prisma.EstateOrderByWithRelationInput | Prisma.EstateOrderByWithRelationInput[]
+  cursor?: Prisma.EstateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EstateScalarFieldEnum | Prisma.EstateScalarFieldEnum[]
+}
+
+/**
+ * User.claimRequests
+ */
+export type User$claimRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EstateClaimRequest
+   */
+  select?: Prisma.EstateClaimRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EstateClaimRequest
+   */
+  omit?: Prisma.EstateClaimRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstateClaimRequestInclude<ExtArgs> | null
+  where?: Prisma.EstateClaimRequestWhereInput
+  orderBy?: Prisma.EstateClaimRequestOrderByWithRelationInput | Prisma.EstateClaimRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EstateClaimRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EstateClaimRequestScalarFieldEnum | Prisma.EstateClaimRequestScalarFieldEnum[]
+}
+
+/**
+ * User.claimReviews
+ */
+export type User$claimReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EstateClaimRequest
+   */
+  select?: Prisma.EstateClaimRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EstateClaimRequest
+   */
+  omit?: Prisma.EstateClaimRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstateClaimRequestInclude<ExtArgs> | null
+  where?: Prisma.EstateClaimRequestWhereInput
+  orderBy?: Prisma.EstateClaimRequestOrderByWithRelationInput | Prisma.EstateClaimRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EstateClaimRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EstateClaimRequestScalarFieldEnum | Prisma.EstateClaimRequestScalarFieldEnum[]
 }
 
 /**

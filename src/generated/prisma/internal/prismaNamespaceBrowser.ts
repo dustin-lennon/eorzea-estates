@@ -67,6 +67,7 @@ export const ModelName = {
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
   SiteSettings: 'SiteSettings',
+  EstateClaimRequest: 'EstateClaimRequest',
   Collection: 'Collection',
   CollectionEstate: 'CollectionEstate'
 } as const
@@ -188,7 +189,9 @@ export const EstateScalarFieldEnum = {
   moderationStatus: 'moderationStatus',
   deletedAt: 'deletedAt',
   verified: 'verified',
-  verificationStatus: 'verificationStatus'
+  verificationStatus: 'verificationStatus',
+  designerId: 'designerId',
+  claimedAt: 'claimedAt'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
@@ -307,6 +310,23 @@ export const SiteSettingsScalarFieldEnum = {
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const EstateClaimRequestScalarFieldEnum = {
+  id: 'id',
+  estateId: 'estateId',
+  claimantId: 'claimantId',
+  characterId: 'characterId',
+  screenshotUrl: 'screenshotUrl',
+  storageKey: 'storageKey',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  modReason: 'modReason'
+} as const
+
+export type EstateClaimRequestScalarFieldEnum = (typeof EstateClaimRequestScalarFieldEnum)[keyof typeof EstateClaimRequestScalarFieldEnum]
 
 
 export const CollectionScalarFieldEnum = {

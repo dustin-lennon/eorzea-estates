@@ -23,6 +23,7 @@ interface Props {
   initialCommissionOpen: boolean
   initialPortfolioUrl: string | null
   initialPinnedEstateId: string | null
+  initialDesigner: boolean
   publishedEstates: Estate[]
 }
 
@@ -33,12 +34,14 @@ export function DesignerProfileSettings({
   initialCommissionOpen,
   initialPortfolioUrl,
   initialPinnedEstateId,
+  initialDesigner,
   publishedEstates,
 }: Props) {
   const [bio, setBio] = useState(initialBio ?? "")
   const [commissionOpen, setCommissionOpen] = useState(initialCommissionOpen)
   const [portfolioUrl, setPortfolioUrl] = useState(initialPortfolioUrl ?? "")
   const [pinnedEstateId, setPinnedEstateId] = useState(initialPinnedEstateId ?? "")
+  const [designer, setDesigner] = useState(initialDesigner)
   const [saving, setSaving] = useState(false)
 
   async function handleSave() {
@@ -52,6 +55,7 @@ export function DesignerProfileSettings({
           commissionOpen,
           portfolioUrl: portfolioUrl.trim() || null,
           pinnedEstateId: pinnedEstateId || null,
+          designer,
         }),
       })
       if (!res.ok) {
@@ -68,6 +72,19 @@ export function DesignerProfileSettings({
 
   return (
     <div className="space-y-6">
+      {/* Designer toggle */}
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium">I&apos;m a Designer</p>
+          <p className="text-xs text-muted-foreground">Show a Designer badge on your profile and unlock designer submission</p>
+        </div>
+        <Switch
+          checked={designer}
+          onCheckedChange={setDesigner}
+          aria-label="I'm a designer"
+        />
+      </div>
+
       {/* Bio */}
       <div className="space-y-2">
         <Label htmlFor="designer-bio">Bio</Label>

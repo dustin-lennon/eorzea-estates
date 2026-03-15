@@ -13,23 +13,29 @@ export default async function SettingsPage() {
     commissionOpen: boolean;
     portfolioUrl: string | null;
     pinnedEstateId: string | null;
+    designer: boolean;
     publishedEstates: { id: string; name: string }[];
   } | null = null;
 
   if (session?.user?.id) {
-    const [user, publishedEstates] = await Promise.all([
-      prisma.user.findUnique({
-        where: { id: session.user.id },
-        select: { bio: true, commissionOpen: true, portfolioUrl: true, pinnedEstateId: true },
-      }),
-      prisma.estate.findMany({
-        where: { ownerId: session.user.id, published: true, deletedAt: null },
-        select: { id: true, name: true },
-        orderBy: { name: "asc" },
-      }),
-    ]);
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        bio: true,
+        commissionOpen: true,
+        portfolioUrl: true,
+        pinnedEstateId: true,
+        designer: true,
+        estates: {
+          where: { published: true, deletedAt: null },
+          select: { id: true, name: true },
+          orderBy: { name: "asc" },
+        },
+      },
+    });
     if (user) {
-      designerData = { ...user, publishedEstates };
+      const { estates: publishedEstates, ...rest } = user;
+      designerData = { ...rest, publishedEstates };
     }
   }
 
@@ -80,6 +86,7 @@ export default async function SettingsPage() {
             initialCommissionOpen={designerData.commissionOpen}
             initialPortfolioUrl={designerData.portfolioUrl}
             initialPinnedEstateId={designerData.pinnedEstateId}
+            initialDesigner={designerData.designer}
             publishedEstates={designerData.publishedEstates}
           />
         </section>
@@ -146,7 +153,7 @@ export default async function SettingsPage() {
             </span>
             <div>
               <p className="font-medium text-sm">Recognized Designer</p>
-              <p className="text-xs text-muted-foreground">Admin-recognized housing designer</p>
+              <p className="text-xs text-muted-foreground">A housing designer in the Eorzea Estates community</p>
             </div>
           </li>
         </ul>

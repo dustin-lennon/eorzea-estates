@@ -122,6 +122,11 @@ export type LegalPage = Prisma.LegalPageModel
  */
 export type SiteSettings = Prisma.SiteSettingsModel
 /**
+ * Model EstateClaimRequest
+ * 
+ */
+export type EstateClaimRequest = Prisma.EstateClaimRequestModel
+/**
  * Model Collection
  * 
  */
