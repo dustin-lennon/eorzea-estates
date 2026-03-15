@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.17.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.6...v1.17.0) (2026-03-15)
+
+### ✨ Features
+
+* make admin user names links to their profiles ([c1356bf](https://github.com/dustin-lennon/eorzea-estates/commit/c1356bf58c4fb1f8c003ac7885b11b83f4b9cc5c)), closes [#161](https://github.com/dustin-lennon/eorzea-estates/issues/161)
+
 ## [1.16.6](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.5...v1.16.6) (2026-03-15)
 
 ### 🐛 Bug Fixes
