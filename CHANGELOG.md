@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.18.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.1...v1.18.2) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* limit pg.Pool to max:1 to prevent serverless connection exhaustion ([a39c7b1](https://github.com/dustin-lennon/eorzea-estates/commit/a39c7b1c3d9409b885f0de420b5d3c0250687a87)), closes [#177](https://github.com/dustin-lennon/eorzea-estates/issues/177)
+
 ## [1.18.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.0...v1.18.1) (2026-03-15)
 
 ### 🐛 Bug Fixes
