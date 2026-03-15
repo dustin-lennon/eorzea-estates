@@ -41,13 +41,7 @@ export async function PATCH(req: Request) {
   if (commissionOpen !== undefined) updateData.commissionOpen = commissionOpen
   if (portfolioUrl !== undefined) updateData.portfolioUrl = portfolioUrl
   if (pinnedEstateId !== undefined) updateData.pinnedEstateId = pinnedEstateId
-  if (designer !== undefined) {
-    // Only allow admins to grant designer status; users can only remove it from themselves
-    if (designer && session.user.role !== "ADMIN") {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
-    }
-    updateData.designer = designer
-  }
+  if (designer !== undefined) updateData.designer = designer
 
   const user = await prisma.user.update({
     where: { id: session.user.id },

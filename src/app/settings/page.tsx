@@ -13,6 +13,7 @@ export default async function SettingsPage() {
     commissionOpen: boolean;
     portfolioUrl: string | null;
     pinnedEstateId: string | null;
+    designer: boolean;
     publishedEstates: { id: string; name: string }[];
   } | null = null;
 
@@ -20,7 +21,7 @@ export default async function SettingsPage() {
     const [user, publishedEstates] = await Promise.all([
       prisma.user.findUnique({
         where: { id: session.user.id },
-        select: { bio: true, commissionOpen: true, portfolioUrl: true, pinnedEstateId: true },
+        select: { bio: true, commissionOpen: true, portfolioUrl: true, pinnedEstateId: true, designer: true },
       }),
       prisma.estate.findMany({
         where: { ownerId: session.user.id, published: true, deletedAt: null },
@@ -80,6 +81,7 @@ export default async function SettingsPage() {
             initialCommissionOpen={designerData.commissionOpen}
             initialPortfolioUrl={designerData.portfolioUrl}
             initialPinnedEstateId={designerData.pinnedEstateId}
+            initialDesigner={designerData.designer}
             publishedEstates={designerData.publishedEstates}
           />
         </section>
