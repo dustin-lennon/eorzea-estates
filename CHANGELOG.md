@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.14.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.13.0...v1.14.0) (2026-03-15)
+
+### ✨ Features
+
+* add contact & feedback section to settings ([6deda53](https://github.com/dustin-lennon/eorzea-estates/commit/6deda5352ac1bad33d4cca83e165617e01be7cfb))
+* add delete account option to settings ([9dff643](https://github.com/dustin-lennon/eorzea-estates/commit/9dff643399c02119da4da95a4435b51dc5a5a90f)), closes [#136](https://github.com/dustin-lennon/eorzea-estates/issues/136)
+* add estate ownership verified badge to icon guide ([548ff81](https://github.com/dustin-lennon/eorzea-estates/commit/548ff81d932ea430b62f076c4807b0f3c0f38029))
+* add icon guide section to settings ([d069e5d](https://github.com/dustin-lennon/eorzea-estates/commit/d069e5d0bf92bee0264edec6809c8e7fe468a7a0))
+* add support eorzea estates section to settings ([0f53e91](https://github.com/dustin-lennon/eorzea-estates/commit/0f53e91ab59bc9e0877e083c73f91b06040bc246))
+
 ## [1.13.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.12.0...v1.13.0) (2026-03-15)
 
 ### ✨ Features
