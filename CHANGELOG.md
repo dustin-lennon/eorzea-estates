@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.15.0...v1.16.0) (2026-03-15)
+
+### ✨ Features
+
+* increase estate image upload limit from 10 to 50 ([c46fd75](https://github.com/dustin-lennon/eorzea-estates/commit/c46fd75a7d63b07d72a0e5b64a71765e9443aaa8)), closes [#141](https://github.com/dustin-lennon/eorzea-estates/issues/141)
+
 ## [1.15.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.14.0...v1.15.0) (2026-03-15)
 
 ### ✨ Features
