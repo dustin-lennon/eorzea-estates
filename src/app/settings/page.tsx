@@ -1,9 +1,44 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass, ShieldCheck } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass, ShieldCheck, Palette } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
+import { DesignerProfileSettings } from "@/components/designer-profile-settings";
+import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const session = await auth();
+  let designerData: {
+    bio: string | null;
+    commissionOpen: boolean;
+    portfolioUrl: string | null;
+    pinnedEstateId: string | null;
+    designer: boolean;
+    publishedEstates: { id: string; name: string }[];
+  } | null = null;
+
+  if (session?.user?.id) {
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        bio: true,
+        commissionOpen: true,
+        portfolioUrl: true,
+        pinnedEstateId: true,
+        designer: true,
+        estates: {
+          where: { published: true, deletedAt: null },
+          select: { id: true, name: true },
+          orderBy: { name: "asc" },
+        },
+      },
+    });
+    if (user) {
+      const { estates: publishedEstates, ...rest } = user;
+      designerData = { ...rest, publishedEstates };
+    }
+  }
+
   return (
     <div className="max-w-xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-8 text-primary">Settings</h1>
@@ -36,6 +71,26 @@ export default function SettingsPage() {
           </li>
         </ul>
       </section>
+
+      {designerData && (
+        <section className="bg-card rounded-xl p-6 mb-8">
+          <div className="flex items-center mb-6">
+            <Palette className="brand-link mr-3" />
+            <h2 className="text-lg font-semibold text-primary">Designer Profile</h2>
+          </div>
+          <p className="text-sm text-muted-foreground mb-6">
+            Showcase your work as a housing designer. Add a bio, link your portfolio, and pin your best estate.
+          </p>
+          <DesignerProfileSettings
+            initialBio={designerData.bio}
+            initialCommissionOpen={designerData.commissionOpen}
+            initialPortfolioUrl={designerData.portfolioUrl}
+            initialPinnedEstateId={designerData.pinnedEstateId}
+            initialDesigner={designerData.designer}
+            publishedEstates={designerData.publishedEstates}
+          />
+        </section>
+      )}
 
       <section className="bg-card rounded-xl p-6 mb-8">
         <div className="flex items-center mb-6">
@@ -81,6 +136,24 @@ export default function SettingsPage() {
             <div>
               <p className="font-medium text-sm">Admin</p>
               <p className="text-xs text-muted-foreground">Eorzea Estates team member</p>
+            </div>
+          </li>
+          <li className="flex items-center gap-4 py-4">
+            <span className="shrink-0">
+              <svg width="0" height="0" className="absolute">
+                <defs>
+                  <linearGradient id="ig-designer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#a855f7" />
+                    <stop offset="50%" stopColor="#ec4899" />
+                    <stop offset="100%" stopColor="#f43f5e" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <Palette className="h-5 w-5" style={{ stroke: "url(#ig-designer-gradient)" }} aria-hidden="true" />
+            </span>
+            <div>
+              <p className="font-medium text-sm">Recognized Designer</p>
+              <p className="text-xs text-muted-foreground">A housing designer in the Eorzea Estates community</p>
             </div>
           </li>
         </ul>

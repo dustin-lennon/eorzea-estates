@@ -13,13 +13,21 @@ export default async function SubmitPage() {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const rawCharacters = await prisma.ffxivCharacter.findMany({
-    where: { userId: session.user.id },
-    orderBy: { createdAt: "asc" },
-    select: { id: true, characterName: true, server: true, lodestoneId: true },
-  })
+  const [dbUser, rawCharacters] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { designer: true },
+    }),
+    prisma.ffxivCharacter.findMany({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: "asc" },
+      select: { id: true, characterName: true, server: true, lodestoneId: true },
+    }),
+  ])
 
-  if (rawCharacters.length === 0) {
+  const isDesigner = dbUser?.designer ?? false
+
+  if (!isDesigner && rawCharacters.length === 0) {
     return (
       <div className="container mx-auto max-w-xl px-4 py-20 text-center">
         <h1 className="text-2xl font-bold mb-2">No Characters Found</h1>
@@ -59,7 +67,7 @@ export default async function SubmitPage() {
           Share your housing creation with the community. All fields marked with * are required.
         </p>
       </div>
-      <EstateSubmitForm characters={characters} />
+      <EstateSubmitForm characters={characters} isDesigner={isDesigner} />
     </div>
   )
 }

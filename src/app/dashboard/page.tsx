@@ -11,7 +11,8 @@ import { EstateCard } from "@/components/estate-card"
 import { DashboardEstateActions } from "./dashboard-estate-actions"
 import { CharacterActions } from "./character-actions"
 import { ESTATE_TYPES } from "@/lib/ffxiv-data"
-import { Plus, BadgeCheck, UserCircle2, ShieldCheck } from "lucide-react"
+import { Plus, BadgeCheck, UserCircle2, ShieldCheck, BookOpen } from "lucide-react"
+import { CollectionManager } from "@/components/collection-manager"
 
 export const metadata: Metadata = { title: "Dashboard" }
 
@@ -63,7 +64,7 @@ export default async function DashboardPage() {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const [characters, estates, likedEstates] = await Promise.all([
+  const [characters, estates, likedEstates, collections] = await Promise.all([
     prisma.ffxivCharacter.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "asc" },
@@ -100,6 +101,16 @@ export default async function DashboardPage() {
         },
       },
       orderBy: { createdAt: "desc" },
+    }),
+    prisma.collection.findMany({
+      where: { userId: session.user.id },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        _count: { select: { estates: true } },
+      },
+      orderBy: { createdAt: "asc" },
     }),
   ])
 
@@ -271,6 +282,27 @@ export default async function DashboardPage() {
             ))}
           </div>
         )}
+      </section>
+
+      <Separator />
+
+      <Separator />
+
+      {/* Collections */}
+      <section className="my-10">
+        <div className="flex items-center gap-2 mb-4">
+          <BookOpen className="h-5 w-5 text-muted-foreground" />
+          <h2 className="text-xl font-semibold">My Collections ({collections.length})</h2>
+        </div>
+        <CollectionManager
+          userId={session.user.id}
+          initialCollections={collections.map((c) => ({
+            id: c.id,
+            name: c.name,
+            description: c.description,
+            estateCount: c._count.estates,
+          }))}
+        />
       </section>
 
       <Separator />

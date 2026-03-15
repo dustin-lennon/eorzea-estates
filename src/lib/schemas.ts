@@ -38,3 +38,13 @@ export const estateFormSchema = z.object({
 })
 
 export type EstateFormValues = z.infer<typeof estateFormSchema>
+
+// Designer submission — no character required; server/DC provided directly
+export const designerEstateFormSchema = estateFormSchema
+  .omit({ characterId: true })
+  .extend({
+    dataCenter: z.string().min(1, "Data center is required"),
+    server: z.string().min(1, "Server is required"),
+  })
+
+export type DesignerEstateFormValues = z.infer<typeof designerEstateFormSchema>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Heart, MapPin, BadgeCheck } from "lucide-react"
+import { Heart, MapPin, BadgeCheck, Palette } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { ESTATE_TYPES, HOUSING_DISTRICTS } from "@/lib/ffxiv-data"
 
@@ -19,6 +19,8 @@ interface EstateCardProps {
   lodestoneVerified?: boolean
   venueType?: string | null
   published?: boolean
+  designerName?: string | null
+  claimedAt?: Date | null
 }
 
 export function EstateCard({
@@ -35,6 +37,8 @@ export function EstateCard({
   lodestoneVerified,
   venueType,
   published = true,
+  designerName,
+  claimedAt,
 }: EstateCardProps) {
   const typeLabel = ESTATE_TYPES.find((t) => t.value === type)?.label ?? type
   const districtLabel = HOUSING_DISTRICTS.find((d) => d.value === district)?.label
@@ -55,7 +59,7 @@ export function EstateCard({
             No screenshots yet
           </div>
         )}
-        <div className="absolute top-2 left-2 flex gap-1">
+        <div className="absolute top-2 left-2 flex gap-1 flex-wrap">
           <Badge variant="secondary" className="text-xs">
             {typeLabel}
           </Badge>
@@ -67,6 +71,12 @@ export function EstateCard({
           {!published && (
             <Badge variant="outline" className="text-xs bg-background/80">
               Unavailable
+            </Badge>
+          )}
+          {designerName && !claimedAt && (
+            <Badge variant="outline" className="text-xs bg-background/80 border-purple-500/50 text-purple-600 dark:text-purple-400 flex items-center gap-1">
+              <Palette className="h-2.5 w-2.5" />
+              Designer
             </Badge>
           )}
         </div>
@@ -98,13 +108,21 @@ export function EstateCard({
         )}
 
         <div className="flex items-center justify-between mt-auto pt-1">
-          {ownerName && (
-            <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
-              {lodestoneVerified && <BadgeCheck className="h-3 w-3 text-blue-500 shrink-0" />}
-              {ownerName}
-            </span>
-          )}
-          <span className="flex items-center gap-1 text-xs text-muted-foreground ml-auto">
+          <div className="flex flex-col min-w-0">
+            {ownerName && (
+              <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
+                {lodestoneVerified && <BadgeCheck className="h-3 w-3 text-blue-500 shrink-0" />}
+                {ownerName}
+              </span>
+            )}
+            {designerName && (
+              <span className="text-xs text-purple-600 dark:text-purple-400 flex items-center gap-1 truncate">
+                <Palette className="h-3 w-3 shrink-0" />
+                {designerName}
+              </span>
+            )}
+          </div>
+          <span className="flex items-center gap-1 text-xs text-muted-foreground ml-auto shrink-0">
             <Heart className="h-3 w-3" />
             {likeCount}
           </span>

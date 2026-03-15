@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
-import { BadgeCheck, MapPin, Clock, Users, ExternalLink, ShieldCheck } from "lucide-react"
+import { BadgeCheck, MapPin, Clock, Users, ExternalLink, ShieldCheck, Palette } from "lucide-react"
 import prisma from "@/lib/prisma"
 import { auth } from "@/auth"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +12,7 @@ import { ESTATE_TYPES, HOUSING_DISTRICTS, VENUE_TYPES, DAYS_OF_WEEK } from "@/li
 import type { HoursSchedule } from "@/lib/ffxiv-data"
 import { EstateImageGallery } from "./estate-image-gallery"
 import { FlagButton } from "@/components/flag-button"
+import { ClaimButton } from "./claim-button"
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -49,6 +50,17 @@ export default async function EstateDetailPage({ params }: PageProps) {
             id: true,
             name: true,
             image: true,
+            characters: {
+              where: { verified: true },
+              select: { characterName: true },
+              take: 1,
+            },
+          },
+        },
+        designer: {
+          select: {
+            id: true,
+            name: true,
             characters: {
               where: { verified: true },
               select: { characterName: true },
@@ -98,6 +110,20 @@ export default async function EstateDetailPage({ params }: PageProps) {
 
   const isLoggedIn = !!session?.user?.id
   const isOwner = isLoggedIn && session?.user?.id === estate.owner.id
+  const isDesigner = isLoggedIn && session?.user?.id === estate.designer?.id
+  const isUnclaimed = !!estate.designer && !estate.claimedAt
+
+  // Fetch verified characters for claim eligibility
+  let claimCharacters: { id: string; characterName: string; server: string }[] = []
+  if (isLoggedIn && isUnclaimed && !isOwner && !isDesigner) {
+    claimCharacters = await prisma.ffxivCharacter.findMany({
+      where: { userId: session!.user!.id!, verified: true },
+      select: { id: true, characterName: true, server: true },
+      orderBy: { createdAt: "asc" },
+    })
+  }
+
+  const canClaim = claimCharacters.length > 0
   const userLiked = isLoggedIn
     ? !!(await prisma.like.findUnique({
         where: { userId_estateId: { userId: session!.user!.id!, estateId: id } },
@@ -157,16 +183,39 @@ export default async function EstateDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Owner */}
-      <div className="flex items-center gap-2 mt-4 text-sm">
-        <span className="text-muted-foreground">Listed by</span>
-        <Link href={`/profile/${estate.owner.id}`} className="brand-link flex items-center gap-1 font-medium no-underline">
-          {ownerIsVerified && (
-            <BadgeCheck className="h-4 w-4 text-blue-500" />
-          )}
-          {ownerDisplayName}
-        </Link>
+      {/* Owner + Designer attribution */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="text-muted-foreground">{isUnclaimed ? "Submitted by" : "Listed by"}</span>
+          <Link href={`/profile/${estate.owner.id}`} className="brand-link flex items-center gap-1 font-medium no-underline">
+            {ownerIsVerified && <BadgeCheck className="h-4 w-4 text-blue-500" />}
+            {ownerDisplayName}
+          </Link>
+        </div>
+        {estate.designer && (
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground">Designed by</span>
+            <Link href={`/profile/${estate.designer.id}`} className="flex items-center gap-1 font-medium text-purple-600 dark:text-purple-400 hover:underline">
+              <Palette className="h-3.5 w-3.5" />
+              {estate.designer.characters[0]?.characterName ?? estate.designer.name}
+            </Link>
+          </div>
+        )}
       </div>
+
+      {/* Unclaimed notice */}
+      {isUnclaimed && (
+        <div className="mt-3 flex flex-wrap items-center gap-3 p-3 rounded-lg border border-purple-500/30 bg-purple-500/5 text-sm">
+          <Palette className="h-4 w-4 text-purple-500 shrink-0" />
+          <p className="text-muted-foreground flex-1">
+            This estate was submitted by its designer. Is this your property?
+          </p>
+          {canClaim && <ClaimButton estateId={id} characters={claimCharacters} />}
+          {isLoggedIn && !canClaim && !isOwner && !isDesigner && (
+            <span className="text-xs text-muted-foreground">Verify a character to claim.</span>
+          )}
+        </div>
+      )}
 
       <Separator className="my-6" />
 
@@ -300,6 +349,15 @@ export default async function EstateDetailPage({ params }: PageProps) {
                     <ShieldCheck className="h-4 w-4" />
                     Verified
                   </span>
+                </div>
+              )}
+              {estate.designer && (
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Designer</span>
+                  <Link href={`/profile/${estate.designer.id}`} className="flex items-center gap-1 text-purple-600 dark:text-purple-400 hover:underline text-xs font-medium">
+                    <Palette className="h-3.5 w-3.5" />
+                    {estate.designer.characters[0]?.characterName ?? estate.designer.name}
+                  </Link>
                 </div>
               )}
             </div>
