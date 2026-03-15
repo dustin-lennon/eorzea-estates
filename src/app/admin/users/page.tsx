@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
 import Image from "next/image"
+import Link from "next/link"
 import { UserRoleSelect } from "./user-role-select"
 import { PathfinderToggle } from "./pathfinder-toggle"
 import { PATHFINDER_LIMIT } from "@/lib/pathfinder"
@@ -75,7 +76,9 @@ export default async function AdminUsersPage() {
                       </div>
                     )}
                     <div>
-                      <p className="font-medium">{user.name ?? "Unknown"}</p>
+                      <Link href={`/profile/${user.id}`} className="brand-link font-medium">
+                        {user.name ?? "Unknown"}
+                      </Link>
                     </div>
                   </div>
                 </td>
