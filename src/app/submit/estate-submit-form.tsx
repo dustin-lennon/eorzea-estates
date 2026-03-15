@@ -55,6 +55,8 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [designerMode, setDesignerMode] = useState(false)
+  const [conflicts, setConflicts] = useState<{ id: string; name: string; ownerName: string }[] | null>(null)
+  const [pendingDesignerValues, setPendingDesignerValues] = useState<DesignerEstateFormValues | null>(null)
   const isEditing = !!estateId
   const useDesignerFlow = isDesigner && designerMode && !isEditing
 
@@ -178,16 +180,111 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
 
       if (!res.ok) {
         const err = await res.json()
-        throw new Error(err.error?.message ?? "Submission failed")
+        throw new Error(typeof err.error === "string" ? err.error : (err.error?.message ?? "Submission failed"))
       }
 
-      toast.success("Designer estate submitted and published!")
-      router.push("/dashboard")
+      const result = await res.json() as { id?: string; attributed?: boolean; conflicts?: { id: string; name: string; ownerName: string }[] }
+
+      if (result.conflicts) {
+        setConflicts(result.conflicts)
+        setPendingDesignerValues(values)
+        return
+      }
+
+      toast.success(result.attributed ? "Designer attribution added to existing listing!" : "Designer estate submitted and published!")
+      router.push(`/estate/${result.id!}`)
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Submission failed")
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  async function handleAttributeTo(targetEstateId: string) {
+    if (!pendingDesignerValues) return
+    setIsSubmitting(true)
+    try {
+      const res = await fetch("/api/estates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...pendingDesignerValues, designerSubmission: true, targetEstateId }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(typeof err.error === "string" ? err.error : "Attribution failed")
+      }
+      const result = await res.json() as { id: string }
+      toast.success("Designer attribution added to existing listing!")
+      router.push(`/estate/${result.id}`)
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Attribution failed")
+    } finally {
+      setIsSubmitting(false)
+      setConflicts(null)
+      setPendingDesignerValues(null)
+    }
+  }
+
+  async function handleCreateNew() {
+    if (!pendingDesignerValues) return
+    setIsSubmitting(true)
+    try {
+      const res = await fetch("/api/estates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...pendingDesignerValues, designerSubmission: true, forceCreate: true }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        throw new Error(typeof err.error === "string" ? err.error : "Submission failed")
+      }
+      const result = await res.json() as { id: string }
+      toast.success("Designer estate submitted and published!")
+      router.push(`/estate/${result.id}`)
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Submission failed")
+    } finally {
+      setIsSubmitting(false)
+      setConflicts(null)
+      setPendingDesignerValues(null)
+    }
+  }
+
+  if (conflicts) {
+    return (
+      <div className="space-y-4">
+        <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
+          <div className="flex items-center gap-3 mb-4">
+            <Palette className="h-5 w-5 text-purple-500 shrink-0" />
+            <div>
+              <p className="text-sm font-medium">Existing listings found at this location</p>
+              <p className="text-xs text-muted-foreground">Select the listing you designed, or create a new one.</p>
+            </div>
+          </div>
+          <ul className="space-y-2 mb-4">
+            {conflicts.map((c) => (
+              <li key={c.id} className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3">
+                <div>
+                  <p className="text-sm font-medium">{c.name}</p>
+                  <p className="text-xs text-muted-foreground">Listed by {c.ownerName}</p>
+                </div>
+                <Button size="sm" onClick={() => handleAttributeTo(c.id)} disabled={isSubmitting}>
+                  This is mine
+                </Button>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center justify-between">
+            <button type="button" onClick={() => { setConflicts(null); setPendingDesignerValues(null) }} className="text-xs text-muted-foreground hover:text-foreground transition">
+              ← Back to form
+            </button>
+            <Button variant="outline" size="sm" onClick={handleCreateNew} disabled={isSubmitting}>
+              None of these — create new listing
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (useDesignerFlow) {

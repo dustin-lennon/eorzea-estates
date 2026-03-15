@@ -35,6 +35,95 @@ export async function POST(req: Request) {
     const region = getRegionByDataCenter(data.dataCenter)
     const isVenue = data.type === "VENUE"
 
+    // Direct attribution by ID (designer selected from conflict picker)
+    if (body.targetEstateId) {
+      const target = await prisma.estate.findFirst({
+        where: { id: body.targetEstateId, published: true, deletedAt: null },
+        select: { id: true, designerId: true },
+      })
+      if (!target) {
+        return NextResponse.json({ error: "Estate not found." }, { status: 404 })
+      }
+      if (target.designerId) {
+        return NextResponse.json(
+          { error: "A designer has already been attributed to this listing." },
+          { status: 409 }
+        )
+      }
+      await prisma.estate.update({
+        where: { id: target.id },
+        data: { designerId: session.user.id },
+      })
+      return NextResponse.json({ id: target.id, attributed: true }, { status: 200 })
+    }
+
+    // Location conflict check (skip if designer chose to create new anyway)
+    if (!body.forceCreate && data.ward && data.plot && data.district) {
+      const unattributed = await prisma.estate.findMany({
+        where: {
+          server: data.server,
+          district: data.district,
+          ward: data.ward,
+          plot: data.plot,
+          published: true,
+          deletedAt: null,
+          designerId: null,
+        },
+        select: {
+          id: true,
+          name: true,
+          owner: {
+            select: {
+              name: true,
+              characters: {
+                where: { verified: true },
+                select: { characterName: true },
+                take: 1,
+              },
+            },
+          },
+        },
+      })
+
+      if (unattributed.length > 1) {
+        return NextResponse.json({
+          conflicts: unattributed.map((e) => ({
+            id: e.id,
+            name: e.name,
+            ownerName: e.owner.characters[0]?.characterName ?? e.owner.name,
+          })),
+        }, { status: 200 })
+      }
+
+      if (unattributed.length === 1) {
+        await prisma.estate.update({
+          where: { id: unattributed[0].id },
+          data: { designerId: session.user.id },
+        })
+        return NextResponse.json({ id: unattributed[0].id, attributed: true }, { status: 200 })
+      }
+
+      // All existing listings at this location already have a designer
+      const anyAttributed = await prisma.estate.findFirst({
+        where: {
+          server: data.server,
+          district: data.district,
+          ward: data.ward,
+          plot: data.plot,
+          published: true,
+          deletedAt: null,
+          designerId: { not: null },
+        },
+        select: { id: true },
+      })
+      if (anyAttributed) {
+        return NextResponse.json(
+          { error: "A designer has already been attributed to all listings at this location." },
+          { status: 409 }
+        )
+      }
+    }
+
     const estate = await prisma.estate.create({
       data: {
         name: data.name,

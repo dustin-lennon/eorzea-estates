@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "@/auth"
-import { Plus, LayoutDashboard, LogOut, Settings as SettingsIcon, ShieldCheck } from "lucide-react"
+import { Plus, LayoutDashboard, LogOut, Settings as SettingsIcon, ShieldCheck, User } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Navbar() {
@@ -57,6 +57,13 @@ export default async function Navbar() {
                     </div>
 
                     <DropdownMenuSeparator />
+
+                    <DropdownMenuItem asChild>
+                      <Link href={`/profile/${session.user.id}`}>
+                        <User className="h-4 w-4 mr-2" />
+                        <span>Profile</span>
+                      </Link>
+                    </DropdownMenuItem>
 
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard">
