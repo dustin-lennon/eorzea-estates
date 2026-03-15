@@ -13,14 +13,10 @@ function getAnthropic() {
     return createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   }
 
-  // VERCEL_OIDC_TOKEN is auto-injected by Vercel when available.
-  // AI_GATEWAY_API_KEY is an explicit API Gateway Key for production fallback.
-  const token = process.env.VERCEL_OIDC_TOKEN ?? process.env.AI_GATEWAY_API_KEY ?? ""
-
   return createAnthropic({
     baseURL: `${gatewayUrl}/v1`,
     apiKey: "not-used", // provider key is managed by the gateway (BYOK)
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${process.env.VERCEL_OIDC_TOKEN ?? ""}` },
   })
 }
 
