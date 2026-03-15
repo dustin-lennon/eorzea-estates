@@ -7,6 +7,13 @@ import { REGIONS, ESTATE_TYPES, HOUSING_DISTRICTS, PREDEFINED_TAGS } from "@/lib
 
 export const metadata: Metadata = { title: "Browse Estates" }
 
+const UPDATED_SINCE_DAYS: Record<string, number> = {
+  "7d": 7,
+  "30d": 30,
+  "90d": 90,
+  "1y": 365,
+}
+
 interface DirectoryPageProps {
   searchParams: Promise<{
     region?: string
@@ -18,6 +25,7 @@ interface DirectoryPageProps {
     q?: string
     sort?: string
     page?: string
+    updatedSince?: string
   }>
 }
 
@@ -29,6 +37,13 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
   const sort = params.sort ?? "newest"
   const selectedTags = params.tags ? params.tags.split(",").filter(Boolean) : []
 
+  const updatedSinceDays = params.updatedSince ? UPDATED_SINCE_DAYS[params.updatedSince] : undefined
+  // eslint-disable-next-line react-hooks/purity
+  const nowMs = Date.now()
+  const updatedSinceDate = updatedSinceDays
+    ? new Date(nowMs - updatedSinceDays * 24 * 60 * 60 * 1000)
+    : undefined
+
   const where = {
     published: true,
     deletedAt: null,
@@ -38,6 +53,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     ...(params.type ? { type: params.type as never } : {}),
     ...(params.district ? { district: params.district as never } : {}),
     ...(selectedTags.length > 0 ? { tags: { hasSome: selectedTags } } : {}),
+    ...(updatedSinceDate ? { updatedAt: { gte: updatedSinceDate } } : {}),
     ...(params.q
       ? {
           OR: [
@@ -70,6 +86,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         dataCenter: true,
         tags: true,
         likeCount: true,
+        updatedAt: true,
         images: { orderBy: { order: "asc" }, take: 1, select: { imageUrl: true } },
         owner: {
           select: {
@@ -107,6 +124,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
               estateTypes={ESTATE_TYPES}
               districts={HOUSING_DISTRICTS}
               tags={PREDEFINED_TAGS}
+              updatedSince={params.updatedSince}
             />
           </Suspense>
         </aside>
@@ -138,6 +156,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                       ownerName={ownerName ?? null}
                       lodestoneVerified={!!verifiedChar}
                       venueType={estate.venueDetails?.venueType ?? null}
+                      updatedAt={estate.updatedAt}
                     />
                   )
                 })}
