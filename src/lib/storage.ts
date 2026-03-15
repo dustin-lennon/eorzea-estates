@@ -60,8 +60,14 @@ function buildStorageDir(ctx: StoragePathContext): string {
   return parts.join("/")
 }
 
-function buildStoragePath(ctx: StoragePathContext, ext: string): string {
+export function buildStoragePath(ctx: StoragePathContext, ext: string): string {
   return `${buildStorageDir(ctx)}/${randomUUID()}.${ext}`
+}
+
+export function getEstateImagePublicUrl(storageKey: string): string {
+  const supabase = getSupabase()
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
+  return data.publicUrl
 }
 
 export async function uploadEstateImage(
