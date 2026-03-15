@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.16.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.3...v1.16.4) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* fetch OIDC token at runtime via getVercelOidcToken() ([ab2a280](https://github.com/dustin-lennon/eorzea-estates/commit/ab2a280730a07f791f089a3fd83ca53560c4f658))
+
+### ⏪ Reverts
+
+* remove AI_GATEWAY_API_KEY fallback — gateway only accepts OIDC ([c526f83](https://github.com/dustin-lennon/eorzea-estates/commit/c526f83f00197789ca8dfae24acd7d81b7e01f52))
+
 ## [1.16.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.16.2...v1.16.3) (2026-03-15)
 
 ### 🐛 Bug Fixes
