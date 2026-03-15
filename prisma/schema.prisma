@@ -52,16 +52,23 @@ model User {
   discordId            String?               @unique
   role                 UserRole              @default(USER)
   pathfinder           Boolean               @default(false)
+  bio                  String?
+  commissionOpen       Boolean               @default(false)
+  portfolioUrl         String?
+  pinnedEstateId       String?
+  designer             Boolean               @default(false)
   accounts             Account[]
   comments             Comment[]
   flaggedEstates       Estate[]              @relation("FlaggedByUser")
   estates              Estate[]
   characters           FfxivCharacter[]
+  collections          Collection[]
   legalPageEdits       LegalPage[]           @relation("LegalPageEditor")
   likes                Like[]
   sessions             Session[]
   venueStaff           VenueStaff[]          @relation("StaffUser")
   verificationReviews  EstateVerification[]  @relation("VerificationReviewer")
+  pinnedEstate         Estate?               @relation("PinnedEstate", fields: [pinnedEstateId], references: [id])
 }
 
 model FfxivCharacter {
@@ -115,11 +122,13 @@ model Estate {
   character          FfxivCharacter?        @relation(fields: [characterId], references: [id])
   flaggedBy          User?                  @relation("FlaggedByUser", fields: [flaggedById], references: [id])
   owner              User                   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pinnedByUsers      User[]                 @relation("PinnedEstate")
   pendingTransfer    EstatePendingTransfer?
   images             Image[]
   likes              Like[]
   venueDetails       VenueDetails?
   verification       EstateVerification?
+  collectionEntries  CollectionEstate[]
 }
 
 model EstateVerification {
@@ -223,6 +232,27 @@ model SiteSettings {
   id              String  @id @default("singleton")
   maintenanceMode Boolean @default(false)
   disputeEmail    String  @default("dispute@eorzeaestates.com")
+}
+
+model Collection {
+  id          String             @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  estates     CollectionEstate[]
+}
+
+model CollectionEstate {
+  collectionId String
+  estateId     String
+  order        Int        @default(0)
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  estate       Estate     @relation(fields: [estateId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, estateId])
 }
 
 enum UserRole {

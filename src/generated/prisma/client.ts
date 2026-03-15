@@ -121,3 +121,13 @@ export type LegalPage = Prisma.LegalPageModel
  * 
  */
 export type SiteSettings = Prisma.SiteSettingsModel
+/**
+ * Model Collection
+ * 
+ */
+export type Collection = Prisma.CollectionModel
+/**
+ * Model CollectionEstate
+ * 
+ */
+export type CollectionEstate = Prisma.CollectionEstateModel

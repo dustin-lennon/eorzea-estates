@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { UserRoleSelect } from "./user-role-select"
 import { PathfinderToggle } from "./pathfinder-toggle"
+import { DesignerToggle } from "./designer-toggle"
 import { PATHFINDER_LIMIT } from "@/lib/pathfinder"
 import type { UserRole } from "@/types/roles"
 
@@ -21,6 +22,7 @@ export default async function AdminUsersPage() {
       discordUsername: true,
       role: true,
       pathfinder: true,
+      designer: true,
       createdAt: true,
       _count: { select: { estates: true, characters: true } },
     },
@@ -55,6 +57,7 @@ export default async function AdminUsersPage() {
               <th className="text-left px-4 py-3 font-medium">Joined</th>
               <th className="text-left px-4 py-3 font-medium">Role</th>
               <th className="text-left px-4 py-3 font-medium">Pathfinder</th>
+              <th className="text-left px-4 py-3 font-medium">Designer</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -103,6 +106,12 @@ export default async function AdminUsersPage() {
                     userId={user.id}
                     isPathfinder={user.pathfinder}
                     atLimit={atLimit}
+                  />
+                </td>
+                <td className="px-4 py-3">
+                  <DesignerToggle
+                    userId={user.id}
+                    isDesigner={user.designer}
                   />
                 </td>
               </tr>

@@ -66,7 +66,9 @@ export const ModelName = {
   Comment: 'Comment',
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
-  SiteSettings: 'SiteSettings'
+  SiteSettings: 'SiteSettings',
+  Collection: 'Collection',
+  CollectionEstate: 'CollectionEstate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -132,7 +134,12 @@ export const UserScalarFieldEnum = {
   discordUsername: 'discordUsername',
   discordId: 'discordId',
   role: 'role',
-  pathfinder: 'pathfinder'
+  pathfinder: 'pathfinder',
+  bio: 'bio',
+  commissionOpen: 'commissionOpen',
+  portfolioUrl: 'portfolioUrl',
+  pinnedEstateId: 'pinnedEstateId',
+  designer: 'designer'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -300,6 +307,27 @@ export const SiteSettingsScalarFieldEnum = {
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const CollectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CollectionScalarFieldEnum = (typeof CollectionScalarFieldEnum)[keyof typeof CollectionScalarFieldEnum]
+
+
+export const CollectionEstateScalarFieldEnum = {
+  collectionId: 'collectionId',
+  estateId: 'estateId',
+  order: 'order'
+} as const
+
+export type CollectionEstateScalarFieldEnum = (typeof CollectionEstateScalarFieldEnum)[keyof typeof CollectionEstateScalarFieldEnum]
 
 
 export const SortOrder = {

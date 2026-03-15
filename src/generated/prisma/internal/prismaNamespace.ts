@@ -399,7 +399,9 @@ export const ModelName = {
   Comment: 'Comment',
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
-  SiteSettings: 'SiteSettings'
+  SiteSettings: 'SiteSettings',
+  Collection: 'Collection',
+  CollectionEstate: 'CollectionEstate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "collection" | "collectionEstate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1603,6 +1605,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Collection: {
+      payload: Prisma.$CollectionPayload<ExtArgs>
+      fields: Prisma.CollectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CollectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CollectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        findFirst: {
+          args: Prisma.CollectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CollectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        findMany: {
+          args: Prisma.CollectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>[]
+        }
+        create: {
+          args: Prisma.CollectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        createMany: {
+          args: Prisma.CollectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CollectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>[]
+        }
+        delete: {
+          args: Prisma.CollectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        update: {
+          args: Prisma.CollectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CollectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CollectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CollectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.CollectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionPayload>
+        }
+        aggregate: {
+          args: Prisma.CollectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCollection>
+        }
+        groupBy: {
+          args: Prisma.CollectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CollectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CollectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CollectionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CollectionEstate: {
+      payload: Prisma.$CollectionEstatePayload<ExtArgs>
+      fields: Prisma.CollectionEstateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CollectionEstateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CollectionEstateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        findFirst: {
+          args: Prisma.CollectionEstateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CollectionEstateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        findMany: {
+          args: Prisma.CollectionEstateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>[]
+        }
+        create: {
+          args: Prisma.CollectionEstateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        createMany: {
+          args: Prisma.CollectionEstateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CollectionEstateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>[]
+        }
+        delete: {
+          args: Prisma.CollectionEstateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        update: {
+          args: Prisma.CollectionEstateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        deleteMany: {
+          args: Prisma.CollectionEstateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CollectionEstateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CollectionEstateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>[]
+        }
+        upsert: {
+          args: Prisma.CollectionEstateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CollectionEstatePayload>
+        }
+        aggregate: {
+          args: Prisma.CollectionEstateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCollectionEstate>
+        }
+        groupBy: {
+          args: Prisma.CollectionEstateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CollectionEstateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CollectionEstateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CollectionEstateCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1689,7 +1839,12 @@ export const UserScalarFieldEnum = {
   discordUsername: 'discordUsername',
   discordId: 'discordId',
   role: 'role',
-  pathfinder: 'pathfinder'
+  pathfinder: 'pathfinder',
+  bio: 'bio',
+  commissionOpen: 'commissionOpen',
+  portfolioUrl: 'portfolioUrl',
+  pinnedEstateId: 'pinnedEstateId',
+  designer: 'designer'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1857,6 +2012,27 @@ export const SiteSettingsScalarFieldEnum = {
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const CollectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CollectionScalarFieldEnum = (typeof CollectionScalarFieldEnum)[keyof typeof CollectionScalarFieldEnum]
+
+
+export const CollectionEstateScalarFieldEnum = {
+  collectionId: 'collectionId',
+  estateId: 'estateId',
+  order: 'order'
+} as const
+
+export type CollectionEstateScalarFieldEnum = (typeof CollectionEstateScalarFieldEnum)[keyof typeof CollectionEstateScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2177,6 +2353,8 @@ export type GlobalOmitConfig = {
   lodestoneVerification?: Prisma.LodestoneVerificationOmit
   legalPage?: Prisma.LegalPageOmit
   siteSettings?: Prisma.SiteSettingsOmit
+  collection?: Prisma.CollectionOmit
+  collectionEstate?: Prisma.CollectionEstateOmit
 }
 
 /* Types for Logging */
