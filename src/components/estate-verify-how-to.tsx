@@ -107,18 +107,19 @@ const STEPS_BY_TYPE: Record<string, Step[]> = {
       title: "Open Additional Chambers",
       description:
         "Find and interact with the 'Entrance to Additional Chambers' door inside the estate and select 'Move to specified private chambers' to open the Additional Chambers selection window.",
-      image: "/images/verification_how_to/fc_room_verification/fc_room_1.png",
+      image: "/images/verification_how_to/fc_room_verification/fc_room_verification_1.png",
     },
     {
       title: "Select your room grouping",
       description:
         "Select the room grouping that your chamber number falls in.",
-      image: "/images/verification_how_to/fc_room_verification/fc_room_2.png",
+      image: "/images/verification_how_to/fc_room_verification/fc_room_verification_2.png",
     },
     {
       title: "Highlight your chamber and take the screenshot",
       description:
         "Hover over your chamber room so your full character name is visible in the Occupant column with your nameplate visible, then take the screenshot.",
+      image: "/images/verification_how_to/fc_room_verification/fc_room_verification_3.png",
     },
   ],
 }
