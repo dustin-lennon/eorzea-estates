@@ -29,7 +29,7 @@ export const estateFormSchema = z.object({
   tags: z.array(z.string()).max(10).default([]),
   images: z.array(
     z.object({ url: z.string().url(), storageKey: z.string() })
-  ).min(1, "At least one screenshot is required").max(10),
+  ).min(1, "At least one screenshot is required").max(50),
   // Venue-specific
   venueType: z.enum(["BAR", "NIGHTCLUB", "CAFE", "RESTAURANT", "GALLERY", "LIBRARY", "SHOP", "BATHHOUSE", "INN", "OTHER"]).optional(),
   venueTimezone: z.string().default("UTC"),
