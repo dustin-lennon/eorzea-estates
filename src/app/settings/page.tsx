@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 
@@ -72,6 +72,34 @@ export default function SettingsPage() {
           </li>
         </ul>
       </section>
+      <section className="bg-card rounded-xl p-6 mb-8">
+        <div className="flex items-center mb-6">
+          <MessageCircle className="brand-link mr-3" />
+          <h2 className="text-lg font-semibold text-primary">Contact & Feedback</h2>
+        </div>
+        <ul className="space-y-4">
+          <li>
+            <a href="mailto:feedback@eorzeaestates.com" className="flex items-center group justify-between hover:bg-accent rounded-lg px-3 py-2 transition">
+              <span className="flex items-center">
+                <Mail className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+                <span className="text-foreground">feedback@eorzeaestates.com</span>
+              </span>
+              <ChevronRight className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+            </a>
+          </li>
+          <li>
+            <a href="https://discord.gg/CMJfbXrwpR" target="_blank" rel="noopener noreferrer" className="flex items-center group justify-between hover:bg-accent rounded-lg px-3 py-2 transition">
+              <span className="flex items-center">
+                <Users className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+                <span className="text-foreground">Discord Server</span>
+              </span>
+              <ChevronRight className="mr-3 text-muted-foreground group-hover:text-primary transition" />
+            </a>
+          </li>
+        </ul>
+        <p className="text-xs text-muted-foreground mt-4 px-3">Found a bug? Have a suggestion? We&apos;d love to hear from you!</p>
+      </section>
+
       <section className="bg-card rounded-xl p-6 border border-destructive/40">
         <div className="flex items-center mb-4">
           <TriangleAlert className="text-destructive mr-3 h-5 w-5" />
