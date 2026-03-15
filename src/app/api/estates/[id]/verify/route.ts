@@ -128,8 +128,12 @@ export async function POST(
       plot: estate.plot,
       room: estate.room,
     })
-  } catch {
+  } catch (err) {
     // AI unavailable — queue for manual review
+    console.error("[verify] AI analysis failed:", err)
+    console.error("[verify] Gateway URL:", process.env.VERCEL_AI_GATEWAY_URL ?? "(not set — using direct API)")
+    console.error("[verify] OIDC token present:", !!process.env.VERCEL_OIDC_TOKEN)
+    console.error("[verify] Anthropic key present:", !!process.env.ANTHROPIC_API_KEY)
   }
 
   // Flush Langfuse traces after the response is sent
