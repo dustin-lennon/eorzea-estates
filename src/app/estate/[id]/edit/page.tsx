@@ -21,7 +21,7 @@ export default async function EditEstatePage({
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const [estate, rawCharacters] = await Promise.all([
+  const [estate, rawCharacters] = await prisma.$transaction([
     prisma.estate.findUnique({
       where: { id, deletedAt: null },
       select: {
