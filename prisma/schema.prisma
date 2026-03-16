@@ -125,6 +125,7 @@ model Estate {
   verificationStatus VerificationStatus?
   designerId         String?
   claimedAt          DateTime?
+  confirmedActiveAt  DateTime?
   comments           Comment[]
   character          FfxivCharacter?        @relation(fields: [characterId], references: [id])
   flaggedBy          User?                  @relation("FlaggedByUser", fields: [flaggedById], references: [id])
