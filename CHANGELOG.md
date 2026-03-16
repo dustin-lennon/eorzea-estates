@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.20.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.20.0...v1.20.1) (2026-03-16)
+
+### 🐛 Bug Fixes
+
+* prevent designer flag from bypassing verification on standard estate submission ([dd18839](https://github.com/dustin-lennon/eorzea-estates/commit/dd18839dd748e3039243816a9b8fa946ef5473d6)), closes [#187](https://github.com/dustin-lennon/eorzea-estates/issues/187)
+
 ## [1.20.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.19.0...v1.20.0) (2026-03-16)
 
 ### ✨ Features
