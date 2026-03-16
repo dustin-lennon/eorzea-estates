@@ -66,6 +66,7 @@ async function FeaturedEstates() {
               ownerName={ownerName ?? null}
               lodestoneVerified={!!verifiedChar}
               venueType={estate.venueDetails?.venueType ?? null}
+              updatedAt={estate.updatedAt}
             />
           )
         })}
