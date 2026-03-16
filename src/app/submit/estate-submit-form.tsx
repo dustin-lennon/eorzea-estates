@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useForm, useFieldArray } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -59,6 +59,11 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
   const [pendingDesignerValues, setPendingDesignerValues] = useState<DesignerEstateFormValues | null>(null)
   const isEditing = !!estateId
   const useDesignerFlow = isDesigner && designerMode && !isEditing
+
+  // Reset designer mode on mount to prevent stale state from soft navigation
+  useEffect(() => {
+    setDesignerMode(false)
+  }, [])
 
   const form = useForm<EstateFormInput, unknown, EstateFormValues>({
     resolver: zodResolver(estateFormSchema),

@@ -16,8 +16,8 @@ export async function POST(req: Request) {
 
   const body = await req.json()
 
-  // Designer submission path
-  if (body.designerSubmission) {
+  // Designer submission path — only if explicitly flagged AND no characterId (standard form always includes characterId)
+  if (body.designerSubmission === true && !body.characterId) {
     const dbUser = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { designer: true },
