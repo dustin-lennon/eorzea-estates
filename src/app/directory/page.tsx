@@ -55,7 +55,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       ? { updatedAt: "desc" as const }
       : { createdAt: "desc" as const }
 
-  const dbResult = await Promise.all([
+  const dbResult = await prisma.$transaction([
     prisma.estate.findMany({
       where,
       orderBy,

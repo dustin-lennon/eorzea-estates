@@ -13,7 +13,7 @@ export default async function SubmitPage() {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  const [dbUser, rawCharacters] = await Promise.all([
+  const [dbUser, rawCharacters] = await prisma.$transaction([
     prisma.user.findUnique({
       where: { id: session.user.id },
       select: { designer: true },

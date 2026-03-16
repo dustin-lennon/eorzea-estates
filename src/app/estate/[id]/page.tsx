@@ -40,7 +40,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
   const { id } = await params
   const session = await auth()
 
-  const [estate, comments] = await Promise.all([
+  const [estate, comments] = await prisma.$transaction([
     prisma.estate.findUnique({
       where: { id, published: true, deletedAt: null },
       include: {

@@ -153,7 +153,7 @@ async function FeaturedDesigners() {
 async function StatsRow() {
   let total = 0, venues = 0, byType: unknown[] = []
   try {
-    ;[total, venues, byType] = await Promise.all([
+    ;[total, venues, byType] = await prisma.$transaction([
       prisma.estate.count({ where: { published: true, deletedAt: null } }),
       prisma.estate.count({ where: { published: true, type: "VENUE", deletedAt: null } }),
       prisma.estate.groupBy({
