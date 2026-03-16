@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { toast } from "sonner"
-import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2, ShieldCheck } from "lucide-react"
+import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2, ShieldCheck, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -25,6 +25,7 @@ interface Props {
   verified: boolean
   verificationStatus: VerificationStatus | null
   modReason?: string | null
+  isStale?: boolean
 }
 
 export function DashboardEstateActions({
@@ -36,6 +37,7 @@ export function DashboardEstateActions({
   verified,
   verificationStatus,
   modReason,
+  isStale = false,
 }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -57,6 +59,20 @@ export function DashboardEstateActions({
       router.refresh()
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed to update estate")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function confirmActive() {
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/estates/${estateId}/confirm-active`, { method: "POST" })
+      if (!res.ok) throw new Error()
+      toast.success("Listing confirmed active")
+      router.refresh()
+    } catch {
+      toast.error("Failed to confirm listing")
     } finally {
       setLoading(false)
     }
@@ -152,6 +168,13 @@ export function DashboardEstateActions({
               <DropdownMenuItem disabled title="Verify ownership before publishing">
                 <Eye className="h-4 w-4 mr-2" />
                 Publish
+              </DropdownMenuItem>
+            )}
+
+            {isStale && (
+              <DropdownMenuItem onClick={confirmActive}>
+                <CheckCircle className="h-4 w-4 mr-2 text-yellow-500" />
+                Confirm Still Active
               </DropdownMenuItem>
             )}
 

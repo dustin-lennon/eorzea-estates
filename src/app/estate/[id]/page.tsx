@@ -13,6 +13,9 @@ import type { HoursSchedule } from "@/lib/ffxiv-data"
 import { EstateImageGallery } from "./estate-image-gallery"
 import { FlagButton } from "@/components/flag-button"
 import { ClaimButton } from "./claim-button"
+import { ConfirmActiveButton } from "@/components/confirm-active-button"
+import { isStale, STALE_DAYS } from "@/lib/constants"
+import { AlertTriangle } from "lucide-react"
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -124,6 +127,9 @@ export default async function EstateDetailPage({ params }: PageProps) {
   }
 
   const canClaim = claimCharacters.length > 0
+  const lastActivity = estate.confirmedActiveAt ?? estate.updatedAt
+  const showStaleBanner = estate.published && isStale(lastActivity)
+
   const userLiked = isLoggedIn
     ? !!(await prisma.like.findUnique({
         where: { userId_estateId: { userId: session!.user!.id!, estateId: id } },
@@ -217,6 +223,17 @@ export default async function EstateDetailPage({ params }: PageProps) {
           {isLoggedIn && !canClaim && !isOwner && !isDesigner && (
             <span className="text-xs text-muted-foreground">Verify a character to claim.</span>
           )}
+        </div>
+      )}
+
+      {/* Stale listing notice */}
+      {showStaleBanner && (
+        <div className="mt-3 flex flex-wrap items-center gap-3 p-3 rounded-lg border border-yellow-500/30 bg-yellow-500/5 text-sm">
+          <AlertTriangle className="h-4 w-4 text-yellow-500 shrink-0" />
+          <p className="text-muted-foreground flex-1">
+            This listing hasn&apos;t been confirmed active in over {STALE_DAYS} days and may be outdated.
+          </p>
+          {isOwner && <ConfirmActiveButton estateId={id} />}
         </div>
       )}
 

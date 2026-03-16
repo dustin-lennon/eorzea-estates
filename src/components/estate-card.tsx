@@ -1,8 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Heart, MapPin, BadgeCheck, Palette, Clock } from "lucide-react"
+import { Heart, MapPin, BadgeCheck, Palette, Clock, AlertTriangle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { ESTATE_TYPES, HOUSING_DISTRICTS } from "@/lib/ffxiv-data"
+import { isStale } from "@/lib/constants"
 
 interface EstateCardProps {
   id: string
@@ -22,6 +23,7 @@ interface EstateCardProps {
   designerName?: string | null
   claimedAt?: Date | null
   updatedAt?: Date | null
+  confirmedActiveAt?: Date | null
 }
 
 function formatUpdatedAt(date: Date): string {
@@ -52,9 +54,12 @@ export function EstateCard({
   designerName,
   claimedAt,
   updatedAt,
+  confirmedActiveAt,
 }: EstateCardProps) {
   const typeLabel = ESTATE_TYPES.find((t) => t.value === type)?.label ?? type
   const districtLabel = HOUSING_DISTRICTS.find((d) => d.value === district)?.label
+  const lastActivity = confirmedActiveAt ?? updatedAt
+  const stale = published && !!lastActivity && isStale(lastActivity)
 
   const inner = (
     <>
@@ -90,6 +95,12 @@ export function EstateCard({
             <Badge variant="outline" className="text-xs bg-background/80 border-purple-500/50 text-purple-600 dark:text-purple-400 flex items-center gap-1">
               <Palette className="h-2.5 w-2.5" />
               Designer
+            </Badge>
+          )}
+          {stale && (
+            <Badge variant="outline" className="text-xs bg-background/80 border-yellow-500/60 text-yellow-600 dark:text-yellow-400 flex items-center gap-1">
+              <AlertTriangle className="h-2.5 w-2.5" />
+              May be outdated
             </Badge>
           )}
         </div>

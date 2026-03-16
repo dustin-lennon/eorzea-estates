@@ -112,6 +112,7 @@ export default async function CharacterProfilePage({ params }: PageProps) {
               lodestoneVerified={character.verified}
               venueType={estate.venueDetails?.venueType ?? null}
               updatedAt={estate.updatedAt}
+              confirmedActiveAt={estate.confirmedActiveAt}
             />
           ))}
         </div>
