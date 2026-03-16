@@ -37,7 +37,7 @@ jobs:
 
           git checkout develop
 
-          BEHIND=$(git rev-list --count develop..main)
+          BEHIND=$(git rev-list --count origin/develop..origin/main)
 
           if [ $BEHIND -gt 0 ]; then
             echo "Develop is $BEHIND commits behind main. Syncing..."

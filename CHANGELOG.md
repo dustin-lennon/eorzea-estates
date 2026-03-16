@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.18.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.2...v1.18.3) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* use origin/ refs in sync-develop rev-list comparison ([f3ce12e](https://github.com/dustin-lennon/eorzea-estates/commit/f3ce12ef6398f32fd476ebbee829d3ba0fc12893))
+
 ## [1.18.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.1...v1.18.2) (2026-03-15)
 
 ### 🐛 Bug Fixes
