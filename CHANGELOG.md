@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.18.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.3...v1.18.4) (2026-03-16)
+
+### 🐛 Bug Fixes
+
+* bypass Vercel payload limit with presigned Supabase upload ([cafbaee](https://github.com/dustin-lennon/eorzea-estates/commit/cafbaee12e143c150ced39fed362c70044652ea3)), closes [#179](https://github.com/dustin-lennon/eorzea-estates/issues/179)
+
 ## [1.18.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.2...v1.18.3) (2026-03-15)
 
 ### 🐛 Bug Fixes
