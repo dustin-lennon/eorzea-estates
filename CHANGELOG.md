@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.20.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.19.0...v1.20.0) (2026-03-16)
+
+### ✨ Features
+
+* add subdivision field for apartments and derived subdivision for private estates ([b0779da](https://github.com/dustin-lennon/eorzea-estates/commit/b0779dac7277f7c9fa2fa0148cdacf79e1ac91e3)), closes [#184](https://github.com/dustin-lennon/eorzea-estates/issues/184)
+
 ## [1.19.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.5...v1.19.0) (2026-03-16)
 
 ### ✨ Features
