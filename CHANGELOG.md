@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.19.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.5...v1.19.0) (2026-03-16)
+
+### ✨ Features
+
+* add last updated date to estate cards and updated-within filter ([0b440d4](https://github.com/dustin-lennon/eorzea-estates/commit/0b440d499a8cbe2775ced706778c33958fcd10d8)), closes [#172](https://github.com/dustin-lennon/eorzea-estates/issues/172)
+* show last updated timestamp on estate cards across all pages ([afe56a8](https://github.com/dustin-lennon/eorzea-estates/commit/afe56a8b72e1fe6b1b31047c0d58b326cc846d95))
+
 ## [1.18.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.4...v1.18.5) (2026-03-16)
 
 ### 🐛 Bug Fixes
