@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.18.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.4...v1.18.5) (2026-03-16)
+
+### 🐛 Bug Fixes
+
+* convert remaining Promise.all prisma queries to \$transaction ([be1d045](https://github.com/dustin-lennon/eorzea-estates/commit/be1d045b5230479af9a3aec292371ac439f79039))
+
 ## [1.18.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.18.3...v1.18.4) (2026-03-16)
 
 ### 🐛 Bug Fixes
