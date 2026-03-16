@@ -6,6 +6,31 @@ import { toast } from "sonner"
 import { X, GripVertical, ImagePlus, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+async function compressImage(file: File): Promise<Blob> {
+  const bitmap = await createImageBitmap(file)
+  const MAX_W = 1920
+  const MAX_H = 1080
+  let w = bitmap.width
+  let h = bitmap.height
+  if (w > MAX_W || h > MAX_H) {
+    const scale = Math.min(MAX_W / w, MAX_H / h)
+    w = Math.round(w * scale)
+    h = Math.round(h * scale)
+  }
+  const canvas = document.createElement("canvas")
+  canvas.width = w
+  canvas.height = h
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, w, h)
+  bitmap.close()
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => (blob ? resolve(blob) : reject(new Error("Compression failed"))),
+      "image/webp",
+      0.85
+    )
+  })
+}
+
 export interface UploadedImage {
   url: string
   storageKey: string
@@ -45,18 +70,32 @@ export function ImageUpload({ value, onChange, maxImages = 50, pathContext }: Im
       try {
         const results = await Promise.all(
           toUpload.map(async (file) => {
-            const formData = new FormData()
-            formData.append("file", file)
-            if (pathContext?.characterId) formData.append("characterId", pathContext.characterId)
-            if (pathContext?.district) formData.append("district", pathContext.district)
-            if (pathContext?.ward != null) formData.append("ward", String(pathContext.ward))
-            if (pathContext?.plot != null) formData.append("plot", String(pathContext.plot))
-            const res = await fetch("/api/upload", { method: "POST", body: formData })
-            if (!res.ok) {
-              const err = await res.json()
+            const compressed = await compressImage(file)
+
+            const signRes = await fetch("/api/upload/sign", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                characterId: pathContext?.characterId,
+                district: pathContext?.district,
+                ward: pathContext?.ward,
+                plot: pathContext?.plot,
+              }),
+            })
+            if (!signRes.ok) {
+              const err = await signRes.json()
               throw new Error(err.error ?? "Upload failed")
             }
-            return res.json() as Promise<UploadedImage>
+            const { signedUrl, storageKey, publicUrl } = await signRes.json()
+
+            const uploadRes = await fetch(signedUrl, {
+              method: "PUT",
+              body: compressed,
+              headers: { "Content-Type": "image/webp" },
+            })
+            if (!uploadRes.ok) throw new Error("Upload failed")
+
+            return { url: publicUrl, storageKey } as UploadedImage
           })
         )
         onChange([...value, ...results])
