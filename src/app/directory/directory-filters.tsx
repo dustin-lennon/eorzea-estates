@@ -25,11 +25,12 @@ interface Props {
   estateTypes: readonly { value: string; label: string }[]
   districts: readonly { value: string; label: string }[]
   tags: readonly string[]
+  updatedSince?: string
 }
 
 const EMPTY = "__all__"
 
-export function DirectoryFilters({ regions, estateTypes, districts, tags }: Props) {
+export function DirectoryFilters({ regions, estateTypes, districts, tags, updatedSince }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -65,7 +66,8 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags }: Prop
     searchParams.get("type") ||
     searchParams.get("district") ||
     searchParams.get("tags") ||
-    searchParams.get("q")
+    searchParams.get("q") ||
+    searchParams.get("updatedSince")
 
   return (
     <div className="space-y-5">
@@ -109,6 +111,27 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags }: Prop
             <SelectItem value="newest">Newest</SelectItem>
             <SelectItem value="likes">Most Liked</SelectItem>
             <SelectItem value="updated">Recently Updated</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <Separator />
+
+      <div>
+        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Updated Within</Label>
+        <Select
+          value={updatedSince ?? EMPTY}
+          onValueChange={(v) => update("updatedSince", v === EMPTY ? null : v)}
+        >
+          <SelectTrigger className="mt-1">
+            <SelectValue placeholder="Any time" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={EMPTY}>Any time</SelectItem>
+            <SelectItem value="7d">Last 7 days</SelectItem>
+            <SelectItem value="30d">Last 30 days</SelectItem>
+            <SelectItem value="90d">Last 90 days</SelectItem>
+            <SelectItem value="1y">Last year</SelectItem>
           </SelectContent>
         </Select>
       </div>

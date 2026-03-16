@@ -109,6 +109,7 @@ export default async function CollectionDetailPage({ params }: PageProps) {
                 ownerName={estateOwnerName ?? null}
                 lodestoneVerified={!!verifiedChar}
                 venueType={estate.venueDetails?.venueType ?? null}
+                updatedAt={estate.updatedAt}
               />
             )
           })}

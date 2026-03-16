@@ -333,6 +333,7 @@ export default async function DashboardPage() {
                   lodestoneVerified={!!verifiedChar}
                   venueType={estate.venueDetails?.venueType ?? null}
                   published={estate.published}
+                  updatedAt={estate.updatedAt}
                 />
               )
             })}

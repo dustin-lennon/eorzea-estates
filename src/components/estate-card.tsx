@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Heart, MapPin, BadgeCheck, Palette } from "lucide-react"
+import { Heart, MapPin, BadgeCheck, Palette, Clock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { ESTATE_TYPES, HOUSING_DISTRICTS } from "@/lib/ffxiv-data"
 
@@ -21,6 +21,18 @@ interface EstateCardProps {
   published?: boolean
   designerName?: string | null
   claimedAt?: Date | null
+  updatedAt?: Date | null
+}
+
+function formatUpdatedAt(date: Date): string {
+  const now = Date.now()
+  const diff = now - date.getTime()
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  if (days === 0) return "Updated today"
+  if (days === 1) return "Updated yesterday"
+  if (days < 30) return `Updated ${days}d ago`
+  if (days < 365) return `Updated ${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`
+  return `Updated ${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
 }
 
 export function EstateCard({
@@ -39,6 +51,7 @@ export function EstateCard({
   published = true,
   designerName,
   claimedAt,
+  updatedAt,
 }: EstateCardProps) {
   const typeLabel = ESTATE_TYPES.find((t) => t.value === type)?.label ?? type
   const districtLabel = HOUSING_DISTRICTS.find((d) => d.value === district)?.label
@@ -122,10 +135,18 @@ export function EstateCard({
               </span>
             )}
           </div>
-          <span className="flex items-center gap-1 text-xs text-muted-foreground ml-auto shrink-0">
-            <Heart className="h-3 w-3" />
-            {likeCount}
-          </span>
+          <div className="flex items-center gap-2 ml-auto shrink-0">
+            {updatedAt && (
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {formatUpdatedAt(updatedAt)}
+              </span>
+            )}
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Heart className="h-3 w-3" />
+              {likeCount}
+            </span>
+          </div>
         </div>
       </div>
     </>
