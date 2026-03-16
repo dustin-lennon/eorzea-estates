@@ -11,6 +11,7 @@ import { EstateCard } from "@/components/estate-card"
 import { DashboardEstateActions } from "./dashboard-estate-actions"
 import { CharacterActions } from "./character-actions"
 import { ESTATE_TYPES } from "@/lib/ffxiv-data"
+import { isStale } from "@/lib/constants"
 import { Plus, BadgeCheck, UserCircle2, ShieldCheck, BookOpen } from "lucide-react"
 import { CollectionManager } from "@/components/collection-manager"
 
@@ -277,6 +278,7 @@ export default async function DashboardPage() {
                   verified={estate.verified}
                   verificationStatus={estate.verificationStatus}
                   modReason={estate.verification?.modReason}
+                  isStale={estate.published && isStale(estate.confirmedActiveAt ?? estate.updatedAt)}
                 />
               </div>
             ))}
@@ -334,6 +336,7 @@ export default async function DashboardPage() {
                   venueType={estate.venueDetails?.venueType ?? null}
                   published={estate.published}
                   updatedAt={estate.updatedAt}
+                  confirmedActiveAt={estate.confirmedActiveAt}
                 />
               )
             })}

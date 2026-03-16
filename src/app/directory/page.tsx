@@ -87,6 +87,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         tags: true,
         likeCount: true,
         updatedAt: true,
+        confirmedActiveAt: true,
         images: { orderBy: { order: "asc" }, take: 1, select: { imageUrl: true } },
         owner: {
           select: {
@@ -157,6 +158,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                       lodestoneVerified={!!verifiedChar}
                       venueType={estate.venueDetails?.venueType ?? null}
                       updatedAt={estate.updatedAt}
+                      confirmedActiveAt={estate.confirmedActiveAt}
                     />
                   )
                 })}

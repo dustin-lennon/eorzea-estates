@@ -152,6 +152,7 @@ export default async function ProfilePage({ params }: PageProps) {
               lodestoneVerified={isVerified}
               venueType={pinnedEstate.venueDetails?.venueType ?? null}
               updatedAt={pinnedEstate.updatedAt}
+              confirmedActiveAt={pinnedEstate.confirmedActiveAt}
             />
           </div>
         </div>
@@ -177,6 +178,7 @@ export default async function ProfilePage({ params }: PageProps) {
               lodestoneVerified={isVerified}
               venueType={estate.venueDetails?.venueType ?? null}
               updatedAt={estate.updatedAt}
+              confirmedActiveAt={estate.confirmedActiveAt}
             />
           ))}
         </div>

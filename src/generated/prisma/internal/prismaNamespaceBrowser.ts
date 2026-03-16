@@ -192,7 +192,8 @@ export const EstateScalarFieldEnum = {
   verified: 'verified',
   verificationStatus: 'verificationStatus',
   designerId: 'designerId',
-  claimedAt: 'claimedAt'
+  claimedAt: 'claimedAt',
+  confirmedActiveAt: 'confirmedActiveAt'
 } as const
 
 export type EstateScalarFieldEnum = (typeof EstateScalarFieldEnum)[keyof typeof EstateScalarFieldEnum]
