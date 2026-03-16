@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.21.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.20.1...v1.21.0) (2026-03-16)
+
+### ✨ Features
+
+* stale listing indicator with owner confirm-active flow ([667dba1](https://github.com/dustin-lennon/eorzea-estates/commit/667dba1b1113de52619860032442d5583d200fdf)), closes [#190](https://github.com/dustin-lennon/eorzea-estates/issues/190)
+
 ## [1.20.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.20.0...v1.20.1) (2026-03-16)
 
 ### 🐛 Bug Fixes
