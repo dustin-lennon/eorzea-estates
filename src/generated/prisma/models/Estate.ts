@@ -62,6 +62,7 @@ export type EstateMinAggregateOutputType = {
   ownerId: string | null
   characterId: string | null
   room: number | null
+  subdivision: string | null
   flagReason: string | null
   flagged: boolean | null
   flaggedAt: Date | null
@@ -94,6 +95,7 @@ export type EstateMaxAggregateOutputType = {
   ownerId: string | null
   characterId: string | null
   room: number | null
+  subdivision: string | null
   flagReason: string | null
   flagged: boolean | null
   flaggedAt: Date | null
@@ -127,6 +129,7 @@ export type EstateCountAggregateOutputType = {
   ownerId: number
   characterId: number
   room: number
+  subdivision: number
   flagReason: number
   flagged: number
   flaggedAt: number
@@ -177,6 +180,7 @@ export type EstateMinAggregateInputType = {
   ownerId?: true
   characterId?: true
   room?: true
+  subdivision?: true
   flagReason?: true
   flagged?: true
   flaggedAt?: true
@@ -209,6 +213,7 @@ export type EstateMaxAggregateInputType = {
   ownerId?: true
   characterId?: true
   room?: true
+  subdivision?: true
   flagReason?: true
   flagged?: true
   flaggedAt?: true
@@ -242,6 +247,7 @@ export type EstateCountAggregateInputType = {
   ownerId?: true
   characterId?: true
   room?: true
+  subdivision?: true
   flagReason?: true
   flagged?: true
   flaggedAt?: true
@@ -362,6 +368,7 @@ export type EstateGroupByOutputType = {
   ownerId: string
   characterId: string | null
   room: number | null
+  subdivision: string | null
   flagReason: string | null
   flagged: boolean
   flaggedAt: Date | null
@@ -418,6 +425,7 @@ export type EstateWhereInput = {
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
   room?: Prisma.IntNullableFilter<"Estate"> | number | null
+  subdivision?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
@@ -464,6 +472,7 @@ export type EstateOrderByWithRelationInput = {
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrderInput | Prisma.SortOrder
   room?: Prisma.SortOrderInput | Prisma.SortOrder
+  subdivision?: Prisma.SortOrderInput | Prisma.SortOrder
   flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
   flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -513,6 +522,7 @@ export type EstateWhereUniqueInput = Prisma.AtLeast<{
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
   room?: Prisma.IntNullableFilter<"Estate"> | number | null
+  subdivision?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
@@ -559,6 +569,7 @@ export type EstateOrderByWithAggregationInput = {
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrderInput | Prisma.SortOrder
   room?: Prisma.SortOrderInput | Prisma.SortOrder
+  subdivision?: Prisma.SortOrderInput | Prisma.SortOrder
   flagReason?: Prisma.SortOrderInput | Prisma.SortOrder
   flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -600,6 +611,7 @@ export type EstateScalarWhereWithAggregatesInput = {
   ownerId?: Prisma.StringWithAggregatesFilter<"Estate"> | string
   characterId?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
   room?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
+  subdivision?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
   flagReason?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
   flagged?: Prisma.BoolWithAggregatesFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Estate"> | Date | string | null
@@ -631,6 +643,7 @@ export type EstateCreateInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -675,6 +688,7 @@ export type EstateUncheckedCreateInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -715,6 +729,7 @@ export type EstateUpdateInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -759,6 +774,7 @@ export type EstateUncheckedUpdateInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -801,6 +817,7 @@ export type EstateCreateManyInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -832,6 +849,7 @@ export type EstateUpdateManyMutationInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -863,6 +881,7 @@ export type EstateUncheckedUpdateManyInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -919,6 +938,7 @@ export type EstateCountOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
   room?: Prisma.SortOrder
+  subdivision?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
   flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
@@ -959,6 +979,7 @@ export type EstateMaxOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
   room?: Prisma.SortOrder
+  subdivision?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
   flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
@@ -991,6 +1012,7 @@ export type EstateMinOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   characterId?: Prisma.SortOrder
   room?: Prisma.SortOrder
+  subdivision?: Prisma.SortOrder
   flagReason?: Prisma.SortOrder
   flagged?: Prisma.SortOrder
   flaggedAt?: Prisma.SortOrder
@@ -1364,6 +1386,7 @@ export type EstateCreateWithoutFlaggedByInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1407,6 +1430,7 @@ export type EstateUncheckedCreateWithoutFlaggedByInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1456,6 +1480,7 @@ export type EstateCreateWithoutOwnerInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1498,6 +1523,7 @@ export type EstateUncheckedCreateWithoutOwnerInput = {
   commentCount?: number
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1548,6 +1574,7 @@ export type EstateCreateWithoutPinnedByUsersInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1591,6 +1618,7 @@ export type EstateUncheckedCreateWithoutPinnedByUsersInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1635,6 +1663,7 @@ export type EstateCreateWithoutDesignerInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1678,6 +1707,7 @@ export type EstateUncheckedCreateWithoutDesignerInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1748,6 +1778,7 @@ export type EstateScalarWhereInput = {
   ownerId?: Prisma.StringFilter<"Estate"> | string
   characterId?: Prisma.StringNullableFilter<"Estate"> | string | null
   room?: Prisma.IntNullableFilter<"Estate"> | number | null
+  subdivision?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagReason?: Prisma.StringNullableFilter<"Estate"> | string | null
   flagged?: Prisma.BoolFilter<"Estate"> | boolean
   flaggedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
@@ -1806,6 +1837,7 @@ export type EstateUpdateWithoutPinnedByUsersInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1849,6 +1881,7 @@ export type EstateUncheckedUpdateWithoutPinnedByUsersInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1904,6 +1937,7 @@ export type EstateCreateWithoutCharacterInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -1946,6 +1980,7 @@ export type EstateUncheckedCreateWithoutCharacterInput = {
   commentCount?: number
   ownerId: string
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2012,6 +2047,7 @@ export type EstateCreateWithoutVerificationInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2055,6 +2091,7 @@ export type EstateUncheckedCreateWithoutVerificationInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2110,6 +2147,7 @@ export type EstateUpdateWithoutVerificationInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2153,6 +2191,7 @@ export type EstateUncheckedUpdateWithoutVerificationInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2192,6 +2231,7 @@ export type EstateCreateWithoutPendingTransferInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2235,6 +2275,7 @@ export type EstateUncheckedCreateWithoutPendingTransferInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2290,6 +2331,7 @@ export type EstateUpdateWithoutPendingTransferInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2333,6 +2375,7 @@ export type EstateUncheckedUpdateWithoutPendingTransferInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2372,6 +2415,7 @@ export type EstateCreateWithoutImagesInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2415,6 +2459,7 @@ export type EstateUncheckedCreateWithoutImagesInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2470,6 +2515,7 @@ export type EstateUpdateWithoutImagesInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2513,6 +2559,7 @@ export type EstateUncheckedUpdateWithoutImagesInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2552,6 +2599,7 @@ export type EstateCreateWithoutVenueDetailsInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2595,6 +2643,7 @@ export type EstateUncheckedCreateWithoutVenueDetailsInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2650,6 +2699,7 @@ export type EstateUpdateWithoutVenueDetailsInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2693,6 +2743,7 @@ export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2732,6 +2783,7 @@ export type EstateCreateWithoutLikesInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2775,6 +2827,7 @@ export type EstateUncheckedCreateWithoutLikesInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2830,6 +2883,7 @@ export type EstateUpdateWithoutLikesInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2873,6 +2927,7 @@ export type EstateUncheckedUpdateWithoutLikesInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2912,6 +2967,7 @@ export type EstateCreateWithoutCommentsInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -2955,6 +3011,7 @@ export type EstateUncheckedCreateWithoutCommentsInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3010,6 +3067,7 @@ export type EstateUpdateWithoutCommentsInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3053,6 +3111,7 @@ export type EstateUncheckedUpdateWithoutCommentsInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3092,6 +3151,7 @@ export type EstateCreateWithoutClaimRequestInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3135,6 +3195,7 @@ export type EstateUncheckedCreateWithoutClaimRequestInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3190,6 +3251,7 @@ export type EstateUpdateWithoutClaimRequestInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3233,6 +3295,7 @@ export type EstateUncheckedUpdateWithoutClaimRequestInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3272,6 +3335,7 @@ export type EstateCreateWithoutCollectionEntriesInput = {
   likeCount?: number
   commentCount?: number
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3315,6 +3379,7 @@ export type EstateUncheckedCreateWithoutCollectionEntriesInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3370,6 +3435,7 @@ export type EstateUpdateWithoutCollectionEntriesInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3413,6 +3479,7 @@ export type EstateUncheckedUpdateWithoutCollectionEntriesInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3454,6 +3521,7 @@ export type EstateCreateManyFlaggedByInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3485,6 +3553,7 @@ export type EstateCreateManyOwnerInput = {
   commentCount?: number
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3518,6 +3587,7 @@ export type EstateCreateManyDesignerInput = {
   ownerId: string
   characterId?: string | null
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3548,6 +3618,7 @@ export type EstateUpdateWithoutFlaggedByInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3591,6 +3662,7 @@ export type EstateUncheckedUpdateWithoutFlaggedByInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3632,6 +3704,7 @@ export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3662,6 +3735,7 @@ export type EstateUpdateWithoutOwnerInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3704,6 +3778,7 @@ export type EstateUncheckedUpdateWithoutOwnerInput = {
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3745,6 +3820,7 @@ export type EstateUncheckedUpdateManyWithoutOwnerInput = {
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3776,6 +3852,7 @@ export type EstateUpdateWithoutDesignerInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3819,6 +3896,7 @@ export type EstateUncheckedUpdateWithoutDesignerInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3860,6 +3938,7 @@ export type EstateUncheckedUpdateManyWithoutDesignerInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3891,6 +3970,7 @@ export type EstateCreateManyCharacterInput = {
   commentCount?: number
   ownerId: string
   room?: number | null
+  subdivision?: string | null
   flagReason?: string | null
   flagged?: boolean
   flaggedAt?: Date | string | null
@@ -3922,6 +4002,7 @@ export type EstateUpdateWithoutCharacterInput = {
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3964,6 +4045,7 @@ export type EstateUncheckedUpdateWithoutCharacterInput = {
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4005,6 +4087,7 @@ export type EstateUncheckedUpdateManyWithoutCharacterInput = {
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4105,6 +4188,7 @@ export type EstateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   ownerId?: boolean
   characterId?: boolean
   room?: boolean
+  subdivision?: boolean
   flagReason?: boolean
   flagged?: boolean
   flaggedAt?: boolean
@@ -4152,6 +4236,7 @@ export type EstateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   ownerId?: boolean
   characterId?: boolean
   room?: boolean
+  subdivision?: boolean
   flagReason?: boolean
   flagged?: boolean
   flaggedAt?: boolean
@@ -4189,6 +4274,7 @@ export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   ownerId?: boolean
   characterId?: boolean
   room?: boolean
+  subdivision?: boolean
   flagReason?: boolean
   flagged?: boolean
   flaggedAt?: boolean
@@ -4226,6 +4312,7 @@ export type EstateSelectScalar = {
   ownerId?: boolean
   characterId?: boolean
   room?: boolean
+  subdivision?: boolean
   flagReason?: boolean
   flagged?: boolean
   flaggedAt?: boolean
@@ -4238,7 +4325,7 @@ export type EstateSelectScalar = {
   claimedAt?: boolean
 }
 
-export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt", ExtArgs["result"]["estate"]>
+export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "subdivision" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt", ExtArgs["result"]["estate"]>
 export type EstateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
@@ -4306,6 +4393,7 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     ownerId: string
     characterId: string | null
     room: number | null
+    subdivision: string | null
     flagReason: string | null
     flagged: boolean
     flaggedAt: Date | null
@@ -4772,6 +4860,7 @@ export interface EstateFieldRefs {
   readonly ownerId: Prisma.FieldRef<"Estate", 'String'>
   readonly characterId: Prisma.FieldRef<"Estate", 'String'>
   readonly room: Prisma.FieldRef<"Estate", 'Int'>
+  readonly subdivision: Prisma.FieldRef<"Estate", 'String'>
   readonly flagReason: Prisma.FieldRef<"Estate", 'String'>
   readonly flagged: Prisma.FieldRef<"Estate", 'Boolean'>
   readonly flaggedAt: Prisma.FieldRef<"Estate", 'DateTime'>

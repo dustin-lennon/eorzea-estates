@@ -449,6 +449,26 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                     />
                   </div>
                 )}
+                {isRoomType && (
+                  <div>
+                    <Label htmlFor="d-subdivision">Subdivision (optional)</Label>
+                    <Select
+                      value={designerForm.watch("subdivision") ?? "__none__"}
+                      onValueChange={(v) =>
+                        designerForm.setValue("subdivision", v === "__none__" ? undefined : (v as "Main" | "Subdivision"))
+                      }
+                    >
+                      <SelectTrigger id="d-subdivision" className="mt-1">
+                        <SelectValue placeholder="Select subdivision" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="__none__">Unknown</SelectItem>
+                        <SelectItem value="Main">Main</SelectItem>
+                        <SelectItem value="Subdivision">Subdivision</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -696,6 +716,26 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                     form.setValue("room", e.target.value ? parseInt(e.target.value) : undefined)
                   }
                 />
+              </div>
+            )}
+            {isRoomType && (
+              <div>
+                <Label htmlFor="subdivision">Subdivision (optional)</Label>
+                <Select
+                  value={form.watch("subdivision") ?? "__none__"}
+                  onValueChange={(v) =>
+                    form.setValue("subdivision", v === "__none__" ? undefined : (v as "Main" | "Subdivision"))
+                  }
+                >
+                  <SelectTrigger id="subdivision" className="mt-1">
+                    <SelectValue placeholder="Select subdivision" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="__none__">Unknown</SelectItem>
+                    <SelectItem value="Main">Main</SelectItem>
+                    <SelectItem value="Subdivision">Subdivision</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             )}
           </div>

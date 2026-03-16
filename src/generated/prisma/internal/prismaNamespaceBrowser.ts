@@ -182,6 +182,7 @@ export const EstateScalarFieldEnum = {
   ownerId: 'ownerId',
   characterId: 'characterId',
   room: 'room',
+  subdivision: 'subdivision',
   flagReason: 'flagReason',
   flagged: 'flagged',
   flaggedAt: 'flaggedAt',
