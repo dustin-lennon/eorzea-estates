@@ -114,6 +114,7 @@ model Estate {
   ownerId            String
   characterId        String?
   room               Int?
+  subdivision        String?
   flagReason         String?
   flagged            Boolean                @default(false)
   flaggedAt          DateTime?
