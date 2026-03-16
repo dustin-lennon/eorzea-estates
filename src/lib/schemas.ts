@@ -26,6 +26,7 @@ export const estateFormSchema = z.object({
   ward: z.number().int().min(1).max(30).optional(),
   plot: z.number().int().min(1).max(60).optional(),
   room: z.number().int().min(1).max(2048).optional(),
+  subdivision: z.enum(["Main", "Subdivision"]).optional(),
   tags: z.array(z.string()).max(10).default([]),
   images: z.array(
     z.object({ url: z.string().url(), storageKey: z.string() })

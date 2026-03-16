@@ -167,6 +167,9 @@ export default async function EstateDetailPage({ params }: PageProps) {
             {estate.ward && estate.plot && (
               <span> · Ward {estate.ward}, Plot {estate.plot}</span>
             )}
+            {estate.ward && estate.room && (
+              <span> · Ward {estate.ward}, Room {estate.room}</span>
+            )}
           </div>
         </div>
 
@@ -340,6 +343,24 @@ export default async function EstateDetailPage({ params }: PageProps) {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Plot</span>
                   <span>{estate.plot}</span>
+                </div>
+              )}
+              {estate.room && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Room</span>
+                  <span>{estate.room}</span>
+                </div>
+              )}
+              {estate.subdivision && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Subdivision</span>
+                  <span>{estate.subdivision}</span>
+                </div>
+              )}
+              {!estate.subdivision && estate.plot && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Subdivision</span>
+                  <span>{estate.plot <= 30 ? "Main" : "Subdivision"}</span>
                 </div>
               )}
               {estate.verified && (

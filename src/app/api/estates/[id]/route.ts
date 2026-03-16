@@ -200,6 +200,7 @@ export async function PATCH(
       ward: data.ward ?? null,
       plot: data.plot ?? null,
       room: data.room ?? null,
+      subdivision: data.subdivision ?? null,
       tags: data.tags,
       images: {
         deleteMany: {},
