@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.21.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.21.0...v1.21.1) (2026-03-20)
+
+### 🐛 Bug Fixes
+
+* compress verification screenshot client-side before upload ([4d98a54](https://github.com/dustin-lennon/eorzea-estates/commit/4d98a546c54374c02075106f512e47df2da6fe81))
+* suppress hydration warning on comment timestamps ([60ebb7e](https://github.com/dustin-lennon/eorzea-estates/commit/60ebb7e0600dd8da6439b4c50480dbeba9e8f962))
+
 ## [1.21.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.20.1...v1.21.0) (2026-03-16)
 
 ### ✨ Features
