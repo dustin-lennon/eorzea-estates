@@ -115,7 +115,7 @@ export function CommentsSection({ estateId, initialComments, isLoggedIn }: Comme
                     <Link href={`/profile/${comment.user.id}`} className="hover:underline">
                       {displayName}
                     </Link>
-                    <span className="text-xs text-muted-foreground font-normal ml-1">
+                    <span className="text-xs text-muted-foreground font-normal ml-1" suppressHydrationWarning>
                       {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </span>
                   </div>
