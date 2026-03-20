@@ -1,6 +1,31 @@
 "use client"
 
 import { useState, useRef } from "react"
+
+async function compressImage(file: File): Promise<Blob> {
+  const bitmap = await createImageBitmap(file)
+  const MAX_W = 1920
+  const MAX_H = 1080
+  let w = bitmap.width
+  let h = bitmap.height
+  if (w > MAX_W || h > MAX_H) {
+    const scale = Math.min(MAX_W / w, MAX_H / h)
+    w = Math.round(w * scale)
+    h = Math.round(h * scale)
+  }
+  const canvas = document.createElement("canvas")
+  canvas.width = w
+  canvas.height = h
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, w, h)
+  bitmap.close()
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => (blob ? resolve(blob) : reject(new Error("Compression failed"))),
+      "image/webp",
+      0.85
+    )
+  })
+}
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { toast } from "sonner"
@@ -83,8 +108,9 @@ export function EstateVerifyModal({
     if (!file) return
     setSubmitting(true)
     try {
+      const compressed = await compressImage(file)
       const formData = new FormData()
-      formData.append("screenshot", file)
+      formData.append("screenshot", new File([compressed], "screenshot.webp", { type: "image/webp" }))
       const res = await fetch(`/api/estates/${estateId}/verify`, {
         method: "POST",
         body: formData,
@@ -162,7 +188,7 @@ export function EstateVerifyModal({
                 <p className="text-sm text-muted-foreground">
                   Drop screenshot here or click to upload
                 </p>
-                <p className="text-xs text-muted-foreground">Max 10 MB</p>
+                <p className="text-xs text-muted-foreground">PNG, JPG, WebP — compressed automatically</p>
               </div>
             )}
           </div>
