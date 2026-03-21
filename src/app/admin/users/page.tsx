@@ -75,7 +75,6 @@ export default async function AdminUsersPage() {
                         width={32}
                         height={32}
                         className="rounded-full shrink-0"
-                        unoptimized
                       />
                     ) : (
                       <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0 text-xs font-bold">
@@ -107,7 +106,6 @@ export default async function AdminUsersPage() {
                           width={24}
                           height={24}
                           className="rounded-full shrink-0"
-                          unoptimized
                         />
                       )}
                       <span className="text-sm">{user.characters[0].characterName}</span>
