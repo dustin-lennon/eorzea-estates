@@ -2,9 +2,11 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import prisma from "@/lib/prisma"
+import { auth } from "@/auth"
 import { EstateCard } from "@/components/estate-card"
 import { PathfinderBadge } from "@/components/pathfinder-badge"
 import { DesignerBadge } from "@/components/designer-badge"
+import { InquiryDialog } from "@/components/inquiry-dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BadgeCheck, Crown, Shield, ExternalLink, Palette, Pin, BookOpen } from "lucide-react"
 
@@ -28,6 +30,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfilePage({ params }: PageProps) {
   const { userId } = await params
+  const session = await auth()
+
+  // Check if viewer can send inquiries (authenticated + verified character + not viewing own profile)
+  let viewerCanInquire = false
+  if (session?.user?.id && session.user.id !== userId) {
+    const verifiedChar = await prisma.ffxivCharacter.findFirst({
+      where: { userId: session.user.id, verified: true },
+      select: { id: true },
+    })
+    viewerCanInquire = !!verifiedChar
+  }
 
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -114,6 +127,12 @@ export default async function ProfilePage({ params }: PageProps) {
                 <Palette className="h-3 w-3" />
                 Open for Commissions
               </span>
+            )}
+            {user.designer && user.commissionOpen && viewerCanInquire && (
+              <InquiryDialog
+                designerId={user.id}
+                designerName={displayName ?? user.name ?? "Designer"}
+              />
             )}
             {user.portfolioUrl && (
               <a

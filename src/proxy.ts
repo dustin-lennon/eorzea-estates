@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 const { auth } = NextAuth(authConfig)
 
-const protectedRoutes = ["/submit", "/dashboard", "/estate"]
+const protectedRoutes = ["/submit", "/dashboard", "/estate", "/messages"]
 
 export default auth((req) => {
   const pathname = req.nextUrl.pathname

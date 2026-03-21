@@ -13,6 +13,7 @@ import {
 import { signOut } from "@/auth"
 import { Plus, LayoutDashboard, LogOut, Settings as SettingsIcon, ShieldCheck, User } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { NavbarMessagesLink } from "@/components/navbar-messages-link"
 
 export default async function Navbar() {
   const session = await auth()
@@ -30,10 +31,16 @@ export default async function Navbar() {
               Browse
             </Link>
 
+            <Link href="/designers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Designers
+            </Link>
+
             <ThemeToggle />
 
             {session?.user ? (
               <>
+                <NavbarMessagesLink />
+
                 <Button asChild size="sm">
                   <Link href="/submit">
                     <Plus className="h-4 w-4 mr-1" />

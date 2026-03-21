@@ -9,6 +9,12 @@ const profileSchema = z.object({
   portfolioUrl: z.string().url().nullable().optional(),
   pinnedEstateId: z.string().nullable().optional(),
   designer: z.boolean().optional(),
+  designerSpecialties: z.array(z.string()).optional(),
+  designerStyleTags: z.array(z.string()).optional(),
+  designerPricingText: z.string().max(300).nullable().optional(),
+  designerTurnaround: z.string().max(100).nullable().optional(),
+  emailOnInquiry: z.boolean().optional(),
+  emailOnMessage: z.boolean().optional(),
 })
 
 export async function PATCH(req: Request) {
@@ -23,7 +29,9 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
   }
 
-  const { bio, commissionOpen, portfolioUrl, pinnedEstateId, designer } = parsed.data
+  const { bio, commissionOpen, portfolioUrl, pinnedEstateId, designer,
+    designerSpecialties, designerStyleTags, designerPricingText, designerTurnaround,
+    emailOnInquiry, emailOnMessage } = parsed.data
 
   // Verify pinnedEstateId belongs to this user if provided
   if (pinnedEstateId) {
@@ -42,11 +50,21 @@ export async function PATCH(req: Request) {
   if (portfolioUrl !== undefined) updateData.portfolioUrl = portfolioUrl
   if (pinnedEstateId !== undefined) updateData.pinnedEstateId = pinnedEstateId
   if (designer !== undefined) updateData.designer = designer
+  if (designerSpecialties !== undefined) updateData.designerSpecialties = designerSpecialties
+  if (designerStyleTags !== undefined) updateData.designerStyleTags = designerStyleTags
+  if (designerPricingText !== undefined) updateData.designerPricingText = designerPricingText
+  if (designerTurnaround !== undefined) updateData.designerTurnaround = designerTurnaround
+  if (emailOnInquiry !== undefined) updateData.emailOnInquiry = emailOnInquiry
+  if (emailOnMessage !== undefined) updateData.emailOnMessage = emailOnMessage
 
   const user = await prisma.user.update({
     where: { id: session.user.id },
     data: updateData,
-    select: { bio: true, commissionOpen: true, portfolioUrl: true, pinnedEstateId: true, designer: true },
+    select: {
+      bio: true, commissionOpen: true, portfolioUrl: true, pinnedEstateId: true, designer: true,
+      designerSpecialties: true, designerStyleTags: true, designerPricingText: true,
+      designerTurnaround: true, emailOnInquiry: true, emailOnMessage: true,
+    },
   })
 
   return NextResponse.json(user)
