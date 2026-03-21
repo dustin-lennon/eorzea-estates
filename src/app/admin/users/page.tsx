@@ -25,6 +25,8 @@ export default async function AdminUsersPage() {
       designer: true,
       createdAt: true,
       _count: { select: { estates: true, characters: true } },
+      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, take: 1 },
+      accounts: { select: { provider: true } },
     },
     orderBy: { createdAt: "asc" },
   })
@@ -52,7 +54,8 @@ export default async function AdminUsersPage() {
           <thead className="bg-muted/50 border-b">
             <tr>
               <th className="text-left px-4 py-3 font-medium">User</th>
-              <th className="text-left px-4 py-3 font-medium">Discord</th>
+              <th className="text-left px-4 py-3 font-medium">Auth</th>
+              <th className="text-left px-4 py-3 font-medium">FFXIV Character</th>
               <th className="text-left px-4 py-3 font-medium">Estates</th>
               <th className="text-left px-4 py-3 font-medium">Joined</th>
               <th className="text-left px-4 py-3 font-medium">Role</th>
@@ -72,6 +75,7 @@ export default async function AdminUsersPage() {
                         width={32}
                         height={32}
                         className="rounded-full shrink-0"
+                        unoptimized
                       />
                     ) : (
                       <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0 text-xs font-bold">
@@ -80,13 +84,37 @@ export default async function AdminUsersPage() {
                     )}
                     <div>
                       <Link href={`/profile/${user.id}`} className="brand-link font-medium">
-                        {user.name ?? "Unknown"}
+                        {user.name ?? user.email ?? "Unknown"}
                       </Link>
+                      {user.email && (
+                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                      )}
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-muted-foreground">
-                  {user.discordUsername ?? "—"}
+                <td className="px-4 py-3 text-muted-foreground text-xs">
+                  {user.accounts.length > 0
+                    ? user.accounts.map((a) => a.provider).join(", ")
+                    : user.email ? "email" : "—"}
+                </td>
+                <td className="px-4 py-3">
+                  {user.characters[0] ? (
+                    <div className="flex items-center gap-2">
+                      {user.characters[0].avatarUrl && (
+                        <Image
+                          src={user.characters[0].avatarUrl}
+                          alt={user.characters[0].characterName}
+                          width={24}
+                          height={24}
+                          className="rounded-full shrink-0"
+                          unoptimized
+                        />
+                      )}
+                      <span className="text-sm">{user.characters[0].characterName}</span>
+                    </div>
+                  ) : (
+                    <span className="text-muted-foreground text-xs">—</span>
+                  )}
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">
                   {user._count.estates}
