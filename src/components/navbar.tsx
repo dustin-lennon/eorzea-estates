@@ -118,7 +118,7 @@ export default async function Navbar() {
               </>
             ) : (
               <Button asChild size="sm">
-                <Link href="/login">Sign in with Discord</Link>
+                <Link href="/login">Sign in</Link>
               </Button>
             )}
           </nav>

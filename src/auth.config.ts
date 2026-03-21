@@ -1,9 +1,13 @@
 import type { NextAuthConfig } from "next-auth"
 import Discord from "next-auth/providers/discord"
+import Google from "next-auth/providers/google"
 import type { UserRole } from "@/types/roles"
 
 export const authConfig: NextAuthConfig = {
-  providers: [Discord({ allowDangerousEmailAccountLinking: true })],
+  providers: [
+    Discord({ allowDangerousEmailAccountLinking: true }),
+    Google({ allowDangerousEmailAccountLinking: true }),
+  ],
   session: {
     strategy: "jwt",
   },
