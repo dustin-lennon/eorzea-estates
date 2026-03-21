@@ -118,8 +118,8 @@ export async function GET() {
     },
     orderBy: { updatedAt: "desc" },
     include: {
-      designer: { select: { id: true, name: true, image: true } },
-      requestor: { select: { id: true, name: true, image: true } },
+      designer: { select: { id: true, name: true, image: true, lastSeenAt: true } },
+      requestor: { select: { id: true, name: true, image: true, lastSeenAt: true } },
       messages: {
         orderBy: { createdAt: "desc" },
         take: 1,
@@ -137,7 +137,7 @@ export async function GET() {
 
     return {
       id: conv.id,
-      otherParty,
+      otherParty: { ...otherParty, lastSeenAt: otherParty.lastSeenAt?.toISOString() ?? null },
       estateType: conv.estateType,
       district: conv.district,
       budgetRange: conv.budgetRange,

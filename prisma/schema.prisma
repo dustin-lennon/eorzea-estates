@@ -65,6 +65,7 @@ model User {
   // Notification preferences
   emailOnInquiry         Boolean               @default(true)
   emailOnMessage         Boolean               @default(true)
+  lastSeenAt             DateTime?
   accounts               Account[]
   comments               Comment[]
   flaggedEstates         Estate[]              @relation("FlaggedByUser")

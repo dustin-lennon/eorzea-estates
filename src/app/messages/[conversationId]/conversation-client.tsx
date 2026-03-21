@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { formatDistanceToNow } from "date-fns"
 import { Send } from "lucide-react"
+import { PresenceIndicator } from "@/components/presence-indicator"
 
 interface Sender {
   name: string | null
@@ -24,10 +25,12 @@ interface Props {
   conversationId: string
   currentUserId: string
   initialMessages: Message[]
+  initialOtherPartyLastSeenAt: string | null
 }
 
-export function ConversationClient({ conversationId, currentUserId, initialMessages }: Props) {
+export function ConversationClient({ conversationId, currentUserId, initialMessages, initialOtherPartyLastSeenAt }: Props) {
   const [messages, setMessages] = useState(initialMessages)
+  const [otherPartyLastSeenAt, setOtherPartyLastSeenAt] = useState(initialOtherPartyLastSeenAt)
   const [body, setBody] = useState("")
   const [sending, setSending] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -36,8 +39,9 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
     try {
       const res = await fetch(`/api/messages/${conversationId}`)
       if (res.ok) {
-        const data = await res.json() as { messages: Message[] }
+        const data = await res.json() as { messages: Message[]; otherPartyLastSeenAt: string | null }
         setMessages(data.messages)
+        setOtherPartyLastSeenAt(data.otherPartyLastSeenAt)
       }
     } catch {
       // silently ignore
@@ -87,6 +91,11 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
 
   return (
     <div className="flex flex-col h-full">
+      {/* Presence indicator */}
+      <div className="px-4 pt-3 pb-1 border-b border-border">
+        <PresenceIndicator lastSeenAt={otherPartyLastSeenAt} />
+      </div>
+
       {/* Message list */}
       <div className="flex-1 overflow-y-auto space-y-4 p-4">
         {messages.length === 0 && (

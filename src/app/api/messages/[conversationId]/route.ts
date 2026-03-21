@@ -12,8 +12,8 @@ async function getConversationForUser(id: string, userId: string) {
       id: true,
       designerId: true,
       requestorId: true,
-      designer: { select: { id: true, name: true, email: true, emailOnMessage: true } },
-      requestor: { select: { id: true, name: true, email: true, emailOnMessage: true } },
+      designer: { select: { id: true, name: true, email: true, emailOnMessage: true, lastSeenAt: true } },
+      requestor: { select: { id: true, name: true, email: true, emailOnMessage: true, lastSeenAt: true } },
     },
   })
   if (!conv) return null
@@ -50,7 +50,14 @@ export async function GET(_req: Request, { params }: { params: Promise<{ convers
     conv.designerId === session.user.id ? { designerReadAt: new Date() } : { requestorReadAt: new Date() }
   await prisma.conversation.update({ where: { id: conversationId }, data: updateField })
 
-  return NextResponse.json({ conversation: conv, messages })
+  const isDesigner = conv.designerId === session.user.id
+  const otherParty = isDesigner ? conv.requestor : conv.designer
+
+  return NextResponse.json({
+    conversation: conv,
+    messages,
+    otherPartyLastSeenAt: otherParty.lastSeenAt?.toISOString() ?? null,
+  })
 }
 
 export async function POST(req: Request, { params }: { params: Promise<{ conversationId: string }> }) {

@@ -17,8 +17,8 @@ export default async function MessagesPage() {
     },
     orderBy: { updatedAt: "desc" },
     include: {
-      designer: { select: { id: true, name: true, image: true } },
-      requestor: { select: { id: true, name: true, image: true } },
+      designer: { select: { id: true, name: true, image: true, lastSeenAt: true } },
+      requestor: { select: { id: true, name: true, image: true, lastSeenAt: true } },
       messages: {
         orderBy: { createdAt: "desc" },
         take: 1,
@@ -36,7 +36,7 @@ export default async function MessagesPage() {
 
     return {
       id: conv.id,
-      otherParty,
+      otherParty: { ...otherParty, lastSeenAt: otherParty.lastSeenAt?.toISOString() ?? null },
       estateType: conv.estateType as string | null,
       district: conv.district as string | null,
       budgetRange: conv.budgetRange,

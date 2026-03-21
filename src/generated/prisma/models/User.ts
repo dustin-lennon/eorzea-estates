@@ -44,6 +44,7 @@ export type UserMinAggregateOutputType = {
   designerTurnaround: string | null
   emailOnInquiry: boolean | null
   emailOnMessage: boolean | null
+  lastSeenAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type UserMaxAggregateOutputType = {
   designerTurnaround: string | null
   emailOnInquiry: boolean | null
   emailOnMessage: boolean | null
+  lastSeenAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -90,6 +92,7 @@ export type UserCountAggregateOutputType = {
   designerTurnaround: number
   emailOnInquiry: number
   emailOnMessage: number
+  lastSeenAt: number
   _all: number
 }
 
@@ -114,6 +117,7 @@ export type UserMinAggregateInputType = {
   designerTurnaround?: true
   emailOnInquiry?: true
   emailOnMessage?: true
+  lastSeenAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -136,6 +140,7 @@ export type UserMaxAggregateInputType = {
   designerTurnaround?: true
   emailOnInquiry?: true
   emailOnMessage?: true
+  lastSeenAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -160,6 +165,7 @@ export type UserCountAggregateInputType = {
   designerTurnaround?: true
   emailOnInquiry?: true
   emailOnMessage?: true
+  lastSeenAt?: true
   _all?: true
 }
 
@@ -257,6 +263,7 @@ export type UserGroupByOutputType = {
   designerTurnaround: string | null
   emailOnInquiry: boolean
   emailOnMessage: boolean
+  lastSeenAt: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -302,6 +309,7 @@ export type UserWhereInput = {
   designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
   emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
   emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -345,6 +353,7 @@ export type UserOrderByWithRelationInput = {
   designerTurnaround?: Prisma.SortOrderInput | Prisma.SortOrder
   emailOnInquiry?: Prisma.SortOrder
   emailOnMessage?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   flaggedEstates?: Prisma.EstateOrderByRelationAggregateInput
@@ -391,6 +400,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
   emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
   emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -434,6 +444,7 @@ export type UserOrderByWithAggregationInput = {
   designerTurnaround?: Prisma.SortOrderInput | Prisma.SortOrder
   emailOnInquiry?: Prisma.SortOrder
   emailOnMessage?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -464,6 +475,7 @@ export type UserScalarWhereWithAggregatesInput = {
   designerTurnaround?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   emailOnInquiry?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   emailOnMessage?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -487,6 +499,7 @@ export type UserCreateInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -530,6 +543,7 @@ export type UserUncheckedCreateInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -571,6 +585,7 @@ export type UserUpdateInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -614,6 +629,7 @@ export type UserUncheckedUpdateInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -656,6 +672,7 @@ export type UserCreateManyInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -679,6 +696,7 @@ export type UserUpdateManyMutationInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -703,6 +721,7 @@ export type UserUncheckedUpdateManyInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserScalarRelationFilter = {
@@ -740,6 +759,7 @@ export type UserCountOrderByAggregateInput = {
   designerTurnaround?: Prisma.SortOrder
   emailOnInquiry?: Prisma.SortOrder
   emailOnMessage?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -762,6 +782,7 @@ export type UserMaxOrderByAggregateInput = {
   designerTurnaround?: Prisma.SortOrder
   emailOnInquiry?: Prisma.SortOrder
   emailOnMessage?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -784,6 +805,7 @@ export type UserMinOrderByAggregateInput = {
   designerTurnaround?: Prisma.SortOrder
   emailOnInquiry?: Prisma.SortOrder
   emailOnMessage?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -1158,6 +1180,7 @@ export type UserCreateWithoutAccountsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -1200,6 +1223,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -1256,6 +1280,7 @@ export type UserUpdateWithoutAccountsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -1298,6 +1323,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1338,6 +1364,7 @@ export type UserCreateWithoutSessionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1380,6 +1407,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1436,6 +1464,7 @@ export type UserUpdateWithoutSessionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1478,6 +1507,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1518,6 +1548,7 @@ export type UserCreateWithoutCharactersInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1560,6 +1591,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1616,6 +1648,7 @@ export type UserUpdateWithoutCharactersInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1658,6 +1691,7 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1698,6 +1732,7 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -1740,6 +1775,7 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -1785,6 +1821,7 @@ export type UserCreateWithoutEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1827,6 +1864,7 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1872,6 +1910,7 @@ export type UserCreateWithoutDesignedEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1914,6 +1953,7 @@ export type UserUncheckedCreateWithoutDesignedEstatesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1959,6 +1999,7 @@ export type UserCreateWithoutPinnedEstateInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2000,6 +2041,7 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2062,6 +2104,7 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -2104,6 +2147,7 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2155,6 +2199,7 @@ export type UserUpdateWithoutEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2197,6 +2242,7 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2248,6 +2294,7 @@ export type UserUpdateWithoutDesignedEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2290,6 +2337,7 @@ export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2350,6 +2398,7 @@ export type UserScalarWhereInput = {
   designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
   emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
   emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
 }
 
 export type UserCreateWithoutVerificationReviewsInput = {
@@ -2373,6 +2422,7 @@ export type UserCreateWithoutVerificationReviewsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2415,6 +2465,7 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2471,6 +2522,7 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2513,6 +2565,7 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2553,6 +2606,7 @@ export type UserCreateWithoutVenueStaffInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2595,6 +2649,7 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2651,6 +2706,7 @@ export type UserUpdateWithoutVenueStaffInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2693,6 +2749,7 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2733,6 +2790,7 @@ export type UserCreateWithoutLikesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2775,6 +2833,7 @@ export type UserUncheckedCreateWithoutLikesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2831,6 +2890,7 @@ export type UserUpdateWithoutLikesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2873,6 +2933,7 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2913,6 +2974,7 @@ export type UserCreateWithoutCommentsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -2955,6 +3017,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -3011,6 +3074,7 @@ export type UserUpdateWithoutCommentsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -3053,6 +3117,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3093,6 +3158,7 @@ export type UserCreateWithoutLegalPageEditsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3135,6 +3201,7 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3191,6 +3258,7 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -3233,6 +3301,7 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -3273,6 +3342,7 @@ export type UserCreateWithoutClaimRequestsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3315,6 +3385,7 @@ export type UserUncheckedCreateWithoutClaimRequestsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3360,6 +3431,7 @@ export type UserCreateWithoutClaimReviewsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3402,6 +3474,7 @@ export type UserUncheckedCreateWithoutClaimReviewsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3458,6 +3531,7 @@ export type UserUpdateWithoutClaimRequestsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -3500,6 +3574,7 @@ export type UserUncheckedUpdateWithoutClaimRequestsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -3551,6 +3626,7 @@ export type UserUpdateWithoutClaimReviewsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -3593,6 +3669,7 @@ export type UserUncheckedUpdateWithoutClaimReviewsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -3633,6 +3710,7 @@ export type UserCreateWithoutCollectionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3675,6 +3753,7 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3731,6 +3810,7 @@ export type UserUpdateWithoutCollectionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -3773,6 +3853,7 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -3813,6 +3894,7 @@ export type UserCreateWithoutDesignerConversationsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3855,6 +3937,7 @@ export type UserUncheckedCreateWithoutDesignerConversationsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3900,6 +3983,7 @@ export type UserCreateWithoutRequestorConversationsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -3942,6 +4026,7 @@ export type UserUncheckedCreateWithoutRequestorConversationsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -3998,6 +4083,7 @@ export type UserUpdateWithoutDesignerConversationsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -4040,6 +4126,7 @@ export type UserUncheckedUpdateWithoutDesignerConversationsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -4091,6 +4178,7 @@ export type UserUpdateWithoutRequestorConversationsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -4133,6 +4221,7 @@ export type UserUncheckedUpdateWithoutRequestorConversationsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -4173,6 +4262,7 @@ export type UserCreateWithoutSentMessagesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -4215,6 +4305,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -4271,6 +4362,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -4313,6 +4405,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -4353,6 +4446,7 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -4395,6 +4489,7 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -4451,6 +4546,7 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -4493,6 +4589,7 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -4533,6 +4630,7 @@ export type UserCreateManyPinnedEstateInput = {
   designerTurnaround?: string | null
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
 }
 
 export type UserUpdateWithoutPinnedEstateInput = {
@@ -4556,6 +4654,7 @@ export type UserUpdateWithoutPinnedEstateInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -4597,6 +4696,7 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -4638,6 +4738,7 @@ export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
   designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -4846,6 +4947,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   designerTurnaround?: boolean
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   flaggedEstates?: boolean | Prisma.User$flaggedEstatesArgs<ExtArgs>
@@ -4890,6 +4992,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   designerTurnaround?: boolean
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: boolean
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4915,6 +5018,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   designerTurnaround?: boolean
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: boolean
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4940,9 +5044,10 @@ export type UserSelectScalar = {
   designerTurnaround?: boolean
   emailOnInquiry?: boolean
   emailOnMessage?: boolean
+  lastSeenAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer" | "designerSpecialties" | "designerStyleTags" | "designerPricingText" | "designerTurnaround" | "emailOnInquiry" | "emailOnMessage", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer" | "designerSpecialties" | "designerStyleTags" | "designerPricingText" | "designerTurnaround" | "emailOnInquiry" | "emailOnMessage" | "lastSeenAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
@@ -5017,6 +5122,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     designerTurnaround: string | null
     emailOnInquiry: boolean
     emailOnMessage: boolean
+    lastSeenAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -5480,6 +5586,7 @@ export interface UserFieldRefs {
   readonly designerTurnaround: Prisma.FieldRef<"User", 'String'>
   readonly emailOnInquiry: Prisma.FieldRef<"User", 'Boolean'>
   readonly emailOnMessage: Prisma.FieldRef<"User", 'Boolean'>
+  readonly lastSeenAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

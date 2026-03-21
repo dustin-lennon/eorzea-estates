@@ -149,7 +149,8 @@ export const UserScalarFieldEnum = {
   designerPricingText: 'designerPricingText',
   designerTurnaround: 'designerTurnaround',
   emailOnInquiry: 'emailOnInquiry',
-  emailOnMessage: 'emailOnMessage'
+  emailOnMessage: 'emailOnMessage',
+  lastSeenAt: 'lastSeenAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

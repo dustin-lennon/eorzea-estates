@@ -7,10 +7,13 @@ import { Badge } from "@/components/ui/badge"
 import { formatDistanceToNow } from "date-fns"
 import { HOUSING_DISTRICTS, ESTATE_TYPES } from "@/lib/ffxiv-data"
 
+const ONLINE_THRESHOLD_MS = 3 * 60 * 1000
+
 interface OtherParty {
   id: string
   name: string | null
   image: string | null
+  lastSeenAt?: string | null
 }
 
 interface LastMessage {
@@ -70,6 +73,9 @@ export function InboxClient({ initialConversations }: { initialConversations: Co
     <div className="divide-y divide-border rounded-xl border border-border overflow-hidden">
       {conversations.map((conv) => {
         const initials = conv.otherParty.name?.slice(0, 2).toUpperCase() ?? "??"
+        const isOnline = conv.otherParty.lastSeenAt
+          ? Date.now() - new Date(conv.otherParty.lastSeenAt).getTime() < ONLINE_THRESHOLD_MS
+          : false
         const typeLabel = getLabel(ESTATE_TYPES, conv.estateType)
         const districtLabel = getLabel(HOUSING_DISTRICTS, conv.district)
         const preview = conv.lastMessage?.body.slice(0, 100) ?? ""
@@ -80,10 +86,15 @@ export function InboxClient({ initialConversations }: { initialConversations: Co
             href={`/messages/${conv.id}`}
             className="flex items-start gap-4 px-5 py-4 hover:bg-accent transition-colors"
           >
-            <Avatar className="h-10 w-10 shrink-0">
-              <AvatarImage src={conv.otherParty.image ?? undefined} />
-              <AvatarFallback>{initials}</AvatarFallback>
-            </Avatar>
+            <div className="relative shrink-0">
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={conv.otherParty.image ?? undefined} />
+                <AvatarFallback>{initials}</AvatarFallback>
+              </Avatar>
+              {isOnline && (
+                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-background" />
+              )}
+            </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">

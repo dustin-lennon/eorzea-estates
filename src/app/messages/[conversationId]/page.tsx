@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import { redirect, notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { ConversationClient } from "./conversation-client"
+import { PresenceIndicator } from "@/components/presence-indicator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft } from "lucide-react"
@@ -25,8 +26,8 @@ export default async function ConversationPage({ params }: { params: Promise<{ c
   const conv = await prisma.conversation.findUnique({
     where: { id: conversationId },
     include: {
-      designer: { select: { id: true, name: true, image: true } },
-      requestor: { select: { id: true, name: true, image: true } },
+      designer: { select: { id: true, name: true, image: true, lastSeenAt: true } },
+      requestor: { select: { id: true, name: true, image: true, lastSeenAt: true } },
       messages: {
         orderBy: { createdAt: "asc" },
         select: {
@@ -91,6 +92,7 @@ export default async function ConversationPage({ params }: { params: Promise<{ c
           conversationId={conversationId}
           currentUserId={userId}
           initialMessages={initialMessages}
+          initialOtherPartyLastSeenAt={otherParty.lastSeenAt?.toISOString() ?? null}
         />
       </div>
     </div>
