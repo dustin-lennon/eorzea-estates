@@ -25,6 +25,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   callbacks: {
+    async signIn({ user, account }) {
+      // Google and Discord both guarantee the email is verified.
+      // Ensure emailVerified is set in the DB so password linking works correctly.
+      if (account?.type === "oauth" && user.id) {
+        await prisma.user.updateMany({
+          where: { id: user.id, emailVerified: null },
+          data: { emailVerified: new Date() },
+        })
+      }
+      return true
+    },
     async jwt({ token, user, trigger }) {
       if (user) {
         token.sub = user.id
