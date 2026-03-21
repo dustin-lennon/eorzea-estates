@@ -43,6 +43,7 @@ function getLabel<T extends { value: string; label: string }>(list: readonly T[]
 
 export function InboxClient({ initialConversations }: { initialConversations: Conversation[] }) {
   const [conversations, setConversations] = useState(initialConversations)
+  const [now] = useState(Date.now)
 
   const fetchConversations = useCallback(async () => {
     try {
@@ -75,7 +76,7 @@ export function InboxClient({ initialConversations }: { initialConversations: Co
       {conversations.map((conv) => {
         const initials = conv.otherParty.name?.slice(0, 2).toUpperCase() ?? "??"
         const isOnline = conv.otherParty.lastSeenAt
-          ? Date.now() - new Date(conv.otherParty.lastSeenAt).getTime() < ONLINE_THRESHOLD_MS
+          ? now - new Date(conv.otherParty.lastSeenAt).getTime() < ONLINE_THRESHOLD_MS
           : false
         const typeLabel = getLabel(ESTATE_TYPES, conv.estateType)
         const districtLabel = getLabel(HOUSING_DISTRICTS, conv.district)
