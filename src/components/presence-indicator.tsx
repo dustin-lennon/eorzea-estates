@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import { formatDistanceToNow } from "date-fns"
 
 const ONLINE_THRESHOLD_MS = 3 * 60 * 1000 // 3 minutes
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export function PresenceIndicator({ lastSeenAt, className = "" }: Props) {
+  const now = useMemo(() => Date.now(), [])
+
   if (!lastSeenAt) {
     return (
       <span className={`flex items-center gap-1.5 text-xs text-muted-foreground ${className}`}>
@@ -19,7 +22,7 @@ export function PresenceIndicator({ lastSeenAt, className = "" }: Props) {
     )
   }
 
-  const isOnline = Date.now() - new Date(lastSeenAt).getTime() < ONLINE_THRESHOLD_MS
+  const isOnline = now - new Date(lastSeenAt).getTime() < ONLINE_THRESHOLD_MS
 
   if (isOnline) {
     return (
