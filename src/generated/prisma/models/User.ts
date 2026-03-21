@@ -40,6 +40,10 @@ export type UserMinAggregateOutputType = {
   portfolioUrl: string | null
   pinnedEstateId: string | null
   designer: boolean | null
+  designerPricingText: string | null
+  designerTurnaround: string | null
+  emailOnInquiry: boolean | null
+  emailOnMessage: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -58,6 +62,10 @@ export type UserMaxAggregateOutputType = {
   portfolioUrl: string | null
   pinnedEstateId: string | null
   designer: boolean | null
+  designerPricingText: string | null
+  designerTurnaround: string | null
+  emailOnInquiry: boolean | null
+  emailOnMessage: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -76,6 +84,12 @@ export type UserCountAggregateOutputType = {
   portfolioUrl: number
   pinnedEstateId: number
   designer: number
+  designerSpecialties: number
+  designerStyleTags: number
+  designerPricingText: number
+  designerTurnaround: number
+  emailOnInquiry: number
+  emailOnMessage: number
   _all: number
 }
 
@@ -96,6 +110,10 @@ export type UserMinAggregateInputType = {
   portfolioUrl?: true
   pinnedEstateId?: true
   designer?: true
+  designerPricingText?: true
+  designerTurnaround?: true
+  emailOnInquiry?: true
+  emailOnMessage?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -114,6 +132,10 @@ export type UserMaxAggregateInputType = {
   portfolioUrl?: true
   pinnedEstateId?: true
   designer?: true
+  designerPricingText?: true
+  designerTurnaround?: true
+  emailOnInquiry?: true
+  emailOnMessage?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -132,6 +154,12 @@ export type UserCountAggregateInputType = {
   portfolioUrl?: true
   pinnedEstateId?: true
   designer?: true
+  designerSpecialties?: true
+  designerStyleTags?: true
+  designerPricingText?: true
+  designerTurnaround?: true
+  emailOnInquiry?: true
+  emailOnMessage?: true
   _all?: true
 }
 
@@ -223,6 +251,12 @@ export type UserGroupByOutputType = {
   portfolioUrl: string | null
   pinnedEstateId: string | null
   designer: boolean
+  designerSpecialties: string[]
+  designerStyleTags: string[]
+  designerPricingText: string | null
+  designerTurnaround: string | null
+  emailOnInquiry: boolean
+  emailOnMessage: boolean
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -262,6 +296,12 @@ export type UserWhereInput = {
   portfolioUrl?: Prisma.StringNullableFilter<"User"> | string | null
   pinnedEstateId?: Prisma.StringNullableFilter<"User"> | string | null
   designer?: Prisma.BoolFilter<"User"> | boolean
+  designerSpecialties?: Prisma.StringNullableListFilter<"User">
+  designerStyleTags?: Prisma.StringNullableListFilter<"User">
+  designerPricingText?: Prisma.StringNullableFilter<"User"> | string | null
+  designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
+  emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
+  emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -277,6 +317,10 @@ export type UserWhereInput = {
   designedEstates?: Prisma.EstateListRelationFilter
   claimRequests?: Prisma.EstateClaimRequestListRelationFilter
   claimReviews?: Prisma.EstateClaimRequestListRelationFilter
+  designerConversations?: Prisma.ConversationListRelationFilter
+  requestorConversations?: Prisma.ConversationListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -295,6 +339,12 @@ export type UserOrderByWithRelationInput = {
   portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   pinnedEstateId?: Prisma.SortOrderInput | Prisma.SortOrder
   designer?: Prisma.SortOrder
+  designerSpecialties?: Prisma.SortOrder
+  designerStyleTags?: Prisma.SortOrder
+  designerPricingText?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerTurnaround?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailOnInquiry?: Prisma.SortOrder
+  emailOnMessage?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   flaggedEstates?: Prisma.EstateOrderByRelationAggregateInput
@@ -310,6 +360,10 @@ export type UserOrderByWithRelationInput = {
   designedEstates?: Prisma.EstateOrderByRelationAggregateInput
   claimRequests?: Prisma.EstateClaimRequestOrderByRelationAggregateInput
   claimReviews?: Prisma.EstateClaimRequestOrderByRelationAggregateInput
+  designerConversations?: Prisma.ConversationOrderByRelationAggregateInput
+  requestorConversations?: Prisma.ConversationOrderByRelationAggregateInput
+  sentMessages?: Prisma.MessageOrderByRelationAggregateInput
+  pushSubscriptions?: Prisma.PushSubscriptionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -331,6 +385,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   portfolioUrl?: Prisma.StringNullableFilter<"User"> | string | null
   pinnedEstateId?: Prisma.StringNullableFilter<"User"> | string | null
   designer?: Prisma.BoolFilter<"User"> | boolean
+  designerSpecialties?: Prisma.StringNullableListFilter<"User">
+  designerStyleTags?: Prisma.StringNullableListFilter<"User">
+  designerPricingText?: Prisma.StringNullableFilter<"User"> | string | null
+  designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
+  emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
+  emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
   accounts?: Prisma.AccountListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   flaggedEstates?: Prisma.EstateListRelationFilter
@@ -346,6 +406,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   designedEstates?: Prisma.EstateListRelationFilter
   claimRequests?: Prisma.EstateClaimRequestListRelationFilter
   claimReviews?: Prisma.EstateClaimRequestListRelationFilter
+  designerConversations?: Prisma.ConversationListRelationFilter
+  requestorConversations?: Prisma.ConversationListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }, "id" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -364,6 +428,12 @@ export type UserOrderByWithAggregationInput = {
   portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   pinnedEstateId?: Prisma.SortOrderInput | Prisma.SortOrder
   designer?: Prisma.SortOrder
+  designerSpecialties?: Prisma.SortOrder
+  designerStyleTags?: Prisma.SortOrder
+  designerPricingText?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerTurnaround?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailOnInquiry?: Prisma.SortOrder
+  emailOnMessage?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -388,6 +458,12 @@ export type UserScalarWhereWithAggregatesInput = {
   portfolioUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   pinnedEstateId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   designer?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  designerSpecialties?: Prisma.StringNullableListFilter<"User">
+  designerStyleTags?: Prisma.StringNullableListFilter<"User">
+  designerPricingText?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  designerTurnaround?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  emailOnInquiry?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  emailOnMessage?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -405,6 +481,12 @@ export type UserCreateInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -420,6 +502,10 @@ export type UserCreateInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -438,6 +524,12 @@ export type UserUncheckedCreateInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -452,6 +544,10 @@ export type UserUncheckedCreateInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -469,6 +565,12 @@ export type UserUpdateInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -484,6 +586,10 @@ export type UserUpdateInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -502,6 +608,12 @@ export type UserUncheckedUpdateInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -516,6 +628,10 @@ export type UserUncheckedUpdateInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -534,6 +650,12 @@ export type UserCreateManyInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -551,6 +673,12 @@ export type UserUpdateManyMutationInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -569,11 +697,25 @@ export type UserUncheckedUpdateManyInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -592,6 +734,12 @@ export type UserCountOrderByAggregateInput = {
   portfolioUrl?: Prisma.SortOrder
   pinnedEstateId?: Prisma.SortOrder
   designer?: Prisma.SortOrder
+  designerSpecialties?: Prisma.SortOrder
+  designerStyleTags?: Prisma.SortOrder
+  designerPricingText?: Prisma.SortOrder
+  designerTurnaround?: Prisma.SortOrder
+  emailOnInquiry?: Prisma.SortOrder
+  emailOnMessage?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -610,6 +758,10 @@ export type UserMaxOrderByAggregateInput = {
   portfolioUrl?: Prisma.SortOrder
   pinnedEstateId?: Prisma.SortOrder
   designer?: Prisma.SortOrder
+  designerPricingText?: Prisma.SortOrder
+  designerTurnaround?: Prisma.SortOrder
+  emailOnInquiry?: Prisma.SortOrder
+  emailOnMessage?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -628,6 +780,10 @@ export type UserMinOrderByAggregateInput = {
   portfolioUrl?: Prisma.SortOrder
   pinnedEstateId?: Prisma.SortOrder
   designer?: Prisma.SortOrder
+  designerPricingText?: Prisma.SortOrder
+  designerTurnaround?: Prisma.SortOrder
+  emailOnInquiry?: Prisma.SortOrder
+  emailOnMessage?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -673,6 +829,14 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreatedesignerSpecialtiesInput = {
+  set: string[]
+}
+
+export type UserCreatedesignerStyleTagsInput = {
+  set: string[]
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
@@ -683,6 +847,16 @@ export type EnumUserRoleFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type UserUpdatedesignerSpecialtiesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type UserUpdatedesignerStyleTagsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type UserCreateNestedOneWithoutCharactersInput = {
@@ -907,6 +1081,62 @@ export type UserUpdateOneRequiredWithoutCollectionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCollectionsInput, Prisma.UserUpdateWithoutCollectionsInput>, Prisma.UserUncheckedUpdateWithoutCollectionsInput>
 }
 
+export type UserCreateNestedOneWithoutDesignerConversationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDesignerConversationsInput, Prisma.UserUncheckedCreateWithoutDesignerConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDesignerConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRequestorConversationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequestorConversationsInput, Prisma.UserUncheckedCreateWithoutRequestorConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequestorConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDesignerConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDesignerConversationsInput, Prisma.UserUncheckedCreateWithoutDesignerConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDesignerConversationsInput
+  upsert?: Prisma.UserUpsertWithoutDesignerConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDesignerConversationsInput, Prisma.UserUpdateWithoutDesignerConversationsInput>, Prisma.UserUncheckedUpdateWithoutDesignerConversationsInput>
+}
+
+export type UserUpdateOneRequiredWithoutRequestorConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRequestorConversationsInput, Prisma.UserUncheckedCreateWithoutRequestorConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequestorConversationsInput
+  upsert?: Prisma.UserUpsertWithoutRequestorConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRequestorConversationsInput, Prisma.UserUpdateWithoutRequestorConversationsInput>, Prisma.UserUncheckedUpdateWithoutRequestorConversationsInput>
+}
+
+export type UserCreateNestedOneWithoutSentMessagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput
+  upsert?: Prisma.UserUpsertWithoutSentMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.UserUpdateWithoutSentMessagesInput>, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
+}
+
+export type UserCreateNestedOneWithoutPushSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  upsert?: Prisma.UserUpsertWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, Prisma.UserUpdateWithoutPushSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name?: string | null
@@ -922,6 +1152,12 @@ export type UserCreateWithoutAccountsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -936,6 +1172,10 @@ export type UserCreateWithoutAccountsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -954,6 +1194,12 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -967,6 +1213,10 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1000,6 +1250,12 @@ export type UserUpdateWithoutAccountsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -1014,6 +1270,10 @@ export type UserUpdateWithoutAccountsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1032,6 +1292,12 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1045,6 +1311,10 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1062,6 +1332,12 @@ export type UserCreateWithoutSessionsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1076,6 +1352,10 @@ export type UserCreateWithoutSessionsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1094,6 +1374,12 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1107,6 +1393,10 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1140,6 +1430,12 @@ export type UserUpdateWithoutSessionsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1154,6 +1450,10 @@ export type UserUpdateWithoutSessionsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1172,6 +1472,12 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1185,6 +1491,10 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -1202,6 +1512,12 @@ export type UserCreateWithoutCharactersInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1216,6 +1532,10 @@ export type UserCreateWithoutCharactersInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -1234,6 +1554,12 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1247,6 +1573,10 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -1280,6 +1610,12 @@ export type UserUpdateWithoutCharactersInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1294,6 +1630,10 @@ export type UserUpdateWithoutCharactersInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1312,6 +1652,12 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1325,6 +1671,10 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFlaggedEstatesInput = {
@@ -1342,6 +1692,12 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -1356,6 +1712,10 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
@@ -1374,6 +1734,12 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -1387,6 +1753,10 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
@@ -1409,6 +1779,12 @@ export type UserCreateWithoutEstatesInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1423,6 +1799,10 @@ export type UserCreateWithoutEstatesInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEstatesInput = {
@@ -1441,6 +1821,12 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1454,6 +1840,10 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEstatesInput = {
@@ -1476,6 +1866,12 @@ export type UserCreateWithoutDesignedEstatesInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1490,6 +1886,10 @@ export type UserCreateWithoutDesignedEstatesInput = {
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDesignedEstatesInput = {
@@ -1508,6 +1908,12 @@ export type UserUncheckedCreateWithoutDesignedEstatesInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1521,6 +1927,10 @@ export type UserUncheckedCreateWithoutDesignedEstatesInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDesignedEstatesInput = {
@@ -1543,6 +1953,12 @@ export type UserCreateWithoutPinnedEstateInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1557,6 +1973,10 @@ export type UserCreateWithoutPinnedEstateInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPinnedEstateInput = {
@@ -1574,6 +1994,12 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1588,6 +2014,10 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPinnedEstateInput = {
@@ -1626,6 +2056,12 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -1640,6 +2076,10 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
@@ -1658,6 +2098,12 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1671,6 +2117,10 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutEstatesInput = {
@@ -1699,6 +2149,12 @@ export type UserUpdateWithoutEstatesInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1713,6 +2169,10 @@ export type UserUpdateWithoutEstatesInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEstatesInput = {
@@ -1731,6 +2191,12 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1744,6 +2210,10 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDesignedEstatesInput = {
@@ -1772,6 +2242,12 @@ export type UserUpdateWithoutDesignedEstatesInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1786,6 +2262,10 @@ export type UserUpdateWithoutDesignedEstatesInput = {
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
@@ -1804,6 +2284,12 @@ export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1817,6 +2303,10 @@ export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutPinnedEstateInput = {
@@ -1854,6 +2344,12 @@ export type UserScalarWhereInput = {
   portfolioUrl?: Prisma.StringNullableFilter<"User"> | string | null
   pinnedEstateId?: Prisma.StringNullableFilter<"User"> | string | null
   designer?: Prisma.BoolFilter<"User"> | boolean
+  designerSpecialties?: Prisma.StringNullableListFilter<"User">
+  designerStyleTags?: Prisma.StringNullableListFilter<"User">
+  designerPricingText?: Prisma.StringNullableFilter<"User"> | string | null
+  designerTurnaround?: Prisma.StringNullableFilter<"User"> | string | null
+  emailOnInquiry?: Prisma.BoolFilter<"User"> | boolean
+  emailOnMessage?: Prisma.BoolFilter<"User"> | boolean
 }
 
 export type UserCreateWithoutVerificationReviewsInput = {
@@ -1871,6 +2367,12 @@ export type UserCreateWithoutVerificationReviewsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -1885,6 +2387,10 @@ export type UserCreateWithoutVerificationReviewsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationReviewsInput = {
@@ -1903,6 +2409,12 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -1916,6 +2428,10 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationReviewsInput = {
@@ -1949,6 +2465,12 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -1963,6 +2485,10 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
@@ -1981,6 +2507,12 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -1994,6 +2526,10 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVenueStaffInput = {
@@ -2011,6 +2547,12 @@ export type UserCreateWithoutVenueStaffInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2025,6 +2567,10 @@ export type UserCreateWithoutVenueStaffInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVenueStaffInput = {
@@ -2043,6 +2589,12 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2056,6 +2608,10 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVenueStaffInput = {
@@ -2089,6 +2645,12 @@ export type UserUpdateWithoutVenueStaffInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2103,6 +2665,10 @@ export type UserUpdateWithoutVenueStaffInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVenueStaffInput = {
@@ -2121,6 +2687,12 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2134,6 +2706,10 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLikesInput = {
@@ -2151,6 +2727,12 @@ export type UserCreateWithoutLikesInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2165,6 +2747,10 @@ export type UserCreateWithoutLikesInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLikesInput = {
@@ -2183,6 +2769,12 @@ export type UserUncheckedCreateWithoutLikesInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2196,6 +2788,10 @@ export type UserUncheckedCreateWithoutLikesInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLikesInput = {
@@ -2229,6 +2825,12 @@ export type UserUpdateWithoutLikesInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2243,6 +2845,10 @@ export type UserUpdateWithoutLikesInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLikesInput = {
@@ -2261,6 +2867,12 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2274,6 +2886,10 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -2291,6 +2907,12 @@ export type UserCreateWithoutCommentsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
@@ -2305,6 +2927,10 @@ export type UserCreateWithoutCommentsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -2323,6 +2949,12 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
   estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
@@ -2336,6 +2968,10 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2369,6 +3005,12 @@ export type UserUpdateWithoutCommentsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
@@ -2383,6 +3025,10 @@ export type UserUpdateWithoutCommentsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2401,6 +3047,12 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
   estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2414,6 +3066,10 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLegalPageEditsInput = {
@@ -2431,6 +3087,12 @@ export type UserCreateWithoutLegalPageEditsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2445,6 +3107,10 @@ export type UserCreateWithoutLegalPageEditsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLegalPageEditsInput = {
@@ -2463,6 +3129,12 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2476,6 +3148,10 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLegalPageEditsInput = {
@@ -2509,6 +3185,12 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2523,6 +3205,10 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
@@ -2541,6 +3227,12 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2554,6 +3246,10 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutClaimRequestsInput = {
@@ -2571,6 +3267,12 @@ export type UserCreateWithoutClaimRequestsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2585,6 +3287,10 @@ export type UserCreateWithoutClaimRequestsInput = {
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClaimRequestsInput = {
@@ -2603,6 +3309,12 @@ export type UserUncheckedCreateWithoutClaimRequestsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2616,6 +3328,10 @@ export type UserUncheckedCreateWithoutClaimRequestsInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClaimRequestsInput = {
@@ -2638,6 +3354,12 @@ export type UserCreateWithoutClaimReviewsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2652,6 +3374,10 @@ export type UserCreateWithoutClaimReviewsInput = {
   pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClaimReviewsInput = {
@@ -2670,6 +3396,12 @@ export type UserUncheckedCreateWithoutClaimReviewsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2683,6 +3415,10 @@ export type UserUncheckedCreateWithoutClaimReviewsInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClaimReviewsInput = {
@@ -2716,6 +3452,12 @@ export type UserUpdateWithoutClaimRequestsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2730,6 +3472,10 @@ export type UserUpdateWithoutClaimRequestsInput = {
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClaimRequestsInput = {
@@ -2748,6 +3494,12 @@ export type UserUncheckedUpdateWithoutClaimRequestsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2761,6 +3513,10 @@ export type UserUncheckedUpdateWithoutClaimRequestsInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutClaimReviewsInput = {
@@ -2789,6 +3545,12 @@ export type UserUpdateWithoutClaimReviewsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2803,6 +3565,10 @@ export type UserUpdateWithoutClaimReviewsInput = {
   pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClaimReviewsInput = {
@@ -2821,6 +3587,12 @@ export type UserUncheckedUpdateWithoutClaimReviewsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2834,6 +3606,10 @@ export type UserUncheckedUpdateWithoutClaimReviewsInput = {
   verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -2851,6 +3627,12 @@ export type UserCreateWithoutCollectionsInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
@@ -2865,6 +3647,10 @@ export type UserCreateWithoutCollectionsInput = {
   designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -2883,6 +3669,12 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   portfolioUrl?: string | null
   pinnedEstateId?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
@@ -2896,6 +3688,10 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -2929,6 +3725,12 @@ export type UserUpdateWithoutCollectionsInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -2943,6 +3745,10 @@ export type UserUpdateWithoutCollectionsInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -2961,6 +3767,12 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -2974,6 +3786,730 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDesignerConversationsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDesignerConversationsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDesignerConversationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDesignerConversationsInput, Prisma.UserUncheckedCreateWithoutDesignerConversationsInput>
+}
+
+export type UserCreateWithoutRequestorConversationsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRequestorConversationsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRequestorConversationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequestorConversationsInput, Prisma.UserUncheckedCreateWithoutRequestorConversationsInput>
+}
+
+export type UserUpsertWithoutDesignerConversationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDesignerConversationsInput, Prisma.UserUncheckedUpdateWithoutDesignerConversationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDesignerConversationsInput, Prisma.UserUncheckedCreateWithoutDesignerConversationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDesignerConversationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDesignerConversationsInput, Prisma.UserUncheckedUpdateWithoutDesignerConversationsInput>
+}
+
+export type UserUpdateWithoutDesignerConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDesignerConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutRequestorConversationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRequestorConversationsInput, Prisma.UserUncheckedUpdateWithoutRequestorConversationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRequestorConversationsInput, Prisma.UserUncheckedCreateWithoutRequestorConversationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRequestorConversationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRequestorConversationsInput, Prisma.UserUncheckedUpdateWithoutRequestorConversationsInput>
+}
+
+export type UserUpdateWithoutRequestorConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRequestorConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSentMessagesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSentMessagesInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSentMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
+}
+
+export type UserUpsertWithoutSentMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSentMessagesInput, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSentMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSentMessagesInput, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
+}
+
+export type UserUpdateWithoutSentMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSentMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+}
+
+export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+}
+
+export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpsertWithoutPushSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushSubscriptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
 }
 
 export type UserCreateManyPinnedEstateInput = {
@@ -2991,6 +4527,12 @@ export type UserCreateManyPinnedEstateInput = {
   commissionOpen?: boolean
   portfolioUrl?: string | null
   designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
 }
 
 export type UserUpdateWithoutPinnedEstateInput = {
@@ -3008,6 +4550,12 @@ export type UserUpdateWithoutPinnedEstateInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
@@ -3022,6 +4570,10 @@ export type UserUpdateWithoutPinnedEstateInput = {
   designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPinnedEstateInput = {
@@ -3039,6 +4591,12 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
@@ -3053,6 +4611,10 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
   claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
@@ -3070,6 +4632,12 @@ export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
   commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -3092,6 +4660,10 @@ export type UserCountOutputType = {
   designedEstates: number
   claimRequests: number
   claimReviews: number
+  designerConversations: number
+  requestorConversations: number
+  sentMessages: number
+  pushSubscriptions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3109,6 +4681,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   designedEstates?: boolean | UserCountOutputTypeCountDesignedEstatesArgs
   claimRequests?: boolean | UserCountOutputTypeCountClaimRequestsArgs
   claimReviews?: boolean | UserCountOutputTypeCountClaimReviewsArgs
+  designerConversations?: boolean | UserCountOutputTypeCountDesignerConversationsArgs
+  requestorConversations?: boolean | UserCountOutputTypeCountRequestorConversationsArgs
+  sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+  pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
 }
 
 /**
@@ -3219,6 +4795,34 @@ export type UserCountOutputTypeCountClaimReviewsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.EstateClaimRequestWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDesignerConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRequestorConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PushSubscriptionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3236,6 +4840,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   portfolioUrl?: boolean
   pinnedEstateId?: boolean
   designer?: boolean
+  designerSpecialties?: boolean
+  designerStyleTags?: boolean
+  designerPricingText?: boolean
+  designerTurnaround?: boolean
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   flaggedEstates?: boolean | Prisma.User$flaggedEstatesArgs<ExtArgs>
@@ -3251,6 +4861,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   designedEstates?: boolean | Prisma.User$designedEstatesArgs<ExtArgs>
   claimRequests?: boolean | Prisma.User$claimRequestsArgs<ExtArgs>
   claimReviews?: boolean | Prisma.User$claimReviewsArgs<ExtArgs>
+  designerConversations?: boolean | Prisma.User$designerConversationsArgs<ExtArgs>
+  requestorConversations?: boolean | Prisma.User$requestorConversationsArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3270,6 +4884,12 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   portfolioUrl?: boolean
   pinnedEstateId?: boolean
   designer?: boolean
+  designerSpecialties?: boolean
+  designerStyleTags?: boolean
+  designerPricingText?: boolean
+  designerTurnaround?: boolean
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3289,6 +4909,12 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   portfolioUrl?: boolean
   pinnedEstateId?: boolean
   designer?: boolean
+  designerSpecialties?: boolean
+  designerStyleTags?: boolean
+  designerPricingText?: boolean
+  designerTurnaround?: boolean
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
   pinnedEstate?: boolean | Prisma.User$pinnedEstateArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3308,9 +4934,15 @@ export type UserSelectScalar = {
   portfolioUrl?: boolean
   pinnedEstateId?: boolean
   designer?: boolean
+  designerSpecialties?: boolean
+  designerStyleTags?: boolean
+  designerPricingText?: boolean
+  designerTurnaround?: boolean
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer" | "designerSpecialties" | "designerStyleTags" | "designerPricingText" | "designerTurnaround" | "emailOnInquiry" | "emailOnMessage", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
@@ -3327,6 +4959,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   designedEstates?: boolean | Prisma.User$designedEstatesArgs<ExtArgs>
   claimRequests?: boolean | Prisma.User$claimRequestsArgs<ExtArgs>
   claimReviews?: boolean | Prisma.User$claimReviewsArgs<ExtArgs>
+  designerConversations?: boolean | Prisma.User$designerConversationsArgs<ExtArgs>
+  requestorConversations?: boolean | Prisma.User$requestorConversationsArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3354,6 +4990,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     designedEstates: Prisma.$EstatePayload<ExtArgs>[]
     claimRequests: Prisma.$EstateClaimRequestPayload<ExtArgs>[]
     claimReviews: Prisma.$EstateClaimRequestPayload<ExtArgs>[]
+    designerConversations: Prisma.$ConversationPayload<ExtArgs>[]
+    requestorConversations: Prisma.$ConversationPayload<ExtArgs>[]
+    sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+    pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3371,6 +5011,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     portfolioUrl: string | null
     pinnedEstateId: string | null
     designer: boolean
+    designerSpecialties: string[]
+    designerStyleTags: string[]
+    designerPricingText: string | null
+    designerTurnaround: string | null
+    emailOnInquiry: boolean
+    emailOnMessage: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -3780,6 +5426,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   designedEstates<T extends Prisma.User$designedEstatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$designedEstatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   claimRequests<T extends Prisma.User$claimRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$claimRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   claimReviews<T extends Prisma.User$claimReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$claimReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designerConversations<T extends Prisma.User$designerConversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$designerConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requestorConversations<T extends Prisma.User$requestorConversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestorConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3824,6 +5474,12 @@ export interface UserFieldRefs {
   readonly portfolioUrl: Prisma.FieldRef<"User", 'String'>
   readonly pinnedEstateId: Prisma.FieldRef<"User", 'String'>
   readonly designer: Prisma.FieldRef<"User", 'Boolean'>
+  readonly designerSpecialties: Prisma.FieldRef<"User", 'String[]'>
+  readonly designerStyleTags: Prisma.FieldRef<"User", 'String[]'>
+  readonly designerPricingText: Prisma.FieldRef<"User", 'String'>
+  readonly designerTurnaround: Prisma.FieldRef<"User", 'String'>
+  readonly emailOnInquiry: Prisma.FieldRef<"User", 'Boolean'>
+  readonly emailOnMessage: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
@@ -4572,6 +6228,102 @@ export type User$claimReviewsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.EstateClaimRequestScalarFieldEnum | Prisma.EstateClaimRequestScalarFieldEnum[]
+}
+
+/**
+ * User.designerConversations
+ */
+export type User$designerConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * User.requestorConversations
+ */
+export type User$requestorConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * User.sentMessages
+ */
+export type User$sentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+}
+
+/**
+ * User.pushSubscriptions
+ */
+export type User$pushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PushSubscription
+   */
+  select?: Prisma.PushSubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PushSubscription
+   */
+  omit?: Prisma.PushSubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PushSubscriptionInclude<ExtArgs> | null
+  where?: Prisma.PushSubscriptionWhereInput
+  orderBy?: Prisma.PushSubscriptionOrderByWithRelationInput | Prisma.PushSubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PushSubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PushSubscriptionScalarFieldEnum | Prisma.PushSubscriptionScalarFieldEnum[]
 }
 
 /**

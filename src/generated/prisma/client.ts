@@ -136,3 +136,18 @@ export type Collection = Prisma.CollectionModel
  * 
  */
 export type CollectionEstate = Prisma.CollectionEstateModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model PushSubscription
+ * 
+ */
+export type PushSubscription = Prisma.PushSubscriptionModel

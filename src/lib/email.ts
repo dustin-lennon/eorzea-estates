@@ -259,6 +259,64 @@ export async function sendVerificationRejectedEmail({
   })
 }
 
+export async function sendNewInquiryEmail({
+  to,
+  designerName,
+  requestorName,
+  conversationId,
+}: {
+  to: string
+  designerName: string
+  requestorName: string
+  conversationId: string
+}) {
+  const url = `https://eorzeaestates.com/messages/${conversationId}`
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">New commission inquiry</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${designerName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      <strong style="color:#f5f5f5;">${requestorName}</strong> has sent you a commission inquiry. Open the conversation to read their message and reply.
+    </p>
+    <a href="${url}" style="display:inline-block;background:#c084fc;color:#fff;text-decoration:none;font-weight:600;padding:10px 24px;border-radius:8px;margin-bottom:20px;">View Inquiry</a>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `New commission inquiry from ${requestorName}`,
+    html: baseTemplate("New commission inquiry", body),
+  })
+}
+
+export async function sendNewMessageEmail({
+  to,
+  recipientName,
+  senderName,
+  conversationId,
+}: {
+  to: string
+  recipientName: string
+  senderName: string
+  conversationId: string
+}) {
+  const url = `https://eorzeaestates.com/messages/${conversationId}`
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">New message</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${recipientName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      <strong style="color:#f5f5f5;">${senderName}</strong> sent you a message in your commission conversation.
+    </p>
+    <a href="${url}" style="display:inline-block;background:#c084fc;color:#fff;text-decoration:none;font-weight:600;padding:10px 24px;border-radius:8px;margin-bottom:20px;">View Message</a>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `New message from ${senderName}`,
+    html: baseTemplate("New message", body),
+  })
+}
+
 export async function sendFCEstateTransferInviteEmail({
   to,
   newOwnerName,

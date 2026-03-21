@@ -69,7 +69,10 @@ export const ModelName = {
   SiteSettings: 'SiteSettings',
   EstateClaimRequest: 'EstateClaimRequest',
   Collection: 'Collection',
-  CollectionEstate: 'CollectionEstate'
+  CollectionEstate: 'CollectionEstate',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  PushSubscription: 'PushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -140,7 +143,13 @@ export const UserScalarFieldEnum = {
   commissionOpen: 'commissionOpen',
   portfolioUrl: 'portfolioUrl',
   pinnedEstateId: 'pinnedEstateId',
-  designer: 'designer'
+  designer: 'designer',
+  designerSpecialties: 'designerSpecialties',
+  designerStyleTags: 'designerStyleTags',
+  designerPricingText: 'designerPricingText',
+  designerTurnaround: 'designerTurnaround',
+  emailOnInquiry: 'emailOnInquiry',
+  emailOnMessage: 'emailOnMessage'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -350,6 +359,46 @@ export const CollectionEstateScalarFieldEnum = {
 } as const
 
 export type CollectionEstateScalarFieldEnum = (typeof CollectionEstateScalarFieldEnum)[keyof typeof CollectionEstateScalarFieldEnum]
+
+
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  designerId: 'designerId',
+  requestorId: 'requestorId',
+  estateType: 'estateType',
+  district: 'district',
+  budgetRange: 'budgetRange',
+  timeframe: 'timeframe',
+  designerReadAt: 'designerReadAt',
+  requestorReadAt: 'requestorReadAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  createdAt: 'createdAt'
+} as const
+
+export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
 export const SortOrder = {

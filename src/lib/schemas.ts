@@ -49,3 +49,20 @@ export const designerEstateFormSchema = estateFormSchema
   })
 
 export type DesignerEstateFormValues = z.infer<typeof designerEstateFormSchema>
+
+export const inquirySchema = z.object({
+  designerId: z.string().min(1),
+  estateType: z.enum(["PRIVATE", "FC_ESTATE", "VENUE", "APARTMENT", "FC_ROOM"]).optional(),
+  district: z.enum(["MIST", "LAVENDER_BEDS", "GOBLET", "SHIROGANE", "EMPYREUM"]).optional(),
+  budgetRange: z.string().max(100).optional(),
+  timeframe: z.string().max(100).optional(),
+  body: z.string().min(20, "Message must be at least 20 characters").max(2000),
+})
+
+export type InquiryValues = z.infer<typeof inquirySchema>
+
+export const messageSchema = z.object({
+  body: z.string().min(1, "Message cannot be empty").max(2000),
+})
+
+export type MessageValues = z.infer<typeof messageSchema>
