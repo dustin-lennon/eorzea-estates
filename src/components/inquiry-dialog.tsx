@@ -21,8 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { inquirySchema, type InquiryValues } from "@/lib/schemas"
+import { inquirySchema, COMMISSIONABLE_ESTATE_TYPES, type InquiryValues } from "@/lib/schemas"
 import { HOUSING_DISTRICTS, ESTATE_TYPES } from "@/lib/ffxiv-data"
+
+const COMMISSIONABLE_ESTATE_TYPE_OPTIONS = ESTATE_TYPES.filter((t) =>
+  (COMMISSIONABLE_ESTATE_TYPES as readonly string[]).includes(t.value)
+)
 
 interface Props {
   designerId: string
@@ -94,11 +98,16 @@ export function InquiryDialog({ designerId, designerName, trigger }: Props) {
                 <SelectValue placeholder="Select estate type (optional)" />
               </SelectTrigger>
               <SelectContent>
-                {ESTATE_TYPES.map((t) => (
+                {COMMISSIONABLE_ESTATE_TYPE_OPTIONS.map((t) => (
                   <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
+            {estateType === "FC_ESTATE" && (
+              <p className="text-xs text-amber-600 dark:text-amber-400">
+                Note: The designer must be a member of your Free Company to work on an FC estate.
+              </p>
+            )}
           </div>
 
           {/* District */}

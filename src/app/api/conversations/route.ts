@@ -1,7 +1,7 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
-import { inquirySchema } from "@/lib/schemas"
+import { inquirySchema, COMMISSIONABLE_ESTATE_TYPES } from "@/lib/schemas"
 import { sendNewInquiryEmail } from "@/lib/email"
 import { sendPushToUser } from "@/lib/push"
 
@@ -27,6 +27,13 @@ export async function POST(req: Request) {
   }
 
   const { designerId, estateType, district, budgetRange, timeframe, body: messageBody } = parsed.data
+
+  if (estateType && !(COMMISSIONABLE_ESTATE_TYPES as readonly string[]).includes(estateType)) {
+    return NextResponse.json(
+      { error: "Designers can only be commissioned for private estates, venues, or FC estates" },
+      { status: 400 }
+    )
+  }
 
   if (designerId === session.user.id) {
     return NextResponse.json({ error: "Cannot send an inquiry to yourself" }, { status: 400 })

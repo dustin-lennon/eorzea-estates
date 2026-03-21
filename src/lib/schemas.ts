@@ -50,9 +50,15 @@ export const designerEstateFormSchema = estateFormSchema
 
 export type DesignerEstateFormValues = z.infer<typeof designerEstateFormSchema>
 
+// Designers can only work on private estates, venues, or FC estates (FC estate
+// requires the designer to be a member of the same Free Company).
+// Apartments and FC rooms are not eligible for designer commissions.
+export const COMMISSIONABLE_ESTATE_TYPES = ["PRIVATE", "VENUE", "FC_ESTATE"] as const
+export type CommissionableEstateType = (typeof COMMISSIONABLE_ESTATE_TYPES)[number]
+
 export const inquirySchema = z.object({
   designerId: z.string().min(1),
-  estateType: z.enum(["PRIVATE", "FC_ESTATE", "VENUE", "APARTMENT", "FC_ROOM"]).optional(),
+  estateType: z.enum(["PRIVATE", "VENUE", "FC_ESTATE"]).optional(),
   district: z.enum(["MIST", "LAVENDER_BEDS", "GOBLET", "SHIROGANE", "EMPYREUM"]).optional(),
   budgetRange: z.string().max(100).optional(),
   timeframe: z.string().max(100).optional(),
