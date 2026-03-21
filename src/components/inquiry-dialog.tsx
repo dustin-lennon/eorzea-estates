@@ -108,6 +108,11 @@ export function InquiryDialog({ designerId, designerName, trigger }: Props) {
                 Note: The designer must be a member of your Free Company to work on an FC estate.
               </p>
             )}
+            {estateType === "VENUE" && (
+              <p className="text-xs text-muted-foreground">
+                If this venue is owned by a Free Company, the designer must be a member of that FC.
+              </p>
+            )}
           </div>
 
           {/* District */}
