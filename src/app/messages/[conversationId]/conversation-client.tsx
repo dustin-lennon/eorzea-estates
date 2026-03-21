@@ -79,7 +79,7 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+    if (e.key === "Enter" && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
       e.preventDefault()
       void handleSend()
     }
@@ -126,7 +126,7 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
         <div className="flex gap-3 items-end">
           <textarea
             className="flex-1 min-h-[72px] max-h-[180px] rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            placeholder="Type a message… (Cmd+Enter to send)"
+            placeholder="Type a message… (Enter to send, Ctrl+Enter for new line)"
             value={body}
             onChange={(e) => setBody(e.target.value)}
             onKeyDown={handleKeyDown}
