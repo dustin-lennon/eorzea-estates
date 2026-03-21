@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     where: { id: userId },
     select: {
       name: true,
-      characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
+      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, take: 1 },
     },
   })
   if (!user) return {}
@@ -56,7 +56,7 @@ export default async function ProfilePage({ params }: PageProps) {
       portfolioUrl: true,
       pinnedEstateId: true,
       createdAt: true,
-      characters: { where: { verified: true }, select: { characterName: true }, take: 1 },
+      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, take: 1 },
       collections: {
         select: {
           id: true,
@@ -83,6 +83,7 @@ export default async function ProfilePage({ params }: PageProps) {
   const verifiedChar = user.characters[0]
   const isVerified = !!verifiedChar
   const displayName = verifiedChar?.characterName ?? user.name
+  const avatarSrc = verifiedChar?.avatarUrl || user.image || undefined
 
   const pinnedEstate = user.pinnedEstateId
     ? estates.find((e) => e.id === user.pinnedEstateId) ?? null
@@ -91,11 +92,36 @@ export default async function ProfilePage({ params }: PageProps) {
     ? estates.filter((e) => e.id !== user.pinnedEstateId)
     : estates
 
+  // Gate: profile is only visible once the user has a verified FFXIV character
+  if (!isVerified) {
+    const isOwner = session?.user?.id === userId
+    return (
+      <div className="container mx-auto max-w-4xl px-4 py-10 text-center">
+        <p className="text-2xl font-bold mb-3">
+          {isOwner ? "Your profile isn't set up yet" : "Profile not available"}
+        </p>
+        <p className="text-muted-foreground mb-6">
+          {isOwner
+            ? "Verify an FFXIV character to unlock your public profile, set your display name, and show your Lodestone avatar."
+            : "This user hasn't linked an FFXIV character yet."}
+        </p>
+        {isOwner && (
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition"
+          >
+            Go to Dashboard to verify your character
+          </Link>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
       <div className="flex items-start gap-4 mb-6">
         <Avatar className="h-16 w-16 shrink-0">
-          <AvatarImage src={user.image ?? undefined} alt={displayName ?? ""} />
+          <AvatarImage src={avatarSrc} alt={displayName ?? ""} />
           <AvatarFallback className="text-2xl">
             {displayName?.charAt(0).toUpperCase() ?? "?"}
           </AvatarFallback>
