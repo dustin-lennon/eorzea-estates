@@ -34,6 +34,9 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
   const [body, setBody] = useState("")
   const [sending, setSending] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const isInitialMount = useRef(true)
+  const justSentRef = useRef(false)
 
   const fetchMessages = useCallback(async () => {
     try {
@@ -53,9 +56,22 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
     return () => clearInterval(interval)
   }, [fetchMessages])
 
-  // Scroll to bottom on new messages
+  // Scroll to bottom: always on initial load, on send, or when already near the bottom
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    if (isInitialMount.current) {
+      bottomRef.current?.scrollIntoView()
+      isInitialMount.current = false
+      return
+    }
+
+    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150
+    if (justSentRef.current || isNearBottom) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+    justSentRef.current = false
   }, [messages])
 
   async function handleSend() {
@@ -73,6 +89,7 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
         throw new Error(typeof data.error === "string" ? data.error : "Failed to send")
       }
       const msg = await res.json() as Message
+      justSentRef.current = true
       setMessages((prev) => [...prev, msg])
       setBody("")
     } catch (err) {
@@ -97,7 +114,7 @@ export function ConversationClient({ conversationId, currentUserId, initialMessa
       </div>
 
       {/* Message list */}
-      <div className="flex-1 overflow-y-auto space-y-4 p-4">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto space-y-4 p-4">
         {messages.length === 0 && (
           <p className="text-center text-muted-foreground text-sm py-8">No messages yet. Start the conversation!</p>
         )}

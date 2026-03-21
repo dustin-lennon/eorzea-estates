@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { formatDistanceToNow } from "date-fns"
 import { HOUSING_DISTRICTS, ESTATE_TYPES } from "@/lib/ffxiv-data"
+import { PresenceIndicator } from "@/components/presence-indicator"
 
 const ONLINE_THRESHOLD_MS = 3 * 60 * 1000
 
@@ -120,6 +121,7 @@ export function InboxClient({ initialConversations }: { initialConversations: Co
               {preview && (
                 <p className="text-xs text-muted-foreground truncate">{preview}</p>
               )}
+              <PresenceIndicator lastSeenAt={conv.otherParty.lastSeenAt ?? null} className="mt-1" />
             </div>
           </Link>
         )
