@@ -55,23 +55,36 @@ model User {
   bio                  String?
   commissionOpen       Boolean               @default(false)
   portfolioUrl         String?
-  pinnedEstateId       String?
-  designer             Boolean               @default(false)
-  accounts             Account[]
-  comments             Comment[]
-  flaggedEstates       Estate[]              @relation("FlaggedByUser")
-  estates              Estate[]
-  characters           FfxivCharacter[]
-  collections          Collection[]
-  legalPageEdits       LegalPage[]           @relation("LegalPageEditor")
-  likes                Like[]
-  sessions             Session[]
-  venueStaff           VenueStaff[]          @relation("StaffUser")
-  verificationReviews  EstateVerification[]  @relation("VerificationReviewer")
-  pinnedEstate         Estate?               @relation("PinnedEstate", fields: [pinnedEstateId], references: [id])
-  designedEstates      Estate[]              @relation("DesignedEstates")
-  claimRequests        EstateClaimRequest[]  @relation("ClaimRequests")
-  claimReviews         EstateClaimRequest[]  @relation("ClaimReviewer")
+  pinnedEstateId         String?
+  designer               Boolean               @default(false)
+  // Designer commission extended fields
+  designerSpecialties    String[]              @default([])
+  designerStyleTags      String[]              @default([])
+  designerPricingText    String?
+  designerTurnaround     String?
+  // Notification preferences
+  emailOnInquiry         Boolean               @default(true)
+  emailOnMessage         Boolean               @default(true)
+  lastSeenAt             DateTime?
+  accounts               Account[]
+  comments               Comment[]
+  flaggedEstates         Estate[]              @relation("FlaggedByUser")
+  estates                Estate[]
+  characters             FfxivCharacter[]
+  collections            Collection[]
+  legalPageEdits         LegalPage[]           @relation("LegalPageEditor")
+  likes                  Like[]
+  sessions               Session[]
+  venueStaff             VenueStaff[]          @relation("StaffUser")
+  verificationReviews    EstateVerification[]  @relation("VerificationReviewer")
+  pinnedEstate           Estate?               @relation("PinnedEstate", fields: [pinnedEstateId], references: [id])
+  designedEstates        Estate[]              @relation("DesignedEstates")
+  claimRequests          EstateClaimRequest[]  @relation("ClaimRequests")
+  claimReviews           EstateClaimRequest[]  @relation("ClaimReviewer")
+  designerConversations  Conversation[]        @relation("DesignerConversations")
+  requestorConversations Conversation[]        @relation("RequestorConversations")
+  sentMessages           Message[]             @relation("SentMessages")
+  pushSubscriptions      PushSubscription[]
 }
 
 model FfxivCharacter {
@@ -281,6 +294,45 @@ model CollectionEstate {
   estate       Estate     @relation(fields: [estateId], references: [id], onDelete: Cascade)
 
   @@id([collectionId, estateId])
+}
+
+model Conversation {
+  id              String           @id @default(cuid())
+  designerId      String
+  requestorId     String
+  estateType      EstateType?
+  district        HousingDistrict?
+  budgetRange     String?
+  timeframe       String?
+  designerReadAt  DateTime?
+  requestorReadAt DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  designer        User             @relation("DesignerConversations", fields: [designerId], references: [id], onDelete: Cascade)
+  requestor       User             @relation("RequestorConversations", fields: [requestorId], references: [id], onDelete: Cascade)
+  messages        Message[]
+
+  @@unique([designerId, requestorId])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  senderId       String
+  body           String
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum UserRole {

@@ -14,6 +14,12 @@ export default async function SettingsPage() {
     portfolioUrl: string | null;
     pinnedEstateId: string | null;
     designer: boolean;
+    designerSpecialties: string[];
+    designerStyleTags: string[];
+    designerPricingText: string | null;
+    designerTurnaround: string | null;
+    emailOnInquiry: boolean;
+    emailOnMessage: boolean;
     publishedEstates: { id: string; name: string }[];
   } | null = null;
 
@@ -26,6 +32,12 @@ export default async function SettingsPage() {
         portfolioUrl: true,
         pinnedEstateId: true,
         designer: true,
+        designerSpecialties: true,
+        designerStyleTags: true,
+        designerPricingText: true,
+        designerTurnaround: true,
+        emailOnInquiry: true,
+        emailOnMessage: true,
         estates: {
           where: { published: true, deletedAt: null },
           select: { id: true, name: true },
@@ -87,6 +99,12 @@ export default async function SettingsPage() {
             initialPortfolioUrl={designerData.portfolioUrl}
             initialPinnedEstateId={designerData.pinnedEstateId}
             initialDesigner={designerData.designer}
+            initialDesignerSpecialties={designerData.designerSpecialties}
+            initialDesignerStyleTags={designerData.designerStyleTags}
+            initialDesignerPricingText={designerData.designerPricingText}
+            initialDesignerTurnaround={designerData.designerTurnaround}
+            initialEmailOnInquiry={designerData.emailOnInquiry}
+            initialEmailOnMessage={designerData.emailOnMessage}
             publishedEstates={designerData.publishedEstates}
           />
         </section>

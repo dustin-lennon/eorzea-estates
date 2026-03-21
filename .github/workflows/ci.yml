@@ -115,6 +115,9 @@ jobs:
       CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME || 'placeholder' }}
       CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY || 'placeholder' }}
       CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET || 'placeholder' }}
+      VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY || '' }}
+      VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY || '' }}
+      NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_VAPID_PUBLIC_KEY || '' }}
       NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN || '' }}
       SENTRY_DSN: ${{ secrets.SENTRY_DSN || '' }}
       SENTRY_ORG: ${{ secrets.SENTRY_ORG || '' }}
