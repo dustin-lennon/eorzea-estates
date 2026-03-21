@@ -3,6 +3,23 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.22.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.21.1...v1.22.0) (2026-03-21)
+
+### ✨ Features
+
+* add designer commission inquiry and messaging platform ([7f95b02](https://github.com/dustin-lennon/eorzea-estates/commit/7f95b02ed47d31b474af366c916fedd450f46f1c)), closes [#203](https://github.com/dustin-lennon/eorzea-estates/issues/203)
+* add FC membership note for venue commission inquiries ([3abbb6e](https://github.com/dustin-lennon/eorzea-estates/commit/3abbb6eaa6181e5af9a68fc9ccba995fce80df61))
+* add online presence indicator to messaging ([22c036a](https://github.com/dustin-lennon/eorzea-estates/commit/22c036a02992ebddc3d951a0834c449cf03619e7))
+* restrict commission inquiries to private estates and venues ([6ddb5bc](https://github.com/dustin-lennon/eorzea-estates/commit/6ddb5bc7810c524e0f6e7cc625356ef797bdc2a7))
+* swap message composer keyboard shortcuts ([862623f](https://github.com/dustin-lennon/eorzea-estates/commit/862623fa671a9ff361aab4037064d9c4f3266465))
+
+### 🐛 Bug Fixes
+
+* lazily initialize VAPID details to prevent build failure when keys are absent ([209bff6](https://github.com/dustin-lennon/eorzea-estates/commit/209bff67230e92c882f725aaf5e7f6c0dc33f7ff))
+* prevent scroll jump when reading message history and show last seen in inbox ([f36bce2](https://github.com/dustin-lennon/eorzea-estates/commit/f36bce21ce0a358a901896ce3f08b1723a40abde))
+* replace Date.now() calls with useState(Date.now) to satisfy React Compiler purity rules ([18073bb](https://github.com/dustin-lennon/eorzea-estates/commit/18073bbfb24866dcf519fc8687991661c474ee0c))
+* use useMemo for Date.now() in PresenceIndicator to satisfy React Compiler purity rules ([59a14c7](https://github.com/dustin-lennon/eorzea-estates/commit/59a14c70c79746d61fb265b088657e29283ea61f))
+
 ## [1.21.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.21.0...v1.21.1) (2026-03-20)
 
 ### 🐛 Bug Fixes
