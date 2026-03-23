@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.23.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.23.0...v1.23.1) (2026-03-23)
+
+### 🐛 Bug Fixes
+
+* sync Discord avatar on sign-in and add broken image fallback ([ef7c16f](https://github.com/dustin-lennon/eorzea-estates/commit/ef7c16fc6184383e60f822f7350034c9cecc9b92)), closes [#209](https://github.com/dustin-lennon/eorzea-estates/issues/209)
+
 ## [1.23.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.22.0...v1.23.0) (2026-03-23)
 
 ### ✨ Features
