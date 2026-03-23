@@ -6,6 +6,7 @@ import Link from "next/link"
 import { UserRoleSelect } from "./user-role-select"
 import { PathfinderToggle } from "./pathfinder-toggle"
 import { DesignerToggle } from "./designer-toggle"
+import { UserAvatar } from "@/components/user-avatar"
 import { PATHFINDER_LIMIT } from "@/lib/pathfinder"
 import type { UserRole } from "@/types/roles"
 
@@ -68,19 +69,7 @@ export default async function AdminUsersPage() {
               <tr key={user.id} className="hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    {user.image ? (
-                      <Image
-                        src={user.image}
-                        alt={user.name ?? "User"}
-                        width={32}
-                        height={32}
-                        className="rounded-full shrink-0"
-                      />
-                    ) : (
-                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0 text-xs font-bold">
-                        {user.name?.charAt(0).toUpperCase() ?? "?"}
-                      </div>
-                    )}
+                    <UserAvatar src={user.image} name={user.name} size={32} />
                     <div>
                       <Link href={`/profile/${user.id}`} className="brand-link font-medium">
                         {user.name ?? user.email ?? "Unknown"}
