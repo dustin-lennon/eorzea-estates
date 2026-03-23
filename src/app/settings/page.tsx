@@ -64,7 +64,8 @@ export default async function SettingsPage() {
       linkedProviders = accounts.map((a) => a.provider)
       hasPassword = !!user.password
       linkedEmail = user.email ?? null
-      emailVerified = !!user.emailVerified
+      // Treat linked OAuth providers as email-verified (Google/Discord both verify identity)
+      emailVerified = !!user.emailVerified || accounts.length > 0
       designerData = {
         bio: user.bio,
         commissionOpen: user.commissionOpen,

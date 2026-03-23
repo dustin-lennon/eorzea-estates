@@ -6,7 +6,6 @@ import prisma from "@/lib/prisma"
 const schema = z
   .object({
     email: z.string().email(),
-    name: z.string().min(1, "Display name is required"),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
   })
@@ -29,7 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: first?.message ?? "Invalid input" }, { status: 400 })
   }
 
-  const { email, name, password } = parsed.data
+  const { email, password } = parsed.data
 
   // Re-validate the verification token is still valid
   const token = await prisma.verificationToken.findFirst({
@@ -52,7 +51,6 @@ export async function POST(request: Request) {
     prisma.user.create({
       data: {
         email,
-        name,
         emailVerified: new Date(),
         password: hashed,
       },

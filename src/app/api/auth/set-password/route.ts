@@ -36,10 +36,16 @@ export async function POST(request: Request) {
 
   const { currentPassword, newPassword } = parsed.data
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { password: true, email: true, emailVerified: true },
-  })
+  const [user, linkedAccounts] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { password: true, email: true, emailVerified: true },
+    }),
+    prisma.account.findMany({
+      where: { userId: session.user.id },
+      select: { provider: true },
+    }),
+  ])
 
   if (!user?.email) {
     return NextResponse.json(
@@ -48,7 +54,9 @@ export async function POST(request: Request) {
     )
   }
 
-  if (!user.emailVerified) {
+  // Treat linked OAuth providers as email-verified (Google/Discord both verify identity)
+  const effectivelyVerified = !!user.emailVerified || linkedAccounts.length > 0
+  if (!effectivelyVerified) {
     return NextResponse.json(
       { error: "Your email address must be verified before setting a password." },
       { status: 400 },

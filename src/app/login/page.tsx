@@ -53,7 +53,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+    <div className="flex-1 flex items-center justify-center px-4 py-8">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome back</CardTitle>

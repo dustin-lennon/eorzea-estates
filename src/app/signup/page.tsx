@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { toast } from "sonner"
@@ -28,6 +28,14 @@ const GoogleIcon = () => (
 )
 
 export default function SignupPage() {
+  return (
+    <Suspense>
+      <SignupForm />
+    </Suspense>
+  )
+}
+
+function SignupForm() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const callbackUrl = searchParams.get("callbackUrl") ?? "/"
@@ -35,7 +43,6 @@ export default function SignupPage() {
   const [step, setStep] = useState<Step>("email")
   const [email, setEmail] = useState("")
   const [code, setCode] = useState("")
-  const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -78,6 +85,7 @@ export default function SignupPage() {
         setError(data.error ?? "Invalid code")
         return
       }
+      toast.success("Email verified!")
       setStep("password")
     } finally {
       setLoading(false)
@@ -91,7 +99,7 @@ export default function SignupPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, password, confirmPassword }),
+        body: JSON.stringify({ email, password, confirmPassword }),
       })
       const data = await res.json() as { ok?: boolean; error?: string }
       if (!res.ok) {
@@ -109,13 +117,14 @@ export default function SignupPage() {
         return
       }
       router.push(callbackUrl)
+      router.refresh()
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+    <div className="flex-1 flex items-center justify-center px-4 py-8">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Create your account</CardTitle>
@@ -233,17 +242,6 @@ export default function SignupPage() {
                 <span>{email} verified</span>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="name">Display name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  autoComplete="name"
-                />
-              </div>
-              <div className="space-y-1.5">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
                   <Input
@@ -292,7 +290,7 @@ export default function SignupPage() {
               <Button
                 className="w-full"
                 onClick={createAccount}
-                disabled={!name || password.length < 8 || password !== confirmPassword || loading}
+                disabled={password.length < 8 || password !== confirmPassword || loading}
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                 Create Account

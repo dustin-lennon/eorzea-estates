@@ -78,7 +78,7 @@ export default async function RootLayout({
           ) : (
             <>
               <Navbar />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 flex flex-col">{children}</main>
               <Footer />
             </>
           )}

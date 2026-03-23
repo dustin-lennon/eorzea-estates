@@ -6,7 +6,18 @@ import type { UserRole } from "@/types/roles"
 export const authConfig: NextAuthConfig = {
   providers: [
     Discord({ allowDangerousEmailAccountLinking: true }),
-    Google({ allowDangerousEmailAccountLinking: true }),
+    Google({
+      allowDangerousEmailAccountLinking: true,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          email: profile.email,
+          emailVerified: profile.email_verified ? new Date() : null,
+          image: profile.picture,
+          name: null,
+        }
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
