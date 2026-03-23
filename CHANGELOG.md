@@ -3,6 +3,19 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.23.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.22.0...v1.23.0) (2026-03-23)
+
+### ✨ Features
+
+* add Google OAuth and email/password auth with account linking ([eaefcad](https://github.com/dustin-lennon/eorzea-estates/commit/eaefcad0a8c83ae34ce7601414bfd29a11cf0429)), closes [#206](https://github.com/dustin-lennon/eorzea-estates/issues/206)
+* gate profile behind verified FFXIV character and sync Lodestone avatar ([82db7f0](https://github.com/dustin-lennon/eorzea-estates/commit/82db7f0a31850e5fed2e4f3bbb32596a27d3d9c4))
+* refresh session immediately after Lodestone verify; update admin users table ([0a09092](https://github.com/dustin-lennon/eorzea-estates/commit/0a09092adbfc5cdfc5895c24bda05d30d18f0d02))
+
+### 🐛 Bug Fixes
+
+* improve signup and auth UX ([9f4c3dc](https://github.com/dustin-lennon/eorzea-estates/commit/9f4c3dcf00b51a004eb7d796d1d1a59452885aaa))
+* stamp emailVerified on OAuth sign-in for Google and Discord users ([281f195](https://github.com/dustin-lennon/eorzea-estates/commit/281f1955766a29500326ec72a5054f748b13b7d1))
+
 ## [1.22.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.21.1...v1.22.0) (2026-03-21)
 
 ### ✨ Features
