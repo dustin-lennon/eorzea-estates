@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       // Google and Discord both guarantee the email is verified.
       // Ensure emailVerified is set in the DB so password linking works correctly.
       if (account?.type === "oauth" && user.id) {
@@ -33,6 +33,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           where: { id: user.id, emailVerified: null },
           data: { emailVerified: new Date() },
         })
+
+        // Sync Discord avatar on every sign-in so stale CDN URLs don't break.
+        // Skip if the user has a verified Lodestone character (that image takes priority).
+        if (account.provider === "discord" && profile) {
+          const p = profile as { id?: string; avatar?: string | null }
+          const freshImage = p.id && p.avatar
+            ? `https://cdn.discordapp.com/avatars/${p.id}/${p.avatar}.png`
+            : null
+          if (freshImage) {
+            const hasLodestone = await prisma.ffxivCharacter.findFirst({
+              where: { userId: user.id, verified: true },
+              select: { id: true },
+            })
+            if (!hasLodestone) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: { image: freshImage },
+              })
+            }
+          }
+        }
       }
       return true
     },
