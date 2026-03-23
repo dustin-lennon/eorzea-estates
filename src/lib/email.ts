@@ -345,3 +345,23 @@ export async function sendFCEstateTransferInviteEmail({
     `,
   })
 }
+
+export async function sendVerificationCodeEmail(to: string, code: string) {
+  const resend = getResend()
+  await resend.emails.send({
+    from: FROM,
+    to,
+    subject: "Your Eorzea Estates verification code",
+    html: baseTemplate(
+      "Verify your email",
+      `
+      <h2 style="margin:0 0 16px;font-size:20px;color:#e5e5e5;">Verify your email address</h2>
+      <p style="margin:0 0 24px;color:#a3a3a3;">Enter the code below to verify your email and continue creating your account. This code expires in 15 minutes.</p>
+      <div style="background:#1a1a1a;border:1px solid #404040;border-radius:8px;padding:20px;text-align:center;margin:0 0 24px;">
+        <span style="font-size:36px;font-weight:700;letter-spacing:8px;color:#e5e5e5;font-family:monospace;">${code}</span>
+      </div>
+      <p style="margin:0;font-size:13px;color:#737373;">If you did not request this code, you can safely ignore this email.</p>
+      `,
+    ),
+  })
+}
