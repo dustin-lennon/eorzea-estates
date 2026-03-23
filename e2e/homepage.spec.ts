@@ -40,7 +40,7 @@ test.describe("Directory page", () => {
 test.describe("Login page", () => {
   test("renders the Discord sign-in button", async ({ page }) => {
     await page.goto("/login")
-    await expect(page.getByRole("button", { name: /Continue with Discord/i })).toBeVisible()
+    await expect(page.getByRole("button", { name: /Discord/i })).toBeVisible()
   })
 })
 
