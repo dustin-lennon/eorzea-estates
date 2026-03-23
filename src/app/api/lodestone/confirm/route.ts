@@ -56,6 +56,12 @@ export async function POST(req: Request) {
     )
   }
 
+  // Check if this is the user's first verified character
+  const alreadyHasVerified = await prisma.ffxivCharacter.findFirst({
+    where: { userId: session.user.id, verified: true, id: { not: characterId } },
+    select: { id: true },
+  })
+
   // Verification success
   await prisma.$transaction([
     prisma.ffxivCharacter.update({
@@ -66,6 +72,16 @@ export async function POST(req: Request) {
       where: { characterId },
       data: { verified: true },
     }),
+    // Sync name + avatar from Lodestone on first verified character
+    ...(alreadyHasVerified ? [] : [
+      prisma.user.update({
+        where: { id: session.user.id },
+        data: {
+          name: character.characterName,
+          ...(character.avatarUrl ? { image: character.avatarUrl } : {}),
+        },
+      }),
+    ]),
   ])
 
   await maybeGrantPathfinder(session.user.id)

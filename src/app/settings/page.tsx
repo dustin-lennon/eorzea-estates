@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass, ShieldCheck, Palette } from "lucide-react";
+import { Shield, Lock, FileText, Cookie, ChevronRight, Database, ScrollText, TriangleAlert, MessageCircle, Mail, Users, Heart, HelpCircle, BadgeCheck, Crown, Compass, ShieldCheck, Palette, LinkIcon } from "lucide-react";
 import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 import { DesignerProfileSettings } from "@/components/designer-profile-settings";
+import { LinkedAccountsSettings } from "@/components/linked-accounts-settings";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 
@@ -23,37 +24,86 @@ export default async function SettingsPage() {
     publishedEstates: { id: string; name: string }[];
   } | null = null;
 
+  let linkedProviders: string[] = []
+  let hasPassword = false
+  let linkedEmail: string | null = null
+  let emailVerified = false
+
   if (session?.user?.id) {
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: {
-        bio: true,
-        commissionOpen: true,
-        portfolioUrl: true,
-        pinnedEstateId: true,
-        designer: true,
-        designerSpecialties: true,
-        designerStyleTags: true,
-        designerPricingText: true,
-        designerTurnaround: true,
-        emailOnInquiry: true,
-        emailOnMessage: true,
-        estates: {
-          where: { published: true, deletedAt: null },
-          select: { id: true, name: true },
-          orderBy: { name: "asc" },
+    const [user, accounts] = await Promise.all([
+      prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: {
+          password: true,
+          email: true,
+          emailVerified: true,
+          bio: true,
+          commissionOpen: true,
+          portfolioUrl: true,
+          pinnedEstateId: true,
+          designer: true,
+          designerSpecialties: true,
+          designerStyleTags: true,
+          designerPricingText: true,
+          designerTurnaround: true,
+          emailOnInquiry: true,
+          emailOnMessage: true,
+          estates: {
+            where: { published: true, deletedAt: null },
+            select: { id: true, name: true },
+            orderBy: { name: "asc" },
+          },
         },
-      },
-    });
+      }),
+      prisma.account.findMany({
+        where: { userId: session.user.id },
+        select: { provider: true },
+      }),
+    ])
     if (user) {
-      const { estates: publishedEstates, ...rest } = user;
-      designerData = { ...rest, publishedEstates };
+      linkedProviders = accounts.map((a) => a.provider)
+      hasPassword = !!user.password
+      linkedEmail = user.email ?? null
+      // Treat linked OAuth providers as email-verified (Google/Discord both verify identity)
+      emailVerified = !!user.emailVerified || accounts.length > 0
+      designerData = {
+        bio: user.bio,
+        commissionOpen: user.commissionOpen,
+        portfolioUrl: user.portfolioUrl,
+        pinnedEstateId: user.pinnedEstateId,
+        designer: user.designer,
+        designerSpecialties: user.designerSpecialties,
+        designerStyleTags: user.designerStyleTags,
+        designerPricingText: user.designerPricingText,
+        designerTurnaround: user.designerTurnaround,
+        emailOnInquiry: user.emailOnInquiry,
+        emailOnMessage: user.emailOnMessage,
+        publishedEstates: user.estates,
+      };
     }
   }
 
   return (
     <div className="max-w-xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-8 text-primary">Settings</h1>
+
+      {session?.user && (
+        <section className="bg-card rounded-xl p-6 mb-8">
+          <div className="flex items-center mb-6">
+            <LinkIcon className="brand-link mr-3" />
+            <h2 className="text-lg font-semibold text-primary">Linked Accounts</h2>
+          </div>
+          <p className="text-sm text-muted-foreground mb-4">
+            Manage how you sign in to Eorzea Estates. You can connect multiple login methods to your account.
+          </p>
+          <LinkedAccountsSettings
+            initialProviders={linkedProviders}
+            initialHasPassword={hasPassword}
+            email={linkedEmail}
+            emailVerified={emailVerified}
+          />
+        </section>
+      )}
 
       <section className="bg-card rounded-xl p-6 mb-8">
         <div className="flex items-center mb-6">
