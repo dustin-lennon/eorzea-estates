@@ -4,7 +4,21 @@ import { Suspense } from "react"
 import { DesignerCard } from "./designer-card"
 import { DesignerFilters } from "./designer-filters"
 
-export const metadata = { title: "Designers — Eorzea Estates" }
+export const metadata = {
+  title: "Designers",
+  description: "Discover talented FFXIV housing designers available for hire on Eorzea Estates.",
+  alternates: { canonical: "/designers" },
+  openGraph: {
+    title: "Designers | Eorzea Estates",
+    description: "Discover talented FFXIV housing designers available for hire on Eorzea Estates.",
+    url: "/designers",
+  },
+  twitter: {
+    card: "summary",
+    title: "Designers | Eorzea Estates",
+    description: "Discover talented FFXIV housing designers available for hire on Eorzea Estates.",
+  },
+}
 
 interface SearchParams {
   openOnly?: string

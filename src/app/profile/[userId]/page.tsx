@@ -25,7 +25,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   })
   if (!user) return {}
   const displayName = user.characters[0]?.characterName ?? user.name
-  return { title: `${displayName}'s Profile` }
+  const title = `${displayName}'s Profile`
+  const description = `Browse ${displayName}'s FFXIV estates and collections on Eorzea Estates.`
+  return {
+    title,
+    description,
+    alternates: { canonical: `/profile/${userId}` },
+    openGraph: { title, description, url: `/profile/${userId}` },
+    twitter: { card: "summary", title, description },
+  }
 }
 
 export default async function ProfilePage({ params }: PageProps) {
