@@ -21,6 +21,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+const siteUrl = process.env.NEXTAUTH_URL ?? "https://eorzeaestates.com"
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Eorzea Estates",
+  url: siteUrl,
+  description:
+    "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/directory?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+}
+
 export const metadata: Metadata = {
   title: {
     default: "Eorzea Estates — FFXIV Housing Directory",
@@ -28,9 +47,24 @@ export const metadata: Metadata = {
   },
   description:
     "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     siteName: "Eorzea Estates",
+    url: siteUrl,
+    locale: "en_US",
+    title: "Eorzea Estates — FFXIV Housing Directory",
+    description:
+      "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eorzea Estates — FFXIV Housing Directory",
+    description:
+      "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
   },
 }
 
@@ -71,6 +105,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background flex flex-col`}>
         <Providers>
           {isMaintenancePage ? (

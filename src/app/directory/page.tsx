@@ -5,7 +5,21 @@ import { EstateCard } from "@/components/estate-card"
 import { DirectoryFilters } from "./directory-filters"
 import { REGIONS, ESTATE_TYPES, HOUSING_DISTRICTS, PREDEFINED_TAGS } from "@/lib/ffxiv-data"
 
-export const metadata: Metadata = { title: "Browse Estates" }
+export const metadata: Metadata = {
+  title: "Browse Estates",
+  description: "Search and filter Final Fantasy XIV player estates, venues, apartments, and free company houses across all servers.",
+  alternates: { canonical: "/directory" },
+  openGraph: {
+    title: "Browse Estates | Eorzea Estates",
+    description: "Search and filter Final Fantasy XIV player estates, venues, apartments, and free company houses across all servers.",
+    url: "/directory",
+  },
+  twitter: {
+    card: "summary",
+    title: "Browse Estates | Eorzea Estates",
+    description: "Search and filter Final Fantasy XIV player estates, venues, apartments, and free company houses across all servers.",
+  },
+}
 
 const UPDATED_SINCE_DAYS: Record<string, number> = {
   "7d": 7,

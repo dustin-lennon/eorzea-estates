@@ -16,7 +16,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     select: { characterName: true, server: true },
   })
   if (!character) return {}
-  return { title: `${character.characterName} (${character.server})` }
+  const title = `${character.characterName} (${character.server})`
+  const description = `View ${character.characterName}'s verified FFXIV character profile and linked estates on Eorzea Estates.`
+  return {
+    title,
+    description,
+    alternates: { canonical: `/character/${characterId}` },
+    openGraph: { title, description, url: `/character/${characterId}` },
+    twitter: { card: "summary", title, description },
+  }
 }
 
 export default async function CharacterProfilePage({ params }: PageProps) {
