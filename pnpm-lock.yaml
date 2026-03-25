@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ai-sdk/anthropic':
-        specifier: ^3.0.58
-        version: 3.0.58(zod@4.3.6)
+        specifier: ^3.0.64
+        version: 3.0.64(zod@4.3.6)
       '@auth/prisma-adapter':
         specifier: ^2.11.1
         version: 2.11.1(@prisma/client@7.5.0(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3))
@@ -234,8 +234,8 @@ packages:
   '@adobe/css-tools@4.4.4':
     resolution: {integrity: sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==}
 
-  '@ai-sdk/anthropic@3.0.58':
-    resolution: {integrity: sha512-/53SACgmVukO4bkms4dpxpRlYhW8Ct6QZRe6sj1Pi5H00hYhxIrqfiLbZBGxkdRvjsBQeP/4TVGsXgH5rQeb8Q==}
+  '@ai-sdk/anthropic@3.0.64':
+    resolution: {integrity: sha512-rwLi/Rsuj2pYniQXIrvClHvXDzgM4UQHHnvHTWEF14efnlKclG/1ghpNC+adsRujAbCTr6gRsSbDE2vEqriV7g==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -248,6 +248,12 @@ packages:
 
   '@ai-sdk/provider-utils@4.0.19':
     resolution: {integrity: sha512-3eG55CrSWCu2SXlqq2QCsFjo3+E7+Gmg7i/oRVoSZzIodTuDSfLb3MRje67xE9RFea73Zao7Lm4mADIfUETKGg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/provider-utils@4.0.21':
+    resolution: {integrity: sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -7292,6 +7298,10 @@ packages:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
 
+  tapable@2.3.2:
+    resolution: {integrity: sha512-1MOpMXuhGzGL5TTCZFItxCc0AARf1EZFQkGqMm7ERKj8+Hgr5oLvJOVFcC+lRmR8hCe2S3jC4T5D7Vg/d7/fhA==}
+    engines: {node: '>=6'}
+
   temp-dir@3.0.0:
     resolution: {integrity: sha512-nHc6S/bwIilKHNRgK/3jlhDoIHcp45YgyiwcAk46Tr0LfEqGBVpmiAyuiuxeVE44m3mXnEeVhaipLOEWmH+Njw==}
     engines: {node: '>=14.16'}
@@ -7982,10 +7992,10 @@ snapshots:
 
   '@adobe/css-tools@4.4.4': {}
 
-  '@ai-sdk/anthropic@3.0.58(zod@4.3.6)':
+  '@ai-sdk/anthropic@3.0.64(zod@4.3.6)':
     dependencies:
       '@ai-sdk/provider': 3.0.8
-      '@ai-sdk/provider-utils': 4.0.19(zod@4.3.6)
+      '@ai-sdk/provider-utils': 4.0.21(zod@4.3.6)
       zod: 4.3.6
 
   '@ai-sdk/gateway@3.0.66(zod@4.3.6)':
@@ -7996,6 +8006,13 @@ snapshots:
       zod: 4.3.6
 
   '@ai-sdk/provider-utils@4.0.19(zod@4.3.6)':
+    dependencies:
+      '@ai-sdk/provider': 3.0.8
+      '@standard-schema/spec': 1.1.0
+      eventsource-parser: 3.0.6
+      zod: 4.3.6
+
+  '@ai-sdk/provider-utils@4.0.21(zod@4.3.6)':
     dependencies:
       '@ai-sdk/provider': 3.0.8
       '@standard-schema/spec': 1.1.0
@@ -12323,7 +12340,7 @@ snapshots:
   enhanced-resolve@5.20.1:
     dependencies:
       graceful-fs: 4.2.11
-      tapable: 2.3.0
+      tapable: 2.3.2
 
   entities@2.2.0: {}
 
@@ -16067,6 +16084,8 @@ snapshots:
 
   tapable@2.3.0: {}
 
+  tapable@2.3.2: {}
+
   temp-dir@3.0.0: {}
 
   tempy@3.2.0:
@@ -16545,7 +16564,7 @@ snapshots:
       mime-types: 2.1.35
       neo-async: 2.6.2
       schema-utils: 4.3.3
-      tapable: 2.3.0
+      tapable: 2.3.2
       terser-webpack-plugin: 5.4.0(webpack@5.105.4)
       watchpack: 2.5.1
       webpack-sources: 3.3.4
