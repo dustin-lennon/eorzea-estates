@@ -28,13 +28,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     select: { name: true, description: true, images: { take: 1, select: { imageUrl: true } } },
   })
   if (!estate) return {}
+  const description = estate.description.slice(0, 160)
+  const ogImage = estate.images[0]?.imageUrl
   return {
     title: estate.name,
-    description: estate.description.slice(0, 160),
+    description,
+    alternates: { canonical: `/estate/${id}` },
     openGraph: {
       title: estate.name,
-      description: estate.description.slice(0, 160),
-      images: estate.images[0]?.imageUrl ? [estate.images[0].imageUrl] : [],
+      description,
+      url: `/estate/${id}`,
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: estate.name }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: estate.name,
+      description,
+      images: ogImage ? [ogImage] : [],
     },
   }
 }
@@ -148,8 +158,26 @@ export default async function EstateDetailPage({ params }: PageProps) {
 
   const hours = estate.venueDetails?.hours as HoursSchedule | null | undefined
 
+  const siteUrl = process.env.NEXTAUTH_URL ?? "https://eorzeaestates.com"
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: estate.name,
+    description: estate.description,
+    url: `${siteUrl}/estate/${id}`,
+    ...(estate.images[0]?.imageUrl ? { image: estate.images[0].imageUrl } : {}),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: `${estate.server} (${estate.dataCenter})`,
+    },
+  }
+
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Gallery */}
       <EstateImageGallery images={estate.images.map((i) => i.imageUrl)} name={estate.name} />
 

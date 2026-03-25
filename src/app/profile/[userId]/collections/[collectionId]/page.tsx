@@ -16,7 +16,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     select: { name: true },
   })
   if (!collection) return {}
-  return { title: collection.name }
+  return {
+    title: collection.name,
+    description: `Browse the "${collection.name}" estate collection on Eorzea Estates.`,
+    alternates: { canonical: `/profile/${(await params).userId}/collections/${collectionId}` },
+  }
 }
 
 export default async function CollectionDetailPage({ params }: PageProps) {
