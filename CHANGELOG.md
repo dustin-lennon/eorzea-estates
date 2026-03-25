@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.24.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.24.0...v1.24.1) (2026-03-25)
+
+### ⚡ Performance
+
+* prioritize above-fold images to improve LCP on home and directory ([5d4992a](https://github.com/dustin-lennon/eorzea-estates/commit/5d4992a1008c0b76ae5b43e441b3df88a4745f75)), closes [#220](https://github.com/dustin-lennon/eorzea-estates/issues/220)
+
 ## [1.24.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.23.1...v1.24.0) (2026-03-25)
 
 ### ✨ Features
