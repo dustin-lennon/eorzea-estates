@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       select: { id: true, createdAt: true },
     }),
     prisma.user.findMany({
+      where: { characters: { some: { verified: true } } },
       select: { id: true, createdAt: true },
     }),
   ])

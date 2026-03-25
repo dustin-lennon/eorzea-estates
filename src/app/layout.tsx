@@ -23,6 +23,23 @@ const geistMono = Geist_Mono({
 
 const siteUrl = process.env.NEXTAUTH_URL ?? "https://eorzeaestates.com"
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Eorzea Estates",
+  url: siteUrl,
+  description:
+    "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/directory?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+}
+
 export const metadata: Metadata = {
   title: {
     default: "Eorzea Estates — FFXIV Housing Directory",
@@ -85,23 +102,6 @@ export default async function RootLayout({
   }
 
   const isMaintenancePage = pathname.startsWith("/maintenance")
-
-  const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Eorzea Estates",
-    url: siteUrl,
-    description:
-      "A community-curated directory of Final Fantasy XIV player estates, venues, apartments, and free company houses.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/directory?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
-  }
 
   return (
     <html lang="en" suppressHydrationWarning>
