@@ -153,7 +153,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
           ) : (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                {estates.map((estate) => {
+                {estates.map((estate, i) => {
                   const verifiedChar = estate.owner.characters[0]
                   const ownerName = verifiedChar?.characterName ?? estate.owner.name
                   return (
@@ -168,6 +168,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
                       tags={estate.tags}
                       likeCount={estate.likeCount}
                       coverImage={estate.images[0]?.imageUrl}
+                      priority={i < 3}
                       ownerName={ownerName ?? null}
                       lodestoneVerified={!!verifiedChar}
                       venueType={estate.venueDetails?.venueType ?? null}
