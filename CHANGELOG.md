@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.24.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.23.1...v1.24.0) (2026-03-25)
+
+### ✨ Features
+
+* add comprehensive SEO for organic search discoverability ([4f9a7a6](https://github.com/dustin-lennon/eorzea-estates/commit/4f9a7a63e4a493f64f04614a737d8afbe10cc9ae)), closes [#217](https://github.com/dustin-lennon/eorzea-estates/issues/217)
+
 ## [1.23.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.23.0...v1.23.1) (2026-03-23)
 
 ### 🐛 Bug Fixes
