@@ -36,9 +36,6 @@ DIRECT_URL            # Supabase direct connection (required for migrations)
 AUTH_SECRET           # NextAuth secret (generate with: openssl rand -base64 32)
 AUTH_DISCORD_ID       # Discord OAuth client ID
 AUTH_DISCORD_SECRET   # Discord OAuth client secret
-CLOUDINARY_CLOUD_NAME
-CLOUDINARY_API_KEY
-CLOUDINARY_API_SECRET
 NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 ```
 
@@ -50,7 +47,7 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 - **Next.js 16** with App Router, React 19, TypeScript
 - **Auth**: NextAuth v5 (beta) with Discord OAuth, JWT sessions, Prisma adapter
 - **Database**: PostgreSQL via Supabase, accessed with Prisma 7 (client generated to `src/generated/prisma/`)
-- **Images**: Cloudinary (server-side signed uploads)
+- **Images**: Supabase Storage, served via `*.supabase.co`
 - **UI**: Tailwind CSS v4, shadcn/ui components (`src/components/ui/`), Radix UI
 - **Forms**: react-hook-form + Zod validation
 - **Testing**: Vitest (unit/component), Playwright (E2E)
@@ -76,7 +73,7 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 - `estates/` — create estates; `estates/[id]` — read/update/delete
 - `comments/[estateId]` — list/post comments
 - `likes/[estateId]` — toggle like
-- `upload` — Cloudinary signed upload
+- `upload` — image upload
 - `lodestone/start` + `lodestone/confirm` — character verification
 - `characters/` + `characters/[id]` — character management
 - `characters/[id]/reverify-fc` — re-verification flow for FC-related estates
