@@ -31,7 +31,7 @@
     "@vercel/functions": "^3.4.3",
     "@vercel/speed-insights": "^2.0.0",
     "@xivapi/nodestone": "^0.2.7",
-    "ai": "^6.0.116",
+    "ai": "^6.0.138",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
