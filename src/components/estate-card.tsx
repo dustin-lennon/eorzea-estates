@@ -15,6 +15,7 @@ interface EstateCardProps {
   tags: string[]
   likeCount: number
   coverImage?: string | null
+  priority?: boolean
   ownerName?: string | null
   ownerImage?: string | null
   lodestoneVerified?: boolean
@@ -47,6 +48,7 @@ export function EstateCard({
   tags,
   likeCount,
   coverImage,
+  priority = false,
   ownerName,
   lodestoneVerified,
   venueType,
@@ -69,6 +71,7 @@ export function EstateCard({
             src={coverImage}
             alt={name}
             fill
+            priority={priority}
             className={`object-cover${published ? " group-hover:scale-105 transition-transform duration-300" : ""}`}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
