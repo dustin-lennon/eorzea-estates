@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -16,6 +17,7 @@ interface Props {
 
 export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
   const { data: session, update } = useSession()
+  const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(initialAvatarUrl)
   const [uploading, setUploading] = useState(false)
@@ -49,6 +51,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       const { url } = await res.json()
       setPreviewUrl(url)
       await update()
+      router.refresh()
       toast.success("Profile picture updated")
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Upload failed")
@@ -65,6 +68,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       if (!res.ok) throw new Error("Failed to remove avatar")
       setPreviewUrl(null)
       await update()
+      router.refresh()
       toast.success("Profile picture removed")
     } catch {
       toast.error("Failed to remove profile picture")
