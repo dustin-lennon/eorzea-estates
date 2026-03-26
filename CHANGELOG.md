@@ -3,6 +3,18 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.26.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.25.0...v1.26.0) (2026-03-26)
+
+### ✨ Features
+
+* add FC officer override for FC_ESTATE submission ([49f6821](https://github.com/dustin-lennon/eorzea-estates/commit/49f6821c8d8820c26b5c71a63196d86abb83994e)), closes [#226](https://github.com/dustin-lennon/eorzea-estates/issues/226)
+* add screenshot evidence and submit page callout to FC override flow ([591c9d0](https://github.com/dustin-lennon/eorzea-estates/commit/591c9d0c38deaf70bf68439e6ac0ab6c1ea9197d))
+
+### 🐛 Bug Fixes
+
+* correct lodestone field names and FC override callout display ([8388770](https://github.com/dustin-lennon/eorzea-estates/commit/83887703a0e5b968b47ca84200fe4271c1cc6721))
+* use try/catch for fc lookup failed flag to satisfy lint rule ([10fd478](https://github.com/dustin-lennon/eorzea-estates/commit/10fd478f4d375e7eb9434bc2f55ff36f1aacf719))
+
 ## [1.25.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.24.1...v1.25.0) (2026-03-26)
 
 ### ✨ Features
