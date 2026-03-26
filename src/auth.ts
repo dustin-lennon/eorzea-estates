@@ -62,15 +62,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.sub = user.id
         token.role = (user.role ?? "USER") as UserRole
       }
-      // Hydrate from DB on first load (role missing) or when client calls update()
-      if (token.sub && (!token.role || trigger === "update")) {
+      // Hydrate from DB on sign-in, first load (role missing), or when client calls update().
+      // Must run on sign-in so customAvatarUrl overrides the Discord/Google avatar that
+      // NextAuth auto-populates into token.picture from the provider profile.
+      if (token.sub && (!!user || !token.role || trigger === "update")) {
         const dbUser = await prisma.user.findUnique({
           where: { id: token.sub },
-          select: { role: true, name: true, image: true },
+          select: { role: true, name: true, image: true, customAvatarUrl: true },
         })
         token.role = (dbUser?.role ?? "USER") as UserRole
         if (dbUser?.name) token.name = dbUser.name
-        if (dbUser?.image) token.picture = dbUser.image
+        const effectiveImage = dbUser?.customAvatarUrl ?? dbUser?.image ?? null
+        token.picture = effectiveImage ?? undefined
       }
       return token
     },
@@ -78,7 +81,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token.sub) session.user.id = token.sub
       if (token.role) session.user.role = token.role as UserRole
       if (token.name) session.user.name = token.name
-      if (token.picture) session.user.image = token.picture as string
+      session.user.image = token.picture ? (token.picture as string) : null
       return session
     },
   },

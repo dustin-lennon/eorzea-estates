@@ -2136,6 +2136,7 @@ export const UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   password: 'password',
   image: 'image',
+  customAvatarUrl: 'customAvatarUrl',
   createdAt: 'createdAt',
   discordUsername: 'discordUsername',
   discordId: 'discordId',

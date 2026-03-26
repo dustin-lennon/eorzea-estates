@@ -56,6 +56,7 @@ export default async function ProfilePage({ params }: PageProps) {
       id: true,
       name: true,
       image: true,
+      customAvatarUrl: true,
       role: true,
       pathfinder: true,
       designer: true,
@@ -91,7 +92,7 @@ export default async function ProfilePage({ params }: PageProps) {
   const verifiedChar = user.characters[0]
   const isVerified = !!verifiedChar
   const displayName = verifiedChar?.characterName ?? user.name
-  const avatarSrc = verifiedChar?.avatarUrl || user.image || undefined
+  const avatarSrc = user.customAvatarUrl || verifiedChar?.avatarUrl || user.image || undefined
 
   const pinnedEstate = user.pinnedEstateId
     ? estates.find((e) => e.id === user.pinnedEstateId) ?? null

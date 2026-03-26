@@ -48,6 +48,7 @@ model User {
   emailVerified        DateTime?
   password             String?
   image                String?
+  customAvatarUrl      String?
   createdAt            DateTime              @default(now())
   discordUsername      String?
   discordId            String?               @unique
