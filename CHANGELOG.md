@@ -3,6 +3,17 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.25.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.24.1...v1.25.0) (2026-03-26)
+
+### ✨ Features
+
+* allow users to upload a custom profile picture ([b109fa9](https://github.com/dustin-lennon/eorzea-estates/commit/b109fa9929276d5eb24cdbb28aa2570feb232943)), closes [#223](https://github.com/dustin-lennon/eorzea-estates/issues/223)
+
+### 🐛 Bug Fixes
+
+* fix navbar avatar update, sign-in override, and remove fallback ([4d53263](https://github.com/dustin-lennon/eorzea-estates/commit/4d532634bc58217f1e93ffe7a6241f4916e8551e))
+* refresh server components after avatar update so navbar updates ([7aa6277](https://github.com/dustin-lennon/eorzea-estates/commit/7aa6277d53f3287e69cc58e2dc2110edcce57bad))
+
 ## [1.24.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.24.0...v1.24.1) (2026-03-25)
 
 ### ⚡ Performance
