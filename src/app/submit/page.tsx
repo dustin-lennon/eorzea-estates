@@ -49,12 +49,30 @@ export default async function SubmitPage() {
         const masterId = await getFCMasterLodestoneId(fcId).catch(() => null)
         isFcOwner = masterId === char.lodestoneId
       }
+      let overrideActive = false
+      if (!isFcOwner && fcId) {
+        const activeOverride = await prisma.fcOverride.findFirst({
+          where: { characterId: char.id, revokedAt: null, fcId },
+        })
+        if (activeOverride) {
+          isFcOwner = true
+          overrideActive = true
+        }
+      }
+      const overrideRequest = !overrideActive && !isFcOwner && fcId
+        ? await prisma.fcOverrideRequest.findFirst({
+            where: { characterId: char.id, status: "PENDING" },
+            select: { status: true },
+          })
+        : null
       return {
         id: char.id,
         characterName: char.characterName,
         server: char.server,
         isFcMember: fcId !== null,
         isFcOwner,
+        overrideActive,
+        overrideRequestStatus: overrideRequest?.status ?? null,
       }
     })
   )

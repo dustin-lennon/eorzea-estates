@@ -40,13 +40,13 @@ export async function getCharacterById(lodestoneId: number): Promise<LodestoneCh
   const result = await characterParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
-    .catch(() => null) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
+    .catch(() => null) as { Name?: string; Server?: { World?: string; DC?: string }; Avatar?: string } | null
   if (!result?.Name) return null
   return {
     ID: lodestoneId,
     Name: result.Name,
-    Server: result.World ?? "",
-    DC: result.DC ?? "",
+    Server: result.Server?.World ?? "",
+    DC: result.Server?.DC ?? "",
     Avatar: result.Avatar ?? "",
   }
 }
@@ -81,8 +81,8 @@ export async function getFCName(fcId: string): Promise<string | null> {
   const result = await fcParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { fcId }, query: {} } as any)
-    .catch(() => null) as { NAME?: string } | null
-  return result?.NAME ?? null
+    .catch(() => null) as { Name?: string } | null
+  return result?.Name ?? null
 }
 
 export function generateVerificationCode(): string {

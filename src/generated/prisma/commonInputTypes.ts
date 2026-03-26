@@ -389,6 +389,23 @@ export type EnumEstateTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumEstateTypeNullableFilter<$PrismaModel>
 }
 
+export type EnumFcOverrideRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FcOverrideRequestStatus | Prisma.EnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel> | $Enums.FcOverrideRequestStatus
+}
+
+export type EnumFcOverrideRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FcOverrideRequestStatus | Prisma.EnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFcOverrideRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FcOverrideRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -748,6 +765,23 @@ export type NestedEnumEstateTypeNullableWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEstateTypeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEstateTypeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumFcOverrideRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FcOverrideRequestStatus | Prisma.EnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel> | $Enums.FcOverrideRequestStatus
+}
+
+export type NestedEnumFcOverrideRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FcOverrideRequestStatus | Prisma.EnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FcOverrideRequestStatus[] | Prisma.ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFcOverrideRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FcOverrideRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFcOverrideRequestStatusFilter<$PrismaModel>
 }
 
 

@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const FcOverrideRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  DENIED: 'DENIED'
+} as const
+
+export type FcOverrideRequestStatus = (typeof FcOverrideRequestStatus)[keyof typeof FcOverrideRequestStatus]
+
+
 export const UserRole = {
   USER: 'USER',
   MODERATOR: 'MODERATOR',
