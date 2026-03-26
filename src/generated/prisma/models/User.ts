@@ -345,6 +345,9 @@ export type UserWhereInput = {
   requestorConversations?: Prisma.ConversationListRelationFilter
   sentMessages?: Prisma.MessageListRelationFilter
   pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
+  fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
+  fcOverrideReviews?: Prisma.FcOverrideRequestListRelationFilter
+  fcOverridesGranted?: Prisma.FcOverrideListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -391,6 +394,9 @@ export type UserOrderByWithRelationInput = {
   requestorConversations?: Prisma.ConversationOrderByRelationAggregateInput
   sentMessages?: Prisma.MessageOrderByRelationAggregateInput
   pushSubscriptions?: Prisma.PushSubscriptionOrderByRelationAggregateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestOrderByRelationAggregateInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestOrderByRelationAggregateInput
+  fcOverridesGranted?: Prisma.FcOverrideOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -440,6 +446,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   requestorConversations?: Prisma.ConversationListRelationFilter
   sentMessages?: Prisma.MessageListRelationFilter
   pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
+  fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
+  fcOverrideReviews?: Prisma.FcOverrideRequestListRelationFilter
+  fcOverridesGranted?: Prisma.FcOverrideListRelationFilter
 }, "id" | "email" | "discordId">
 
 export type UserOrderByWithAggregationInput = {
@@ -545,6 +554,9 @@ export type UserCreateInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -590,6 +602,9 @@ export type UserUncheckedCreateInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUpdateInput = {
@@ -635,6 +650,9 @@ export type UserUpdateInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -680,6 +698,9 @@ export type UserUncheckedUpdateInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1203,6 +1224,50 @@ export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, Prisma.UserUpdateWithoutPushSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
 }
 
+export type UserCreateNestedOneWithoutFcOverrideRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedCreateWithoutFcOverrideRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverrideRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutFcOverrideReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedCreateWithoutFcOverrideReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverrideReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFcOverrideRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedCreateWithoutFcOverrideRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverrideRequestsInput
+  upsert?: Prisma.UserUpsertWithoutFcOverrideRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFcOverrideRequestsInput, Prisma.UserUpdateWithoutFcOverrideRequestsInput>, Prisma.UserUncheckedUpdateWithoutFcOverrideRequestsInput>
+}
+
+export type UserUpdateOneWithoutFcOverrideReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedCreateWithoutFcOverrideReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverrideReviewsInput
+  upsert?: Prisma.UserUpsertWithoutFcOverrideReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFcOverrideReviewsInput, Prisma.UserUpdateWithoutFcOverrideReviewsInput>, Prisma.UserUncheckedUpdateWithoutFcOverrideReviewsInput>
+}
+
+export type UserCreateNestedOneWithoutFcOverridesGrantedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedCreateWithoutFcOverridesGrantedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverridesGrantedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFcOverridesGrantedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedCreateWithoutFcOverridesGrantedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFcOverridesGrantedInput
+  upsert?: Prisma.UserUpsertWithoutFcOverridesGrantedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFcOverridesGrantedInput, Prisma.UserUpdateWithoutFcOverridesGrantedInput>, Prisma.UserUncheckedUpdateWithoutFcOverridesGrantedInput>
+}
+
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name?: string | null
@@ -1245,6 +1310,9 @@ export type UserCreateWithoutAccountsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1289,6 +1357,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1349,6 +1420,9 @@ export type UserUpdateWithoutAccountsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1393,6 +1467,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1437,6 +1514,9 @@ export type UserCreateWithoutSessionsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1481,6 +1561,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1541,6 +1624,9 @@ export type UserUpdateWithoutSessionsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1585,6 +1671,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -1629,6 +1718,9 @@ export type UserCreateWithoutCharactersInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -1673,6 +1765,9 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -1733,6 +1828,9 @@ export type UserUpdateWithoutCharactersInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1777,6 +1875,9 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutFlaggedEstatesInput = {
@@ -1821,6 +1922,9 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
@@ -1865,6 +1969,9 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutFlaggedEstatesInput = {
@@ -1914,6 +2021,9 @@ export type UserCreateWithoutEstatesInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutEstatesInput = {
@@ -1958,6 +2068,9 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutEstatesInput = {
@@ -2007,6 +2120,9 @@ export type UserCreateWithoutDesignedEstatesInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutDesignedEstatesInput = {
@@ -2051,6 +2167,9 @@ export type UserUncheckedCreateWithoutDesignedEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutDesignedEstatesInput = {
@@ -2100,6 +2219,9 @@ export type UserCreateWithoutPinnedEstateInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutPinnedEstateInput = {
@@ -2144,6 +2266,9 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutPinnedEstateInput = {
@@ -2209,6 +2334,9 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
@@ -2253,6 +2381,9 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUpsertWithoutEstatesInput = {
@@ -2308,6 +2439,9 @@ export type UserUpdateWithoutEstatesInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEstatesInput = {
@@ -2352,6 +2486,9 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUpsertWithoutDesignedEstatesInput = {
@@ -2407,6 +2544,9 @@ export type UserUpdateWithoutDesignedEstatesInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
@@ -2451,6 +2591,9 @@ export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutPinnedEstateInput = {
@@ -2541,6 +2684,9 @@ export type UserCreateWithoutVerificationReviewsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutVerificationReviewsInput = {
@@ -2585,6 +2731,9 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutVerificationReviewsInput = {
@@ -2645,6 +2794,9 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
@@ -2689,6 +2841,9 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutVenueStaffInput = {
@@ -2733,6 +2888,9 @@ export type UserCreateWithoutVenueStaffInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutVenueStaffInput = {
@@ -2777,6 +2935,9 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutVenueStaffInput = {
@@ -2837,6 +2998,9 @@ export type UserUpdateWithoutVenueStaffInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVenueStaffInput = {
@@ -2881,6 +3045,9 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutLikesInput = {
@@ -2925,6 +3092,9 @@ export type UserCreateWithoutLikesInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutLikesInput = {
@@ -2969,6 +3139,9 @@ export type UserUncheckedCreateWithoutLikesInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutLikesInput = {
@@ -3029,6 +3202,9 @@ export type UserUpdateWithoutLikesInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLikesInput = {
@@ -3073,6 +3249,9 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -3117,6 +3296,9 @@ export type UserCreateWithoutCommentsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -3161,6 +3343,9 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -3221,6 +3406,9 @@ export type UserUpdateWithoutCommentsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -3265,6 +3453,9 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutLegalPageEditsInput = {
@@ -3309,6 +3500,9 @@ export type UserCreateWithoutLegalPageEditsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutLegalPageEditsInput = {
@@ -3353,6 +3547,9 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutLegalPageEditsInput = {
@@ -3413,6 +3610,9 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
@@ -3457,6 +3657,9 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutClaimRequestsInput = {
@@ -3501,6 +3704,9 @@ export type UserCreateWithoutClaimRequestsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutClaimRequestsInput = {
@@ -3545,6 +3751,9 @@ export type UserUncheckedCreateWithoutClaimRequestsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutClaimRequestsInput = {
@@ -3594,6 +3803,9 @@ export type UserCreateWithoutClaimReviewsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutClaimReviewsInput = {
@@ -3638,6 +3850,9 @@ export type UserUncheckedCreateWithoutClaimReviewsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutClaimReviewsInput = {
@@ -3698,6 +3913,9 @@ export type UserUpdateWithoutClaimRequestsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClaimRequestsInput = {
@@ -3742,6 +3960,9 @@ export type UserUncheckedUpdateWithoutClaimRequestsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUpsertWithoutClaimReviewsInput = {
@@ -3797,6 +4018,9 @@ export type UserUpdateWithoutClaimReviewsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClaimReviewsInput = {
@@ -3841,6 +4065,9 @@ export type UserUncheckedUpdateWithoutClaimReviewsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -3885,6 +4112,9 @@ export type UserCreateWithoutCollectionsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -3929,6 +4159,9 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -3989,6 +4222,9 @@ export type UserUpdateWithoutCollectionsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -4033,6 +4269,9 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutDesignerConversationsInput = {
@@ -4077,6 +4316,9 @@ export type UserCreateWithoutDesignerConversationsInput = {
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutDesignerConversationsInput = {
@@ -4121,6 +4363,9 @@ export type UserUncheckedCreateWithoutDesignerConversationsInput = {
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutDesignerConversationsInput = {
@@ -4170,6 +4415,9 @@ export type UserCreateWithoutRequestorConversationsInput = {
   designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutRequestorConversationsInput = {
@@ -4214,6 +4462,9 @@ export type UserUncheckedCreateWithoutRequestorConversationsInput = {
   designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutRequestorConversationsInput = {
@@ -4274,6 +4525,9 @@ export type UserUpdateWithoutDesignerConversationsInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDesignerConversationsInput = {
@@ -4318,6 +4572,9 @@ export type UserUncheckedUpdateWithoutDesignerConversationsInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUpsertWithoutRequestorConversationsInput = {
@@ -4373,6 +4630,9 @@ export type UserUpdateWithoutRequestorConversationsInput = {
   designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestorConversationsInput = {
@@ -4417,6 +4677,9 @@ export type UserUncheckedUpdateWithoutRequestorConversationsInput = {
   designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -4461,6 +4724,9 @@ export type UserCreateWithoutSentMessagesInput = {
   designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -4505,6 +4771,9 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -4565,6 +4834,9 @@ export type UserUpdateWithoutSentMessagesInput = {
   designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -4609,6 +4881,9 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserCreateWithoutPushSubscriptionsInput = {
@@ -4653,6 +4928,9 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
   requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
@@ -4697,6 +4975,9 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
   requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
   sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
 }
 
 export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
@@ -4757,6 +5038,9 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
@@ -4801,6 +5085,621 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
+}
+
+export type UserCreateWithoutFcOverrideRequestsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
+}
+
+export type UserUncheckedCreateWithoutFcOverrideRequestsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
+}
+
+export type UserCreateOrConnectWithoutFcOverrideRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedCreateWithoutFcOverrideRequestsInput>
+}
+
+export type UserCreateWithoutFcOverrideReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverridesGranted?: Prisma.FcOverrideCreateNestedManyWithoutGrantedByInput
+}
+
+export type UserUncheckedCreateWithoutFcOverrideReviewsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutGrantedByInput
+}
+
+export type UserCreateOrConnectWithoutFcOverrideReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedCreateWithoutFcOverrideReviewsInput>
+}
+
+export type UserUpsertWithoutFcOverrideRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedUpdateWithoutFcOverrideRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedCreateWithoutFcOverrideRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFcOverrideRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFcOverrideRequestsInput, Prisma.UserUncheckedUpdateWithoutFcOverrideRequestsInput>
+}
+
+export type UserUpdateWithoutFcOverrideRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFcOverrideRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
+}
+
+export type UserUpsertWithoutFcOverrideReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedUpdateWithoutFcOverrideReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedCreateWithoutFcOverrideReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFcOverrideReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFcOverrideReviewsInput, Prisma.UserUncheckedUpdateWithoutFcOverrideReviewsInput>
+}
+
+export type UserUpdateWithoutFcOverrideReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFcOverrideReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
+}
+
+export type UserCreateWithoutFcOverridesGrantedInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationCreateNestedManyWithoutReviewedByInput
+  pinnedEstate?: Prisma.EstateCreateNestedOneWithoutPinnedByUsersInput
+  designedEstates?: Prisma.EstateCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutFcOverridesGrantedInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  customAvatarUrl?: string | null
+  createdAt?: Date | string
+  discordUsername?: string | null
+  discordId?: string | null
+  role?: $Enums.UserRole
+  pathfinder?: boolean
+  bio?: string | null
+  commissionOpen?: boolean
+  portfolioUrl?: string | null
+  pinnedEstateId?: string | null
+  designer?: boolean
+  designerSpecialties?: Prisma.UserCreatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserCreatedesignerStyleTagsInput | string[]
+  designerPricingText?: string | null
+  designerTurnaround?: string | null
+  emailOnInquiry?: boolean
+  emailOnMessage?: boolean
+  lastSeenAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  flaggedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutFlaggedByInput
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutOwnerInput
+  characters?: Prisma.FfxivCharacterUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  legalPageEdits?: Prisma.LegalPageUncheckedCreateNestedManyWithoutUpdatedByInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  venueStaff?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedUserInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  designedEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutClaimantInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  designerConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDesignerInput
+  requestorConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRequestorInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutUserInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutFcOverridesGrantedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedCreateWithoutFcOverridesGrantedInput>
+}
+
+export type UserUpsertWithoutFcOverridesGrantedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedUpdateWithoutFcOverridesGrantedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedCreateWithoutFcOverridesGrantedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFcOverridesGrantedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFcOverridesGrantedInput, Prisma.UserUncheckedUpdateWithoutFcOverridesGrantedInput>
+}
+
+export type UserUpdateWithoutFcOverridesGrantedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUpdateManyWithoutReviewedByNestedInput
+  pinnedEstate?: Prisma.EstateUpdateOneWithoutPinnedByUsersNestedInput
+  designedEstates?: Prisma.EstateUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFcOverridesGrantedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  pathfinder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commissionOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinnedEstateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  designerSpecialties?: Prisma.UserUpdatedesignerSpecialtiesInput | string[]
+  designerStyleTags?: Prisma.UserUpdatedesignerStyleTagsInput | string[]
+  designerPricingText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerTurnaround?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailOnInquiry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailOnMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  flaggedEstates?: Prisma.EstateUncheckedUpdateManyWithoutFlaggedByNestedInput
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutOwnerNestedInput
+  characters?: Prisma.FfxivCharacterUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  legalPageEdits?: Prisma.LegalPageUncheckedUpdateManyWithoutUpdatedByNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  venueStaff?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedUserNestedInput
+  verificationReviews?: Prisma.EstateVerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  designedEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutClaimantNestedInput
+  claimReviews?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  designerConversations?: Prisma.ConversationUncheckedUpdateManyWithoutDesignerNestedInput
+  requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyPinnedEstateInput = {
@@ -4871,6 +5770,9 @@ export type UserUpdateWithoutPinnedEstateInput = {
   requestorConversations?: Prisma.ConversationUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPinnedEstateInput = {
@@ -4915,6 +5817,9 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   requestorConversations?: Prisma.ConversationUncheckedUpdateManyWithoutRequestorNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutUserNestedInput
+  fcOverrideReviews?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  fcOverridesGranted?: Prisma.FcOverrideUncheckedUpdateManyWithoutGrantedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
@@ -4967,6 +5872,9 @@ export type UserCountOutputType = {
   requestorConversations: number
   sentMessages: number
   pushSubscriptions: number
+  fcOverrideRequests: number
+  fcOverrideReviews: number
+  fcOverridesGranted: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4988,6 +5896,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   requestorConversations?: boolean | UserCountOutputTypeCountRequestorConversationsArgs
   sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
   pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
+  fcOverrideRequests?: boolean | UserCountOutputTypeCountFcOverrideRequestsArgs
+  fcOverrideReviews?: boolean | UserCountOutputTypeCountFcOverrideReviewsArgs
+  fcOverridesGranted?: boolean | UserCountOutputTypeCountFcOverridesGrantedArgs
 }
 
 /**
@@ -5126,6 +6037,27 @@ export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends runtim
   where?: Prisma.PushSubscriptionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFcOverrideRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FcOverrideRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFcOverrideReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FcOverrideRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFcOverridesGrantedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FcOverrideWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5171,6 +6103,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   requestorConversations?: boolean | Prisma.User$requestorConversationsArgs<ExtArgs>
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
+  fcOverrideRequests?: boolean | Prisma.User$fcOverrideRequestsArgs<ExtArgs>
+  fcOverrideReviews?: boolean | Prisma.User$fcOverrideReviewsArgs<ExtArgs>
+  fcOverridesGranted?: boolean | Prisma.User$fcOverridesGrantedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5278,6 +6213,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   requestorConversations?: boolean | Prisma.User$requestorConversationsArgs<ExtArgs>
   sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
   pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
+  fcOverrideRequests?: boolean | Prisma.User$fcOverrideRequestsArgs<ExtArgs>
+  fcOverrideReviews?: boolean | Prisma.User$fcOverrideReviewsArgs<ExtArgs>
+  fcOverridesGranted?: boolean | Prisma.User$fcOverridesGrantedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5309,6 +6247,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     requestorConversations: Prisma.$ConversationPayload<ExtArgs>[]
     sentMessages: Prisma.$MessagePayload<ExtArgs>[]
     pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
+    fcOverrideRequests: Prisma.$FcOverrideRequestPayload<ExtArgs>[]
+    fcOverrideReviews: Prisma.$FcOverrideRequestPayload<ExtArgs>[]
+    fcOverridesGranted: Prisma.$FcOverridePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5748,6 +6689,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   requestorConversations<T extends Prisma.User$requestorConversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestorConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fcOverrideRequests<T extends Prisma.User$fcOverrideRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fcOverrideRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverrideRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fcOverrideReviews<T extends Prisma.User$fcOverrideReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fcOverrideReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverrideRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fcOverridesGranted<T extends Prisma.User$fcOverridesGrantedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fcOverridesGrantedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6645,6 +7589,78 @@ export type User$pushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.PushSubscriptionScalarFieldEnum | Prisma.PushSubscriptionScalarFieldEnum[]
+}
+
+/**
+ * User.fcOverrideRequests
+ */
+export type User$fcOverrideRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FcOverrideRequest
+   */
+  select?: Prisma.FcOverrideRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FcOverrideRequest
+   */
+  omit?: Prisma.FcOverrideRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FcOverrideRequestInclude<ExtArgs> | null
+  where?: Prisma.FcOverrideRequestWhereInput
+  orderBy?: Prisma.FcOverrideRequestOrderByWithRelationInput | Prisma.FcOverrideRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FcOverrideRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FcOverrideRequestScalarFieldEnum | Prisma.FcOverrideRequestScalarFieldEnum[]
+}
+
+/**
+ * User.fcOverrideReviews
+ */
+export type User$fcOverrideReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FcOverrideRequest
+   */
+  select?: Prisma.FcOverrideRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FcOverrideRequest
+   */
+  omit?: Prisma.FcOverrideRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FcOverrideRequestInclude<ExtArgs> | null
+  where?: Prisma.FcOverrideRequestWhereInput
+  orderBy?: Prisma.FcOverrideRequestOrderByWithRelationInput | Prisma.FcOverrideRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FcOverrideRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FcOverrideRequestScalarFieldEnum | Prisma.FcOverrideRequestScalarFieldEnum[]
+}
+
+/**
+ * User.fcOverridesGranted
+ */
+export type User$fcOverridesGrantedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FcOverride
+   */
+  select?: Prisma.FcOverrideSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FcOverride
+   */
+  omit?: Prisma.FcOverrideOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FcOverrideInclude<ExtArgs> | null
+  where?: Prisma.FcOverrideWhereInput
+  orderBy?: Prisma.FcOverrideOrderByWithRelationInput | Prisma.FcOverrideOrderByWithRelationInput[]
+  cursor?: Prisma.FcOverrideWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FcOverrideScalarFieldEnum | Prisma.FcOverrideScalarFieldEnum[]
 }
 
 /**

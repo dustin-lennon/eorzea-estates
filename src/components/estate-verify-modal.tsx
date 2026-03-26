@@ -164,6 +164,14 @@ export function EstateVerifyModal({
             </div>
           )}
 
+          {/* Officer override hint for FC estates */}
+          {estateType === "FC_ESTATE" && verificationStatus === "MOD_REJECTED" && (
+            <p className="text-xs text-muted-foreground">
+              If you are an FC officer and the leader is unavailable, you can request an admin
+              override from your dashboard.
+            </p>
+          )}
+
           {/* File drop zone */}
           <div
             className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer hover:border-primary/50 transition-colors"

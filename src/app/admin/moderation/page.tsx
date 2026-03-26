@@ -4,9 +4,12 @@ import Link from "next/link"
 import Image from "next/image"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
+import { UserAvatar } from "@/components/user-avatar"
 import { ModerationActions } from "./moderation-actions"
 import { VerificationActions } from "./verification-actions"
 import { ClaimActions } from "./claim-actions"
+import { FcOverrideRequestActions } from "./fc-override-request-actions"
+import { getCharacterFCId, getFCName, getFCMasterLodestoneId, getCharacterById } from "@/lib/lodestone"
 
 interface PageProps {
   searchParams: Promise<{ tab?: string }>
@@ -19,9 +22,14 @@ export default async function ModerationPage({ searchParams }: PageProps) {
   }
 
   const { tab } = await searchParams
-  const activeTab = tab === "deleted" ? "deleted" : tab === "verification" ? "verification" : tab === "claims" ? "claims" : "flagged"
+  const activeTab =
+    tab === "deleted" ? "deleted" :
+    tab === "verification" ? "verification" :
+    tab === "claims" ? "claims" :
+    tab === "fc-overrides" ? "fc-overrides" :
+    "flagged"
 
-  const [flaggedEstates, deletedEstates, verificationQueue, claimQueue] = await prisma.$transaction([
+  const [flaggedEstates, deletedEstates, verificationQueue, claimQueue, rawOverrideRequests] = await prisma.$transaction([
     prisma.estate.findMany({
       where: { flagged: true, deletedAt: null },
       orderBy: { flaggedAt: "asc" },
@@ -71,7 +79,39 @@ export default async function ModerationPage({ searchParams }: PageProps) {
         character: { select: { characterName: true, server: true } },
       },
     }),
+    prisma.fcOverrideRequest.findMany({
+      where: { status: "PENDING" },
+      orderBy: [{ userId: "asc" }, { createdAt: "asc" }],
+      include: {
+        user: { select: { id: true, name: true, discordUsername: true, image: true, customAvatarUrl: true } },
+        character: { select: { id: true, characterName: true, server: true, avatarUrl: true, lodestoneId: true } },
+        estate: { select: { id: true } },
+      },
+    }),
   ])
+
+  // Fetch live FC info for each override request — sequential to avoid Lodestone rate limits
+  const overrideRequests: (typeof rawOverrideRequests[number] & { fcName: string | null; masterName: string | null; fcLookupFailed: boolean })[] = []
+  for (const req of rawOverrideRequests) {
+    let fcId: string | null = null
+    let fcLookupFailed = false
+    try {
+      fcId = await getCharacterFCId(parseInt(req.character.lodestoneId))
+    } catch {
+      fcLookupFailed = true
+    }
+    const fcName = fcId ? await getFCName(fcId).catch(() => null) : null
+    const masterId = fcId ? await getFCMasterLodestoneId(fcId).catch(() => null) : null
+    const master = masterId ? await getCharacterById(parseInt(masterId)).catch(() => null) : null
+    overrideRequests.push({ ...req, fcName, masterName: master?.Name ?? null, fcLookupFailed })
+  }
+
+  // Compute rowspan counts per user for the override table
+  const userRowspans = new Map<string, number>()
+  for (const req of overrideRequests) {
+    userRowspans.set(req.user.id, (userRowspans.get(req.user.id) ?? 0) + 1)
+  }
+  const seenUsers = new Set<string>()
 
   return (
     <div>
@@ -139,6 +179,21 @@ export default async function ModerationPage({ searchParams }: PageProps) {
           {claimQueue.length > 0 && (
             <span className="ml-2 text-xs bg-destructive text-destructive-foreground rounded-full px-1.5 py-0.5">
               {claimQueue.length}
+            </span>
+          )}
+        </Link>
+        <Link
+          href="/admin/moderation?tab=fc-overrides"
+          className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+            activeTab === "fc-overrides"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          FC Overrides
+          {overrideRequests.length > 0 && (
+            <span className="ml-2 text-xs bg-destructive text-destructive-foreground rounded-full px-1.5 py-0.5">
+              {overrideRequests.length}
             </span>
           )}
         </Link>
@@ -408,6 +463,114 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                     </td>
                   </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      )}
+
+      {activeTab === "fc-overrides" && (
+        overrideRequests.length === 0 ? (
+          <div className="border rounded-xl p-10 text-center text-muted-foreground">
+            No pending FC override requests. All clear!
+          </div>
+        ) : (
+          <div className="border rounded-xl overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50 border-b">
+                <tr>
+                  <th className="text-left px-4 py-3 font-medium">Requesting User</th>
+                  <th className="text-left px-4 py-3 font-medium">Character</th>
+                  <th className="text-left px-4 py-3 font-medium">FC Info</th>
+                  <th className="text-left px-4 py-3 font-medium">Screenshot</th>
+                  <th className="text-left px-4 py-3 font-medium">Message</th>
+                  <th className="text-left px-4 py-3 font-medium">Submitted</th>
+                  <th className="text-left px-4 py-3 font-medium">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {overrideRequests.map((req) => {
+                  const isFirstForUser = !seenUsers.has(req.user.id)
+                  if (isFirstForUser) seenUsers.add(req.user.id)
+                  const rowSpan = isFirstForUser ? userRowspans.get(req.user.id) : undefined
+
+                  return (
+                    <tr key={req.id} className="hover:bg-muted/30 transition-colors align-top">
+                      {isFirstForUser && (
+                        <td className="px-4 py-3 align-top" rowSpan={rowSpan}>
+                          <div className="flex items-center gap-2">
+                            <UserAvatar src={req.user.customAvatarUrl ?? req.user.image} name={req.user.name} size={32} />
+                            <div>
+                              <p className="font-medium">{req.user.name ?? "Unknown"}</p>
+                              {req.user.discordUsername && (
+                                <p className="text-xs text-muted-foreground">{req.user.discordUsername}</p>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      )}
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          {req.character.avatarUrl && (
+                            <Image
+                              src={req.character.avatarUrl}
+                              alt={req.character.characterName}
+                              width={24}
+                              height={24}
+                              className="rounded-full shrink-0"
+                            />
+                          )}
+                          <div>
+                            <p className="font-medium">{req.character.characterName}</p>
+                            <p className="text-xs text-muted-foreground">{req.character.server}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        {req.fcName ? (
+                          <div>
+                            <p className="font-medium">{req.fcName}</p>
+                            <p className="text-xs text-muted-foreground">
+                              Master: {req.masterName ?? "Unknown"}
+                            </p>
+                          </div>
+                        ) : req.fcLookupFailed ? (
+                          <span className="text-muted-foreground text-xs">Lodestone unavailable</span>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">Not in FC</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        {req.screenshotUrl ? (
+                          <a href={req.screenshotUrl} target="_blank" rel="noopener noreferrer" className="block">
+                            <div className="relative h-16 w-28 rounded overflow-hidden border hover:opacity-80 transition-opacity">
+                              <Image
+                                src={req.screenshotUrl}
+                                alt="Override evidence screenshot"
+                                fill
+                                className="object-cover"
+                                unoptimized
+                              />
+                            </div>
+                          </a>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 max-w-xs">
+                        <p className="text-muted-foreground text-xs line-clamp-3 whitespace-pre-wrap">
+                          {req.message ?? "—"}
+                        </p>
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                        {new Date(req.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-3">
+                        <FcOverrideRequestActions requestId={req.id} />
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

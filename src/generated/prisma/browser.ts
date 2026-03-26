@@ -127,3 +127,13 @@ export type Message = Prisma.MessageModel
  * 
  */
 export type PushSubscription = Prisma.PushSubscriptionModel
+/**
+ * Model FcOverrideRequest
+ * 
+ */
+export type FcOverrideRequest = Prisma.FcOverrideRequestModel
+/**
+ * Model FcOverride
+ * 
+ */
+export type FcOverride = Prisma.FcOverrideModel

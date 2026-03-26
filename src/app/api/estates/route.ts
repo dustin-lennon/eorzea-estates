@@ -204,10 +204,15 @@ export async function POST(req: Request) {
     if (data.type === "FC_ESTATE") {
       const masterId = await getFCMasterLodestoneId(fcId).catch(() => null)
       if (masterId !== character.lodestoneId) {
-        return NextResponse.json(
-          { error: { message: "Character is not the owner of a Free Company." } },
-          { status: 403 }
-        )
+        const activeOverride = await prisma.fcOverride.findFirst({
+          where: { characterId: character.id, revokedAt: null },
+        })
+        if (!activeOverride || activeOverride.fcId !== fcId) {
+          return NextResponse.json(
+            { error: { message: "Character is not the owner of a Free Company." } },
+            { status: 403 }
+          )
+        }
       }
     }
   }

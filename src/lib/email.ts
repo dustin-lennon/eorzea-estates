@@ -346,6 +346,65 @@ export async function sendFCEstateTransferInviteEmail({
   })
 }
 
+export async function sendFcOverrideApprovedEmail({
+  to,
+  userName,
+  characterName,
+}: {
+  to: string
+  userName: string
+  characterName: string
+}) {
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Officer override approved</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${userName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      Your officer override request for <strong style="color:#f5f5f5;">${characterName}</strong> has been approved.
+      You can now submit an FC estate listing on behalf of your Free Company from the
+      <a href="https://eorzeaestates.com/submit" style="color:#c084fc;text-decoration:none;font-weight:600;">submission page</a>.
+    </p>
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `Officer override approved — ${characterName} can now submit FC estates`,
+    html: baseTemplate("Officer override approved", body),
+  })
+}
+
+export async function sendFcOverrideDeniedEmail({
+  to,
+  userName,
+  characterName,
+  adminNote,
+}: {
+  to: string
+  userName: string
+  characterName: string
+  adminNote?: string
+}) {
+  const body = `
+    <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Officer override request denied</h2>
+    <p style="margin:0 0 12px;color:#a3a3a3;line-height:1.6;">Hi ${userName},</p>
+    <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+      Your officer override request for <strong style="color:#f5f5f5;">${characterName}</strong> has been denied.
+    </p>
+    ${adminNote ? `
+    <div style="background:#1f1f1f;border-left:3px solid #ef4444;border-radius:4px;padding:16px;margin:0 0 20px;">
+      <p style="margin:0;font-size:13px;font-weight:600;color:#a3a3a3;text-transform:uppercase;letter-spacing:0.5px;">Note from moderator</p>
+      <p style="margin:8px 0 0;color:#e5e5e5;line-height:1.6;">${adminNote}</p>
+    </div>` : ""}
+    <p style="margin:0;color:#525252;font-size:13px;">— The Eorzea Estates Team</p>
+  `
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: `Officer override request denied — ${characterName}`,
+    html: baseTemplate("Officer override request denied", body),
+  })
+}
+
 export async function sendVerificationCodeEmail(to: string, code: string) {
   const resend = getResend()
   await resend.emails.send({
