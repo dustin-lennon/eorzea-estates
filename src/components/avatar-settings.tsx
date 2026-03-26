@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Loader2, Upload, X } from "lucide-react"
+import { AVATAR_CHANGED_EVENT } from "@/components/navbar-user-menu"
 
 const MAX_BYTES = 5 * 1024 * 1024 // 5 MB
 
@@ -50,6 +51,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       }
       const { url } = await res.json()
       setPreviewUrl(url)
+      window.dispatchEvent(new CustomEvent(AVATAR_CHANGED_EVENT, { detail: { url } }))
       await update()
       router.refresh()
       toast.success("Profile picture updated")
@@ -67,6 +69,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       const res = await fetch("/api/upload/avatar", { method: "DELETE" })
       if (!res.ok) throw new Error("Failed to remove avatar")
       setPreviewUrl(null)
+      window.dispatchEvent(new CustomEvent(AVATAR_CHANGED_EVENT, { detail: { url: fallbackAvatarUrl } }))
       await update()
       router.refresh()
       toast.success("Profile picture removed")

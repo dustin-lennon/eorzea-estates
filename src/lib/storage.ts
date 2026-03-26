@@ -146,7 +146,10 @@ export async function uploadUserAvatar(
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
 
-  return { url: data.publicUrl, storageKey }
+  // Append a version timestamp so browsers don't serve the stale cached image
+  // when the user uploads a replacement (same path, new file content).
+  const url = `${data.publicUrl}?v=${Date.now()}`
+  return { url, storageKey }
 }
 
 export async function uploadVerificationScreenshot(
