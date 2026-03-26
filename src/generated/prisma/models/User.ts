@@ -31,6 +31,7 @@ export type UserMinAggregateOutputType = {
   emailVerified: Date | null
   password: string | null
   image: string | null
+  customAvatarUrl: string | null
   createdAt: Date | null
   discordUsername: string | null
   discordId: string | null
@@ -55,6 +56,7 @@ export type UserMaxAggregateOutputType = {
   emailVerified: Date | null
   password: string | null
   image: string | null
+  customAvatarUrl: string | null
   createdAt: Date | null
   discordUsername: string | null
   discordId: string | null
@@ -79,6 +81,7 @@ export type UserCountAggregateOutputType = {
   emailVerified: number
   password: number
   image: number
+  customAvatarUrl: number
   createdAt: number
   discordUsername: number
   discordId: number
@@ -107,6 +110,7 @@ export type UserMinAggregateInputType = {
   emailVerified?: true
   password?: true
   image?: true
+  customAvatarUrl?: true
   createdAt?: true
   discordUsername?: true
   discordId?: true
@@ -131,6 +135,7 @@ export type UserMaxAggregateInputType = {
   emailVerified?: true
   password?: true
   image?: true
+  customAvatarUrl?: true
   createdAt?: true
   discordUsername?: true
   discordId?: true
@@ -155,6 +160,7 @@ export type UserCountAggregateInputType = {
   emailVerified?: true
   password?: true
   image?: true
+  customAvatarUrl?: true
   createdAt?: true
   discordUsername?: true
   discordId?: true
@@ -254,6 +260,7 @@ export type UserGroupByOutputType = {
   emailVerified: Date | null
   password: string | null
   image: string | null
+  customAvatarUrl: string | null
   createdAt: Date
   discordUsername: string | null
   discordId: string | null
@@ -301,6 +308,7 @@ export type UserWhereInput = {
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
+  customAvatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   discordId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -346,6 +354,7 @@ export type UserOrderByWithRelationInput = {
   emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
+  customAvatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
   discordId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -395,6 +404,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
+  customAvatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -439,6 +449,7 @@ export type UserOrderByWithAggregationInput = {
   emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
+  customAvatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   discordUsername?: Prisma.SortOrderInput | Prisma.SortOrder
   discordId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -471,6 +482,7 @@ export type UserScalarWhereWithAggregatesInput = {
   emailVerified?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  customAvatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   discordUsername?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   discordId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -497,6 +509,7 @@ export type UserCreateInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -541,6 +554,7 @@ export type UserUncheckedCreateInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -585,6 +599,7 @@ export type UserUpdateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -629,6 +644,7 @@ export type UserUncheckedUpdateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -673,6 +689,7 @@ export type UserCreateManyInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -699,6 +716,7 @@ export type UserUpdateManyMutationInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -724,6 +742,7 @@ export type UserUncheckedUpdateManyInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -763,6 +782,7 @@ export type UserCountOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  customAvatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
@@ -789,6 +809,7 @@ export type UserMaxOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  customAvatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
@@ -813,6 +834,7 @@ export type UserMinOrderByAggregateInput = {
   emailVerified?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  customAvatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   discordUsername?: Prisma.SortOrder
   discordId?: Prisma.SortOrder
@@ -1188,6 +1210,7 @@ export type UserCreateWithoutAccountsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1231,6 +1254,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1290,6 +1314,7 @@ export type UserUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1333,6 +1358,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1376,6 +1402,7 @@ export type UserCreateWithoutSessionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1419,6 +1446,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1478,6 +1506,7 @@ export type UserUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1521,6 +1550,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1564,6 +1594,7 @@ export type UserCreateWithoutCharactersInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1607,6 +1638,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1666,6 +1698,7 @@ export type UserUpdateWithoutCharactersInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1709,6 +1742,7 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1752,6 +1786,7 @@ export type UserCreateWithoutFlaggedEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1795,6 +1830,7 @@ export type UserUncheckedCreateWithoutFlaggedEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1843,6 +1879,7 @@ export type UserCreateWithoutEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1886,6 +1923,7 @@ export type UserUncheckedCreateWithoutEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1934,6 +1972,7 @@ export type UserCreateWithoutDesignedEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -1977,6 +2016,7 @@ export type UserUncheckedCreateWithoutDesignedEstatesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2025,6 +2065,7 @@ export type UserCreateWithoutPinnedEstateInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2068,6 +2109,7 @@ export type UserUncheckedCreateWithoutPinnedEstateInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2132,6 +2174,7 @@ export type UserUpdateWithoutFlaggedEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2175,6 +2218,7 @@ export type UserUncheckedUpdateWithoutFlaggedEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2229,6 +2273,7 @@ export type UserUpdateWithoutEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2272,6 +2317,7 @@ export type UserUncheckedUpdateWithoutEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2326,6 +2372,7 @@ export type UserUpdateWithoutDesignedEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2369,6 +2416,7 @@ export type UserUncheckedUpdateWithoutDesignedEstatesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2431,6 +2479,7 @@ export type UserScalarWhereInput = {
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
+  customAvatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   discordUsername?: Prisma.StringNullableFilter<"User"> | string | null
   discordId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -2457,6 +2506,7 @@ export type UserCreateWithoutVerificationReviewsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2500,6 +2550,7 @@ export type UserUncheckedCreateWithoutVerificationReviewsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2559,6 +2610,7 @@ export type UserUpdateWithoutVerificationReviewsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2602,6 +2654,7 @@ export type UserUncheckedUpdateWithoutVerificationReviewsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2645,6 +2698,7 @@ export type UserCreateWithoutVenueStaffInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2688,6 +2742,7 @@ export type UserUncheckedCreateWithoutVenueStaffInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2747,6 +2802,7 @@ export type UserUpdateWithoutVenueStaffInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2790,6 +2846,7 @@ export type UserUncheckedUpdateWithoutVenueStaffInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2833,6 +2890,7 @@ export type UserCreateWithoutLikesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2876,6 +2934,7 @@ export type UserUncheckedCreateWithoutLikesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -2935,6 +2994,7 @@ export type UserUpdateWithoutLikesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2978,6 +3038,7 @@ export type UserUncheckedUpdateWithoutLikesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3021,6 +3082,7 @@ export type UserCreateWithoutCommentsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3064,6 +3126,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3123,6 +3186,7 @@ export type UserUpdateWithoutCommentsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3166,6 +3230,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3209,6 +3274,7 @@ export type UserCreateWithoutLegalPageEditsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3252,6 +3318,7 @@ export type UserUncheckedCreateWithoutLegalPageEditsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3311,6 +3378,7 @@ export type UserUpdateWithoutLegalPageEditsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3354,6 +3422,7 @@ export type UserUncheckedUpdateWithoutLegalPageEditsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3397,6 +3466,7 @@ export type UserCreateWithoutClaimRequestsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3440,6 +3510,7 @@ export type UserUncheckedCreateWithoutClaimRequestsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3488,6 +3559,7 @@ export type UserCreateWithoutClaimReviewsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3531,6 +3603,7 @@ export type UserUncheckedCreateWithoutClaimReviewsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3590,6 +3663,7 @@ export type UserUpdateWithoutClaimRequestsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3633,6 +3707,7 @@ export type UserUncheckedUpdateWithoutClaimRequestsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3687,6 +3762,7 @@ export type UserUpdateWithoutClaimReviewsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3730,6 +3806,7 @@ export type UserUncheckedUpdateWithoutClaimReviewsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3773,6 +3850,7 @@ export type UserCreateWithoutCollectionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3816,6 +3894,7 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -3875,6 +3954,7 @@ export type UserUpdateWithoutCollectionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3918,6 +3998,7 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3961,6 +4042,7 @@ export type UserCreateWithoutDesignerConversationsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4004,6 +4086,7 @@ export type UserUncheckedCreateWithoutDesignerConversationsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4052,6 +4135,7 @@ export type UserCreateWithoutRequestorConversationsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4095,6 +4179,7 @@ export type UserUncheckedCreateWithoutRequestorConversationsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4154,6 +4239,7 @@ export type UserUpdateWithoutDesignerConversationsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4197,6 +4283,7 @@ export type UserUncheckedUpdateWithoutDesignerConversationsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4251,6 +4338,7 @@ export type UserUpdateWithoutRequestorConversationsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4294,6 +4382,7 @@ export type UserUncheckedUpdateWithoutRequestorConversationsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4337,6 +4426,7 @@ export type UserCreateWithoutSentMessagesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4380,6 +4470,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4439,6 +4530,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4482,6 +4574,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4525,6 +4618,7 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4568,6 +4662,7 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4627,6 +4722,7 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4670,6 +4766,7 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4713,6 +4810,7 @@ export type UserCreateManyPinnedEstateInput = {
   emailVerified?: Date | string | null
   password?: string | null
   image?: string | null
+  customAvatarUrl?: string | null
   createdAt?: Date | string
   discordUsername?: string | null
   discordId?: string | null
@@ -4738,6 +4836,7 @@ export type UserUpdateWithoutPinnedEstateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4781,6 +4880,7 @@ export type UserUncheckedUpdateWithoutPinnedEstateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4824,6 +4924,7 @@ export type UserUncheckedUpdateManyWithoutPinnedEstateInput = {
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discordUsername?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5033,6 +5134,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emailVerified?: boolean
   password?: boolean
   image?: boolean
+  customAvatarUrl?: boolean
   createdAt?: boolean
   discordUsername?: boolean
   discordId?: boolean
@@ -5079,6 +5181,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emailVerified?: boolean
   password?: boolean
   image?: boolean
+  customAvatarUrl?: boolean
   createdAt?: boolean
   discordUsername?: boolean
   discordId?: boolean
@@ -5106,6 +5209,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   emailVerified?: boolean
   password?: boolean
   image?: boolean
+  customAvatarUrl?: boolean
   createdAt?: boolean
   discordUsername?: boolean
   discordId?: boolean
@@ -5133,6 +5237,7 @@ export type UserSelectScalar = {
   emailVerified?: boolean
   password?: boolean
   image?: boolean
+  customAvatarUrl?: boolean
   createdAt?: boolean
   discordUsername?: boolean
   discordId?: boolean
@@ -5152,7 +5257,7 @@ export type UserSelectScalar = {
   lastSeenAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "password" | "image" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer" | "designerSpecialties" | "designerStyleTags" | "designerPricingText" | "designerTurnaround" | "emailOnInquiry" | "emailOnMessage" | "lastSeenAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "password" | "image" | "customAvatarUrl" | "createdAt" | "discordUsername" | "discordId" | "role" | "pathfinder" | "bio" | "commissionOpen" | "portfolioUrl" | "pinnedEstateId" | "designer" | "designerSpecialties" | "designerStyleTags" | "designerPricingText" | "designerTurnaround" | "emailOnInquiry" | "emailOnMessage" | "lastSeenAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
@@ -5212,6 +5317,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emailVerified: Date | null
     password: string | null
     image: string | null
+    customAvatarUrl: string | null
     createdAt: Date
     discordUsername: string | null
     discordId: string | null
@@ -5677,6 +5783,7 @@ export interface UserFieldRefs {
   readonly emailVerified: Prisma.FieldRef<"User", 'DateTime'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly image: Prisma.FieldRef<"User", 'String'>
+  readonly customAvatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly discordUsername: Prisma.FieldRef<"User", 'String'>
   readonly discordId: Prisma.FieldRef<"User", 'String'>
