@@ -93,11 +93,13 @@ export default async function ModerationPage({ searchParams }: PageProps) {
   // Fetch live FC info for each override request — sequential to avoid Lodestone rate limits
   const overrideRequests: (typeof rawOverrideRequests[number] & { fcName: string | null; masterName: string | null; fcLookupFailed: boolean })[] = []
   for (const req of rawOverrideRequests) {
+    let fcId: string | null = null
     let fcLookupFailed = false
-    const fcId = await getCharacterFCId(parseInt(req.character.lodestoneId)).catch(() => {
+    try {
+      fcId = await getCharacterFCId(parseInt(req.character.lodestoneId))
+    } catch {
       fcLookupFailed = true
-      return null
-    })
+    }
     const fcName = fcId ? await getFCName(fcId).catch(() => null) : null
     const masterId = fcId ? await getFCMasterLodestoneId(fcId).catch(() => null) : null
     const master = masterId ? await getCharacterById(parseInt(masterId)).catch(() => null) : null
