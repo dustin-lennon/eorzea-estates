@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { toast } from "sonner"
-import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2, ShieldCheck, CheckCircle } from "lucide-react"
+import { MoreHorizontal, Eye, EyeOff, Pencil, Trash2, ShieldCheck, CheckCircle, ShieldAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -14,34 +14,40 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { EstateVerifyModal } from "@/components/estate-verify-modal"
-import type { VerificationStatus } from "@/generated/prisma/client"
+import { FcOverrideRequestModal } from "@/components/fc-override-request-modal"
+import type { VerificationStatus, FcOverrideRequestStatus } from "@/generated/prisma/client"
 
 interface Props {
   estateId: string
   estateName: string
   estateType: string
+  characterId?: string
   characterName: string
   published: boolean
   verified: boolean
   verificationStatus: VerificationStatus | null
   modReason?: string | null
   isStale?: boolean
+  overrideRequestStatus?: FcOverrideRequestStatus | null
 }
 
 export function DashboardEstateActions({
   estateId,
   estateName,
   estateType,
+  characterId,
   characterName,
   published,
   verified,
   verificationStatus,
   modReason,
   isStale = false,
+  overrideRequestStatus,
 }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [verifyOpen, setVerifyOpen] = useState(false)
+  const [overrideOpen, setOverrideOpen] = useState(false)
 
   async function togglePublished() {
     setLoading(true)
@@ -103,6 +109,13 @@ export function DashboardEstateActions({
 
   const showRetryItem = verificationStatus === "MOD_REJECTED"
 
+  const showOverrideItem =
+    estateType === "FC_ESTATE" &&
+    verificationStatus === "MOD_REJECTED" &&
+    !!characterId &&
+    overrideRequestStatus !== "PENDING" &&
+    overrideRequestStatus !== "APPROVED"
+
   return (
     <>
       <EstateVerifyModal
@@ -115,6 +128,16 @@ export function DashboardEstateActions({
         verificationStatus={verificationStatus}
         modReason={modReason}
       />
+
+      {characterId && (
+        <FcOverrideRequestModal
+          open={overrideOpen}
+          onOpenChange={setOverrideOpen}
+          characterId={characterId}
+          characterName={characterName}
+          estateId={estateId}
+        />
+      )}
 
       <div className="flex items-center gap-2">
         {published && (
@@ -147,6 +170,20 @@ export function DashboardEstateActions({
               <DropdownMenuItem onClick={() => setVerifyOpen(true)}>
                 <ShieldCheck className="h-4 w-4 mr-2" />
                 Retry Verification
+              </DropdownMenuItem>
+            )}
+
+            {showOverrideItem && (
+              <DropdownMenuItem onClick={() => setOverrideOpen(true)}>
+                <ShieldAlert className="h-4 w-4 mr-2" />
+                Request Officer Override
+              </DropdownMenuItem>
+            )}
+
+            {overrideRequestStatus === "PENDING" && (
+              <DropdownMenuItem disabled>
+                <ShieldAlert className="h-4 w-4 mr-2" />
+                Override Pending Review
               </DropdownMenuItem>
             )}
 

@@ -405,7 +405,9 @@ export const ModelName = {
   CollectionEstate: 'CollectionEstate',
   Conversation: 'Conversation',
   Message: 'Message',
-  PushSubscription: 'PushSubscription'
+  PushSubscription: 'PushSubscription',
+  FcOverrideRequest: 'FcOverrideRequest',
+  FcOverride: 'FcOverride'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -421,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription" | "fcOverrideRequest" | "fcOverride"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2053,6 +2055,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FcOverrideRequest: {
+      payload: Prisma.$FcOverrideRequestPayload<ExtArgs>
+      fields: Prisma.FcOverrideRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FcOverrideRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FcOverrideRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.FcOverrideRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FcOverrideRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        findMany: {
+          args: Prisma.FcOverrideRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>[]
+        }
+        create: {
+          args: Prisma.FcOverrideRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        createMany: {
+          args: Prisma.FcOverrideRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FcOverrideRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.FcOverrideRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        update: {
+          args: Prisma.FcOverrideRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.FcOverrideRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FcOverrideRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FcOverrideRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.FcOverrideRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverrideRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.FcOverrideRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFcOverrideRequest>
+        }
+        groupBy: {
+          args: Prisma.FcOverrideRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FcOverrideRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FcOverrideRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FcOverrideRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    FcOverride: {
+      payload: Prisma.$FcOverridePayload<ExtArgs>
+      fields: Prisma.FcOverrideFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FcOverrideFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FcOverrideFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        findFirst: {
+          args: Prisma.FcOverrideFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FcOverrideFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        findMany: {
+          args: Prisma.FcOverrideFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>[]
+        }
+        create: {
+          args: Prisma.FcOverrideCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        createMany: {
+          args: Prisma.FcOverrideCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FcOverrideCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>[]
+        }
+        delete: {
+          args: Prisma.FcOverrideDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        update: {
+          args: Prisma.FcOverrideUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        deleteMany: {
+          args: Prisma.FcOverrideDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FcOverrideUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FcOverrideUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>[]
+        }
+        upsert: {
+          args: Prisma.FcOverrideUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FcOverridePayload>
+        }
+        aggregate: {
+          args: Prisma.FcOverrideAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFcOverride>
+        }
+        groupBy: {
+          args: Prisma.FcOverrideGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FcOverrideGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FcOverrideCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FcOverrideCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2405,6 +2555,36 @@ export const PushSubscriptionScalarFieldEnum = {
 export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
+export const FcOverrideRequestScalarFieldEnum = {
+  id: 'id',
+  characterId: 'characterId',
+  userId: 'userId',
+  estateId: 'estateId',
+  message: 'message',
+  status: 'status',
+  adminNote: 'adminNote',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FcOverrideRequestScalarFieldEnum = (typeof FcOverrideRequestScalarFieldEnum)[keyof typeof FcOverrideRequestScalarFieldEnum]
+
+
+export const FcOverrideScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  characterId: 'characterId',
+  fcId: 'fcId',
+  grantedById: 'grantedById',
+  createdAt: 'createdAt',
+  revokedAt: 'revokedAt'
+} as const
+
+export type FcOverrideScalarFieldEnum = (typeof FcOverrideScalarFieldEnum)[keyof typeof FcOverrideScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2600,6 +2780,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'FcOverrideRequestStatus'
+ */
+export type EnumFcOverrideRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FcOverrideRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FcOverrideRequestStatus[]'
+ */
+export type ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FcOverrideRequestStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2729,6 +2923,8 @@ export type GlobalOmitConfig = {
   conversation?: Prisma.ConversationOmit
   message?: Prisma.MessageOmit
   pushSubscription?: Prisma.PushSubscriptionOmit
+  fcOverrideRequest?: Prisma.FcOverrideRequestOmit
+  fcOverride?: Prisma.FcOverrideOmit
 }
 
 /* Types for Logging */

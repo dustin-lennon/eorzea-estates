@@ -457,6 +457,7 @@ export type EstateWhereInput = {
   venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
   verification?: Prisma.XOR<Prisma.EstateVerificationNullableScalarRelationFilter, Prisma.EstateVerificationWhereInput> | null
   collectionEntries?: Prisma.CollectionEstateListRelationFilter
+  fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
 }
 
 export type EstateOrderByWithRelationInput = {
@@ -505,6 +506,7 @@ export type EstateOrderByWithRelationInput = {
   venueDetails?: Prisma.VenueDetailsOrderByWithRelationInput
   verification?: Prisma.EstateVerificationOrderByWithRelationInput
   collectionEntries?: Prisma.CollectionEstateOrderByRelationAggregateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestOrderByRelationAggregateInput
 }
 
 export type EstateWhereUniqueInput = Prisma.AtLeast<{
@@ -556,6 +558,7 @@ export type EstateWhereUniqueInput = Prisma.AtLeast<{
   venueDetails?: Prisma.XOR<Prisma.VenueDetailsNullableScalarRelationFilter, Prisma.VenueDetailsWhereInput> | null
   verification?: Prisma.XOR<Prisma.EstateVerificationNullableScalarRelationFilter, Prisma.EstateVerificationWhereInput> | null
   collectionEntries?: Prisma.CollectionEstateListRelationFilter
+  fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
 }, "id">
 
 export type EstateOrderByWithAggregationInput = {
@@ -678,6 +681,7 @@ export type EstateCreateInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateInput = {
@@ -722,6 +726,7 @@ export type EstateUncheckedCreateInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUpdateInput = {
@@ -766,6 +771,7 @@ export type EstateUpdateInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateInput = {
@@ -810,6 +816,7 @@ export type EstateUncheckedUpdateInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateManyInput = {
@@ -1381,6 +1388,22 @@ export type EstateUpdateOneRequiredWithoutCollectionEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EstateUpdateToOneWithWhereWithoutCollectionEntriesInput, Prisma.EstateUpdateWithoutCollectionEntriesInput>, Prisma.EstateUncheckedUpdateWithoutCollectionEntriesInput>
 }
 
+export type EstateCreateNestedOneWithoutFcOverrideRequestsInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedCreateWithoutFcOverrideRequestsInput>
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutFcOverrideRequestsInput
+  connect?: Prisma.EstateWhereUniqueInput
+}
+
+export type EstateUpdateOneWithoutFcOverrideRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedCreateWithoutFcOverrideRequestsInput>
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutFcOverrideRequestsInput
+  upsert?: Prisma.EstateUpsertWithoutFcOverrideRequestsInput
+  disconnect?: Prisma.EstateWhereInput | boolean
+  delete?: Prisma.EstateWhereInput | boolean
+  connect?: Prisma.EstateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EstateUpdateToOneWithWhereWithoutFcOverrideRequestsInput, Prisma.EstateUpdateWithoutFcOverrideRequestsInput>, Prisma.EstateUncheckedUpdateWithoutFcOverrideRequestsInput>
+}
+
 export type EstateCreateWithoutFlaggedByInput = {
   id?: string
   createdAt?: Date | string
@@ -1422,6 +1445,7 @@ export type EstateCreateWithoutFlaggedByInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutFlaggedByInput = {
@@ -1465,6 +1489,7 @@ export type EstateUncheckedCreateWithoutFlaggedByInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutFlaggedByInput = {
@@ -1518,6 +1543,7 @@ export type EstateCreateWithoutOwnerInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutOwnerInput = {
@@ -1561,6 +1587,7 @@ export type EstateUncheckedCreateWithoutOwnerInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutOwnerInput = {
@@ -1614,6 +1641,7 @@ export type EstateCreateWithoutPinnedByUsersInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutPinnedByUsersInput = {
@@ -1657,6 +1685,7 @@ export type EstateUncheckedCreateWithoutPinnedByUsersInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutPinnedByUsersInput = {
@@ -1705,6 +1734,7 @@ export type EstateCreateWithoutDesignerInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutDesignerInput = {
@@ -1748,6 +1778,7 @@ export type EstateUncheckedCreateWithoutDesignerInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutDesignerInput = {
@@ -1882,6 +1913,7 @@ export type EstateUpdateWithoutPinnedByUsersInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutPinnedByUsersInput = {
@@ -1925,6 +1957,7 @@ export type EstateUncheckedUpdateWithoutPinnedByUsersInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUpsertWithWhereUniqueWithoutDesignerInput = {
@@ -1984,6 +2017,7 @@ export type EstateCreateWithoutCharacterInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutCharacterInput = {
@@ -2027,6 +2061,7 @@ export type EstateUncheckedCreateWithoutCharacterInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutCharacterInput = {
@@ -2096,6 +2131,7 @@ export type EstateCreateWithoutVerificationInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutVerificationInput = {
@@ -2139,6 +2175,7 @@ export type EstateUncheckedCreateWithoutVerificationInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutVerificationInput = {
@@ -2198,6 +2235,7 @@ export type EstateUpdateWithoutVerificationInput = {
   likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutVerificationInput = {
@@ -2241,6 +2279,7 @@ export type EstateUncheckedUpdateWithoutVerificationInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutPendingTransferInput = {
@@ -2284,6 +2323,7 @@ export type EstateCreateWithoutPendingTransferInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutPendingTransferInput = {
@@ -2327,6 +2367,7 @@ export type EstateUncheckedCreateWithoutPendingTransferInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutPendingTransferInput = {
@@ -2386,6 +2427,7 @@ export type EstateUpdateWithoutPendingTransferInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutPendingTransferInput = {
@@ -2429,6 +2471,7 @@ export type EstateUncheckedUpdateWithoutPendingTransferInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutImagesInput = {
@@ -2472,6 +2515,7 @@ export type EstateCreateWithoutImagesInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutImagesInput = {
@@ -2515,6 +2559,7 @@ export type EstateUncheckedCreateWithoutImagesInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutImagesInput = {
@@ -2574,6 +2619,7 @@ export type EstateUpdateWithoutImagesInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutImagesInput = {
@@ -2617,6 +2663,7 @@ export type EstateUncheckedUpdateWithoutImagesInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutVenueDetailsInput = {
@@ -2660,6 +2707,7 @@ export type EstateCreateWithoutVenueDetailsInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutVenueDetailsInput = {
@@ -2703,6 +2751,7 @@ export type EstateUncheckedCreateWithoutVenueDetailsInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutVenueDetailsInput = {
@@ -2762,6 +2811,7 @@ export type EstateUpdateWithoutVenueDetailsInput = {
   likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
@@ -2805,6 +2855,7 @@ export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutLikesInput = {
@@ -2848,6 +2899,7 @@ export type EstateCreateWithoutLikesInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutLikesInput = {
@@ -2891,6 +2943,7 @@ export type EstateUncheckedCreateWithoutLikesInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutLikesInput = {
@@ -2950,6 +3003,7 @@ export type EstateUpdateWithoutLikesInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutLikesInput = {
@@ -2993,6 +3047,7 @@ export type EstateUncheckedUpdateWithoutLikesInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutCommentsInput = {
@@ -3036,6 +3091,7 @@ export type EstateCreateWithoutCommentsInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutCommentsInput = {
@@ -3079,6 +3135,7 @@ export type EstateUncheckedCreateWithoutCommentsInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutCommentsInput = {
@@ -3138,6 +3195,7 @@ export type EstateUpdateWithoutCommentsInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutCommentsInput = {
@@ -3181,6 +3239,7 @@ export type EstateUncheckedUpdateWithoutCommentsInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutClaimRequestInput = {
@@ -3224,6 +3283,7 @@ export type EstateCreateWithoutClaimRequestInput = {
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutClaimRequestInput = {
@@ -3267,6 +3327,7 @@ export type EstateUncheckedCreateWithoutClaimRequestInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
   collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutClaimRequestInput = {
@@ -3326,6 +3387,7 @@ export type EstateUpdateWithoutClaimRequestInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutClaimRequestInput = {
@@ -3369,6 +3431,7 @@ export type EstateUncheckedUpdateWithoutClaimRequestInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateWithoutCollectionEntriesInput = {
@@ -3412,6 +3475,7 @@ export type EstateCreateWithoutCollectionEntriesInput = {
   likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
   venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
 }
 
 export type EstateUncheckedCreateWithoutCollectionEntriesInput = {
@@ -3455,6 +3519,7 @@ export type EstateUncheckedCreateWithoutCollectionEntriesInput = {
   likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
   venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
   verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
 }
 
 export type EstateCreateOrConnectWithoutCollectionEntriesInput = {
@@ -3514,6 +3579,7 @@ export type EstateUpdateWithoutCollectionEntriesInput = {
   likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutCollectionEntriesInput = {
@@ -3557,6 +3623,199 @@ export type EstateUncheckedUpdateWithoutCollectionEntriesInput = {
   likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
+}
+
+export type EstateCreateWithoutFcOverrideRequestsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  room?: number | null
+  subdivision?: string | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  verified?: boolean
+  verificationStatus?: $Enums.VerificationStatus | null
+  claimedAt?: Date | string | null
+  confirmedActiveAt?: Date | string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
+  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
+  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
+  verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
+  collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+}
+
+export type EstateUncheckedCreateWithoutFcOverrideRequestsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  ownerId: string
+  characterId?: string | null
+  room?: number | null
+  subdivision?: string | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  flaggedById?: string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  verified?: boolean
+  verificationStatus?: $Enums.VerificationStatus | null
+  designerId?: string | null
+  claimedAt?: Date | string | null
+  confirmedActiveAt?: Date | string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
+  pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  claimRequest?: Prisma.EstateClaimRequestUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
+  verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
+  collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+}
+
+export type EstateCreateOrConnectWithoutFcOverrideRequestsInput = {
+  where: Prisma.EstateWhereUniqueInput
+  create: Prisma.XOR<Prisma.EstateCreateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedCreateWithoutFcOverrideRequestsInput>
+}
+
+export type EstateUpsertWithoutFcOverrideRequestsInput = {
+  update: Prisma.XOR<Prisma.EstateUpdateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedUpdateWithoutFcOverrideRequestsInput>
+  create: Prisma.XOR<Prisma.EstateCreateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedCreateWithoutFcOverrideRequestsInput>
+  where?: Prisma.EstateWhereInput
+}
+
+export type EstateUpdateToOneWithWhereWithoutFcOverrideRequestsInput = {
+  where?: Prisma.EstateWhereInput
+  data: Prisma.XOR<Prisma.EstateUpdateWithoutFcOverrideRequestsInput, Prisma.EstateUncheckedUpdateWithoutFcOverrideRequestsInput>
+}
+
+export type EstateUpdateWithoutFcOverrideRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
+  claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
+  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
+  verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
+  collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+}
+
+export type EstateUncheckedUpdateWithoutFcOverrideRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
+  designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
+  pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  claimRequest?: Prisma.EstateClaimRequestUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
+  verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
+  collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateCreateManyFlaggedByInput = {
@@ -3702,6 +3961,7 @@ export type EstateUpdateWithoutFlaggedByInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutFlaggedByInput = {
@@ -3745,6 +4005,7 @@ export type EstateUncheckedUpdateWithoutFlaggedByInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
@@ -3822,6 +4083,7 @@ export type EstateUpdateWithoutOwnerInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutOwnerInput = {
@@ -3865,6 +4127,7 @@ export type EstateUncheckedUpdateWithoutOwnerInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutOwnerInput = {
@@ -3942,6 +4205,7 @@ export type EstateUpdateWithoutDesignerInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutDesignerInput = {
@@ -3985,6 +4249,7 @@ export type EstateUncheckedUpdateWithoutDesignerInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutDesignerInput = {
@@ -4096,6 +4361,7 @@ export type EstateUpdateWithoutCharacterInput = {
   venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateWithoutCharacterInput = {
@@ -4139,6 +4405,7 @@ export type EstateUncheckedUpdateWithoutCharacterInput = {
   venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
   verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
   collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
 }
 
 export type EstateUncheckedUpdateManyWithoutCharacterInput = {
@@ -4186,6 +4453,7 @@ export type EstateCountOutputType = {
   images: number
   likes: number
   collectionEntries: number
+  fcOverrideRequests: number
 }
 
 export type EstateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4194,6 +4462,7 @@ export type EstateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   images?: boolean | EstateCountOutputTypeCountImagesArgs
   likes?: boolean | EstateCountOutputTypeCountLikesArgs
   collectionEntries?: boolean | EstateCountOutputTypeCountCollectionEntriesArgs
+  fcOverrideRequests?: boolean | EstateCountOutputTypeCountFcOverrideRequestsArgs
 }
 
 /**
@@ -4239,6 +4508,13 @@ export type EstateCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Ex
  */
 export type EstateCountOutputTypeCountCollectionEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CollectionEstateWhereInput
+}
+
+/**
+ * EstateCountOutputType without action
+ */
+export type EstateCountOutputTypeCountFcOverrideRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FcOverrideRequestWhereInput
 }
 
 
@@ -4288,6 +4564,7 @@ export type EstateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
   verification?: boolean | Prisma.Estate$verificationArgs<ExtArgs>
   collectionEntries?: boolean | Prisma.Estate$collectionEntriesArgs<ExtArgs>
+  fcOverrideRequests?: boolean | Prisma.Estate$fcOverrideRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EstateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
@@ -4419,6 +4696,7 @@ export type EstateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   venueDetails?: boolean | Prisma.Estate$venueDetailsArgs<ExtArgs>
   verification?: boolean | Prisma.Estate$verificationArgs<ExtArgs>
   collectionEntries?: boolean | Prisma.Estate$collectionEntriesArgs<ExtArgs>
+  fcOverrideRequests?: boolean | Prisma.Estate$fcOverrideRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EstateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EstateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4450,6 +4728,7 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     venueDetails: Prisma.$VenueDetailsPayload<ExtArgs> | null
     verification: Prisma.$EstateVerificationPayload<ExtArgs> | null
     collectionEntries: Prisma.$CollectionEstatePayload<ExtArgs>[]
+    fcOverrideRequests: Prisma.$FcOverrideRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4891,6 +5170,7 @@ export interface Prisma__EstateClient<T, Null = never, ExtArgs extends runtime.T
   venueDetails<T extends Prisma.Estate$venueDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$venueDetailsArgs<ExtArgs>>): Prisma.Prisma__VenueDetailsClient<runtime.Types.Result.GetResult<Prisma.$VenueDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   verification<T extends Prisma.Estate$verificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$verificationArgs<ExtArgs>>): Prisma.Prisma__EstateVerificationClient<runtime.Types.Result.GetResult<Prisma.$EstateVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   collectionEntries<T extends Prisma.Estate$collectionEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$collectionEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionEstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fcOverrideRequests<T extends Prisma.Estate$fcOverrideRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$fcOverrideRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverrideRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5598,6 +5878,30 @@ export type Estate$collectionEntriesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.CollectionEstateScalarFieldEnum | Prisma.CollectionEstateScalarFieldEnum[]
+}
+
+/**
+ * Estate.fcOverrideRequests
+ */
+export type Estate$fcOverrideRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FcOverrideRequest
+   */
+  select?: Prisma.FcOverrideRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FcOverrideRequest
+   */
+  omit?: Prisma.FcOverrideRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FcOverrideRequestInclude<ExtArgs> | null
+  where?: Prisma.FcOverrideRequestWhereInput
+  orderBy?: Prisma.FcOverrideRequestOrderByWithRelationInput | Prisma.FcOverrideRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FcOverrideRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FcOverrideRequestScalarFieldEnum | Prisma.FcOverrideRequestScalarFieldEnum[]
 }
 
 /**

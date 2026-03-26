@@ -72,7 +72,9 @@ export const ModelName = {
   CollectionEstate: 'CollectionEstate',
   Conversation: 'Conversation',
   Message: 'Message',
-  PushSubscription: 'PushSubscription'
+  PushSubscription: 'PushSubscription',
+  FcOverrideRequest: 'FcOverrideRequest',
+  FcOverride: 'FcOverride'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,6 +404,36 @@ export const PushSubscriptionScalarFieldEnum = {
 } as const
 
 export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
+
+
+export const FcOverrideRequestScalarFieldEnum = {
+  id: 'id',
+  characterId: 'characterId',
+  userId: 'userId',
+  estateId: 'estateId',
+  message: 'message',
+  status: 'status',
+  adminNote: 'adminNote',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FcOverrideRequestScalarFieldEnum = (typeof FcOverrideRequestScalarFieldEnum)[keyof typeof FcOverrideRequestScalarFieldEnum]
+
+
+export const FcOverrideScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  characterId: 'characterId',
+  fcId: 'fcId',
+  grantedById: 'grantedById',
+  createdAt: 'createdAt',
+  revokedAt: 'revokedAt'
+} as const
+
+export type FcOverrideScalarFieldEnum = (typeof FcOverrideScalarFieldEnum)[keyof typeof FcOverrideScalarFieldEnum]
 
 
 export const SortOrder = {

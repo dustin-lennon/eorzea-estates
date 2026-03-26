@@ -77,8 +77,13 @@ export default async function DashboardPage() {
       include: {
         images: { orderBy: { order: "asc" }, take: 1 },
         venueDetails: { select: { venueType: true } },
-        character: { select: { characterName: true, verified: true } },
+        character: { select: { id: true, characterName: true, verified: true } },
         verification: { select: { status: true, modReason: true } },
+        fcOverrideRequests: {
+          orderBy: { createdAt: "desc" },
+          take: 1,
+          select: { status: true },
+        },
       },
     }),
     prisma.like.findMany({
@@ -273,12 +278,14 @@ export default async function DashboardPage() {
                   estateId={estate.id}
                   estateName={estate.name}
                   estateType={estate.type}
+                  characterId={estate.character?.id}
                   characterName={estate.character?.characterName ?? ""}
                   published={estate.published}
                   verified={estate.verified}
                   verificationStatus={estate.verificationStatus}
                   modReason={estate.verification?.modReason}
                   isStale={estate.published && isStale(estate.confirmedActiveAt ?? estate.updatedAt)}
+                  overrideRequestStatus={estate.fcOverrideRequests[0]?.status ?? null}
                 />
               </div>
             ))}
