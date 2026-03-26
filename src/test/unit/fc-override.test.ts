@@ -23,20 +23,24 @@ async function checkFcEstateAccess(
   characterLodestoneId: string,
   characterId: string
 ): Promise<{ allowed: boolean; reason?: string }> {
-  const fcId = await (getCharacterFCId as ReturnType<typeof vi.fn>)(parseInt(characterLodestoneId)).catch(() => null)
+  const mockGetFCId = getCharacterFCId as unknown as (id: number) => Promise<string | null>
+  const mockGetMaster = getFCMasterLodestoneId as unknown as (id: string) => Promise<string | null>
+  const mockFindFirst = prisma.fcOverride.findFirst as unknown as (args: unknown) => Promise<unknown>
+
+  const fcId = await mockGetFCId(parseInt(characterLodestoneId)).catch(() => null)
   if (!fcId) {
     return { allowed: false, reason: "Character is not a member of a Free Company." }
   }
 
-  const masterId = await (getFCMasterLodestoneId as ReturnType<typeof vi.fn>)(fcId).catch(() => null)
+  const masterId = await mockGetMaster(fcId).catch(() => null)
   if (masterId === characterLodestoneId) {
     return { allowed: true }
   }
 
   // Not the master — check for active override
-  const activeOverride = await (prisma.fcOverride.findFirst as ReturnType<typeof vi.fn>)({
+  const activeOverride = await mockFindFirst({
     where: { characterId, revokedAt: null },
-  })
+  }) as { fcId: string } | null
   if (!activeOverride || activeOverride.fcId !== fcId) {
     return { allowed: false, reason: "Character is not the owner of a Free Company." }
   }
@@ -50,15 +54,15 @@ describe("FC estate access check", () => {
   })
 
   it("allows access when character is the FC master", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockResolvedValue("fc-123")
-    ;(getFCMasterLodestoneId as ReturnType<typeof vi.fn>).mockResolvedValue("char-lodestone-1")
+    vi.mocked(getCharacterFCId).mockResolvedValue("fc-123")
+    vi.mocked(getFCMasterLodestoneId).mockResolvedValue("char-lodestone-1")
 
     const result = await checkFcEstateAccess("char-lodestone-1", "char-db-id")
     expect(result.allowed).toBe(true)
   })
 
   it("denies access when character has no FC", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockResolvedValue(null)
+    vi.mocked(getCharacterFCId).mockResolvedValue(null)
 
     const result = await checkFcEstateAccess("char-lodestone-1", "char-db-id")
     expect(result.allowed).toBe(false)
@@ -66,9 +70,9 @@ describe("FC estate access check", () => {
   })
 
   it("denies access when character is not master and has no override", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockResolvedValue("fc-123")
-    ;(getFCMasterLodestoneId as ReturnType<typeof vi.fn>).mockResolvedValue("different-lodestone-id")
-    ;(prisma.fcOverride.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null)
+    vi.mocked(getCharacterFCId).mockResolvedValue("fc-123")
+    vi.mocked(getFCMasterLodestoneId).mockResolvedValue("different-lodestone-id")
+    vi.mocked(prisma.fcOverride.findFirst).mockResolvedValue(null)
 
     const result = await checkFcEstateAccess("char-lodestone-1", "char-db-id")
     expect(result.allowed).toBe(false)
@@ -76,12 +80,15 @@ describe("FC estate access check", () => {
   })
 
   it("allows access when character has an active override for the same FC", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockResolvedValue("fc-123")
-    ;(getFCMasterLodestoneId as ReturnType<typeof vi.fn>).mockResolvedValue("different-lodestone-id")
-    ;(prisma.fcOverride.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue({
+    vi.mocked(getCharacterFCId).mockResolvedValue("fc-123")
+    vi.mocked(getFCMasterLodestoneId).mockResolvedValue("different-lodestone-id")
+    vi.mocked(prisma.fcOverride.findFirst).mockResolvedValue({
       id: "override-1",
+      requestId: "req-1",
       characterId: "char-db-id",
       fcId: "fc-123",
+      grantedById: "admin-1",
+      createdAt: new Date(),
       revokedAt: null,
     })
 
@@ -90,12 +97,15 @@ describe("FC estate access check", () => {
   })
 
   it("denies access when override exists but is for a different FC", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockResolvedValue("fc-123")
-    ;(getFCMasterLodestoneId as ReturnType<typeof vi.fn>).mockResolvedValue("different-lodestone-id")
-    ;(prisma.fcOverride.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue({
+    vi.mocked(getCharacterFCId).mockResolvedValue("fc-123")
+    vi.mocked(getFCMasterLodestoneId).mockResolvedValue("different-lodestone-id")
+    vi.mocked(prisma.fcOverride.findFirst).mockResolvedValue({
       id: "override-1",
+      requestId: "req-1",
       characterId: "char-db-id",
       fcId: "fc-999",
+      grantedById: "admin-1",
+      createdAt: new Date(),
       revokedAt: null,
     })
 
@@ -105,7 +115,7 @@ describe("FC estate access check", () => {
   })
 
   it("denies access when Lodestone lookup fails", async () => {
-    ;(getCharacterFCId as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("Lodestone unavailable"))
+    vi.mocked(getCharacterFCId).mockRejectedValue(new Error("Lodestone unavailable"))
 
     const result = await checkFcEstateAccess("char-lodestone-1", "char-db-id")
     expect(result.allowed).toBe(false)

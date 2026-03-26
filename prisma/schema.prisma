@@ -349,6 +349,8 @@ model FcOverrideRequest {
   userId       String
   estateId     String?
   message      String?
+  screenshotUrl String?
+  storageKey   String?
   status       FcOverrideRequestStatus @default(PENDING)
   adminNote    String?
   reviewedAt   DateTime?

@@ -30,6 +30,8 @@ export type FcOverrideRequestMinAggregateOutputType = {
   userId: string | null
   estateId: string | null
   message: string | null
+  screenshotUrl: string | null
+  storageKey: string | null
   status: $Enums.FcOverrideRequestStatus | null
   adminNote: string | null
   reviewedAt: Date | null
@@ -44,6 +46,8 @@ export type FcOverrideRequestMaxAggregateOutputType = {
   userId: string | null
   estateId: string | null
   message: string | null
+  screenshotUrl: string | null
+  storageKey: string | null
   status: $Enums.FcOverrideRequestStatus | null
   adminNote: string | null
   reviewedAt: Date | null
@@ -58,6 +62,8 @@ export type FcOverrideRequestCountAggregateOutputType = {
   userId: number
   estateId: number
   message: number
+  screenshotUrl: number
+  storageKey: number
   status: number
   adminNote: number
   reviewedAt: number
@@ -74,6 +80,8 @@ export type FcOverrideRequestMinAggregateInputType = {
   userId?: true
   estateId?: true
   message?: true
+  screenshotUrl?: true
+  storageKey?: true
   status?: true
   adminNote?: true
   reviewedAt?: true
@@ -88,6 +96,8 @@ export type FcOverrideRequestMaxAggregateInputType = {
   userId?: true
   estateId?: true
   message?: true
+  screenshotUrl?: true
+  storageKey?: true
   status?: true
   adminNote?: true
   reviewedAt?: true
@@ -102,6 +112,8 @@ export type FcOverrideRequestCountAggregateInputType = {
   userId?: true
   estateId?: true
   message?: true
+  screenshotUrl?: true
+  storageKey?: true
   status?: true
   adminNote?: true
   reviewedAt?: true
@@ -189,6 +201,8 @@ export type FcOverrideRequestGroupByOutputType = {
   userId: string
   estateId: string | null
   message: string | null
+  screenshotUrl: string | null
+  storageKey: string | null
   status: $Enums.FcOverrideRequestStatus
   adminNote: string | null
   reviewedAt: Date | null
@@ -224,6 +238,8 @@ export type FcOverrideRequestWhereInput = {
   userId?: Prisma.StringFilter<"FcOverrideRequest"> | string
   estateId?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   message?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  screenshotUrl?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  storageKey?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFilter<"FcOverrideRequest"> | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FcOverrideRequest"> | Date | string | null
@@ -243,6 +259,8 @@ export type FcOverrideRequestOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  screenshotUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   adminNote?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -265,6 +283,8 @@ export type FcOverrideRequestWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"FcOverrideRequest"> | string
   estateId?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   message?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  screenshotUrl?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  storageKey?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFilter<"FcOverrideRequest"> | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FcOverrideRequest"> | Date | string | null
@@ -284,6 +304,8 @@ export type FcOverrideRequestOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrderInput | Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  screenshotUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   adminNote?: Prisma.SortOrderInput | Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -304,6 +326,8 @@ export type FcOverrideRequestScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"FcOverrideRequest"> | string
   estateId?: Prisma.StringNullableWithAggregatesFilter<"FcOverrideRequest"> | string | null
   message?: Prisma.StringNullableWithAggregatesFilter<"FcOverrideRequest"> | string | null
+  screenshotUrl?: Prisma.StringNullableWithAggregatesFilter<"FcOverrideRequest"> | string | null
+  storageKey?: Prisma.StringNullableWithAggregatesFilter<"FcOverrideRequest"> | string | null
   status?: Prisma.EnumFcOverrideRequestStatusWithAggregatesFilter<"FcOverrideRequest"> | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.StringNullableWithAggregatesFilter<"FcOverrideRequest"> | string | null
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FcOverrideRequest"> | Date | string | null
@@ -315,6 +339,8 @@ export type FcOverrideRequestScalarWhereWithAggregatesInput = {
 export type FcOverrideRequestCreateInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -333,6 +359,8 @@ export type FcOverrideRequestUncheckedCreateInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -345,6 +373,8 @@ export type FcOverrideRequestUncheckedCreateInput = {
 export type FcOverrideRequestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -363,6 +393,8 @@ export type FcOverrideRequestUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -378,6 +410,8 @@ export type FcOverrideRequestCreateManyInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -389,6 +423,8 @@ export type FcOverrideRequestCreateManyInput = {
 export type FcOverrideRequestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -402,6 +438,8 @@ export type FcOverrideRequestUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -426,6 +464,8 @@ export type FcOverrideRequestCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  screenshotUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -440,6 +480,8 @@ export type FcOverrideRequestMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  screenshotUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -454,6 +496,8 @@ export type FcOverrideRequestMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   estateId?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  screenshotUrl?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
@@ -656,6 +700,8 @@ export type FcOverrideRequestUpdateOneRequiredWithoutOverrideNestedInput = {
 export type FcOverrideRequestCreateWithoutUserInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -672,6 +718,8 @@ export type FcOverrideRequestUncheckedCreateWithoutUserInput = {
   characterId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -694,6 +742,8 @@ export type FcOverrideRequestCreateManyUserInputEnvelope = {
 export type FcOverrideRequestCreateWithoutReviewedByInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -711,6 +761,8 @@ export type FcOverrideRequestUncheckedCreateWithoutReviewedByInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -754,6 +806,8 @@ export type FcOverrideRequestScalarWhereInput = {
   userId?: Prisma.StringFilter<"FcOverrideRequest"> | string
   estateId?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   message?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  screenshotUrl?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
+  storageKey?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFilter<"FcOverrideRequest"> | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.StringNullableFilter<"FcOverrideRequest"> | string | null
   reviewedAt?: Prisma.DateTimeNullableFilter<"FcOverrideRequest"> | Date | string | null
@@ -781,6 +835,8 @@ export type FcOverrideRequestUpdateManyWithWhereWithoutReviewedByInput = {
 export type FcOverrideRequestCreateWithoutCharacterInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -797,6 +853,8 @@ export type FcOverrideRequestUncheckedCreateWithoutCharacterInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -835,6 +893,8 @@ export type FcOverrideRequestUpdateManyWithWhereWithoutCharacterInput = {
 export type FcOverrideRequestCreateWithoutEstateInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -851,6 +911,8 @@ export type FcOverrideRequestUncheckedCreateWithoutEstateInput = {
   characterId: string
   userId: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -889,6 +951,8 @@ export type FcOverrideRequestUpdateManyWithWhereWithoutEstateInput = {
 export type FcOverrideRequestCreateWithoutOverrideInput = {
   id?: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -906,6 +970,8 @@ export type FcOverrideRequestUncheckedCreateWithoutOverrideInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -933,6 +999,8 @@ export type FcOverrideRequestUpdateToOneWithWhereWithoutOverrideInput = {
 export type FcOverrideRequestUpdateWithoutOverrideInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -950,6 +1018,8 @@ export type FcOverrideRequestUncheckedUpdateWithoutOverrideInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -963,6 +1033,8 @@ export type FcOverrideRequestCreateManyUserInput = {
   characterId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -977,6 +1049,8 @@ export type FcOverrideRequestCreateManyReviewedByInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -987,6 +1061,8 @@ export type FcOverrideRequestCreateManyReviewedByInput = {
 export type FcOverrideRequestUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1003,6 +1079,8 @@ export type FcOverrideRequestUncheckedUpdateWithoutUserInput = {
   characterId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1017,6 +1095,8 @@ export type FcOverrideRequestUncheckedUpdateManyWithoutUserInput = {
   characterId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1028,6 +1108,8 @@ export type FcOverrideRequestUncheckedUpdateManyWithoutUserInput = {
 export type FcOverrideRequestUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1045,6 +1127,8 @@ export type FcOverrideRequestUncheckedUpdateWithoutReviewedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1059,6 +1143,8 @@ export type FcOverrideRequestUncheckedUpdateManyWithoutReviewedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1071,6 +1157,8 @@ export type FcOverrideRequestCreateManyCharacterInput = {
   userId: string
   estateId?: string | null
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -1082,6 +1170,8 @@ export type FcOverrideRequestCreateManyCharacterInput = {
 export type FcOverrideRequestUpdateWithoutCharacterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1098,6 +1188,8 @@ export type FcOverrideRequestUncheckedUpdateWithoutCharacterInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1112,6 +1204,8 @@ export type FcOverrideRequestUncheckedUpdateManyWithoutCharacterInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   estateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1125,6 +1219,8 @@ export type FcOverrideRequestCreateManyEstateInput = {
   characterId: string
   userId: string
   message?: string | null
+  screenshotUrl?: string | null
+  storageKey?: string | null
   status?: $Enums.FcOverrideRequestStatus
   adminNote?: string | null
   reviewedAt?: Date | string | null
@@ -1136,6 +1232,8 @@ export type FcOverrideRequestCreateManyEstateInput = {
 export type FcOverrideRequestUpdateWithoutEstateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1152,6 +1250,8 @@ export type FcOverrideRequestUncheckedUpdateWithoutEstateInput = {
   characterId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1166,6 +1266,8 @@ export type FcOverrideRequestUncheckedUpdateManyWithoutEstateInput = {
   characterId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  screenshotUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumFcOverrideRequestStatusFieldUpdateOperationsInput | $Enums.FcOverrideRequestStatus
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1182,6 +1284,8 @@ export type FcOverrideRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   userId?: boolean
   estateId?: boolean
   message?: boolean
+  screenshotUrl?: boolean
+  storageKey?: boolean
   status?: boolean
   adminNote?: boolean
   reviewedAt?: boolean
@@ -1201,6 +1305,8 @@ export type FcOverrideRequestSelectCreateManyAndReturn<ExtArgs extends runtime.T
   userId?: boolean
   estateId?: boolean
   message?: boolean
+  screenshotUrl?: boolean
+  storageKey?: boolean
   status?: boolean
   adminNote?: boolean
   reviewedAt?: boolean
@@ -1219,6 +1325,8 @@ export type FcOverrideRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   userId?: boolean
   estateId?: boolean
   message?: boolean
+  screenshotUrl?: boolean
+  storageKey?: boolean
   status?: boolean
   adminNote?: boolean
   reviewedAt?: boolean
@@ -1237,6 +1345,8 @@ export type FcOverrideRequestSelectScalar = {
   userId?: boolean
   estateId?: boolean
   message?: boolean
+  screenshotUrl?: boolean
+  storageKey?: boolean
   status?: boolean
   adminNote?: boolean
   reviewedAt?: boolean
@@ -1245,7 +1355,7 @@ export type FcOverrideRequestSelectScalar = {
   updatedAt?: boolean
 }
 
-export type FcOverrideRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "characterId" | "userId" | "estateId" | "message" | "status" | "adminNote" | "reviewedAt" | "reviewedById" | "createdAt" | "updatedAt", ExtArgs["result"]["fcOverrideRequest"]>
+export type FcOverrideRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "characterId" | "userId" | "estateId" | "message" | "screenshotUrl" | "storageKey" | "status" | "adminNote" | "reviewedAt" | "reviewedById" | "createdAt" | "updatedAt", ExtArgs["result"]["fcOverrideRequest"]>
 export type FcOverrideRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   character?: boolean | Prisma.FfxivCharacterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1281,6 +1391,8 @@ export type $FcOverrideRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     userId: string
     estateId: string | null
     message: string | null
+    screenshotUrl: string | null
+    storageKey: string | null
     status: $Enums.FcOverrideRequestStatus
     adminNote: string | null
     reviewedAt: Date | null
@@ -1720,6 +1832,8 @@ export interface FcOverrideRequestFieldRefs {
   readonly userId: Prisma.FieldRef<"FcOverrideRequest", 'String'>
   readonly estateId: Prisma.FieldRef<"FcOverrideRequest", 'String'>
   readonly message: Prisma.FieldRef<"FcOverrideRequest", 'String'>
+  readonly screenshotUrl: Prisma.FieldRef<"FcOverrideRequest", 'String'>
+  readonly storageKey: Prisma.FieldRef<"FcOverrideRequest", 'String'>
   readonly status: Prisma.FieldRef<"FcOverrideRequest", 'FcOverrideRequestStatus'>
   readonly adminNote: Prisma.FieldRef<"FcOverrideRequest", 'String'>
   readonly reviewedAt: Prisma.FieldRef<"FcOverrideRequest", 'DateTime'>

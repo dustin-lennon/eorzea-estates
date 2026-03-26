@@ -55,12 +55,19 @@ export default async function SubmitPage() {
         })
         if (activeOverride) isFcOwner = true
       }
+      const overrideRequest = !isFcOwner && fcId
+        ? await prisma.fcOverrideRequest.findFirst({
+            where: { characterId: char.id, status: { in: ["PENDING", "APPROVED"] } },
+            select: { status: true },
+          })
+        : null
       return {
         id: char.id,
         characterName: char.characterName,
         server: char.server,
         isFcMember: fcId !== null,
         isFcOwner,
+        overrideRequestStatus: overrideRequest?.status ?? null,
       }
     })
   )

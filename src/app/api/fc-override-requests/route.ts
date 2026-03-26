@@ -7,6 +7,8 @@ const schema = z.object({
   characterId: z.string(),
   estateId: z.string().optional(),
   message: z.string().max(500).optional(),
+  screenshotUrl: z.string().url().optional(),
+  storageKey: z.string().optional(),
 })
 
 export async function POST(req: Request) {
@@ -21,7 +23,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 })
   }
 
-  const { characterId, estateId, message } = parsed.data
+  const { characterId, estateId, message, screenshotUrl, storageKey } = parsed.data
 
   const character = await prisma.ffxivCharacter.findFirst({
     where: { id: characterId, userId: session.user.id, verified: true },
@@ -61,6 +63,8 @@ export async function POST(req: Request) {
       userId: session.user.id,
       estateId: estateId ?? null,
       message: message ?? null,
+      screenshotUrl: screenshotUrl ?? null,
+      storageKey: storageKey ?? null,
     },
   })
 

@@ -478,6 +478,7 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                   <th className="text-left px-4 py-3 font-medium">Character</th>
                   <th className="text-left px-4 py-3 font-medium">FC Info</th>
                   <th className="text-left px-4 py-3 font-medium">Linked Estate</th>
+                  <th className="text-left px-4 py-3 font-medium">Screenshot</th>
                   <th className="text-left px-4 py-3 font-medium">Message</th>
                   <th className="text-left px-4 py-3 font-medium">Submitted</th>
                   <th className="text-left px-4 py-3 font-medium">Actions</th>
@@ -554,6 +555,23 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                               </p>
                             )}
                           </div>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        {req.screenshotUrl ? (
+                          <a href={req.screenshotUrl} target="_blank" rel="noopener noreferrer" className="block">
+                            <div className="relative h-16 w-28 rounded overflow-hidden border hover:opacity-80 transition-opacity">
+                              <Image
+                                src={req.screenshotUrl}
+                                alt="Override evidence screenshot"
+                                fill
+                                className="object-cover"
+                                unoptimized
+                              />
+                            </div>
+                          </a>
                         ) : (
                           <span className="text-muted-foreground text-xs">—</span>
                         )}

@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { Plus, Trash2, Palette } from "lucide-react"
 
 import { estateFormSchema, designerEstateFormSchema, type EstateFormValues, type DesignerEstateFormValues } from "@/lib/schemas"
+import { FcOverrideRequestModal } from "@/components/fc-override-request-modal"
 import { z } from "zod"
 
 type EstateFormInput = z.input<typeof estateFormSchema>
@@ -42,6 +43,7 @@ interface Character {
   server: string
   isFcMember: boolean
   isFcOwner: boolean
+  overrideRequestStatus?: string | null
 }
 
 interface Props {
@@ -55,6 +57,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [designerMode, setDesignerMode] = useState(false)
+  const [overrideOpen, setOverrideOpen] = useState(false)
   const [conflicts, setConflicts] = useState<{ id: string; name: string; ownerName: string }[] | null>(null)
   const [pendingDesignerValues, setPendingDesignerValues] = useState<DesignerEstateFormValues | null>(null)
   const isEditing = !!estateId
@@ -623,6 +626,43 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
               </SelectContent>
             </Select>
           </div>
+
+          {/* FC officer override callout */}
+          {selectedCharacter?.isFcMember && !selectedCharacter?.isFcOwner && !useDesignerFlow && (
+            <>
+              <FcOverrideRequestModal
+                open={overrideOpen}
+                onOpenChange={setOverrideOpen}
+                characterId={selectedCharacter.id}
+                characterName={selectedCharacter.characterName}
+              />
+              <div className="rounded-lg border border-muted bg-muted/30 p-3 text-sm space-y-1">
+                <p className="font-medium">Want to list your FC&apos;s estate?</p>
+                <p className="text-muted-foreground text-xs leading-relaxed">
+                  Submitting an FC estate requires being the FC master. If the leader is unavailable,
+                  you can request an officer override — attach a screenshot of your nameplate and the
+                  FC roster as evidence.
+                </p>
+                {selectedCharacter.overrideRequestStatus === "PENDING" ? (
+                  <p className="text-xs text-yellow-600 dark:text-yellow-400 font-medium">
+                    Your override request is pending review.
+                  </p>
+                ) : selectedCharacter.overrideRequestStatus === "APPROVED" ? (
+                  <p className="text-xs text-green-600 dark:text-green-400 font-medium">
+                    Your override has been approved — FC Estate is available above.
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setOverrideOpen(true)}
+                    className="text-xs text-primary underline underline-offset-2 hover:no-underline"
+                  >
+                    Request an officer override
+                  </button>
+                )}
+              </div>
+            </>
+          )}
 
           <div>
             <Label htmlFor="description">Description *</Label>

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { ImageUpload, type UploadedImage } from "@/components/image-upload"
 
 interface Props {
   open: boolean
@@ -32,10 +33,14 @@ export function FcOverrideRequestModal({
 }: Props) {
   const router = useRouter()
   const [message, setMessage] = useState("")
+  const [screenshots, setScreenshots] = useState<UploadedImage[]>([])
   const [submitting, setSubmitting] = useState(false)
 
   function handleClose(o: boolean) {
-    if (!o) setMessage("")
+    if (!o) {
+      setMessage("")
+      setScreenshots([])
+    }
     onOpenChange(o)
   }
 
@@ -45,7 +50,13 @@ export function FcOverrideRequestModal({
       const res = await fetch("/api/fc-override-requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ characterId, estateId, message: message.trim() || undefined }),
+        body: JSON.stringify({
+          characterId,
+          estateId,
+          message: message.trim() || undefined,
+          screenshotUrl: screenshots[0]?.url,
+          storageKey: screenshots[0]?.storageKey,
+        }),
       })
       if (!res.ok) {
         const data = await res.json() as { error?: string }
@@ -63,7 +74,7 @@ export function FcOverrideRequestModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <ShieldAlert className="h-5 w-5" />
@@ -78,7 +89,24 @@ export function FcOverrideRequestModal({
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="message">Message (optional)</Label>
+            <Label>
+              Supporting screenshot{" "}
+              <span className="text-muted-foreground font-normal">(recommended)</span>
+            </Label>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Take a screenshot showing your character nameplate visible in the scene alongside the
+              FC member roster, so an admin can confirm your membership and rank.
+            </p>
+            <ImageUpload
+              value={screenshots}
+              onChange={setScreenshots}
+              maxImages={1}
+              pathContext={{ characterId }}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Message <span className="text-muted-foreground font-normal">(optional)</span></Label>
             <Textarea
               id="message"
               placeholder="e.g. FC leader has been inactive for several months and is unreachable."

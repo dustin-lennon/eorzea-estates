@@ -412,6 +412,8 @@ export const FcOverrideRequestScalarFieldEnum = {
   userId: 'userId',
   estateId: 'estateId',
   message: 'message',
+  screenshotUrl: 'screenshotUrl',
+  storageKey: 'storageKey',
   status: 'status',
   adminNote: 'adminNote',
   reviewedAt: 'reviewedAt',
