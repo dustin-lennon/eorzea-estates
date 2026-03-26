@@ -123,6 +123,32 @@ export async function deleteEstateImage(storageKey: string): Promise<void> {
   if (error) throw new Error(`Storage delete failed: ${error.message}`)
 }
 
+export async function uploadUserAvatar(
+  buffer: Buffer,
+  userId: string
+): Promise<{ url: string; storageKey: string }> {
+  const processed = await sharp(buffer)
+    .resize(256, 256, { fit: "cover", position: "center" })
+    .webp({ quality: 85 })
+    .toBuffer()
+
+  const storageKey = `user-avatars/${userId}.webp`
+  const supabase = getSupabase()
+
+  const { error } = await supabase.storage
+    .from(BUCKET)
+    .upload(storageKey, processed, {
+      contentType: "image/webp",
+      upsert: true,
+    })
+
+  if (error) throw new Error(`Storage upload failed: ${error.message}`)
+
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
+
+  return { url: data.publicUrl, storageKey }
+}
+
 export async function uploadVerificationScreenshot(
   buffer: Buffer,
   userId: string,

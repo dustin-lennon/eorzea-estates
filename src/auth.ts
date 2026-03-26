@@ -66,11 +66,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token.sub && (!token.role || trigger === "update")) {
         const dbUser = await prisma.user.findUnique({
           where: { id: token.sub },
-          select: { role: true, name: true, image: true },
+          select: { role: true, name: true, image: true, customAvatarUrl: true },
         })
         token.role = (dbUser?.role ?? "USER") as UserRole
         if (dbUser?.name) token.name = dbUser.name
-        if (dbUser?.image) token.picture = dbUser.image
+        const effectiveImage = dbUser?.customAvatarUrl ?? dbUser?.image ?? null
+        if (effectiveImage) token.picture = effectiveImage
       }
       return token
     },

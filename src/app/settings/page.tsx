@@ -4,11 +4,13 @@ import { DataExportButton } from "@/components/data-export-button";
 import { DeleteAccountButton } from "@/components/delete-account-button";
 import { DesignerProfileSettings } from "@/components/designer-profile-settings";
 import { LinkedAccountsSettings } from "@/components/linked-accounts-settings";
+import { AvatarSettings } from "@/components/avatar-settings";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 
 export default async function SettingsPage() {
   const session = await auth();
+  let avatarData: { customAvatarUrl: string | null; image: string | null } | null = null;
   let designerData: {
     bio: string | null;
     commissionOpen: boolean;
@@ -37,6 +39,8 @@ export default async function SettingsPage() {
           password: true,
           email: true,
           emailVerified: true,
+          image: true,
+          customAvatarUrl: true,
           bio: true,
           commissionOpen: true,
           portfolioUrl: true,
@@ -61,6 +65,7 @@ export default async function SettingsPage() {
       }),
     ])
     if (user) {
+      avatarData = { customAvatarUrl: user.customAvatarUrl ?? null, image: user.image ?? null };
       linkedProviders = accounts.map((a) => a.provider)
       hasPassword = !!user.password
       linkedEmail = user.email ?? null
@@ -86,6 +91,22 @@ export default async function SettingsPage() {
   return (
     <div className="max-w-xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-8 text-primary">Settings</h1>
+
+      {session?.user && avatarData && (
+        <section className="bg-card rounded-xl p-6 mb-8">
+          <div className="flex items-center mb-6">
+            <Users className="brand-link mr-3" />
+            <h2 className="text-lg font-semibold text-primary">Profile Picture</h2>
+          </div>
+          <p className="text-sm text-muted-foreground mb-4">
+            Upload a custom profile picture. This will replace your Lodestone or Discord avatar everywhere on the site.
+          </p>
+          <AvatarSettings
+            initialAvatarUrl={avatarData.customAvatarUrl}
+            fallbackAvatarUrl={avatarData.image}
+          />
+        </section>
+      )}
 
       {session?.user && (
         <section className="bg-card rounded-xl p-6 mb-8">
