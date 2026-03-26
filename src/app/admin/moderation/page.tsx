@@ -83,23 +83,26 @@ export default async function ModerationPage({ searchParams }: PageProps) {
       where: { status: "PENDING" },
       orderBy: [{ userId: "asc" }, { createdAt: "asc" }],
       include: {
-        user: { select: { id: true, name: true, discordUsername: true, image: true } },
+        user: { select: { id: true, name: true, discordUsername: true, image: true, customAvatarUrl: true } },
         character: { select: { id: true, characterName: true, server: true, avatarUrl: true, lodestoneId: true } },
-        estate: { select: { id: true, name: true, district: true, ward: true, plot: true, verification: { select: { modReason: true } } } },
+        estate: { select: { id: true } },
       },
     }),
   ])
 
-  // Fetch live FC info for each override request
-  const overrideRequests = await Promise.all(
-    rawOverrideRequests.map(async (req) => {
-      const fcId = await getCharacterFCId(parseInt(req.character.lodestoneId)).catch(() => null)
-      const fcName = fcId ? await getFCName(fcId).catch(() => null) : null
-      const masterId = fcId ? await getFCMasterLodestoneId(fcId).catch(() => null) : null
-      const master = masterId ? await getCharacterById(parseInt(masterId)).catch(() => null) : null
-      return { ...req, fcName, masterName: master?.Name ?? null }
+  // Fetch live FC info for each override request — sequential to avoid Lodestone rate limits
+  const overrideRequests: (typeof rawOverrideRequests[number] & { fcName: string | null; masterName: string | null; fcLookupFailed: boolean })[] = []
+  for (const req of rawOverrideRequests) {
+    let fcLookupFailed = false
+    const fcId = await getCharacterFCId(parseInt(req.character.lodestoneId)).catch(() => {
+      fcLookupFailed = true
+      return null
     })
-  )
+    const fcName = fcId ? await getFCName(fcId).catch(() => null) : null
+    const masterId = fcId ? await getFCMasterLodestoneId(fcId).catch(() => null) : null
+    const master = masterId ? await getCharacterById(parseInt(masterId)).catch(() => null) : null
+    overrideRequests.push({ ...req, fcName, masterName: master?.Name ?? null, fcLookupFailed })
+  }
 
   // Compute rowspan counts per user for the override table
   const userRowspans = new Map<string, number>()
@@ -477,7 +480,6 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                   <th className="text-left px-4 py-3 font-medium">Requesting User</th>
                   <th className="text-left px-4 py-3 font-medium">Character</th>
                   <th className="text-left px-4 py-3 font-medium">FC Info</th>
-                  <th className="text-left px-4 py-3 font-medium">Linked Estate</th>
                   <th className="text-left px-4 py-3 font-medium">Screenshot</th>
                   <th className="text-left px-4 py-3 font-medium">Message</th>
                   <th className="text-left px-4 py-3 font-medium">Submitted</th>
@@ -495,7 +497,7 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                       {isFirstForUser && (
                         <td className="px-4 py-3 align-top" rowSpan={rowSpan}>
                           <div className="flex items-center gap-2">
-                            <UserAvatar src={req.user.image} name={req.user.name} size={32} />
+                            <UserAvatar src={req.user.customAvatarUrl ?? req.user.image} name={req.user.name} size={32} />
                             <div>
                               <p className="font-medium">{req.user.name ?? "Unknown"}</p>
                               {req.user.discordUsername && (
@@ -530,33 +532,10 @@ export default async function ModerationPage({ searchParams }: PageProps) {
                               Master: {req.masterName ?? "Unknown"}
                             </p>
                           </div>
+                        ) : req.fcLookupFailed ? (
+                          <span className="text-muted-foreground text-xs">Lodestone unavailable</span>
                         ) : (
-                          <span className="text-muted-foreground text-xs">Not in FC / unavailable</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3">
-                        {req.estate ? (
-                          <div>
-                            <Link
-                              href={`/estate/${req.estate.id}`}
-                              className="font-medium hover:underline text-primary"
-                              target="_blank"
-                            >
-                              {req.estate.name}
-                            </Link>
-                            {req.estate.district && req.estate.ward && req.estate.plot && (
-                              <p className="text-xs text-muted-foreground">
-                                {req.estate.district} W{req.estate.ward} P{req.estate.plot}
-                              </p>
-                            )}
-                            {req.estate.verification?.modReason && (
-                              <p className="text-xs text-muted-foreground/70 line-clamp-2 mt-1">
-                                {req.estate.verification.modReason}
-                              </p>
-                            )}
-                          </div>
-                        ) : (
-                          <span className="text-muted-foreground text-xs">—</span>
+                          <span className="text-muted-foreground text-xs">Not in FC</span>
                         )}
                       </td>
                       <td className="px-4 py-3">

@@ -43,6 +43,7 @@ interface Character {
   server: string
   isFcMember: boolean
   isFcOwner: boolean
+  overrideActive?: boolean
   overrideRequestStatus?: string | null
 }
 
@@ -628,7 +629,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
           </div>
 
           {/* FC officer override callout */}
-          {selectedCharacter?.isFcMember && !selectedCharacter?.isFcOwner && !useDesignerFlow && (
+          {selectedCharacter?.isFcMember && (!selectedCharacter?.isFcOwner || selectedCharacter?.overrideActive) && !useDesignerFlow && (
             <>
               <FcOverrideRequestModal
                 open={overrideOpen}
@@ -643,13 +644,13 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                   you can request an officer override — attach a screenshot of your nameplate and the
                   FC roster as evidence.
                 </p>
-                {selectedCharacter.overrideRequestStatus === "PENDING" ? (
-                  <p className="text-xs text-yellow-600 dark:text-yellow-400 font-medium">
-                    Your override request is pending review.
-                  </p>
-                ) : selectedCharacter.overrideRequestStatus === "APPROVED" ? (
+                {selectedCharacter.overrideActive ? (
                   <p className="text-xs text-green-600 dark:text-green-400 font-medium">
                     Your override has been approved — FC Estate is available above.
+                  </p>
+                ) : selectedCharacter.overrideRequestStatus === "PENDING" ? (
+                  <p className="text-xs text-yellow-600 dark:text-yellow-400 font-medium">
+                    Your override request is pending review.
                   </p>
                 ) : (
                   <button
