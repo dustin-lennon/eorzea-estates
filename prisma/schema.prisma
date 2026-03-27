@@ -90,6 +90,7 @@ model User {
   fcOverrideRequests     FcOverrideRequest[]   @relation("FcOverrideRequestUser")
   fcOverrideReviews      FcOverrideRequest[]   @relation("FcOverrideReviewer")
   fcOverridesGranted     FcOverride[]          @relation("FcOverrideGrantedBy")
+  moderationLogs         ModerationLog[]       @relation("ModerationLogActor")
 }
 
 model FfxivCharacter {
@@ -381,6 +382,35 @@ enum FcOverrideRequestStatus {
   PENDING
   APPROVED
   DENIED
+}
+
+enum ModerationAction {
+  ESTATE_APPROVED
+  ESTATE_REJECTED
+  ESTATE_REMOVED
+  ESTATE_RESTORED
+  VERIFICATION_APPROVED
+  VERIFICATION_REJECTED
+  CLAIM_APPROVED
+  CLAIM_REJECTED
+  FC_OVERRIDE_APPROVED
+  FC_OVERRIDE_DENIED
+}
+
+model ModerationLog {
+  id         String           @id @default(cuid())
+  action     ModerationAction
+  entityType String
+  entityId   String
+  entityName String
+  actorId    String
+  note       String?
+  createdAt  DateTime         @default(now())
+
+  actor      User             @relation("ModerationLogActor", fields: [actorId], references: [id])
+
+  @@index([createdAt(sort: Desc)])
+  @@index([actorId])
 }
 
 enum UserRole {

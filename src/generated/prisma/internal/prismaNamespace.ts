@@ -407,7 +407,8 @@ export const ModelName = {
   Message: 'Message',
   PushSubscription: 'PushSubscription',
   FcOverrideRequest: 'FcOverrideRequest',
-  FcOverride: 'FcOverride'
+  FcOverride: 'FcOverride',
+  ModerationLog: 'ModerationLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -423,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription" | "fcOverrideRequest" | "fcOverride"
+    modelProps: "account" | "session" | "verificationToken" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription" | "fcOverrideRequest" | "fcOverride" | "moderationLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2203,6 +2204,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ModerationLog: {
+      payload: Prisma.$ModerationLogPayload<ExtArgs>
+      fields: Prisma.ModerationLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ModerationLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ModerationLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        findFirst: {
+          args: Prisma.ModerationLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ModerationLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        findMany: {
+          args: Prisma.ModerationLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>[]
+        }
+        create: {
+          args: Prisma.ModerationLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        createMany: {
+          args: Prisma.ModerationLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ModerationLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>[]
+        }
+        delete: {
+          args: Prisma.ModerationLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        update: {
+          args: Prisma.ModerationLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.ModerationLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ModerationLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ModerationLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.ModerationLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ModerationLogPayload>
+        }
+        aggregate: {
+          args: Prisma.ModerationLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateModerationLog>
+        }
+        groupBy: {
+          args: Prisma.ModerationLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ModerationLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ModerationLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ModerationLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2587,6 +2662,20 @@ export const FcOverrideScalarFieldEnum = {
 export type FcOverrideScalarFieldEnum = (typeof FcOverrideScalarFieldEnum)[keyof typeof FcOverrideScalarFieldEnum]
 
 
+export const ModerationLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  entityName: 'entityName',
+  actorId: 'actorId',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type ModerationLogScalarFieldEnum = (typeof ModerationLogScalarFieldEnum)[keyof typeof ModerationLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2796,6 +2885,20 @@ export type ListEnumFcOverrideRequestStatusFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'ModerationAction'
+ */
+export type EnumModerationActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModerationAction'>
+    
+
+
+/**
+ * Reference to a field of type 'ModerationAction[]'
+ */
+export type ListEnumModerationActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModerationAction[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2927,6 +3030,7 @@ export type GlobalOmitConfig = {
   pushSubscription?: Prisma.PushSubscriptionOmit
   fcOverrideRequest?: Prisma.FcOverrideRequestOmit
   fcOverride?: Prisma.FcOverrideOmit
+  moderationLog?: Prisma.ModerationLogOmit
 }
 
 /* Types for Logging */

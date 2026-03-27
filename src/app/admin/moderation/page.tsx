@@ -12,7 +12,7 @@ import { FcOverrideRequestActions } from "./fc-override-request-actions"
 import { getCharacterFCId, getFCName, getFCMasterLodestoneId, getCharacterById } from "@/lib/lodestone"
 
 interface PageProps {
-  searchParams: Promise<{ tab?: string }>
+  searchParams: Promise<{ tab?: string; page?: string }>
 }
 
 export default async function ModerationPage({ searchParams }: PageProps) {
@@ -21,13 +21,18 @@ export default async function ModerationPage({ searchParams }: PageProps) {
     redirect("/")
   }
 
-  const { tab } = await searchParams
+  const { tab, page: pageParam } = await searchParams
   const activeTab =
     tab === "deleted" ? "deleted" :
     tab === "verification" ? "verification" :
     tab === "claims" ? "claims" :
     tab === "fc-overrides" ? "fc-overrides" :
+    tab === "log" ? "log" :
     "flagged"
+
+  const PAGE_SIZE = 50
+  const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10) || 1)
+  const logSkip = (currentPage - 1) * PAGE_SIZE
 
   const [flaggedEstates, deletedEstates, verificationQueue, claimQueue, rawOverrideRequests] = await prisma.$transaction([
     prisma.estate.findMany({
@@ -105,6 +110,25 @@ export default async function ModerationPage({ searchParams }: PageProps) {
     const master = masterId ? await getCharacterById(parseInt(masterId)).catch(() => null) : null
     overrideRequests.push({ ...req, fcName, masterName: master?.Name ?? null, fcLookupFailed })
   }
+
+  // Fetch log entries only when that tab is active
+  const rawLogEntries = activeTab === "log"
+    ? await prisma.moderationLog.findMany({
+        orderBy: { createdAt: "desc" },
+        skip: logSkip,
+        take: PAGE_SIZE + 1,
+        select: {
+          id: true,
+          action: true,
+          entityName: true,
+          note: true,
+          createdAt: true,
+          actor: { select: { name: true, discordUsername: true } },
+        },
+      })
+    : []
+  const hasNextPage = rawLogEntries.length > PAGE_SIZE
+  const logEntries = hasNextPage ? rawLogEntries.slice(0, PAGE_SIZE) : rawLogEntries
 
   // Compute rowspan counts per user for the override table
   const userRowspans = new Map<string, number>()
@@ -196,6 +220,16 @@ export default async function ModerationPage({ searchParams }: PageProps) {
               {overrideRequests.length}
             </span>
           )}
+        </Link>
+        <Link
+          href="/admin/moderation?tab=log"
+          className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+            activeTab === "log"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Log
         </Link>
       </div>
 
@@ -576,6 +610,93 @@ export default async function ModerationPage({ searchParams }: PageProps) {
           </div>
         )
       )}
+
+      {activeTab === "log" && (
+        <div>
+          {logEntries.length === 0 ? (
+            <div className="border rounded-xl p-10 text-center text-muted-foreground">
+              No moderation actions logged yet.
+            </div>
+          ) : (
+            <div className="border rounded-xl overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/50 border-b">
+                  <tr>
+                    <th className="text-left px-4 py-3 font-medium">Action</th>
+                    <th className="text-left px-4 py-3 font-medium">Target</th>
+                    <th className="text-left px-4 py-3 font-medium">Actor</th>
+                    <th className="text-left px-4 py-3 font-medium">Note</th>
+                    <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Date</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {logEntries.map((entry) => (
+                    <tr key={entry.id} className="hover:bg-muted/30 transition-colors align-top">
+                      <td className="px-4 py-3">
+                        <ModerationActionBadge action={entry.action} />
+                      </td>
+                      <td className="px-4 py-3 font-medium">{entry.entityName}</td>
+                      <td className="px-4 py-3 text-muted-foreground">
+                        {entry.actor.discordUsername ?? entry.actor.name ?? "Unknown"}
+                      </td>
+                      <td className="px-4 py-3 max-w-xs">
+                        <p className="text-muted-foreground text-xs line-clamp-2 whitespace-pre-wrap">
+                          {entry.note ?? "—"}
+                        </p>
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
+                        {new Date(entry.createdAt).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
+            <span>Page {currentPage}</span>
+            <div className="flex gap-2">
+              {currentPage > 1 && (
+                <Link
+                  href={`/admin/moderation?tab=log&page=${currentPage - 1}`}
+                  className="px-3 py-1 border rounded hover:bg-muted/50 transition-colors text-foreground"
+                >
+                  Previous
+                </Link>
+              )}
+              {hasNextPage && (
+                <Link
+                  href={`/admin/moderation?tab=log&page=${currentPage + 1}`}
+                  className="px-3 py-1 border rounded hover:bg-muted/50 transition-colors text-foreground"
+                >
+                  Next
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  )
+}
+
+function ModerationActionBadge({ action }: { action: string }) {
+  const config: Record<string, { label: string; className: string }> = {
+    ESTATE_APPROVED:       { label: "Flag Dismissed",         className: "text-green-700 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800" },
+    ESTATE_REJECTED:       { label: "Unpublished",            className: "text-yellow-700 bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:bg-yellow-950 dark:border-yellow-800" },
+    ESTATE_REMOVED:        { label: "Removed",                className: "text-red-700 bg-red-50 border-red-200 dark:text-red-400 dark:bg-red-950 dark:border-red-800" },
+    ESTATE_RESTORED:       { label: "Restored",               className: "text-green-700 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800" },
+    VERIFICATION_APPROVED: { label: "Verified",               className: "text-green-700 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800" },
+    VERIFICATION_REJECTED: { label: "Verification Rejected",  className: "text-yellow-700 bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:bg-yellow-950 dark:border-yellow-800" },
+    CLAIM_APPROVED:        { label: "Claim Approved",         className: "text-green-700 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800" },
+    CLAIM_REJECTED:        { label: "Claim Rejected",         className: "text-yellow-700 bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:bg-yellow-950 dark:border-yellow-800" },
+    FC_OVERRIDE_APPROVED:  { label: "FC Override Approved",   className: "text-green-700 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950 dark:border-green-800" },
+    FC_OVERRIDE_DENIED:    { label: "FC Override Denied",     className: "text-yellow-700 bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:bg-yellow-950 dark:border-yellow-800" },
+  }
+  const { label, className } = config[action] ?? { label: action, className: "text-muted-foreground bg-muted border-border" }
+  return (
+    <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium whitespace-nowrap ${className}`}>
+      {label}
+    </span>
   )
 }
