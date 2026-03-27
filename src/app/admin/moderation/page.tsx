@@ -141,7 +141,7 @@ export default async function ModerationPage({ searchParams }: PageProps) {
     <div>
       <h1 className="text-2xl font-bold mb-2">Moderation Queue</h1>
       <p className="text-sm text-muted-foreground mb-6">
-        Review flagged estates and ownership verifications. Dismiss to clear a report, Unpublish to take it down, Remove to soft-delete. Approve or reject queued verification screenshots.
+        Review flagged estates, verifications, claims, and FC override requests. The Log tab records all moderation actions taken.
       </p>
 
       {/* Tabs */}
