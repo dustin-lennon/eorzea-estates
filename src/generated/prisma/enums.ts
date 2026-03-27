@@ -18,6 +18,22 @@ export const FcOverrideRequestStatus = {
 export type FcOverrideRequestStatus = (typeof FcOverrideRequestStatus)[keyof typeof FcOverrideRequestStatus]
 
 
+export const ModerationAction = {
+  ESTATE_APPROVED: 'ESTATE_APPROVED',
+  ESTATE_REJECTED: 'ESTATE_REJECTED',
+  ESTATE_REMOVED: 'ESTATE_REMOVED',
+  ESTATE_RESTORED: 'ESTATE_RESTORED',
+  VERIFICATION_APPROVED: 'VERIFICATION_APPROVED',
+  VERIFICATION_REJECTED: 'VERIFICATION_REJECTED',
+  CLAIM_APPROVED: 'CLAIM_APPROVED',
+  CLAIM_REJECTED: 'CLAIM_REJECTED',
+  FC_OVERRIDE_APPROVED: 'FC_OVERRIDE_APPROVED',
+  FC_OVERRIDE_DENIED: 'FC_OVERRIDE_DENIED'
+} as const
+
+export type ModerationAction = (typeof ModerationAction)[keyof typeof ModerationAction]
+
+
 export const UserRole = {
   USER: 'USER',
   MODERATOR: 'MODERATOR',

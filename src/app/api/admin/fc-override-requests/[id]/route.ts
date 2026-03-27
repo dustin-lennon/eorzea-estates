@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { getCharacterFCId } from "@/lib/lodestone"
 import { sendFcOverrideApprovedEmail, sendFcOverrideDeniedEmail } from "@/lib/email"
+import { logModerationAction } from "@/lib/moderation-log"
+import { ModerationAction } from "@/generated/prisma/client"
 
 export async function PATCH(
   req: Request,
@@ -60,6 +62,15 @@ export async function PATCH(
       }),
     ])
 
+    await logModerationAction(prisma, {
+      action: ModerationAction.FC_OVERRIDE_APPROVED,
+      entityType: "fcOverrideRequest",
+      entityId: id,
+      entityName: overrideRequest.character.characterName,
+      actorId: session.user.id,
+      note: body.adminNote,
+    })
+
     if (overrideRequest.user.email) {
       sendFcOverrideApprovedEmail({
         to: overrideRequest.user.email,
@@ -78,6 +89,15 @@ export async function PATCH(
         reviewedById: session.user.id,
         adminNote: body.adminNote ?? null,
       },
+    })
+
+    await logModerationAction(prisma, {
+      action: ModerationAction.FC_OVERRIDE_DENIED,
+      entityType: "fcOverrideRequest",
+      entityId: id,
+      entityName: overrideRequest.character.characterName,
+      actorId: session.user.id,
+      note: body.adminNote,
     })
 
     if (overrideRequest.user.email) {

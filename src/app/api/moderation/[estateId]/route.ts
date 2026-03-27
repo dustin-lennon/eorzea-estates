@@ -1,6 +1,8 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { sendModerationUnpublishedEmail, sendModerationRemovedEmail } from "@/lib/email"
+import { logModerationAction } from "@/lib/moderation-log"
+import { ModerationAction } from "@/generated/prisma/client"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -44,6 +46,8 @@ export async function PATCH(
   const ownerEmail = estate.owner.email
   const ownerName = estate.owner.discordUsername ?? estate.owner.name ?? "there"
 
+  const actorId = session.user.id!
+
   if (action === "approve") {
     await prisma.estate.update({
       where: { id: estateId },
@@ -55,6 +59,13 @@ export async function PATCH(
         moderationStatus: "APPROVED",
       },
     })
+    await logModerationAction(prisma, {
+      action: ModerationAction.ESTATE_APPROVED,
+      entityType: "estate",
+      entityId: estateId,
+      entityName: estate.name,
+      actorId,
+    })
   } else if (action === "reject") {
     await prisma.estate.update({
       where: { id: estateId },
@@ -63,6 +74,14 @@ export async function PATCH(
         published: false,
         moderationStatus: "REJECTED",
       },
+    })
+    await logModerationAction(prisma, {
+      action: ModerationAction.ESTATE_REJECTED,
+      entityType: "estate",
+      entityId: estateId,
+      entityName: estate.name,
+      actorId,
+      note: estate.flagReason,
     })
     if (ownerEmail) {
       await sendModerationUnpublishedEmail({
@@ -82,6 +101,14 @@ export async function PATCH(
         flagged: false,
         moderationStatus: "REMOVED",
       },
+    })
+    await logModerationAction(prisma, {
+      action: ModerationAction.ESTATE_REMOVED,
+      entityType: "estate",
+      entityId: estateId,
+      entityName: estate.name,
+      actorId,
+      note: estate.flagReason,
     })
     if (ownerEmail) {
       await sendModerationRemovedEmail({
@@ -103,6 +130,13 @@ export async function PATCH(
         flaggedById: null,
         flaggedAt: null,
       },
+    })
+    await logModerationAction(prisma, {
+      action: ModerationAction.ESTATE_RESTORED,
+      entityType: "estate",
+      entityId: estateId,
+      entityName: estate.name,
+      actorId,
     })
   }
 
