@@ -2,6 +2,8 @@ import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { sendVerificationApprovedEmail, sendVerificationRejectedEmail } from "@/lib/email"
+import { logModerationAction } from "@/lib/moderation-log"
+import { ModerationAction } from "@/generated/prisma/client"
 
 export async function PATCH(
   req: Request,
@@ -48,6 +50,14 @@ export async function PATCH(
       }),
     ])
 
+    await logModerationAction(prisma, {
+      action: ModerationAction.VERIFICATION_APPROVED,
+      entityType: "estate",
+      entityId: verification.estateId,
+      entityName: verification.estate.name,
+      actorId: session.user.id,
+    })
+
     if (verification.estate.owner.email) {
       sendVerificationApprovedEmail({
         to: verification.estate.owner.email,
@@ -75,6 +85,15 @@ export async function PATCH(
         },
       }),
     ])
+
+    await logModerationAction(prisma, {
+      action: ModerationAction.VERIFICATION_REJECTED,
+      entityType: "estate",
+      entityId: verification.estateId,
+      entityName: verification.estate.name,
+      actorId: session.user.id,
+      note: reason,
+    })
 
     if (verification.estate.owner.email) {
       sendVerificationRejectedEmail({

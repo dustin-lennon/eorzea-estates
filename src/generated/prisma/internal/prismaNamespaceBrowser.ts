@@ -74,7 +74,8 @@ export const ModelName = {
   Message: 'Message',
   PushSubscription: 'PushSubscription',
   FcOverrideRequest: 'FcOverrideRequest',
-  FcOverride: 'FcOverride'
+  FcOverride: 'FcOverride',
+  ModerationLog: 'ModerationLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -436,6 +437,20 @@ export const FcOverrideScalarFieldEnum = {
 } as const
 
 export type FcOverrideScalarFieldEnum = (typeof FcOverrideScalarFieldEnum)[keyof typeof FcOverrideScalarFieldEnum]
+
+
+export const ModerationLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  entityName: 'entityName',
+  actorId: 'actorId',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type ModerationLogScalarFieldEnum = (typeof ModerationLogScalarFieldEnum)[keyof typeof ModerationLogScalarFieldEnum]
 
 
 export const SortOrder = {

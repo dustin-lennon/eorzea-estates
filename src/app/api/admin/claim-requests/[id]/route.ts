@@ -1,6 +1,8 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
+import { logModerationAction } from "@/lib/moderation-log"
+import { ModerationAction } from "@/generated/prisma/client"
 
 export async function PATCH(
   req: Request,
@@ -17,7 +19,7 @@ export async function PATCH(
   const claim = await prisma.estateClaimRequest.findUnique({
     where: { id },
     include: {
-      estate: { select: { id: true, designerId: true, claimedAt: true } },
+      estate: { select: { id: true, name: true, designerId: true, claimedAt: true } },
     },
   })
 
@@ -44,6 +46,13 @@ export async function PATCH(
         },
       }),
     ])
+    await logModerationAction(prisma, {
+      action: ModerationAction.CLAIM_APPROVED,
+      entityType: "estate",
+      entityId: claim.estateId,
+      entityName: claim.estate.name,
+      actorId: session.user.id,
+    })
     return NextResponse.json({ status: "approved" })
   }
 
@@ -57,6 +66,14 @@ export async function PATCH(
         reviewedById: session.user.id,
         modReason: reason,
       },
+    })
+    await logModerationAction(prisma, {
+      action: ModerationAction.CLAIM_REJECTED,
+      entityType: "estate",
+      entityId: claim.estateId,
+      entityName: claim.estate.name,
+      actorId: session.user.id,
+      note: reason,
     })
     return NextResponse.json({ status: "rejected" })
   }

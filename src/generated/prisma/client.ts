@@ -161,3 +161,8 @@ export type FcOverrideRequest = Prisma.FcOverrideRequestModel
  * 
  */
 export type FcOverride = Prisma.FcOverrideModel
+/**
+ * Model ModerationLog
+ * 
+ */
+export type ModerationLog = Prisma.ModerationLogModel
