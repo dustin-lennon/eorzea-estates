@@ -20,6 +20,7 @@ export default async function AdminUsersPage() {
       name: true,
       email: true,
       image: true,
+      customAvatarUrl: true,
       discordUsername: true,
       role: true,
       pathfinder: true,
@@ -69,7 +70,7 @@ export default async function AdminUsersPage() {
               <tr key={user.id} className="hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <UserAvatar src={user.image} name={user.name} size={32} />
+                    <UserAvatar src={user.customAvatarUrl ?? user.image} name={user.name} size={32} />
                     <div>
                       <Link href={`/profile/${user.id}`} className="brand-link font-medium">
                         {user.name ?? user.email ?? "Unknown"}
