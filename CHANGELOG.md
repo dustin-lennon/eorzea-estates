@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.27.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.26.0...v1.27.0) (2026-03-27)
+
+### ✨ Features
+
+* add moderation action audit log ([bfd594b](https://github.com/dustin-lennon/eorzea-estates/commit/bfd594b8b42d1c00fd52488864fd3f89cddd814e)), closes [#229](https://github.com/dustin-lennon/eorzea-estates/issues/229)
+
+### 🐛 Bug Fixes
+
+* use customAvatarUrl on admin users page when available ([417c5d4](https://github.com/dustin-lennon/eorzea-estates/commit/417c5d4ebe00c51689e50cd5416a2609876fa71e)), closes [#230](https://github.com/dustin-lennon/eorzea-estates/issues/230)
+
 ## [1.26.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.25.0...v1.26.0) (2026-03-26)
 
 ### ✨ Features
