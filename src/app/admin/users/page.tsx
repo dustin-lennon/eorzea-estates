@@ -27,7 +27,7 @@ export default async function AdminUsersPage() {
       designer: true,
       createdAt: true,
       _count: { select: { estates: true, characters: true } },
-      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, take: 1 },
+      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, orderBy: { createdAt: "asc" } },
       accounts: { select: { provider: true } },
     },
     orderBy: { createdAt: "asc" },
@@ -87,18 +87,22 @@ export default async function AdminUsersPage() {
                     : user.email ? "email" : "—"}
                 </td>
                 <td className="px-4 py-3">
-                  {user.characters[0] ? (
-                    <div className="flex items-center gap-2">
-                      {user.characters[0].avatarUrl && (
-                        <Image
-                          src={user.characters[0].avatarUrl}
-                          alt={user.characters[0].characterName}
-                          width={24}
-                          height={24}
-                          className="rounded-full shrink-0"
-                        />
-                      )}
-                      <span className="text-sm">{user.characters[0].characterName}</span>
+                  {user.characters.length > 0 ? (
+                    <div className="space-y-1.5">
+                      {user.characters.map((char) => (
+                        <div key={char.characterName} className="flex items-center gap-2">
+                          {char.avatarUrl && (
+                            <Image
+                              src={char.avatarUrl}
+                              alt={char.characterName}
+                              width={24}
+                              height={24}
+                              className="rounded-full shrink-0"
+                            />
+                          )}
+                          <span className="text-sm">{char.characterName}</span>
+                        </div>
+                      ))}
                     </div>
                   ) : (
                     <span className="text-muted-foreground text-xs">—</span>
