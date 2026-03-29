@@ -34,6 +34,7 @@ export default async function EditEstatePage({
         ward: true,
         plot: true,
         room: true,
+        size: true,
         subdivision: true,
         tags: true,
         characterId: true,
@@ -88,6 +89,7 @@ export default async function EditEstatePage({
     plot: estate.plot ?? undefined,
     room: estate.room ?? undefined,
     subdivision: (estate.subdivision as EstateFormValues["subdivision"]) ?? undefined,
+    size: (estate.size as EstateFormValues["size"]) ?? undefined,
     tags: estate.tags,
     images: estate.images.map((img) => ({
       url: img.imageUrl,

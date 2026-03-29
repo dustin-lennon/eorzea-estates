@@ -57,6 +57,7 @@ export type EstateMinAggregateOutputType = {
   server: string | null
   ward: number | null
   plot: number | null
+  size: $Enums.EstateSize | null
   likeCount: number | null
   commentCount: number | null
   ownerId: string | null
@@ -91,6 +92,7 @@ export type EstateMaxAggregateOutputType = {
   server: string | null
   ward: number | null
   plot: number | null
+  size: $Enums.EstateSize | null
   likeCount: number | null
   commentCount: number | null
   ownerId: string | null
@@ -125,6 +127,7 @@ export type EstateCountAggregateOutputType = {
   server: number
   ward: number
   plot: number
+  size: number
   tags: number
   likeCount: number
   commentCount: number
@@ -178,6 +181,7 @@ export type EstateMinAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
+  size?: true
   likeCount?: true
   commentCount?: true
   ownerId?: true
@@ -212,6 +216,7 @@ export type EstateMaxAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
+  size?: true
   likeCount?: true
   commentCount?: true
   ownerId?: true
@@ -246,6 +251,7 @@ export type EstateCountAggregateInputType = {
   server?: true
   ward?: true
   plot?: true
+  size?: true
   tags?: true
   likeCount?: true
   commentCount?: true
@@ -368,6 +374,7 @@ export type EstateGroupByOutputType = {
   server: string
   ward: number | null
   plot: number | null
+  size: $Enums.EstateSize | null
   tags: string[]
   likeCount: number
   commentCount: number
@@ -426,6 +433,7 @@ export type EstateWhereInput = {
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
+  size?: Prisma.EnumEstateSizeNullableFilter<"Estate"> | $Enums.EstateSize | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
@@ -475,6 +483,7 @@ export type EstateOrderByWithRelationInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrderInput | Prisma.SortOrder
   plot?: Prisma.SortOrderInput | Prisma.SortOrder
+  size?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
@@ -527,6 +536,7 @@ export type EstateWhereUniqueInput = Prisma.AtLeast<{
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
+  size?: Prisma.EnumEstateSizeNullableFilter<"Estate"> | $Enums.EstateSize | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
@@ -576,6 +586,7 @@ export type EstateOrderByWithAggregationInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrderInput | Prisma.SortOrder
   plot?: Prisma.SortOrderInput | Prisma.SortOrder
+  size?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
@@ -619,6 +630,7 @@ export type EstateScalarWhereWithAggregatesInput = {
   server?: Prisma.StringWithAggregatesFilter<"Estate"> | string
   ward?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableWithAggregatesFilter<"Estate"> | number | null
+  size?: Prisma.EnumEstateSizeNullableWithAggregatesFilter<"Estate"> | $Enums.EstateSize | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntWithAggregatesFilter<"Estate"> | number
   commentCount?: Prisma.IntWithAggregatesFilter<"Estate"> | number
@@ -654,6 +666,7 @@ export type EstateCreateInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -699,6 +712,7 @@ export type EstateUncheckedCreateInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -744,6 +758,7 @@ export type EstateUpdateInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -789,6 +804,7 @@ export type EstateUncheckedUpdateInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -834,6 +850,7 @@ export type EstateCreateManyInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -869,6 +886,7 @@ export type EstateUpdateManyMutationInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -900,6 +918,7 @@ export type EstateUncheckedUpdateManyInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -950,6 +969,7 @@ export type EstateCountOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
+  size?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
@@ -993,6 +1013,7 @@ export type EstateMaxOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
+  size?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
@@ -1027,6 +1048,7 @@ export type EstateMinOrderByAggregateInput = {
   server?: Prisma.SortOrder
   ward?: Prisma.SortOrder
   plot?: Prisma.SortOrder
+  size?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
@@ -1255,6 +1277,10 @@ export type NullableEnumHousingDistrictFieldUpdateOperationsInput = {
   set?: $Enums.HousingDistrict | null
 }
 
+export type NullableEnumEstateSizeFieldUpdateOperationsInput = {
+  set?: $Enums.EstateSize | null
+}
+
 export type EstateUpdatetagsInput = {
   set?: string[]
   push?: string | string[]
@@ -1419,6 +1445,7 @@ export type EstateCreateWithoutFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1463,6 +1490,7 @@ export type EstateUncheckedCreateWithoutFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1517,6 +1545,7 @@ export type EstateCreateWithoutOwnerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1561,6 +1590,7 @@ export type EstateUncheckedCreateWithoutOwnerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1615,6 +1645,7 @@ export type EstateCreateWithoutPinnedByUsersInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1659,6 +1690,7 @@ export type EstateUncheckedCreateWithoutPinnedByUsersInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1708,6 +1740,7 @@ export type EstateCreateWithoutDesignerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1752,6 +1785,7 @@ export type EstateUncheckedCreateWithoutDesignerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -1825,6 +1859,7 @@ export type EstateScalarWhereInput = {
   server?: Prisma.StringFilter<"Estate"> | string
   ward?: Prisma.IntNullableFilter<"Estate"> | number | null
   plot?: Prisma.IntNullableFilter<"Estate"> | number | null
+  size?: Prisma.EnumEstateSizeNullableFilter<"Estate"> | $Enums.EstateSize | null
   tags?: Prisma.StringNullableListFilter<"Estate">
   likeCount?: Prisma.IntFilter<"Estate"> | number
   commentCount?: Prisma.IntFilter<"Estate"> | number
@@ -1887,6 +1922,7 @@ export type EstateUpdateWithoutPinnedByUsersInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1931,6 +1967,7 @@ export type EstateUncheckedUpdateWithoutPinnedByUsersInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1991,6 +2028,7 @@ export type EstateCreateWithoutCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2035,6 +2073,7 @@ export type EstateUncheckedCreateWithoutCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2105,6 +2144,7 @@ export type EstateCreateWithoutVerificationInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2149,6 +2189,7 @@ export type EstateUncheckedCreateWithoutVerificationInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2209,6 +2250,7 @@ export type EstateUpdateWithoutVerificationInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2253,6 +2295,7 @@ export type EstateUncheckedUpdateWithoutVerificationInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2297,6 +2340,7 @@ export type EstateCreateWithoutPendingTransferInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2341,6 +2385,7 @@ export type EstateUncheckedCreateWithoutPendingTransferInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2401,6 +2446,7 @@ export type EstateUpdateWithoutPendingTransferInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2445,6 +2491,7 @@ export type EstateUncheckedUpdateWithoutPendingTransferInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2489,6 +2536,7 @@ export type EstateCreateWithoutImagesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2533,6 +2581,7 @@ export type EstateUncheckedCreateWithoutImagesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2593,6 +2642,7 @@ export type EstateUpdateWithoutImagesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2637,6 +2687,7 @@ export type EstateUncheckedUpdateWithoutImagesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2681,6 +2732,7 @@ export type EstateCreateWithoutVenueDetailsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2725,6 +2777,7 @@ export type EstateUncheckedCreateWithoutVenueDetailsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2785,6 +2838,7 @@ export type EstateUpdateWithoutVenueDetailsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2829,6 +2883,7 @@ export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2873,6 +2928,7 @@ export type EstateCreateWithoutLikesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2917,6 +2973,7 @@ export type EstateUncheckedCreateWithoutLikesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -2977,6 +3034,7 @@ export type EstateUpdateWithoutLikesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3021,6 +3079,7 @@ export type EstateUncheckedUpdateWithoutLikesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3065,6 +3124,7 @@ export type EstateCreateWithoutCommentsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3109,6 +3169,7 @@ export type EstateUncheckedCreateWithoutCommentsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3169,6 +3230,7 @@ export type EstateUpdateWithoutCommentsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3213,6 +3275,7 @@ export type EstateUncheckedUpdateWithoutCommentsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3257,6 +3320,7 @@ export type EstateCreateWithoutClaimRequestInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3301,6 +3365,7 @@ export type EstateUncheckedCreateWithoutClaimRequestInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3361,6 +3426,7 @@ export type EstateUpdateWithoutClaimRequestInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3405,6 +3471,7 @@ export type EstateUncheckedUpdateWithoutClaimRequestInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3449,6 +3516,7 @@ export type EstateCreateWithoutCollectionEntriesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3493,6 +3561,7 @@ export type EstateUncheckedCreateWithoutCollectionEntriesInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3553,6 +3622,7 @@ export type EstateUpdateWithoutCollectionEntriesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3597,6 +3667,7 @@ export type EstateUncheckedUpdateWithoutCollectionEntriesInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3641,6 +3712,7 @@ export type EstateCreateWithoutFcOverrideRequestsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3685,6 +3757,7 @@ export type EstateUncheckedCreateWithoutFcOverrideRequestsInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3745,6 +3818,7 @@ export type EstateUpdateWithoutFcOverrideRequestsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3789,6 +3863,7 @@ export type EstateUncheckedUpdateWithoutFcOverrideRequestsInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3833,6 +3908,7 @@ export type EstateCreateManyFlaggedByInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3867,6 +3943,7 @@ export type EstateCreateManyOwnerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3901,6 +3978,7 @@ export type EstateCreateManyDesignerInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -3935,6 +4013,7 @@ export type EstateUpdateWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3979,6 +4058,7 @@ export type EstateUncheckedUpdateWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4023,6 +4103,7 @@ export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4057,6 +4138,7 @@ export type EstateUpdateWithoutOwnerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4101,6 +4183,7 @@ export type EstateUncheckedUpdateWithoutOwnerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4145,6 +4228,7 @@ export type EstateUncheckedUpdateManyWithoutOwnerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4179,6 +4263,7 @@ export type EstateUpdateWithoutDesignerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4223,6 +4308,7 @@ export type EstateUncheckedUpdateWithoutDesignerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4267,6 +4353,7 @@ export type EstateUncheckedUpdateManyWithoutDesignerInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4301,6 +4388,7 @@ export type EstateCreateManyCharacterInput = {
   server: string
   ward?: number | null
   plot?: number | null
+  size?: $Enums.EstateSize | null
   tags?: Prisma.EstateCreatetagsInput | string[]
   likeCount?: number
   commentCount?: number
@@ -4335,6 +4423,7 @@ export type EstateUpdateWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4379,6 +4468,7 @@ export type EstateUncheckedUpdateWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4423,6 +4513,7 @@ export type EstateUncheckedUpdateManyWithoutCharacterInput = {
   server?: Prisma.StringFieldUpdateOperationsInput | string
   ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
   tags?: Prisma.EstateUpdatetagsInput | string[]
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
@@ -4533,6 +4624,7 @@ export type EstateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   server?: boolean
   ward?: boolean
   plot?: boolean
+  size?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
@@ -4583,6 +4675,7 @@ export type EstateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   server?: boolean
   ward?: boolean
   plot?: boolean
+  size?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
@@ -4622,6 +4715,7 @@ export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   server?: boolean
   ward?: boolean
   plot?: boolean
+  size?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
@@ -4661,6 +4755,7 @@ export type EstateSelectScalar = {
   server?: boolean
   ward?: boolean
   plot?: boolean
+  size?: boolean
   tags?: boolean
   likeCount?: boolean
   commentCount?: boolean
@@ -4681,7 +4776,7 @@ export type EstateSelectScalar = {
   confirmedActiveAt?: boolean
 }
 
-export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "subdivision" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt" | "confirmedActiveAt", ExtArgs["result"]["estate"]>
+export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "size" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "subdivision" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt" | "confirmedActiveAt", ExtArgs["result"]["estate"]>
 export type EstateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
@@ -4745,6 +4840,7 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     server: string
     ward: number | null
     plot: number | null
+    size: $Enums.EstateSize | null
     tags: string[]
     likeCount: number
     commentCount: number
@@ -5214,6 +5310,7 @@ export interface EstateFieldRefs {
   readonly server: Prisma.FieldRef<"Estate", 'String'>
   readonly ward: Prisma.FieldRef<"Estate", 'Int'>
   readonly plot: Prisma.FieldRef<"Estate", 'Int'>
+  readonly size: Prisma.FieldRef<"Estate", 'EstateSize'>
   readonly tags: Prisma.FieldRef<"Estate", 'String[]'>
   readonly likeCount: Prisma.FieldRef<"Estate", 'Int'>
   readonly commentCount: Prisma.FieldRef<"Estate", 'Int'>
