@@ -404,7 +404,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
               </div>
               {!isRoomType && (
                 <div>
-                  <Label htmlFor="d-size">Plot Size</Label>
+                  <Label htmlFor="d-size">Estate Size</Label>
                   <Select
                     value={designerForm.watch("size") ?? "__none__"}
                     onValueChange={(v) =>
@@ -657,7 +657,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
 
           {!isRoomType && (
             <div>
-              <Label htmlFor="size">Plot Size</Label>
+              <Label htmlFor="size">Estate Size</Label>
               <Select
                 value={form.watch("size") ?? "__none__"}
                 onValueChange={(v) =>

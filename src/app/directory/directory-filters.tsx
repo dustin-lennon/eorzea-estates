@@ -177,7 +177,7 @@ export function DirectoryFilters({ regions, estateTypes, estateSizes, districts,
       </div>
 
       <div>
-        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Plot Size</Label>
+        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Estate Size</Label>
         <Select
           value={searchParams.get("size") ?? EMPTY}
           onValueChange={(v) => update("size", v === EMPTY ? null : v)}
