@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { LikeButton } from "@/components/like-button"
 import { CommentsSection } from "@/components/comments-section"
-import { ESTATE_TYPES, HOUSING_DISTRICTS, VENUE_TYPES, DAYS_OF_WEEK } from "@/lib/ffxiv-data"
+import { ESTATE_TYPES, ESTATE_SIZES, HOUSING_DISTRICTS, VENUE_TYPES, DAYS_OF_WEEK } from "@/lib/ffxiv-data"
 import type { HoursSchedule } from "@/lib/ffxiv-data"
 import { EstateImageGallery } from "./estate-image-gallery"
 import { FlagButton } from "@/components/flag-button"
@@ -148,6 +148,7 @@ export default async function EstateDetailPage({ params }: PageProps) {
 
   const typeLabel = ESTATE_TYPES.find((t) => t.value === estate.type)?.label ?? estate.type
   const districtLabel = HOUSING_DISTRICTS.find((d) => d.value === estate.district)?.label
+  const sizeLabel = estate.size ? ESTATE_SIZES.find((s) => s.value === estate.size)?.label : null
   const venueTypeLabel = estate.venueDetails
     ? VENUE_TYPES.find((v) => v.value === estate.venueDetails!.venueType)?.label
     : null
@@ -368,6 +369,12 @@ export default async function EstateDetailPage({ params }: PageProps) {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">District</span>
                   <span>{districtLabel}</span>
+                </div>
+              )}
+              {estate.type !== "APARTMENT" && estate.type !== "FC_ROOM" && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Estate Size</span>
+                  <span>{sizeLabel ?? "Unknown"}</span>
                 </div>
               )}
               <div className="flex justify-between">

@@ -129,6 +129,7 @@ model Estate {
   server             String
   ward               Int?
   plot               Int?
+  size               EstateSize?
   tags               String[]
   likeCount          Int                    @default(0)
   commentCount       Int                    @default(0)
@@ -425,6 +426,12 @@ enum EstateType {
   VENUE
   APARTMENT
   FC_ROOM
+}
+
+enum EstateSize {
+  SMALL
+  MEDIUM
+  LARGE
 }
 
 enum HousingDistrict {

@@ -15,7 +15,7 @@ export function AdminNavLink({ href, children }: Props) {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+      className={`flex shrink-0 items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
         isActive
           ? "bg-accent text-accent-foreground font-medium"
           : "hover:bg-accent hover:text-accent-foreground text-muted-foreground"

@@ -54,6 +54,15 @@ export const EstateType = {
 export type EstateType = (typeof EstateType)[keyof typeof EstateType]
 
 
+export const EstateSize = {
+  SMALL: 'SMALL',
+  MEDIUM: 'MEDIUM',
+  LARGE: 'LARGE'
+} as const
+
+export type EstateSize = (typeof EstateSize)[keyof typeof EstateSize]
+
+
 export const HousingDistrict = {
   MIST: 'MIST',
   LAVENDER_BEDS: 'LAVENDER_BEDS',

@@ -88,6 +88,12 @@ export const ESTATE_TYPES = [
   { value: "FC_ROOM", label: "Free Company Room" },
 ] as const
 
+export const ESTATE_SIZES = [
+  { value: "SMALL", label: "Small" },
+  { value: "MEDIUM", label: "Medium" },
+  { value: "LARGE", label: "Large" },
+] as const
+
 export const VENUE_TYPES = [
   { value: "BAR", label: "Bar" },
   { value: "NIGHTCLUB", label: "Nightclub" },

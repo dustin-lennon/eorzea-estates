@@ -27,7 +27,7 @@ export default async function AdminUsersPage() {
       designer: true,
       createdAt: true,
       _count: { select: { estates: true, characters: true } },
-      characters: { where: { verified: true }, select: { characterName: true, avatarUrl: true }, orderBy: { createdAt: "asc" } },
+      characters: { where: { verified: true }, select: { id: true, characterName: true, avatarUrl: true, lodestoneId: true }, orderBy: { createdAt: "asc" } },
       accounts: { select: { provider: true } },
     },
     orderBy: { createdAt: "asc" },
@@ -51,8 +51,8 @@ export default async function AdminUsersPage() {
         {atLimit && <span className="text-destructive text-xs">(limit reached)</span>}
       </div>
 
-      <div className="border rounded-xl overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="border rounded-xl overflow-x-auto">
+        <table className="w-full text-sm min-w-[700px]">
           <thead className="bg-muted/50 border-b">
             <tr>
               <th className="text-left px-4 py-3 font-medium">User</th>
@@ -100,7 +100,20 @@ export default async function AdminUsersPage() {
                               className="rounded-full shrink-0"
                             />
                           )}
-                          <span className="text-sm">{char.characterName}</span>
+                          <span className="text-sm">
+                            <Link href={`/character/${char.id}`} className="brand-link">
+                              {char.characterName}
+                            </Link>
+                            {" "}
+                            <Link
+                              href={`https://na.finalfantasyxiv.com/lodestone/character/${char.lodestoneId}/`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                              (Lodestone Profile)
+                            </Link>
+                          </span>
                         </div>
                       ))}
                     </div>

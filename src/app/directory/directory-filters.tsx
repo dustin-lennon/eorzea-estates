@@ -23,6 +23,7 @@ interface DC {
 interface Props {
   regions: { name: string; dataCenters: DC[] }[]
   estateTypes: readonly { value: string; label: string }[]
+  estateSizes: readonly { value: string; label: string }[]
   districts: readonly { value: string; label: string }[]
   tags: readonly string[]
   updatedSince?: string
@@ -30,7 +31,7 @@ interface Props {
 
 const EMPTY = "__all__"
 
-export function DirectoryFilters({ regions, estateTypes, districts, tags, updatedSince }: Props) {
+export function DirectoryFilters({ regions, estateTypes, estateSizes, districts, tags, updatedSince }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -64,6 +65,7 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags, update
   const hasFilters =
     searchParams.get("region") ||
     searchParams.get("type") ||
+    searchParams.get("size") ||
     searchParams.get("district") ||
     searchParams.get("tags") ||
     searchParams.get("q") ||
@@ -169,6 +171,25 @@ export function DirectoryFilters({ regions, estateTypes, districts, tags, update
             <SelectItem value={EMPTY}>All districts</SelectItem>
             {districts.map((d) => (
               <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Estate Size</Label>
+        <Select
+          value={searchParams.get("size") ?? EMPTY}
+          onValueChange={(v) => update("size", v === EMPTY ? null : v)}
+        >
+          <SelectTrigger className="mt-1">
+            <SelectValue placeholder="All sizes" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={EMPTY}>All sizes</SelectItem>
+            <SelectItem value="unknown">Unknown</SelectItem>
+            {estateSizes.map((s) => (
+              <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
             ))}
           </SelectContent>
         </Select>

@@ -206,6 +206,13 @@ export type EnumHousingDistrictNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel> | $Enums.HousingDistrict | null
 }
 
+export type EnumEstateSizeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstateSize | Prisma.EnumEstateSizeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel> | $Enums.EstateSize | null
+}
+
 export type IntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -249,6 +256,16 @@ export type EnumHousingDistrictNullableWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel>
+}
+
+export type EnumEstateSizeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstateSize | Prisma.EnumEstateSizeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEstateSizeNullableWithAggregatesFilter<$PrismaModel> | $Enums.EstateSize | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel>
 }
 
 export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -628,6 +645,13 @@ export type NestedEnumHousingDistrictNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel> | $Enums.HousingDistrict | null
 }
 
+export type NestedEnumEstateSizeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstateSize | Prisma.EnumEstateSizeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel> | $Enums.EstateSize | null
+}
+
 export type NestedEnumModerationStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ModerationStatus | Prisma.EnumModerationStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ModerationStatus[] | Prisma.ListEnumModerationStatusFieldRefInput<$PrismaModel>
@@ -660,6 +684,16 @@ export type NestedEnumHousingDistrictNullableWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumHousingDistrictNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumEstateSizeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.EstateSize | Prisma.EnumEstateSizeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.EstateSize[] | Prisma.ListEnumEstateSizeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumEstateSizeNullableWithAggregatesFilter<$PrismaModel> | $Enums.EstateSize | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumEstateSizeNullableFilter<$PrismaModel>
 }
 
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
