@@ -187,6 +187,7 @@ export function DirectoryFilters({ regions, estateTypes, estateSizes, districts,
           </SelectTrigger>
           <SelectContent>
             <SelectItem value={EMPTY}>All sizes</SelectItem>
+            <SelectItem value="unknown">Unknown</SelectItem>
             {estateSizes.map((s) => (
               <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
             ))}

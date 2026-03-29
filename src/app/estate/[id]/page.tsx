@@ -371,10 +371,10 @@ export default async function EstateDetailPage({ params }: PageProps) {
                   <span>{districtLabel}</span>
                 </div>
               )}
-              {sizeLabel && (
+              {estate.type !== "APARTMENT" && estate.type !== "FC_ROOM" && (
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Plot Size</span>
-                  <span>{sizeLabel}</span>
+                  <span>{sizeLabel ?? "Unknown"}</span>
                 </div>
               )}
               <div className="flex justify-between">

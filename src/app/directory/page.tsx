@@ -67,7 +67,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     ...(params.server ? { server: params.server } : {}),
     ...(params.type ? { type: params.type as never } : {}),
     ...(params.district ? { district: params.district as never } : {}),
-    ...(params.size ? { size: params.size as never } : {}),
+    ...(params.size === "unknown" ? { size: null } : params.size ? { size: params.size as never } : {}),
     ...(selectedTags.length > 0 ? { tags: { hasSome: selectedTags } } : {}),
     ...(updatedSinceDate ? { updatedAt: { gte: updatedSinceDate } } : {}),
     ...(params.q
