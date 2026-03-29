@@ -3,6 +3,20 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.29.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.28.0...v1.29.0) (2026-03-29)
+
+### ✨ Features
+
+* add character and Lodestone profile links on admin users page ([0fbd107](https://github.com/dustin-lennon/eorzea-estates/commit/0fbd107ee3a9dd0988e4195a2066a687326c574a)), closes [#239](https://github.com/dustin-lennon/eorzea-estates/issues/239)
+* add estate size (Small/Medium/Large) to submission and search ([d0f8b4d](https://github.com/dustin-lennon/eorzea-estates/commit/d0f8b4dfb406001d53dbb811300e17ce401e4f86)), closes [#241](https://github.com/dustin-lennon/eorzea-estates/issues/241)
+* show Unknown plot size on detail page and add Unknown filter option ([2c6ebc6](https://github.com/dustin-lennon/eorzea-estates/commit/2c6ebc67e5c7529d205e93cdbf513bd0f08757ca))
+
+### 🐛 Bug Fixes
+
+* make admin panel layout responsive on mobile ([bf85f48](https://github.com/dustin-lennon/eorzea-estates/commit/bf85f4806468208913014f9f7fa6cf5bf4fc7f6c)), closes [#237](https://github.com/dustin-lennon/eorzea-estates/issues/237)
+* open character page in same tab, Lodestone in new tab ([a23a127](https://github.com/dustin-lennon/eorzea-estates/commit/a23a127484242c8bb4066ee7b7a0af259f457394))
+* rename Plot Size to Estate Size ([b1623d3](https://github.com/dustin-lennon/eorzea-estates/commit/b1623d37236c798878f56e4de512af612466e9e9))
+
 ## [1.28.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.27.0...v1.28.0) (2026-03-27)
 
 ### ✨ Features
