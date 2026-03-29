@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import prisma from "@/lib/prisma"
 import { EstateCard } from "@/components/estate-card"
 import { DirectoryFilters } from "./directory-filters"
-import { REGIONS, ESTATE_TYPES, HOUSING_DISTRICTS, PREDEFINED_TAGS } from "@/lib/ffxiv-data"
+import { REGIONS, ESTATE_TYPES, ESTATE_SIZES, HOUSING_DISTRICTS, PREDEFINED_TAGS } from "@/lib/ffxiv-data"
 
 export const metadata: Metadata = {
   title: "Browse Estates",
@@ -35,6 +35,7 @@ interface DirectoryPageProps {
     server?: string
     type?: string
     district?: string
+    size?: string
     tags?: string
     q?: string
     sort?: string
@@ -66,6 +67,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
     ...(params.server ? { server: params.server } : {}),
     ...(params.type ? { type: params.type as never } : {}),
     ...(params.district ? { district: params.district as never } : {}),
+    ...(params.size ? { size: params.size as never } : {}),
     ...(selectedTags.length > 0 ? { tags: { hasSome: selectedTags } } : {}),
     ...(updatedSinceDate ? { updatedAt: { gte: updatedSinceDate } } : {}),
     ...(params.q
@@ -137,6 +139,7 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
             <DirectoryFilters
               regions={REGIONS.map((r) => ({ name: r.name, dataCenters: r.dataCenters }))}
               estateTypes={ESTATE_TYPES}
+              estateSizes={ESTATE_SIZES}
               districts={HOUSING_DISTRICTS}
               tags={PREDEFINED_TAGS}
               updatedSince={params.updatedSince}

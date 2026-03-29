@@ -25,6 +25,7 @@ export const estateFormSchema = z.object({
   district: z.enum(["MIST", "LAVENDER_BEDS", "GOBLET", "SHIROGANE", "EMPYREUM"]).optional(),
   ward: z.number().int().min(1).max(30).optional(),
   plot: z.number().int().min(1).max(60).optional(),
+  size: z.enum(["SMALL", "MEDIUM", "LARGE"]).optional(),
   room: z.number().int().min(1).max(2048).optional(),
   subdivision: z.enum(["Main", "Subdivision"]).optional(),
   tags: z.array(z.string()).max(10).default([]),

@@ -29,6 +29,7 @@ export async function GET(
       ward: true,
       plot: true,
       room: true,
+      size: true,
       tags: true,
       published: true,
       characterId: true,
@@ -200,6 +201,7 @@ export async function PATCH(
       ward: data.ward ?? null,
       plot: data.plot ?? null,
       room: data.room ?? null,
+      size: data.size ?? null,
       subdivision: data.subdivision ?? null,
       tags: data.tags,
       images: {

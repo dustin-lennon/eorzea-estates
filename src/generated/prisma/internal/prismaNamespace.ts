@@ -2414,6 +2414,7 @@ export const EstateScalarFieldEnum = {
   server: 'server',
   ward: 'ward',
   plot: 'plot',
+  size: 'size',
   tags: 'tags',
   likeCount: 'likeCount',
   commentCount: 'commentCount',
@@ -2811,6 +2812,20 @@ export type EnumHousingDistrictFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'HousingDistrict[]'
  */
 export type ListEnumHousingDistrictFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HousingDistrict[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EstateSize'
+ */
+export type EnumEstateSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstateSize'>
+    
+
+
+/**
+ * Reference to a field of type 'EstateSize[]'
+ */
+export type ListEnumEstateSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstateSize[]'>
     
 
 

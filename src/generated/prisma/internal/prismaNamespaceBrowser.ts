@@ -191,6 +191,7 @@ export const EstateScalarFieldEnum = {
   server: 'server',
   ward: 'ward',
   plot: 'plot',
+  size: 'size',
   tags: 'tags',
   likeCount: 'likeCount',
   commentCount: 'commentCount',

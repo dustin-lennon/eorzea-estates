@@ -15,6 +15,7 @@ type EstateFormInput = z.input<typeof estateFormSchema>
 type DesignerEstateFormInput = z.input<typeof designerEstateFormSchema>
 import {
   ESTATE_TYPES,
+  ESTATE_SIZES,
   HOUSING_DISTRICTS,
   VENUE_TYPES,
   PREDEFINED_TAGS,
@@ -390,6 +391,7 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                     designerForm.setValue("type", v as DesignerEstateFormValues["type"])
                     if (v !== "APARTMENT" && v !== "FC_ROOM") designerForm.setValue("room", undefined)
                     if (v === "APARTMENT") designerForm.setValue("plot", undefined)
+                    if (v === "APARTMENT" || v === "FC_ROOM") designerForm.setValue("size", undefined)
                   }}
                 >
                   <SelectTrigger className="mt-1"><SelectValue placeholder="Select type" /></SelectTrigger>
@@ -400,6 +402,28 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                   </SelectContent>
                 </Select>
               </div>
+              {!isRoomType && (
+                <div>
+                  <Label htmlFor="d-size">Plot Size</Label>
+                  <Select
+                    value={designerForm.watch("size") ?? "__none__"}
+                    onValueChange={(v) =>
+                      designerForm.setValue("size", v === "__none__" ? undefined : (v as DesignerEstateFormValues["size"]))
+                    }
+                  >
+                    <SelectTrigger id="d-size" className="mt-1">
+                      <SelectValue placeholder="Select size (optional)" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="__none__">Unknown</SelectItem>
+                      {ESTATE_SIZES.map((s) => (
+                        <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
               <div>
                 <Label htmlFor="d-description">Description *</Label>
                 <Textarea id="d-description" {...designerForm.register("description")} placeholder="Describe your estate…" rows={5} className="mt-1" />
@@ -615,6 +639,9 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
                 if (v === "APARTMENT") {
                   form.setValue("plot", undefined)
                 }
+                if (v === "APARTMENT" || v === "FC_ROOM") {
+                  form.setValue("size", undefined)
+                }
               }}
             >
               <SelectTrigger className="mt-1">
@@ -627,6 +654,28 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
               </SelectContent>
             </Select>
           </div>
+
+          {!isRoomType && (
+            <div>
+              <Label htmlFor="size">Plot Size</Label>
+              <Select
+                value={form.watch("size") ?? "__none__"}
+                onValueChange={(v) =>
+                  form.setValue("size", v === "__none__" ? undefined : (v as EstateFormValues["size"]))
+                }
+              >
+                <SelectTrigger id="size" className="mt-1">
+                  <SelectValue placeholder="Select size (optional)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__none__">Unknown</SelectItem>
+                  {ESTATE_SIZES.map((s) => (
+                    <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           {/* FC officer override callout */}
           {selectedCharacter?.isFcMember && (!selectedCharacter?.isFcOwner || selectedCharacter?.overrideActive) && !useDesignerFlow && (
