@@ -101,7 +101,7 @@ export default async function AdminUsersPage() {
                             />
                           )}
                           <span className="text-sm">
-                            <Link href={`/character/${char.id}`} target="_blank" className="brand-link">
+                            <Link href={`/character/${char.id}`} className="brand-link">
                               {char.characterName}
                             </Link>
                             {" "}
