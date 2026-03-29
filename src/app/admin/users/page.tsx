@@ -51,8 +51,8 @@ export default async function AdminUsersPage() {
         {atLimit && <span className="text-destructive text-xs">(limit reached)</span>}
       </div>
 
-      <div className="border rounded-xl overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="border rounded-xl overflow-x-auto">
+        <table className="w-full text-sm min-w-[700px]">
           <thead className="bg-muted/50 border-b">
             <tr>
               <th className="text-left px-4 py-3 font-medium">User</th>
