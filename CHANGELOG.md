@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.30.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.29.0...v1.30.0) (2026-04-01)
+
+### ✨ Features
+
+* remove ko-fi link from the footer ([a9e02d5](https://github.com/dustin-lennon/eorzea-estates/commit/a9e02d5b25bff88609523974509599046752ae69))
+
 ## [1.29.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.28.0...v1.29.0) (2026-03-29)
 
 ### ✨ Features
