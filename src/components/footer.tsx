@@ -12,15 +12,6 @@ export default function Footer() {
         <p className="flex items-center gap-3">
           <span>&copy; {year} Eorzea Estates. All Rights Reserved.</span>
           <span>&middot;</span>
-          <a
-            href="https://ko-fi.com/caspiannightworth"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="brand-link"
-          >
-            Support on Ko-fi
-          </a>
-          <span>&middot;</span>
           <span>v{version}</span>
           <a
             href="https://discord.gg/CMJfbXrwpR"
