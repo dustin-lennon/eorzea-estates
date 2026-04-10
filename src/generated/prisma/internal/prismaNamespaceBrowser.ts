@@ -106,7 +106,17 @@ export const AccountScalarFieldEnum = {
   token_type: 'token_type',
   scope: 'scope',
   id_token: 'id_token',
-  session_state: 'session_state'
+  session_state: 'session_state',
+  accountId: 'accountId',
+  providerId: 'providerId',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  idToken: 'idToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -116,7 +126,11 @@ export const SessionScalarFieldEnum = {
   id: 'id',
   sessionToken: 'sessionToken',
   userId: 'userId',
-  expires: 'expires'
+  expires: 'expires',
+  token: 'token',
+  updatedAt: 'updatedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -136,6 +150,8 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
+  emailVerifiedBool: 'emailVerifiedBool',
+  updatedAt: 'updatedAt',
   password: 'password',
   image: 'image',
   customAvatarUrl: 'customAvatarUrl',
