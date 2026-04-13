@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -31,7 +32,7 @@ export async function POST(
   req: Request,
   { params }: { params: Promise<{ userId: string }> }
 ) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   const { userId } = await params
 
   if (!session?.user?.id || session.user.id !== userId) {

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { LEGAL_DEFAULTS, type LegalSlug } from "@/lib/legal-defaults"
 import { z } from "zod"
 
 async function requireAdmin() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id || session.user.role !== "ADMIN") {
     return null
   }

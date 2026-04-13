@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -62,10 +63,10 @@ function VerificationBadge({
 }
 
 export default async function DashboardPage() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
-  const [characters, estates, likedEstates, collections] = await prisma.$transaction([
+  const [characters, estates, likedEstates, collections] = await Promise.all([
     prisma.ffxivCharacter.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "asc" },

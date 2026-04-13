@@ -5,11 +5,12 @@ import { DeleteAccountButton } from "@/components/delete-account-button";
 import { DesignerProfileSettings } from "@/components/designer-profile-settings";
 import { LinkedAccountsSettings } from "@/components/linked-accounts-settings";
 import { AvatarSettings } from "@/components/avatar-settings";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import prisma from "@/lib/prisma";
 
 export default async function SettingsPage() {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   let avatarData: { customAvatarUrl: string | null; image: string | null } | null = null;
   let designerData: {
     bio: string | null;
@@ -39,6 +40,7 @@ export default async function SettingsPage() {
           password: true,
           email: true,
           emailVerified: true,
+          emailVerifiedAt: true,
           image: true,
           customAvatarUrl: true,
           bio: true,
@@ -61,16 +63,23 @@ export default async function SettingsPage() {
       }),
       prisma.account.findMany({
         where: { userId: session.user.id },
-        select: { provider: true },
+        select: { provider: true, providerId: true },
       }),
     ])
     if (user) {
       avatarData = { customAvatarUrl: user.customAvatarUrl ?? null, image: user.image ?? null };
-      linkedProviders = accounts.map((a) => a.provider)
-      hasPassword = !!user.password
+      const oauthAccounts = accounts.filter(
+        (a) => (a.providerId ?? a.provider) !== "credential" && (a.providerId ?? a.provider) !== "credentials"
+      )
+      linkedProviders = oauthAccounts.map((a) => a.providerId ?? a.provider)
+      hasPassword = !!user.password || accounts.some(
+        (a) => a.providerId === "credential" || a.provider === "credentials"
+      )
       linkedEmail = user.email ?? null
       // Treat linked OAuth providers as email-verified (Google/Discord both verify identity)
-      emailVerified = !!user.emailVerified || accounts.length > 0
+      emailVerified = user.emailVerified || !!user.emailVerifiedAt || accounts.some(
+        (a) => (a.providerId ?? a.provider) !== "credential" && (a.providerId ?? a.provider) !== "credentials"
+      )
       designerData = {
         bio: user.bio,
         commissionOpen: user.commissionOpen,

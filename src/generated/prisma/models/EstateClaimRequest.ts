@@ -200,7 +200,7 @@ export type EstateClaimRequestGroupByOutputType = {
   _max: EstateClaimRequestMaxAggregateOutputType | null
 }
 
-type GetEstateClaimRequestGroupByPayload<T extends EstateClaimRequestGroupByArgs> = Prisma.PrismaPromise<
+export type GetEstateClaimRequestGroupByPayload<T extends EstateClaimRequestGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EstateClaimRequestGroupByOutputType, T['by']> &
       {
@@ -1759,6 +1759,11 @@ export type EstateClaimRequestFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` EstateClaimRequests.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EstateClaimRequests.
+   */
   distinct?: Prisma.EstateClaimRequestScalarFieldEnum | Prisma.EstateClaimRequestScalarFieldEnum[]
 }
 

@@ -186,7 +186,7 @@ export type FfxivCharacterGroupByOutputType = {
   _max: FfxivCharacterMaxAggregateOutputType | null
 }
 
-type GetFfxivCharacterGroupByPayload<T extends FfxivCharacterGroupByArgs> = Prisma.PrismaPromise<
+export type GetFfxivCharacterGroupByPayload<T extends FfxivCharacterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FfxivCharacterGroupByOutputType, T['by']> &
       {
@@ -2027,6 +2027,11 @@ export type FfxivCharacterFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` FfxivCharacters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of FfxivCharacters.
+   */
   distinct?: Prisma.FfxivCharacterScalarFieldEnum | Prisma.FfxivCharacterScalarFieldEnum[]
 }
 

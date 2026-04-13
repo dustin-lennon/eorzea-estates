@@ -1,14 +1,16 @@
 import Link from "next/link"
 import Image from "next/image"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { NavbarMessagesLink } from "@/components/navbar-messages-link"
 import { NavbarUserMenu } from "@/components/navbar-user-menu"
+import { effectiveImage } from "@/lib/effective-image"
 
 export default async function Navbar() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
 
   try {
     return (
@@ -42,9 +44,9 @@ export default async function Navbar() {
 
                 <NavbarUserMenu
                   initialName={session.user.name ?? null}
-                  initialImage={session.user.image ?? null}
+                  initialImage={effectiveImage(session.user)}
                   initialId={session.user.id!}
-                  initialRole={session.user.role ?? "USER"}
+                  initialRole={(session.user.role ?? "USER") as import("@/types/roles").UserRole}
                 />
               </>
             ) : (

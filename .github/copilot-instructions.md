@@ -8,7 +8,7 @@ Primary stack:
 
 - Next.js 16 with App Router
 - React 19 and TypeScript
-- Auth.js / NextAuth v5 with Discord OAuth
+- Better Auth with Discord and Google OAuth
 - Prisma 7 with PostgreSQL (Supabase)
 - Tailwind CSS v4 with shadcn/ui and Radix UI
 - React Hook Form with Zod
@@ -40,8 +40,8 @@ Important project structure:
 
 - `src/app/` - App Router pages and route handlers
 - `src/app/api/` - API endpoints for auth, estates, comments, likes, uploads, Lodestone verification, characters, cron jobs, and estate transfer
-- `src/auth.config.ts` - edge-safe Auth.js config
-- `src/auth.ts` - full Auth.js setup with Prisma adapter
+- `src/lib/auth.ts` - Better Auth instance with Prisma adapter, social providers, and databaseHooks
+- `src/lib/auth-client.ts` - client-side auth helpers (`authClient.useSession()`, `authClient.signIn.*`)
 - `src/proxy.ts` - route protection for authenticated areas
 - `src/lib/` - Prisma client, validation, FFXIV data, Cloudinary, Lodestone, email, utilities
 - `src/components/` - shared UI and feature components
@@ -69,11 +69,10 @@ When suggesting schema-aware code, use the current Prisma schema rather than old
 
 ## Auth and Route Protection
 
-Follow the existing auth split:
-
-- Keep `src/auth.config.ts` free of Node-only dependencies so it remains safe for edge/runtime use
-- Put Prisma adapter usage and full auth wiring in `src/auth.ts`
-- Use `auth()` from `@/auth` in server components and route handlers when session access is needed
+- Use `auth.api.getSession({ headers: await headers() })` from `@/lib/auth` in server components and route handlers
+- Client components use `authClient.useSession()` from `@/lib/auth-client`
+- Sign in via `authClient.signIn.email(...)` (credentials) or `authClient.signIn.social({ provider })` (OAuth)
+- Sign out via `authClient.signOut(...)` on the client, or `auth.api.signOut(...)` server-side
 
 Protected route behavior currently lives in `src/proxy.ts`, not `middleware.ts`.
 
@@ -142,13 +141,15 @@ The project expects environment variables in `.env`, including:
 
 - `DATABASE_URL`
 - `DIRECT_URL`
-- `AUTH_SECRET`
+- `BETTER_AUTH_SECRET`
 - `AUTH_DISCORD_ID`
 - `AUTH_DISCORD_SECRET`
-- `CLOUDINARY_CLOUD_NAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
-- `NEXTAUTH_URL`
+- `AUTH_GOOGLE_ID`
+- `AUTH_GOOGLE_SECRET`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `BETTER_AUTH_URL`
+- `NEXT_PUBLIC_APP_URL`
 
 Refer to `SETUP.md` for local setup details.
 

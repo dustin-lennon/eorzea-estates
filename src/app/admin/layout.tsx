@@ -1,10 +1,11 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { LayoutDashboard, Users, FileText, ShieldCheck, Flag, SlidersHorizontal } from "lucide-react"
 import { AdminNavLink } from "./admin-nav-link"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   const role = session?.user?.role
   if (!role || !["ADMIN", "MODERATOR"].includes(role)) redirect("/")
 

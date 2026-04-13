@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { toast } from "sonner"
 import { Eye, EyeOff, ArrowLeft, CheckCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -106,13 +106,12 @@ function SignupForm() {
         setError(data.error ?? "Failed to create account")
         return
       }
-      const result = await signIn("credentials", {
+      const { error: signInError } = await authClient.signIn.email({
         email,
         password,
-        callbackUrl,
-        redirect: false,
+        callbackURL: callbackUrl,
       })
-      if (result?.error) {
+      if (signInError) {
         setError("Account created but sign-in failed. Please go to sign in.")
         return
       }
@@ -163,11 +162,11 @@ function SignupForm() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" onClick={() => signIn("google", { callbackUrl })}>
+                <Button variant="outline" onClick={() => authClient.signIn.social({ provider: "google", callbackURL: callbackUrl })}>
                   <GoogleIcon />
                   <span className="ml-2">Google</span>
                 </Button>
-                <Button variant="outline" onClick={() => signIn("discord", { callbackUrl })}>
+                <Button variant="outline" onClick={() => authClient.signIn.social({ provider: "discord", callbackURL: callbackUrl })}>
                   <DiscordIcon />
                   <span className="ml-2">Discord</span>
                 </Button>
