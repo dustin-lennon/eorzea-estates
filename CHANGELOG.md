@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.31.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.30.0...v1.31.0) (2026-04-17)
+
+### ✨ Features
+
+* migrate authentication from NextAuth to Better Auth ([15acc96](https://github.com/dustin-lennon/eorzea-estates/commit/15acc9606848f0a3e305221fabd33285b39d2679))
+
+### 🐛 Bug Fixes
+
+* reduce DB connections in middleware and pg pool ([2562e55](https://github.com/dustin-lennon/eorzea-estates/commit/2562e55d07a52b491fbb64074d6dd9d9cc47fd79))
+
 ## [1.30.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.29.0...v1.30.0) (2026-04-01)
 
 ### ✨ Features
