@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { Button } from "@/components/ui/button"
@@ -10,7 +11,7 @@ import { EstateSubmitForm } from "./estate-submit-form"
 export const metadata: Metadata = { title: "Submit Estate" }
 
 export default async function SubmitPage() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
   const [dbUser, rawCharacters] = await prisma.$transaction([

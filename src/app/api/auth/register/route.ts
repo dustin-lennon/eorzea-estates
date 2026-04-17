@@ -46,16 +46,30 @@ export async function POST(request: Request) {
 
   const hashed = await bcrypt.hash(password, 12)
 
-  await prisma.$transaction([
-    prisma.verificationToken.deleteMany({ where: { identifier: email } }),
-    prisma.user.create({
+  await prisma.$transaction(async (tx) => {
+    await tx.verificationToken.deleteMany({ where: { identifier: email } })
+    const user = await tx.user.create({
       data: {
         email,
-        emailVerified: new Date(),
+        emailVerified: true,
         password: hashed,
       },
-    }),
-  ])
+      select: { id: true },
+    })
+    // Better Auth requires credentials in the Account table with providerId="credential"
+    await tx.account.create({
+      data: {
+        userId: user.id,
+        accountId: user.id,
+        providerId: "credential",
+        password: hashed,
+        // Legacy NextAuth fields (required NOT NULL during transition)
+        type: "credentials",
+        provider: "credentials",
+        providerAccountId: user.id,
+      },
+    })
+  })
 
   return NextResponse.json({ ok: true })
 }

@@ -49,6 +49,7 @@ export function InquiryDialog({ designerId, designerName, trigger }: Props) {
     defaultValues: { designerId },
   })
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const estateType = watch("estateType")
   const district = watch("district")
   const body = watch("body") ?? ""

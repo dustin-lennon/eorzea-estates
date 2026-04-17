@@ -200,7 +200,7 @@ export type EstateVerificationGroupByOutputType = {
   _max: EstateVerificationMaxAggregateOutputType | null
 }
 
-type GetEstateVerificationGroupByPayload<T extends EstateVerificationGroupByArgs> = Prisma.PrismaPromise<
+export type GetEstateVerificationGroupByPayload<T extends EstateVerificationGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EstateVerificationGroupByOutputType, T['by']> &
       {
@@ -1451,6 +1451,11 @@ export type EstateVerificationFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` EstateVerifications.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EstateVerifications.
+   */
   distinct?: Prisma.EstateVerificationScalarFieldEnum | Prisma.EstateVerificationScalarFieldEnum[]
 }
 

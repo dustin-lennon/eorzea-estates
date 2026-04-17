@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { messageSchema } from "@/lib/schemas"
@@ -22,7 +23,7 @@ async function getConversationForUser(id: string, userId: string) {
 }
 
 export async function GET(_req: Request, { params }: { params: Promise<{ conversationId: string }> }) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
@@ -61,7 +62,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ convers
 }
 
 export async function POST(req: Request, { params }: { params: Promise<{ conversationId: string }> }) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

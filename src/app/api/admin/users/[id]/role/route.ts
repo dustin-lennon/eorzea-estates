@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { z } from "zod"
 
@@ -11,7 +12,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id || session.user.role !== "ADMIN") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
@@ -32,6 +33,10 @@ export async function PATCH(
     data: { role: parsed.data.role },
     select: { id: true, name: true, role: true },
   })
+
+  // Delete user sessions so the new role takes effect immediately
+  // (BA's cookie cache would otherwise serve the old role for up to 5 min)
+  await prisma.session.deleteMany({ where: { userId: id } })
 
   return NextResponse.json(user)
 }

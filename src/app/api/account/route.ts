@@ -1,10 +1,11 @@
-import { auth, signOut } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { deleteEstateImage } from "@/lib/storage"
 import { NextResponse } from "next/server"
 
 export async function DELETE() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
@@ -29,10 +30,8 @@ export async function DELETE() {
   // Delete images from storage (best-effort)
   await Promise.allSettled(storageKeys.map((key) => deleteEstateImage(key)))
 
-  // Delete the user — cascades handle all DB rows
+  // Delete the user — cascades handle all DB rows (including sessions)
   await prisma.user.delete({ where: { id: userId } })
-
-  await signOut({ redirect: false })
 
   return NextResponse.json({ success: true })
 }

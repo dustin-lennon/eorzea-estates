@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { Suspense } from "react"
 import { DesignerCard } from "./designer-card"
@@ -31,7 +32,7 @@ interface SearchParams {
 const PAGE_SIZE = 24
 
 export default async function DesignersPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   const params = await searchParams
 
   const openOnly = params.openOnly === "1"

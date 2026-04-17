@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { EstateSubmitForm } from "@/app/submit/estate-submit-form"
@@ -18,7 +19,7 @@ export default async function EditEstatePage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
   const [estate, rawCharacters] = await prisma.$transaction([

@@ -158,7 +158,7 @@ export type LodestoneVerificationGroupByOutputType = {
   _max: LodestoneVerificationMaxAggregateOutputType | null
 }
 
-type GetLodestoneVerificationGroupByPayload<T extends LodestoneVerificationGroupByArgs> = Prisma.PrismaPromise<
+export type GetLodestoneVerificationGroupByPayload<T extends LodestoneVerificationGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LodestoneVerificationGroupByOutputType, T['by']> &
       {
@@ -1072,6 +1072,11 @@ export type LodestoneVerificationFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` LodestoneVerifications.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LodestoneVerifications.
+   */
   distinct?: Prisma.LodestoneVerificationScalarFieldEnum | Prisma.LodestoneVerificationScalarFieldEnum[]
 }
 

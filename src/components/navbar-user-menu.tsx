@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { useSession, signOut } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { LayoutDashboard, LogOut, Settings as SettingsIcon, ShieldCheck, User } from "lucide-react"
 import type { UserRole } from "@/types/roles"
+import { effectiveImage } from "@/lib/effective-image"
 
 // Custom event emitted by AvatarSettings after a successful upload/remove.
 // Using a browser event avoids dependency on useSession() propagating in time.
@@ -26,7 +27,7 @@ interface Props {
 }
 
 export function NavbarUserMenu({ initialName, initialImage, initialId, initialRole }: Props) {
-  const { data: session } = useSession()
+  const { data: session } = authClient.useSession()
   const [liveImage, setLiveImage] = useState<string | null>(null)
 
   useEffect(() => {
@@ -38,10 +39,10 @@ export function NavbarUserMenu({ initialName, initialImage, initialId, initialRo
   }, [])
 
   const name = session?.user?.name ?? initialName
-  // liveImage wins (set immediately after upload), then session, then server prop
-  const image = liveImage ?? session?.user?.image ?? initialImage
-  const id = (session?.user as { id?: string })?.id ?? initialId
-  const role = ((session?.user as { role?: UserRole })?.role ?? initialRole) as UserRole
+  // liveImage wins (set immediately after upload), then session (customAvatarUrl ?? image), then server prop
+  const image = liveImage ?? (session?.user ? effectiveImage(session.user) : null) ?? initialImage
+  const id = session?.user?.id ?? initialId
+  const role = (session?.user?.role ?? initialRole) as UserRole
 
   return (
     <DropdownMenu>
@@ -92,7 +93,7 @@ export function NavbarUserMenu({ initialName, initialImage, initialId, initialRo
         <DropdownMenuSeparator />
 
         <DropdownMenuItem
-          onClick={() => signOut({ callbackUrl: "/" })}
+          onClick={() => authClient.signOut({ fetchOptions: { onSuccess: () => { window.location.href = "/" } } })}
           className="cursor-pointer"
         >
           <LogOut className="h-4 w-4 mr-2" />

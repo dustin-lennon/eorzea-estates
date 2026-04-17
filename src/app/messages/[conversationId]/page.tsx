@@ -1,8 +1,8 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { redirect, notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { ConversationClient } from "./conversation-client"
-import { PresenceIndicator } from "@/components/presence-indicator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft } from "lucide-react"
@@ -17,7 +17,7 @@ function getLabel<T extends { value: string; label: string }>(list: readonly T[]
 }
 
 export default async function ConversationPage({ params }: { params: Promise<{ conversationId: string }> }) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
   const { conversationId } = await params

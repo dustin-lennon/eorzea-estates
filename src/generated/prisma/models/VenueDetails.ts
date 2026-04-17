@@ -154,7 +154,7 @@ export type VenueDetailsGroupByOutputType = {
   _max: VenueDetailsMaxAggregateOutputType | null
 }
 
-type GetVenueDetailsGroupByPayload<T extends VenueDetailsGroupByArgs> = Prisma.PrismaPromise<
+export type GetVenueDetailsGroupByPayload<T extends VenueDetailsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VenueDetailsGroupByOutputType, T['by']> &
       {
@@ -1183,6 +1183,11 @@ export type VenueDetailsFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` VenueDetails.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VenueDetails.
+   */
   distinct?: Prisma.VenueDetailsScalarFieldEnum | Prisma.VenueDetailsScalarFieldEnum[]
 }
 

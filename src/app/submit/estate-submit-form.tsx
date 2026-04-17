@@ -107,10 +107,6 @@ export function EstateSubmitForm({ characters, estateId, defaultValues, isDesign
     control: form.control,
     name: "venueStaff",
   })
-  const { fields: _dStaffFields, append: _dAppendStaff, remove: _dRemoveStaff } = useFieldArray({
-    control: designerForm.control,
-    name: "venueStaff",
-  })
 
   const watchedCharacterId = form.watch("characterId")
   const selectedCharacter = characters.find((c) => c.id === watchedCharacterId)

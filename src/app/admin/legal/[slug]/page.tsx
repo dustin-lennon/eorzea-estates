@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { LEGAL_DEFAULTS, type LegalSlug } from "@/lib/legal-defaults"
 import { LegalEditor } from "./legal-editor"
@@ -11,7 +12,7 @@ interface PageProps {
 }
 
 export default async function AdminLegalEditorPage({ params }: PageProps) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user || session.user.role !== "ADMIN") redirect("/")
 
   const { slug } = await params

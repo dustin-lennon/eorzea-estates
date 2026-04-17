@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
-  const { data: session, update } = useSession()
+  const { data: session, refetch } = authClient.useSession()
   const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(initialAvatarUrl)
@@ -52,7 +52,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       const { url } = await res.json()
       setPreviewUrl(url)
       window.dispatchEvent(new CustomEvent(AVATAR_CHANGED_EVENT, { detail: { url } }))
-      await update()
+      await refetch()
       router.refresh()
       toast.success("Profile picture updated")
     } catch (err) {
@@ -70,7 +70,7 @@ export function AvatarSettings({ initialAvatarUrl, fallbackAvatarUrl }: Props) {
       if (!res.ok) throw new Error("Failed to remove avatar")
       setPreviewUrl(null)
       window.dispatchEvent(new CustomEvent(AVATAR_CHANGED_EVENT, { detail: { url: fallbackAvatarUrl } }))
-      await update()
+      await refetch()
       router.refresh()
       toast.success("Profile picture removed")
     } catch {

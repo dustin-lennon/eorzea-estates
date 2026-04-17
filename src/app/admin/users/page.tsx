@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
 import Image from "next/image"
@@ -11,7 +12,7 @@ import { PATHFINDER_LIMIT } from "@/lib/pathfinder"
 import type { UserRole } from "@/types/roles"
 
 export default async function AdminUsersPage() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user || session.user.role !== "ADMIN") redirect("/")
 
   const users = await prisma.user.findMany({

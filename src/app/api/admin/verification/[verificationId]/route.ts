@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { sendVerificationApprovedEmail, sendVerificationRejectedEmail } from "@/lib/email"
@@ -9,7 +10,7 @@ export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ verificationId: string }> }
 ) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id || !["ADMIN", "MODERATOR"].includes(session.user.role ?? "")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }

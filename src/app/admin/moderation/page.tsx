@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -16,7 +17,7 @@ interface PageProps {
 }
 
 export default async function ModerationPage({ searchParams }: PageProps) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.role || !["ADMIN", "MODERATOR"].includes(session.user.role)) {
     redirect("/")
   }

@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { signIn } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -38,17 +38,16 @@ function LoginForm() {
   async function handleCredentialsSignIn() {
     setLoading(true)
     setError("")
-    const result = await signIn("credentials", {
+    const { error } = await authClient.signIn.email({
       email,
       password,
-      callbackUrl,
-      redirect: false,
+      callbackURL: callbackUrl,
     })
     setLoading(false)
-    if (result?.error) {
+    if (error) {
       setError("Invalid email or password")
-    } else if (result?.url) {
-      window.location.href = result.url
+    } else {
+      window.location.href = callbackUrl
     }
   }
 
@@ -72,7 +71,15 @@ function LoginForm() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="password">Password</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+              <a
+                href="/forgot-password"
+                className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Forgot password?
+              </a>
+            </div>
             <div className="relative">
               <Input
                 id="password"
@@ -114,11 +121,11 @@ function LoginForm() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" onClick={() => signIn("google", { callbackUrl })}>
+            <Button variant="outline" onClick={() => authClient.signIn.social({ provider: "google", callbackURL: callbackUrl })}>
               <GoogleIcon />
               <span className="ml-2">Google</span>
             </Button>
-            <Button variant="outline" onClick={() => signIn("discord", { callbackUrl })}>
+            <Button variant="outline" onClick={() => authClient.signIn.social({ provider: "discord", callbackURL: callbackUrl })}>
               <DiscordIcon />
               <span className="ml-2">Discord</span>
             </Button>

@@ -3,7 +3,8 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { BadgeCheck, MapPin, Clock, Users, ExternalLink, ShieldCheck, Palette } from "lucide-react"
 import prisma from "@/lib/prisma"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { LikeButton } from "@/components/like-button"
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function EstateDetailPage({ params }: PageProps) {
   const { id } = await params
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
 
   const [estate, comments] = await prisma.$transaction([
     prisma.estate.findUnique({

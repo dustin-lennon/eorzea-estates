@@ -165,7 +165,7 @@ export type VenueStaffGroupByOutputType = {
   _max: VenueStaffMaxAggregateOutputType | null
 }
 
-type GetVenueStaffGroupByPayload<T extends VenueStaffGroupByArgs> = Prisma.PrismaPromise<
+export type GetVenueStaffGroupByPayload<T extends VenueStaffGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VenueStaffGroupByOutputType, T['by']> &
       {
@@ -1409,6 +1409,11 @@ export type VenueStaffFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` VenueStaffs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VenueStaffs.
+   */
   distinct?: Prisma.VenueStaffScalarFieldEnum | Prisma.VenueStaffScalarFieldEnum[]
 }
 

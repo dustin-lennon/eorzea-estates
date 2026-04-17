@@ -2,13 +2,14 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
+import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
-import { auth, signOut } from "@/auth"
+import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 
 const geistSans = Geist({
@@ -84,7 +85,7 @@ export default async function RootLayout({
     try {
       const [settings, session] = await Promise.all([
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
-        auth(),
+        auth.api.getSession({ headers: await headers() }),
       ])
       maintenanceOn = settings?.maintenanceMode ?? false
       isAdmin = session?.user?.role === "ADMIN"
@@ -94,7 +95,8 @@ export default async function RootLayout({
     }
     if (maintenanceOn && !isAdmin) {
       if (hasUser) {
-        await signOut({ redirectTo: "/maintenance" })
+        // Sign out the user — redirect to maintenance page
+        redirect("/api/maintenance-signout")
       } else {
         redirect("/maintenance")
       }
@@ -112,18 +114,20 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background flex flex-col`}>
-        <Providers>
-          {isMaintenancePage ? (
-            children
-          ) : (
-            <>
-              <Navbar />
-              <main className="flex-1 flex flex-col">{children}</main>
-              <Footer />
-            </>
-          )}
-          <Toaster richColors position="bottom-right" />
-        </Providers>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Providers>
+            {isMaintenancePage ? (
+              children
+            ) : (
+              <>
+                <Navbar />
+                <main className="flex-1 flex flex-col">{children}</main>
+                <Footer />
+              </>
+            )}
+            <Toaster richColors position="bottom-right" />
+          </Providers>
+        </ThemeProvider>
         <SpeedInsights />
       </body>
     </html>

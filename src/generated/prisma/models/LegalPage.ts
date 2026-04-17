@@ -158,7 +158,7 @@ export type LegalPageGroupByOutputType = {
   _max: LegalPageMaxAggregateOutputType | null
 }
 
-type GetLegalPageGroupByPayload<T extends LegalPageGroupByArgs> = Prisma.PrismaPromise<
+export type GetLegalPageGroupByPayload<T extends LegalPageGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LegalPageGroupByOutputType, T['by']> &
       {
@@ -1122,6 +1122,11 @@ export type LegalPageFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` LegalPages.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LegalPages.
+   */
   distinct?: Prisma.LegalPageScalarFieldEnum | Prisma.LegalPageScalarFieldEnum[]
 }
 
