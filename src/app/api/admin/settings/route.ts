@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -9,7 +10,7 @@ const schema = z.union([
 ])
 
 export async function PATCH(req: Request) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user || session.user.role !== "ADMIN") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }

@@ -178,7 +178,7 @@ export type CollectionEstateGroupByOutputType = {
   _max: CollectionEstateMaxAggregateOutputType | null
 }
 
-type GetCollectionEstateGroupByPayload<T extends CollectionEstateGroupByArgs> = Prisma.PrismaPromise<
+export type GetCollectionEstateGroupByPayload<T extends CollectionEstateGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CollectionEstateGroupByOutputType, T['by']> &
       {
@@ -1210,6 +1210,11 @@ export type CollectionEstateFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` CollectionEstates.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of CollectionEstates.
+   */
   distinct?: Prisma.CollectionEstateScalarFieldEnum | Prisma.CollectionEstateScalarFieldEnum[]
 }
 

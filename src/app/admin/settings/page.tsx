@@ -1,11 +1,12 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { MaintenanceToggle } from "./maintenance-toggle"
 import { DisputeEmailInput } from "./dispute-email-input"
 
 export default async function AdminSettingsPage() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user || session.user.role !== "ADMIN") redirect("/")
 
   const settings = await prisma.siteSettings.findUnique({

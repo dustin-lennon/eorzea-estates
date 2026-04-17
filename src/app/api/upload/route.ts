@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { uploadEstateImage } from "@/lib/storage"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
@@ -6,7 +7,7 @@ import { NextResponse } from "next/server"
 export const runtime = "nodejs"
 
 export async function POST(req: Request) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

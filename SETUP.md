@@ -8,9 +8,9 @@ This guide walks through configuring all external services required to run the a
 
 - [pnpm](https://pnpm.io/installation) installed globally
 - Node.js 18+
-- A Discord account
-- A Cloudinary account (free)
-- A Supabase account (free)
+- A Discord account (for OAuth)
+- A Google Cloud account (for OAuth)
+- A Supabase account (free, for database + image storage)
 
 ---
 
@@ -50,7 +50,7 @@ DIRECT_URL="postgresql://postgres.xxxx:yourpassword@aws-0-us-east-1.supabase.com
 
 ---
 
-## Step 2 — NextAuth Secret
+## Step 2 — Better Auth Secret
 
 Run this command to generate a random secret:
 
@@ -58,10 +58,10 @@ Run this command to generate a random secret:
 openssl rand -base64 32
 ```
 
-Copy the output and paste it as `AUTH_SECRET` in your `.env`:
+Copy the output and paste it as `BETTER_AUTH_SECRET` in your `.env`:
 
 ```env
-AUTH_SECRET="paste-the-generated-value-here"
+BETTER_AUTH_SECRET="paste-the-generated-value-here"
 ```
 
 ---
@@ -92,23 +92,21 @@ AUTH_DISCORD_SECRET="your-client-secret-here"
 
 ---
 
-## Step 4 — Cloudinary (Image Hosting)
+## Step 4 — Supabase Storage (Image Hosting)
 
-1. Go to [https://cloudinary.com](https://cloudinary.com) and sign in or create a free account.
-2. After signing in, you land on the **Dashboard**.
-3. In the **Product Environment Credentials** section you will see:
-   - **Cloud name** → paste as `CLOUDINARY_CLOUD_NAME`
-   - **API key** → paste as `CLOUDINARY_API_KEY`
-   - **API secret** → click the eye icon to reveal it → paste as `CLOUDINARY_API_SECRET`
+Images are stored in Supabase Storage using the same Supabase project you set up in Step 1.
+
+1. In your Supabase project dashboard, go to **Project Settings → API**.
+2. Find the **Service role** key under **Project API keys** (not the `anon` key). Click the eye icon to reveal it.
+3. Copy the **Project URL** (e.g. `https://xxxx.supabase.co`) and the service role key:
 
 Your `.env` should now look like:
 ```env
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="123456789012345"
-CLOUDINARY_API_SECRET="your-api-secret-here"
+SUPABASE_URL="https://your-project-ref.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
-> **Optional — create an upload preset (not required for this app):** The app uses server-side signed uploads, so no preset is needed.
+> **Note:** The service role key has full access to your database and storage — keep it secret and never expose it client-side.
 
 ---
 
@@ -121,18 +119,26 @@ Your completed `.env` should look like this:
 DATABASE_URL="postgresql://postgres.xxxx:password@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
 DIRECT_URL="postgresql://postgres.xxxx:password@aws-0-us-east-1.supabase.com:5432/postgres"
 
-# Auth.js / NextAuth
-AUTH_SECRET="your-generated-secret"
+# Supabase Storage
+SUPABASE_URL="https://your-project-ref.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
+
+# Better Auth
+BETTER_AUTH_SECRET="your-generated-secret"
 AUTH_DISCORD_ID="your-discord-client-id"
 AUTH_DISCORD_SECRET="your-discord-client-secret"
-
-# Cloudinary
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
+AUTH_GOOGLE_ID="your-google-client-id"
+AUTH_GOOGLE_SECRET="your-google-client-secret"
 
 # App
-NEXTAUTH_URL="http://localhost:3000"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Web Push (VAPID) — generate with: npx web-push generate-vapid-keys
+VAPID_PUBLIC_KEY="your-vapid-public-key"
+NEXT_PUBLIC_VAPID_PUBLIC_KEY="your-vapid-public-key"  # same value as above
+VAPID_PRIVATE_KEY="your-vapid-private-key"
+VAPID_SUBJECT="mailto:you@example.com"
 
 # Sentry (optional — errors only captured in production)
 NEXT_PUBLIC_SENTRY_DSN="https://your-dsn@sentry.io/project-id"  # client-side
@@ -184,8 +190,8 @@ Open [http://localhost:3000](http://localhost:3000). You should see the homepage
 |---|---|
 | `PrismaClientInitializationError` | Check `DATABASE_URL` is correct and Supabase project is active |
 | Discord sign-in fails | Verify the redirect URL in Discord matches exactly (including `http://`) |
-| Images fail to upload | Double-check all three `CLOUDINARY_*` values are set |
-| `AUTH_SECRET` error on sign-in | Make sure `AUTH_SECRET` is set and not the placeholder text |
+| Images fail to upload | Check `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are set correctly |
+| `BETTER_AUTH_SECRET` error on sign-in | Make sure `BETTER_AUTH_SECRET` is set and not the placeholder text |
 | Migration fails | Ensure `DIRECT_URL` is set — pooled connections cannot run migrations |
 
 ---
@@ -194,6 +200,6 @@ Open [http://localhost:3000](http://localhost:3000). You should see the homepage
 
 When you deploy:
 1. Add all `.env` values to your hosting provider's environment variables
-2. Change `NEXTAUTH_URL` to your production domain
+2. Change `BETTER_AUTH_URL` and `NEXT_PUBLIC_APP_URL` to your production domain
 3. Add the production callback URL to Discord OAuth redirects
 4. Run `pnpm prisma migrate deploy` (not `dev`) on the production database

@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import prisma from "@/lib/prisma"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import { EstateCard } from "@/components/estate-card"
 import { PathfinderBadge } from "@/components/pathfinder-badge"
 import { DesignerBadge } from "@/components/designer-badge"
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfilePage({ params }: PageProps) {
   const { userId } = await params
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
 
   // Check if viewer can send inquiries (authenticated + verified character + not viewing own profile)
   let viewerCanInquire = false

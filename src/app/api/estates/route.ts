@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { estateFormSchema, designerEstateFormSchema } from "@/lib/schemas"
 import { getRegionByDataCenter } from "@/lib/ffxiv-data"
@@ -9,7 +10,7 @@ import { NextResponse } from "next/server"
 const SINGLE_LIMIT_TYPES = ["PRIVATE", "APARTMENT", "FC_ROOM", "FC_ESTATE"] as const
 
 export async function POST(req: Request) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

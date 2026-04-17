@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect } from "react"
-import { useSession } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 
 const HEARTBEAT_INTERVAL = 60_000 // 1 minute
 
 export function PresenceManager() {
-  const { data: session } = useSession()
+  const { data: session } = authClient.useSession()
 
   useEffect(() => {
     if (!session?.user) return

@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { inquirySchema, COMMISSIONABLE_ESTATE_TYPES } from "@/lib/schemas"
@@ -6,7 +7,7 @@ import { sendNewInquiryEmail } from "@/lib/email"
 import { sendPushToUser } from "@/lib/push"
 
 export async function POST(req: Request) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
@@ -105,7 +106,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }

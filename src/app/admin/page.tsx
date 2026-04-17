@@ -1,6 +1,6 @@
 import Link from "next/link"
 import prisma from "@/lib/prisma"
-import { Users, FileText, ShieldCheck, Flag } from "lucide-react"
+import { Users, FileText, Flag } from "lucide-react"
 
 export default async function AdminDashboardPage() {
   const [userCount, estateCount, moderatorCount, flaggedCount] = await prisma.$transaction([

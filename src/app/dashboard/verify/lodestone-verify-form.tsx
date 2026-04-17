@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import Image from "next/image"
 import { toast } from "sonner"
 import { BadgeCheck, Copy } from "lucide-react"
@@ -29,7 +29,7 @@ export function LodestoneVerifyForm({
   pendingAvatarUrl,
 }: Props) {
   const router = useRouter()
-  const { update } = useSession()
+  const { refetch } = authClient.useSession()
   const [step, setStep] = useState<"search" | "confirm">(
     pendingCharacterId ? "confirm" : "search"
   )
@@ -85,7 +85,7 @@ export function LodestoneVerifyForm({
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       toast.success(`${data.characterName} verified successfully!`)
-      await update() // refresh session so navbar reflects new name + avatar immediately
+      await refetch() // refresh session so navbar reflects new name + avatar immediately
       router.push("/dashboard")
       router.refresh()
     } catch (err) {

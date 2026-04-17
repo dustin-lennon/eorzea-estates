@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 import bcrypt from "bcryptjs"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 
 const schema = z
@@ -16,7 +17,7 @@ const schema = z
   })
 
 export async function POST(request: Request) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
@@ -39,11 +40,11 @@ export async function POST(request: Request) {
   const [user, linkedAccounts] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { password: true, email: true, emailVerified: true },
+      select: { password: true, email: true, emailVerified: true, emailVerifiedAt: true },
     }),
     prisma.account.findMany({
       where: { userId: session.user.id },
-      select: { provider: true },
+      select: { provider: true, providerId: true },
     }),
   ])
 
@@ -55,7 +56,10 @@ export async function POST(request: Request) {
   }
 
   // Treat linked OAuth providers as email-verified (Google/Discord both verify identity)
-  const effectivelyVerified = !!user.emailVerified || linkedAccounts.length > 0
+  const hasOAuthAccount = linkedAccounts.some(
+    (a) => (a.providerId ?? a.provider) !== "credential" && (a.providerId ?? a.provider) !== "credentials"
+  )
+  const effectivelyVerified = user.emailVerified || !!user.emailVerifiedAt || hasOAuthAccount
   if (!effectivelyVerified) {
     return NextResponse.json(
       { error: "Your email address must be verified before setting a password." },
@@ -74,10 +78,25 @@ export async function POST(request: Request) {
   }
 
   const hashed = await bcrypt.hash(newPassword, 12)
-  await prisma.user.update({
-    where: { id: session.user.id },
-    data: { password: hashed },
-  })
+  const userId = session.user.id
+  // Update password on both User (legacy) and the credential Account (BA)
+  await prisma.$transaction([
+    prisma.user.update({ where: { id: userId }, data: { password: hashed } }),
+    prisma.account.upsert({
+      where: { providerId_accountId: { providerId: "credential", accountId: userId } },
+      update: { password: hashed },
+      create: {
+        userId,
+        accountId: userId,
+        providerId: "credential",
+        password: hashed,
+        // Legacy NextAuth fields (required NOT NULL during transition)
+        type: "credentials",
+        provider: "credentials",
+        providerAccountId: userId,
+      },
+    }),
+  ])
 
   return NextResponse.json({ ok: true })
 }

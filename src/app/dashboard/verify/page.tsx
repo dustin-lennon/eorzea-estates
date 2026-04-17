@@ -1,13 +1,14 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { LodestoneVerifyForm } from "./lodestone-verify-form"
 
 export const metadata: Metadata = { title: "Add Character" }
 
 export default async function VerifyPage() {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
   // Check for any in-progress (unverified) verification for this user

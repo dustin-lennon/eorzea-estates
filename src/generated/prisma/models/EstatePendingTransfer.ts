@@ -172,7 +172,7 @@ export type EstatePendingTransferGroupByOutputType = {
   _max: EstatePendingTransferMaxAggregateOutputType | null
 }
 
-type GetEstatePendingTransferGroupByPayload<T extends EstatePendingTransferGroupByArgs> = Prisma.PrismaPromise<
+export type GetEstatePendingTransferGroupByPayload<T extends EstatePendingTransferGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EstatePendingTransferGroupByOutputType, T['by']> &
       {
@@ -1136,6 +1136,11 @@ export type EstatePendingTransferFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` EstatePendingTransfers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EstatePendingTransfers.
+   */
   distinct?: Prisma.EstatePendingTransferScalarFieldEnum | Prisma.EstatePendingTransferScalarFieldEnum[]
 }
 

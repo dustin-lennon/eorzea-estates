@@ -405,6 +405,26 @@ export async function sendFcOverrideDeniedEmail({
   })
 }
 
+export async function sendPasswordResetEmail({ to, url }: { to: string; url: string }) {
+  return getResend().emails.send({
+    from: FROM,
+    to,
+    subject: "Reset your Eorzea Estates password",
+    html: baseTemplate(
+      "Reset your password",
+      `
+      <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#f5f5f5;">Reset your password</h2>
+      <p style="margin:0 0 20px;color:#a3a3a3;line-height:1.6;">
+        We received a request to reset your password. Click the button below to choose a new one.
+        This link expires in 1 hour.
+      </p>
+      <a href="${url}" style="display:inline-block;background:#c084fc;color:#fff;text-decoration:none;font-weight:600;padding:10px 24px;border-radius:8px;margin-bottom:20px;">Reset Password</a>
+      <p style="margin:0;font-size:13px;color:#737373;">If you did not request a password reset, you can safely ignore this email.</p>
+      `,
+    ),
+  })
+}
+
 export async function sendVerificationCodeEmail(to: string, code: string) {
   const resend = getResend()
   await resend.emails.send({

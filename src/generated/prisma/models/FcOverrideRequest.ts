@@ -214,7 +214,7 @@ export type FcOverrideRequestGroupByOutputType = {
   _max: FcOverrideRequestMaxAggregateOutputType | null
 }
 
-type GetFcOverrideRequestGroupByPayload<T extends FcOverrideRequestGroupByArgs> = Prisma.PrismaPromise<
+export type GetFcOverrideRequestGroupByPayload<T extends FcOverrideRequestGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FcOverrideRequestGroupByOutputType, T['by']> &
       {
@@ -2036,6 +2036,11 @@ export type FcOverrideRequestFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` FcOverrideRequests.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of FcOverrideRequests.
+   */
   distinct?: Prisma.FcOverrideRequestScalarFieldEnum | Prisma.FcOverrideRequestScalarFieldEnum[]
 }
 

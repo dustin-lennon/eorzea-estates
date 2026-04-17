@@ -1,4 +1,5 @@
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { sendModerationUnpublishedEmail, sendModerationRemovedEmail } from "@/lib/email"
 import { logModerationAction } from "@/lib/moderation-log"
@@ -14,7 +15,7 @@ export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ estateId: string }> }
 ) {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.role || !["ADMIN", "MODERATOR"].includes(session.user.role)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }

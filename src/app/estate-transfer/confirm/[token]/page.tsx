@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { AcceptTransferButton } from "./accept-transfer-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,7 +13,7 @@ interface PageProps {
 
 export default async function EstateTransferConfirmPage({ params }: PageProps) {
   const { token } = await params
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
 
   if (!session?.user?.id) {
     redirect(`/api/auth/signin?callbackUrl=/estate-transfer/confirm/${token}`)

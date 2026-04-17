@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { signIn } from "next-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { Eye, EyeOff, Loader2, CheckCircle2, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -129,7 +129,7 @@ export function LinkedAccountsSettings({ initialProviders, initialHasPassword, e
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => signIn(id, { callbackUrl: "/settings" })}
+                  onClick={() => authClient.signIn.social({ provider: id as "discord" | "google", callbackURL: "/settings" })}
                 >
                   Connect
                 </Button>

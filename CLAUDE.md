@@ -31,12 +31,18 @@ pnpm exec vitest run src/test/unit/schemas.test.ts
 Required in `.env` (see `SETUP.md` for full setup instructions):
 
 ```
-DATABASE_URL          # Supabase pooled connection (with ?pgbouncer=true)
-DIRECT_URL            # Supabase direct connection (required for migrations)
-AUTH_SECRET           # NextAuth secret (generate with: openssl rand -base64 32)
-AUTH_DISCORD_ID       # Discord OAuth client ID
-AUTH_DISCORD_SECRET   # Discord OAuth client secret
-NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
+DATABASE_URL              # Supabase pooled connection (with ?pgbouncer=true)
+DIRECT_URL                # Supabase direct connection (required for migrations)
+SUPABASE_URL              # Supabase project URL (for Storage)
+SUPABASE_SERVICE_ROLE_KEY # Supabase service role key (for Storage)
+BETTER_AUTH_SECRET        # Better Auth secret (generate with: openssl rand -base64 32)
+AUTH_DISCORD_ID           # Discord OAuth client ID
+AUTH_DISCORD_SECRET       # Discord OAuth client secret
+AUTH_GOOGLE_ID            # Google OAuth client ID
+AUTH_GOOGLE_SECRET        # Google OAuth client secret
+BETTER_AUTH_URL           # http://localhost:3000 (dev) or production domain
+NEXT_PUBLIC_APP_URL       # http://localhost:3000 (dev) or production domain (public)
+NEXT_PUBLIC_VAPID_PUBLIC_KEY  # VAPID public key for web push (same value as VAPID_PUBLIC_KEY)
 ```
 
 ## Architecture
@@ -45,7 +51,7 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 
 ### Tech Stack
 - **Next.js 16** with App Router, React 19, TypeScript
-- **Auth**: NextAuth v5 (beta) with Discord OAuth, JWT sessions, Prisma adapter
+- **Auth**: Better Auth with Discord and Google OAuth, database sessions, Prisma adapter
 - **Database**: PostgreSQL via Supabase, accessed with Prisma 7 (client generated to `src/generated/prisma/`)
 - **Images**: Supabase Storage, served via `*.supabase.co`
 - **UI**: Tailwind CSS v4, shadcn/ui components (`src/components/ui/`), Radix UI
@@ -54,7 +60,7 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 
 ### Key Patterns
 
-**Auth split** (`src/auth.config.ts` / `src/auth.ts`): Config is split so `auth.config.ts` can be imported in the Edge-compatible auth/proxy layer without pulling in Node-only Prisma dependencies. `src/auth.ts` has the full adapter-based setup used in API routes and server components.
+**Auth instance** (`src/lib/auth.ts`): Single Better Auth instance with Prisma adapter, Discord and Google social providers, email+password, and `databaseHooks` for OAuth avatar sync. Client helpers in `src/lib/auth-client.ts`. Server session access: `auth.api.getSession({ headers: await headers() })` from `@/lib/auth`. Client session: `authClient.useSession()` from `@/lib/auth-client`.
 
 **Protected routes**: `src/proxy.ts` protects `/submit`, `/dashboard`, `/estate` (except GET `/estate/[id]` which is public).
 
@@ -69,7 +75,7 @@ NEXTAUTH_URL          # http://localhost:3000 (dev) or production domain
 **Zod schemas** (`src/lib/schemas.ts`): Shared form validation schemas used by both client forms and API route handlers.
 
 ### API Routes (`src/app/api/`)
-- `auth/[...nextauth]` — NextAuth handler
+- `auth/[...all]` — Better Auth handler
 - `estates/` — create estates; `estates/[id]` — read/update/delete
 - `comments/[estateId]` — list/post comments
 - `likes/[estateId]` — toggle like

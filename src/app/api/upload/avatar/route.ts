@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { auth } from "@/auth"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { uploadUserAvatar } from "@/lib/storage"
 import { createClient } from "@supabase/supabase-js"
@@ -7,7 +8,7 @@ import { createClient } from "@supabase/supabase-js"
 const MAX_BYTES = 5 * 1024 * 1024 // 5 MB
 
 export async function POST(req: Request): Promise<NextResponse> {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const formData = await req.formData()
@@ -28,7 +29,7 @@ export async function POST(req: Request): Promise<NextResponse> {
 }
 
 export async function DELETE(): Promise<NextResponse> {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const supabase = createClient(
