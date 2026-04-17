@@ -21,7 +21,7 @@
     "@ai-sdk/anthropic": "^3.0.64",
     "@auth/prisma-adapter": "^2.11.1",
     "@hookform/resolvers": "^5.2.2",
-    "@langfuse/otel": "^5.0.1",
+    "@langfuse/otel": "^5.1.0",
     "@opentelemetry/sdk-node": "^0.213.0",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.5.0",
