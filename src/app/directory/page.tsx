@@ -87,8 +87,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
       ? { updatedAt: "desc" as const }
       : { createdAt: "desc" as const }
 
-  const dbResult = await prisma.$transaction([
-    prisma.estate.findMany({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let estates: any[] = []
+  let total = 0
+  try {
+    estates = await prisma.estate.findMany({
       where,
       orderBy,
       skip: (page - 1) * PAGE_SIZE,
@@ -117,12 +120,11 @@ export default async function DirectoryPage({ searchParams }: DirectoryPageProps
         },
         venueDetails: { select: { venueType: true } },
       },
-    }),
-    prisma.estate.count({ where }),
-  ]).catch(() => null)
-
-  const estates = dbResult?.[0] ?? []
-  const total = dbResult?.[1] ?? 0
+    })
+    total = await prisma.estate.count({ where })
+  } catch {
+    // DB error — estates stays empty, total stays 0
+  }
 
   const totalPages = Math.ceil(total / PAGE_SIZE)
 

@@ -3,6 +3,13 @@ main = ".open-next/worker.js"
 compatibility_date = "2024-12-30"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
+# Allow statically-imported .wasm files (e.g. Prisma query compiler).
+# Dynamic new WebAssembly.Module(bytes) is blocked by CF Workers; static imports work.
+[[rules]]
+type = "CompiledWasm"
+globs = ["**/*.wasm"]
+fallthrough = true
+
 # Aliases for packages that are incompatible with Cloudflare Workers.
 # pg-cloudflare: OpenNext copies pg's local node_modules (stub with only empty.js)
 #   into .open-next. The real pg-cloudflare (with dist/index.js) is a direct dep here.
@@ -12,6 +19,15 @@ compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 [alias]
 "pg-cloudflare" = "./node_modules/pg-cloudflare/dist/index.js"
 "clipboardy" = "./src/shims/clipboardy.js"
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+# Production Hyperdrive config ID — replace with real ID from:
+#   wrangler hyperdrive create eorzea-estates-db --connection-string="$DATABASE_URL"
+# The UUID below is a placeholder; real CF deployment needs a valid Hyperdrive resource.
+# For local dev, CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE is injected
+# via scripts/preview-local.mjs (must be a valid UUID format for miniflare to accept).
+id = "e4537545fd4e43fdb048c69bf513b1e0"
 
 [assets]
 directory = ".open-next/assets"

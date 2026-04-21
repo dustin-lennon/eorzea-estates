@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
-initOpenNextCloudflareForDev();
+// Don't crash the build if local Hyperdrive proxy fails to start (e.g., no
+// localConnectionString configured). Wrangler sets up the CF context at
+// request time anyway; this call is only needed for `next dev`, not `pnpm preview`.
+initOpenNextCloudflareForDev().catch((e: unknown) => {
+  if (process.env.NODE_ENV === "development") {
+    console.warn("[next.config] initOpenNextCloudflareForDev failed:", (e as Error).message)
+  }
+});
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],

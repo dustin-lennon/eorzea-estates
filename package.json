@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "preview": "opennextjs-cloudflare build && node scripts/patch-cf-externals.mjs && opennextjs-cloudflare preview",
+    "preview": "node scripts/preview-local.mjs",
     "deploy": "opennextjs-cloudflare build && node scripts/patch-cf-externals.mjs && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "lint": "eslint",

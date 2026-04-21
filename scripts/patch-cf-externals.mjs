@@ -196,6 +196,71 @@ if (handler.includes(ARCH_EXEC_LINUX)) {
   console.log("[patch-cf-externals] clipboardy arch execSync pattern not found — already patched or not present.")
 }
 
+// ── 3d. Prisma WASM query compiler — static import shim ─────────────────────
+// CF Workers blocks new WebAssembly.Module(bytes) (dynamic compilation).
+// Prisma 7 generated client calls decodeBase64AsWasm() → new WebAssembly.Module()
+// for its WASM query compiler. Fix: extract the WASM bytes from the base64 bundle,
+// write a real .wasm file alongside handler.mjs, prepend a static import, and
+// replace every decodeBase64AsWasm() return with the statically-imported module.
+//
+// Pattern to replace (minified, two occurrences — one per Turbopack context):
+//   ,XX=Buffer.from(YY,"base64");return new WebAssembly.Module(XX)}
+// Replace with:
+//   ;return __prismaQueryCompilerWasm}
+//
+// The static import is prepended to the top of handler.mjs so wrangler's esbuild
+// resolves it using the [[rules]] CompiledWasm type in wrangler.toml.
+
+const WASM_STATIC_IMPORT = `import __prismaQueryCompilerWasm from "./prisma-query-compiler.wasm";\n`
+const WASM_DECODE_RE = /,\w+=\w+\.from\(\w+,"base64"\);return new WebAssembly\.Module\(\w+\)\}/g
+
+const wasmDecodeMatches = handler.match(WASM_DECODE_RE)
+if (wasmDecodeMatches && wasmDecodeMatches.length > 0) {
+  // Extract WASM bytes from the base64 source in node_modules
+  const wasmBase64ModulePath = path.join(
+    projectRoot,
+    "node_modules",
+    "@prisma",
+    "client",
+    "runtime",
+    "query_compiler_fast_bg.postgresql.wasm-base64.mjs"
+  )
+  if (!fs.existsSync(wasmBase64ModulePath)) {
+    console.error("[patch-cf-externals] Prisma WASM base64 source not found:", wasmBase64ModulePath)
+    process.exit(1)
+  }
+
+  // Read the base64 string — file starts with: const wasm = "AGFz..."
+  const wasmBase64Src = fs.readFileSync(wasmBase64ModulePath, "utf-8")
+  const wasmBase64Match = wasmBase64Src.match(/^(?:export\s+)?const\s+wasm\s*=\s*["']([A-Za-z0-9+/=]+)["']/)
+  if (!wasmBase64Match) {
+    console.error("[patch-cf-externals] Could not extract base64 wasm string from:", wasmBase64ModulePath)
+    process.exit(1)
+  }
+  const wasmBytes = Buffer.from(wasmBase64Match[1], "base64")
+  const wasmOutPath = path.join(
+    projectRoot,
+    ".open-next",
+    "server-functions",
+    "default",
+    "prisma-query-compiler.wasm"
+  )
+  fs.writeFileSync(wasmOutPath, wasmBytes)
+  console.log(`[patch-cf-externals] Prisma WASM written (${wasmBytes.length} bytes): ${wasmOutPath}`)
+
+  // Prepend static import (idempotent)
+  if (!handler.startsWith(WASM_STATIC_IMPORT)) {
+    handler = WASM_STATIC_IMPORT + handler
+  }
+
+  // Replace all occurrences of the base64-decode+WebAssembly.Module pattern
+  handler = handler.replace(WASM_DECODE_RE, ";return __prismaQueryCompilerWasm}")
+  console.log(`[patch-cf-externals] Prisma WASM decodeBase64AsWasm shimmed (${wasmDecodeMatches.length} occurrence(s)).`)
+  patched = true
+} else {
+  console.log("[patch-cf-externals] Prisma WASM decode pattern not found — already patched or not present.")
+}
+
 // ── 4. Write patched handler ─────────────────────────────────────────────────
 
 if (patched) {
