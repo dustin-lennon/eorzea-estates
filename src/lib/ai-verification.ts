@@ -1,29 +1,16 @@
 import { generateText } from "ai"
-import { createAnthropic } from "@ai-sdk/anthropic"
-import { getVercelOidcToken } from "@vercel/functions/oidc"
+import { createOpenAI } from "@ai-sdk/openai"
 
-// Uses Vercel AI Gateway when VERCEL_AI_GATEWAY_URL is set.
-// OIDC token is fetched at runtime via getVercelOidcToken() — not an env var.
-// Falls back to direct Anthropic API (ANTHROPIC_API_KEY) if OIDC is unavailable.
-async function buildProvider(): Promise<{ model: ReturnType<ReturnType<typeof createAnthropic>> }> {
-  const gatewayUrl = process.env.VERCEL_AI_GATEWAY_URL
-
-  if (gatewayUrl) {
-    try {
-      const token = await getVercelOidcToken()
-      const anthropic = createAnthropic({
-        baseURL: `${gatewayUrl}/v1`,
-        apiKey: "not-used",
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      return { model: anthropic("anthropic/claude-opus-4-5") }
-    } catch {
-      // OIDC unavailable — fall through to direct API
-    }
-  }
-
-  const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-  return { model: anthropic("claude-opus-4-5") }
+function buildProvider() {
+  const openrouter = createOpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: process.env.OPENROUTER_API_KEY,
+    headers: {
+      "HTTP-Referer": "https://eorzeaestates.com",
+      "X-Title": "Eorzea Estates",
+    },
+  })
+  return { model: openrouter("anthropic/claude-opus-4-5") }
 }
 
 interface VerificationContext {

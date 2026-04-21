@@ -1,10 +1,24 @@
-import { NodeSDK } from "@opentelemetry/sdk-node"
-import { LangfuseSpanProcessor } from "@langfuse/otel"
+let _processor: { forceFlush(): Promise<void> } | null = null
 
-export const langfuseSpanProcessor = new LangfuseSpanProcessor()
+export const langfuseSpanProcessor = {
+  forceFlush: () => _processor?.forceFlush() ?? Promise.resolve(),
+}
 
-const sdk = new NodeSDK({
-  spanProcessors: [langfuseSpanProcessor],
-})
+export async function register() {
+  // OpenTelemetry SDK requires Node.js — skip in Cloudflare Workers (edge runtime)
+  if (process.env.NEXT_RUNTIME !== "nodejs") return
 
-sdk.start()
+  try {
+    const { NodeSDK } = await import("@opentelemetry/sdk-node")
+    const { LangfuseSpanProcessor } = await import("@langfuse/otel")
+
+    const processor = new LangfuseSpanProcessor()
+    _processor = processor
+    const sdk = new NodeSDK({
+      spanProcessors: [processor],
+    })
+    sdk.start()
+  } catch {
+    // SDK not available in this environment — traces skipped
+  }
+}

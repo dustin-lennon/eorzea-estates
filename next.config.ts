@@ -1,8 +1,19 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+initOpenNextCloudflareForDev();
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
+  // Turbopack hashes sharp to a random module ID (e.g. "sharp-03c9e6d01f648d5d") that
+  // OpenNext's esbuild step cannot resolve. Aliasing to a null shim prevents the error.
+  // Next.js skips image optimization when sharp is unavailable, which is fine for CF Workers.
+  turbopack: {
+    resolveAlias: {
+      sharp: "./src/shims/sharp.js",
+    },
+  },
   images: {
     remotePatterns: [
       {

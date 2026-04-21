@@ -6,7 +6,6 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
@@ -128,7 +127,6 @@ export default async function RootLayout({
             <Toaster richColors position="bottom-right" />
           </Providers>
         </ThemeProvider>
-        <SpeedInsights />
       </body>
     </html>
   )

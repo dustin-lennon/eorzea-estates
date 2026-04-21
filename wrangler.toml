@@ -1,0 +1,53 @@
+name = "eorzea-estates"
+main = ".open-next/worker.js"
+compatibility_date = "2024-12-30"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+# Aliases for packages that are incompatible with Cloudflare Workers.
+# pg-cloudflare: OpenNext copies pg's local node_modules (stub with only empty.js)
+#   into .open-next. The real pg-cloudflare (with dist/index.js) is a direct dep here.
+# clipboardy: regex-translator (dep of @xivapi/nodestone) pulls in clipboardy for CLI
+#   clipboard support. The real clipboardy calls child_process.execSync at import time
+#   to detect system arch, which is not available in CF Workers.
+[alias]
+"pg-cloudflare" = "./node_modules/pg-cloudflare/dist/index.js"
+"clipboardy" = "./src/shims/clipboardy.js"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "eorzea-estates"
+
+[images]
+binding = "IMAGES"
+
+# Non-secret vars that differ per environment.
+# Secrets (API keys, DB URLs, etc.) are set via:
+#   wrangler secret put VAR_NAME [--env preview|production]
+# or in the Cloudflare dashboard under Workers & Pages → eorzea-estates → Settings → Variables.
+
+[vars]
+MAINTENANCE_MODE = "false"
+SENTRY_ORG = "stelth2000-inc"
+SENTRY_PROJECT = "eorzea-estates"
+VAPID_SUBJECT = "mailto:hello@eorzeaestates.com"
+LANGFUSE_BASE_URL = "https://us.cloud.langfuse.com"
+
+[env.preview]
+name = "eorzea-estates-preview"
+
+[env.preview.vars]
+MAINTENANCE_MODE = "false"
+BETTER_AUTH_URL = "https://dev.eorzeaestates.com"
+NEXT_PUBLIC_APP_URL = "https://dev.eorzeaestates.com"
+
+[env.production]
+name = "eorzea-estates"
+
+[env.production.vars]
+MAINTENANCE_MODE = "false"
+BETTER_AUTH_URL = "https://eorzeaestates.com"
+NEXT_PUBLIC_APP_URL = "https://eorzeaestates.com"

@@ -13,14 +13,9 @@
  *   --plot       Plot number (optional)
  *   --room       Room number (optional, for APARTMENT/FC_ROOM)
  *   --fc-name    Free Company name (optional, for FC_ESTATE — verifies the Estate Profile Owner matches)
- *   --gateway    Test via Vercel AI Gateway (requires VERCEL_OIDC_TOKEN — run `vercel env pull` first)
  *
- * Examples:
- *   # Test with direct Anthropic API (.env)
+ * Example:
  *   pnpm test:verify --type PRIVATE --character "Ada Lovelace" --image "https://example.com/screenshot.png"
- *
- *   # Test via Vercel AI Gateway (run `vercel env pull` first to get VERCEL_OIDC_TOKEN)
- *   pnpm test:verify --gateway --type PRIVATE --character "Ada Lovelace" --image "https://example.com/screenshot.png"
  */
 
 const args = process.argv.slice(2)
@@ -30,25 +25,12 @@ function getArg(name: string): string | undefined {
   return idx !== -1 ? args[idx + 1] : undefined
 }
 
-const useGateway = args.includes("--gateway")
-
 import { config } from "dotenv"
 import { resolve } from "path"
 
-const envFile = useGateway ? ".env.gateway" : ".env"
-// Load .env.local first so VERCEL_OIDC_TOKEN (from `vercel env pull`) is available,
-// then override with the chosen env file.
-config({ path: resolve(process.cwd(), ".env.local") })
-config({ path: resolve(process.cwd(), envFile) })
+config({ path: resolve(process.cwd(), ".env") })
 
-console.log(`\nLoading env from: ${envFile}`)
-if (process.env.VERCEL_AI_GATEWAY_URL) {
-  console.log(`VERCEL_AI_GATEWAY_URL: ${process.env.VERCEL_AI_GATEWAY_URL}`)
-  console.log(`VERCEL_OIDC_TOKEN: ${process.env.VERCEL_OIDC_TOKEN ? "set ✓" : "NOT SET ✗ — run: vercel env pull"}`)
-} else {
-  console.log(`VERCEL_AI_GATEWAY_URL: (not set — using direct Anthropic API)`)
-  console.log(`ANTHROPIC_API_KEY: ${process.env.ANTHROPIC_API_KEY ? "set ✓" : "NOT SET ✗"}`)
-}
+console.log(`\nOPENROUTER_API_KEY: ${process.env.OPENROUTER_API_KEY ? "set ✓" : "NOT SET ✗"}`)
 
 import { analyzeVerificationScreenshot } from "../src/lib/ai-verification"
 

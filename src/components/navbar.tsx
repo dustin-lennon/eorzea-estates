@@ -10,7 +10,12 @@ import { NavbarUserMenu } from "@/components/navbar-user-menu"
 import { effectiveImage } from "@/lib/effective-image"
 
 export default async function Navbar() {
-  const session = await auth.api.getSession({ headers: await headers() })
+  let session: Awaited<ReturnType<typeof auth.api.getSession>> | null = null
+  try {
+    session = await auth.api.getSession({ headers: await headers() })
+  } catch {
+    // DB unavailable — render as logged-out
+  }
 
   try {
     return (
