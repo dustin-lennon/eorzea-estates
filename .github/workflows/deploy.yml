@@ -51,7 +51,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Build
-        run: pnpm build
+        run: pnpm exec opennextjs-cloudflare build && node scripts/patch-cf-externals.mjs
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
