@@ -25,11 +25,9 @@
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { createRequire } from "node:module"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, "..")
-const require = createRequire(import.meta.url)
 
 // ── 1. Scan Turbopack chunk files for externalImport hash IDs ───────────────
 
@@ -458,29 +456,6 @@ if (patched) {
 
 const workerPath = path.join(projectRoot, ".open-next", "worker.js")
 const workerSrc = fs.readFileSync(workerPath, "utf8")
-
-const SCHEDULED_HANDLER = `
-
-// Injected by patch-cf-externals: handle CF Workers cron triggers.
-const __originalDefault = globalThis.__workerDefault ?? (await import("./worker.js")).default;
-export const scheduled = async (event, env, ctx) => {
-  const secret = env.CRON_SECRET ?? ""
-  const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
-  try {
-    const res = await fetch(\`\${baseUrl}/api/cron/verify-fc-estates\`, {
-      headers: { Authorization: \`Bearer \${secret}\` },
-    })
-    if (!res.ok) {
-      console.error("[cron] verify-fc-estates failed:", res.status)
-    } else {
-      const result = await res.json()
-      console.log("[cron] verify-fc-estates result:", JSON.stringify(result))
-    }
-  } catch (err) {
-    console.error("[cron] verify-fc-estates error:", err)
-  }
-}
-`
 
 if (workerSrc.includes("export const scheduled")) {
   console.log("[patch-cf-externals] scheduled handler already present — skipping.")
