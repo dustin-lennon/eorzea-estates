@@ -17,18 +17,33 @@ import type { UserRole } from "@/types/roles"
 import { sendPasswordResetEmail } from "@/lib/email"
 
 export const auth = betterAuth({
+  logger: {
+    level: "debug",
+    log(level, message, ...args) {
+      console[level === "error" ? "error" : level === "warn" ? "warn" : "log"]("[better-auth]", message, ...args)
+    },
+  },
+
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+
+  // Use memory storage for rate limiting so counts reset on server restart.
+  // DB-backed rate limiting (the default) persists across restarts and causes
+  // false 429s in local dev after repeated failed attempts during debugging.
+  rateLimit: {
+    storage: "memory",
+  },
 
   // Database sessions — all active NextAuth JWT sessions were invalidated
   // when this became the sole auth system in Phase 4.
   session: {
     expiresIn: 60 * 60 * 24 * 30, // 30 days
     updateAge: 60 * 60 * 24,       // refresh if older than 1 day
+    // cookieCache disabled — BA issue #4203: fails to refresh from DB after expiry,
+    // causing users to be logged out after exactly maxAge seconds.
     cookieCache: {
-      enabled: true,
-      maxAge: 60 * 5, // 5-min client-side cache reduces DB reads in middleware
+      enabled: false,
     },
   },
 
@@ -84,15 +99,18 @@ export const auth = betterAuth({
     account: {
       create: {
         after: async (account) => {
+          console.log("[auth/hook] account.create.after start", account.providerId, account.userId)
           const userId = account.userId
           if (!userId) return
 
           // Mark emailVerified=true on first OAuth sign-in
           if (account.providerId === "discord" || account.providerId === "google") {
+            console.log("[auth/hook] updating emailVerified")
             await prisma.user.updateMany({
               where: { id: userId, emailVerified: false },
               data: { emailVerified: true },
             })
+            console.log("[auth/hook] emailVerified updated")
           }
 
           // Sync Discord avatar on first account link unless the user has a
@@ -104,20 +122,25 @@ export const auth = betterAuth({
             })
             if (!hasLodestone) {
               try {
+                console.log("[auth/hook] fetching Discord avatar")
                 const res = await fetch("https://discord.com/api/users/@me", {
                   headers: { Authorization: `Bearer ${account.accessToken}` },
                 })
+                console.log("[auth/hook] Discord avatar fetch status:", res.status)
                 if (res.ok) {
                   const profile = await res.json() as { id?: string; avatar?: string | null }
                   if (profile.id && profile.avatar) {
                     const freshImage = `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
+                    console.log("[auth/hook] updating avatar")
                     await prisma.user.update({
                       where: { id: userId },
                       data: { image: freshImage },
                     })
+                    console.log("[auth/hook] avatar updated")
                   }
                 }
-              } catch {
+              } catch (e) {
+                console.error("[auth/hook] avatar sync error:", e)
                 // Non-fatal: avatar sync failure should not block sign-in
               }
             }

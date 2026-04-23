@@ -40,13 +40,13 @@ export async function getCharacterById(lodestoneId: number): Promise<LodestoneCh
   const result = await characterParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
-    .catch(() => null) as { Name?: string; Server?: { World?: string; DC?: string }; Avatar?: string } | null
+    .catch(() => null) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
   if (!result?.Name) return null
   return {
     ID: lodestoneId,
     Name: result.Name,
-    Server: result.Server?.World ?? "",
-    DC: result.Server?.DC ?? "",
+    Server: result.World ?? "",
+    DC: result.DC ?? "",
     Avatar: result.Avatar ?? "",
   }
 }

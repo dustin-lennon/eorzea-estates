@@ -1,21 +1,16 @@
 import Link from "next/link"
 import Image from "next/image"
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { NavbarMessagesLink } from "@/components/navbar-messages-link"
 import { NavbarUserMenu } from "@/components/navbar-user-menu"
 import { effectiveImage } from "@/lib/effective-image"
+import { getServerSession } from "@/lib/session"
 
 export default async function Navbar() {
-  let session: Awaited<ReturnType<typeof auth.api.getSession>> | null = null
-  try {
-    session = await auth.api.getSession({ headers: await headers() })
-  } catch {
-    // DB unavailable — render as logged-out
-  }
+  // getServerSession() is React-cached — deduplicates with layout.tsx call (one DB query/request)
+  const session = await getServerSession()
 
   try {
     return (

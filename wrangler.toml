@@ -1,7 +1,10 @@
 name = "eorzea-estates"
 main = ".open-next/worker.js"
 compatibility_date = "2024-12-30"
-compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+# global_fetch_strictly_public omitted from default (local dev) config for flexibility:
+# wrangler dev uses localhost origins, so any accidental loopback fetch would hang
+# rather than throw, making debugging painful. Deployed envs use it for SSRF protection.
+compatibility_flags = ["nodejs_compat"]
 
 # Allow statically-imported .wasm files (e.g. Prisma query compiler).
 # Dynamic new WebAssembly.Module(bytes) is blocked by CF Workers; static imports work.
@@ -17,7 +20,7 @@ fallthrough = true
 #   clipboard support. The real clipboardy calls child_process.execSync at import time
 #   to detect system arch, which is not available in CF Workers.
 [alias]
-"pg-cloudflare" = "./node_modules/pg-cloudflare/dist/index.js"
+"pg-cloudflare" = "./src/shims/pg-cloudflare-fixed.js"
 "clipboardy" = "./src/shims/clipboardy.js"
 
 [[hyperdrive]]
@@ -45,25 +48,132 @@ binding = "IMAGES"
 #   wrangler secret put VAR_NAME [--env preview|production]
 # or in the Cloudflare dashboard under Workers & Pages → eorzea-estates → Settings → Variables.
 
+# Local Dev variables
 [vars]
+# App
 MAINTENANCE_MODE = "false"
+NEXT_PUBLIC_APP_URL = "http://localhost:3000"
+
+# Sentry.io
 SENTRY_ORG = "stelth2000-inc"
 SENTRY_PROJECT = "eorzea-estates"
-VAPID_SUBJECT = "mailto:hello@eorzeaestates.com"
+SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+NEXT_PUBLIC_SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+
+# Supabase Storage API
+SUPABASE_URL = "https://yjzdpphlircmrspatpmp.supabase.co"
+
+# Better Auth
+BETTER_AUTH_URL = "http://localhost:3000"
+AUTH_DISCORD_ID = "1478984603040481494"
+AUTH_GOOGLE_ID = "22852432332-h266mhapupf784um88dtqeh41idsfi60.apps.googleusercontent.com"
+
+# AI
 LANGFUSE_BASE_URL = "https://us.cloud.langfuse.com"
+LANGFUSE_PUBLIC_KEY = "pk-lf-b5c65386-6081-4aa6-a5bb-79c4fefee469"
+LANGSMITH_TRACING = "true"
+LANGSMITH_ENDPOINT = "https://api.smith.langchain.com"
+LANGSMITH_PROJECT = "Eorzea Estates"
+
+# Web Push (VAPID)
+VAPID_SUBJECT = "mailto:hello@eorzeaestates.com"
+VAPID_PUBLIC_KEY = "BBmeup1mZ8tVyuEFBnCs1J2DXcmQDe4R16IkUH7Uarct1GD30_YbGfB6zYlCNTcMl6mp2WLgyPt9oG_BGP_DncU"
+
 
 [env.preview]
 name = "eorzea-estates-preview"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
 [env.preview.vars]
+# App
 MAINTENANCE_MODE = "false"
-BETTER_AUTH_URL = "https://dev.eorzeaestates.com"
 NEXT_PUBLIC_APP_URL = "https://dev.eorzeaestates.com"
+
+# Sentry.io
+SENTRY_ORG = "stelth2000-inc"
+SENTRY_PROJECT = "eorzea-estates"
+SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+NEXT_PUBLIC_SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+
+# Supabase Storage API
+SUPABASE_URL = "https://yjzdpphlircmrspatpmp.supabase.co"
+
+# Better Auth
+BETTER_AUTH_URL = "https://dev.eorzeaestates.com"
+AUTH_DISCORD_ID = "1478984603040481494"
+AUTH_GOOGLE_ID = "22852432332-h266mhapupf784um88dtqeh41idsfi60.apps.googleusercontent.com"
+
+# AI
+LANGFUSE_BASE_URL = "https://us.cloud.langfuse.com"
+LANGFUSE_PUBLIC_KEY = "pk-lf-b5c65386-6081-4aa6-a5bb-79c4fefee469"
+LANGSMITH_TRACING = "true"
+LANGSMITH_ENDPOINT = "https://api.smith.langchain.com"
+LANGSMITH_PROJECT = "Eorzea Estates"
+
+# Web Push (VAPID)
+VAPID_SUBJECT = "mailto:hello@eorzeaestates.com"
+VAPID_PUBLIC_KEY = "BBmeup1mZ8tVyuEFBnCs1J2DXcmQDe4R16IkUH7Uarct1GD30_YbGfB6zYlCNTcMl6mp2WLgyPt9oG_BGP_DncU"
+
+
+[[env.preview.hyperdrive]]
+binding = "HYPERDRIVE"
+id = "db16b12eac0c4d40a5a4a79f7f30cdb2"
+
+[[env.preview.services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "eorzea-estates-preview"
+
+[env.preview.images]
+binding = "IMAGES"
+
+[env.preview.triggers]
+crons = ["0 6 * * *"]
 
 [env.production]
 name = "eorzea-estates"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
 [env.production.vars]
+# App
 MAINTENANCE_MODE = "false"
-BETTER_AUTH_URL = "https://eorzeaestates.com"
 NEXT_PUBLIC_APP_URL = "https://eorzeaestates.com"
+
+# Sentry.io
+SENTRY_ORG = "stelth2000-inc"
+SENTRY_PROJECT = "eorzea-estates"
+SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+NEXT_PUBLIC_SENTRY_DSN = "https://da4f16199815d17ffb417bff6a2dcfa3@o369776.ingest.us.sentry.io/4511050051354624"
+
+# Supabase Storage API
+SUPABASE_URL = "https://znbdajguaslmgnfacvyd.supabase.co"
+
+# Better Auth
+BETTER_AUTH_URL = "https://eorzeaestates.com"
+AUTH_DISCORD_ID = "1478984603040481494"
+AUTH_GOOGLE_ID = "22852432332-h266mhapupf784um88dtqeh41idsfi60.apps.googleusercontent.com"
+
+# AI
+LANGFUSE_BASE_URL = "https://us.cloud.langfuse.com"
+LANGFUSE_PUBLIC_KEY = "pk-lf-82ed7000-5604-4116-85fe-fa09298d3f7a"
+LANGSMITH_TRACING = "true"
+LANGSMITH_ENDPOINT = "https://api.smith.langchain.com"
+LANGSMITH_PROJECT = "Eorzea Estates"
+
+# Web Push (VAPID)
+VAPID_SUBJECT = "mailto:hello@eorzeaestates.com"
+VAPID_PUBLIC_KEY = "BBmeup1mZ8tVyuEFBnCs1J2DXcmQDe4R16IkUH7Uarct1GD30_YbGfB6zYlCNTcMl6mp2WLgyPt9oG_BGP_DncU"
+
+
+[[env.production.hyperdrive]]
+binding = "HYPERDRIVE"
+id = "0f822903612c47858208a934087cf1af"
+
+[[env.production.services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "eorzea-estates"
+
+[env.production.images]
+binding = "IMAGES"
+
+[env.production.triggers]
+crons = ["0 6 * * *"]

@@ -261,6 +261,185 @@ if (wasmDecodeMatches && wasmDecodeMatches.length > 0) {
   console.log("[patch-cf-externals] Prisma WASM decode pattern not found — already patched or not present.")
 }
 
+// ── 3e. @cf-wasm/photon WASM static import shim ─────────────────────────────
+// Turbopack bundles @cf-wasm/photon using the Node.js export condition, which
+// inlines the WASM bytes as base64 and compiles them with new WebAssembly.Module()
+// at startup. CF Workers block dynamic WebAssembly compilation.
+//
+// Fix: copy the photon .wasm file alongside handler.mjs, prepend a static import,
+// and replace the var q=Uint8Array.from(atob(...)).buffer,d=new WebAssembly.Module(q);r.sync({module:d})
+// pattern with a direct r.sync({module: __photonWasm}) call.
+
+const PHOTON_WASM_IMPORT = `import __photonWasm from "./photon.wasm";\n`
+const PHOTON_WASM_RE = /var q=Uint8Array\.from\(atob\("[A-Za-z0-9+/=]+"\),\w+=>\w+\.charCodeAt\(0\)\)\.buffer,\w+=new WebAssembly\.Module\(q\);(\w+)\.sync\(\{module:\w+\}\)/
+
+const photonWasmMatch = handler.match(PHOTON_WASM_RE)
+if (photonWasmMatch) {
+  const syncVar = photonWasmMatch[1]
+  const photonWasmSrc = path.join(
+    projectRoot,
+    "node_modules",
+    "@cf-wasm",
+    "photon",
+    "dist",
+    "lib",
+    "photon_rs_bg.wasm"
+  )
+  if (!fs.existsSync(photonWasmSrc)) {
+    console.error("[patch-cf-externals] photon WASM not found:", photonWasmSrc)
+    process.exit(1)
+  }
+  const photonWasmDest = path.join(
+    projectRoot,
+    ".open-next",
+    "server-functions",
+    "default",
+    "photon.wasm"
+  )
+  fs.copyFileSync(photonWasmSrc, photonWasmDest)
+  console.log(`[patch-cf-externals] photon WASM written (${fs.statSync(photonWasmDest).size} bytes): ${photonWasmDest}`)
+
+  if (!handler.includes(PHOTON_WASM_IMPORT)) {
+    handler = PHOTON_WASM_IMPORT + handler
+  }
+  handler = handler.replace(PHOTON_WASM_RE, `${syncVar}.sync({module:__photonWasm})`)
+  console.log("[patch-cf-externals] photon WASM static import shimmed.")
+  patched = true
+} else {
+  console.log("[patch-cf-externals] photon WASM pattern not found — already patched or not present.")
+}
+
+// ── 3g. pg-cloudflare fixed shim ─────────────────────────────────────────────
+// OpenNext only copies dist/empty.js from pg-cloudflare into .open-next.
+// The "workerd" export condition maps require('pg-cloudflare') → dist/index.js,
+// but that file is absent in the output, so pg falls back to the empty stub.
+//
+// wrangler [alias] cannot fix this: pg is externalized via dynamic import()
+// by Turbopack, so esbuild alias only applies to statically bundled code.
+//
+// Fix: copy our fixed shim (src/shims/pg-cloudflare-fixed.js) as dist/index.js
+// into every pg-cloudflare location inside .open-next. The shim is identical to
+// the upstream CloudflareSocket except _listen() emits 'end' when done=true,
+// preventing zombie connections when Supabase closes an idle TLS session.
+
+const openNextNodeModules = path.join(
+  projectRoot,
+  ".open-next",
+  "server-functions",
+  "default",
+  "node_modules"
+)
+
+// Source: fixed pg-cloudflare shim (emits 'end' on stream close to prevent zombies)
+// The real upstream pg-cloudflare's _listen() silently breaks when done=true,
+// leaving pg Pool holding zombie connections that hang on next use.
+const pgCfFixedShim = path.join(projectRoot, "src", "shims", "pg-cloudflare-fixed.js")
+
+if (!fs.existsSync(pgCfFixedShim)) {
+  console.error("[patch-cf-externals] pg-cloudflare fixed shim not found:", pgCfFixedShim)
+  process.exit(1)
+}
+
+// Find all pg-cloudflare directories in the output node_modules (may appear at
+// top-level and inside .pnpm/ hoisted paths)
+function findPgCloudflareDirs(baseDir) {
+  const results = []
+  if (!fs.existsSync(baseDir)) return results
+
+  function walk(dir, depth) {
+    if (depth > 6) return
+    let entries
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }) } catch { return }
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue
+      const full = path.join(dir, entry.name)
+      if (entry.name === "pg-cloudflare") {
+        results.push(full)
+      } else {
+        walk(full, depth + 1)
+      }
+    }
+  }
+  walk(baseDir, 0)
+  return results
+}
+
+const pgCfDirs = findPgCloudflareDirs(openNextNodeModules)
+if (pgCfDirs.length === 0) {
+  console.log("[patch-cf-externals] No pg-cloudflare directories found in .open-next — skipping.")
+} else {
+  for (const dir of pgCfDirs) {
+    const destDist = path.join(dir, "dist")
+    fs.mkdirSync(destDist, { recursive: true })
+    fs.copyFileSync(pgCfFixedShim, path.join(destDist, "index.js"))
+    console.log(`[patch-cf-externals] pg-cloudflare fixed shim copied → ${path.relative(projectRoot, dir)}`)
+  }
+}
+
+// ── 3h. axios fetch shim ──────────────────────────────────────────────────────
+// @xivapi/nodestone uses axios.get() to fetch Lodestone HTML pages.
+// axios uses Node.js http/https modules which don't work in CF Workers.
+// wrangler [alias] cannot fix this because @xivapi/nodestone is externalized.
+//
+// Turbopack's nft.json traces nodestone's dependencies from the PROJECT ROOT
+// node_modules (not .open-next), so the worker loads the real axios from
+// node_modules/.pnpm/axios@0.21.4/... at runtime. We must patch both:
+//   1. The project root copy (used at wrangler dev runtime via nft.json tracing)
+//   2. The .open-next copy (belt-and-suspenders for any other resolution path)
+
+const axiosShim = path.join(projectRoot, "src", "shims", "axios.js")
+
+if (!fs.existsSync(axiosShim)) {
+  console.error("[patch-cf-externals] axios shim not found:", axiosShim)
+  process.exit(1)
+}
+
+function findAxisDirs(baseDir) {
+  const results = []
+  if (!fs.existsSync(baseDir)) return results
+  function walk(dir, depth) {
+    if (depth > 6) return
+    let entries
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }) } catch { return }
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue
+      const full = path.join(dir, entry.name)
+      if (entry.name === "axios") {
+        results.push(full)
+      } else {
+        walk(full, depth + 1)
+      }
+    }
+  }
+  walk(baseDir, 0)
+  return results
+}
+
+// Patch project root node_modules (runtime path via nft.json tracing)
+const projectNodeModules = path.join(projectRoot, "node_modules")
+const rootAxisDirs = findAxisDirs(projectNodeModules)
+if (rootAxisDirs.length === 0) {
+  console.log("[patch-cf-externals] No axios directories found in project node_modules — skipping.")
+} else {
+  for (const dir of rootAxisDirs) {
+    const destIndex = path.join(dir, "index.js")
+    fs.copyFileSync(axiosShim, destIndex)
+    console.log(`[patch-cf-externals] axios fetch shim copied → ${path.relative(projectRoot, dir)}`)
+  }
+}
+
+// Patch .open-next node_modules (belt-and-suspenders)
+const axisDirs = findAxisDirs(openNextNodeModules)
+if (axisDirs.length === 0) {
+  console.log("[patch-cf-externals] No axios directories found in .open-next — skipping.")
+} else {
+  for (const dir of axisDirs) {
+    const destIndex = path.join(dir, "index.js")
+    fs.copyFileSync(axiosShim, destIndex)
+    console.log(`[patch-cf-externals] axios fetch shim copied → ${path.relative(projectRoot, dir)}`)
+  }
+}
+
 // ── 4. Write patched handler ─────────────────────────────────────────────────
 
 if (patched) {
@@ -268,4 +447,79 @@ if (patched) {
   console.log("[patch-cf-externals] handler.mjs written.")
 } else {
   console.log("[patch-cf-externals] No patches applied.")
+}
+
+// ── 5. Add scheduled handler to worker.js ────────────────────────────────────
+//
+// CF Workers cron triggers fire a `scheduled` event, not an HTTP request.
+// OpenNext only exports a `fetch` handler. We patch worker.js to inject a
+// `scheduled` export that calls the cron API route via self-fetch with the
+// CRON_SECRET auth header.
+
+const workerPath = path.join(projectRoot, ".open-next", "worker.js")
+const workerSrc = fs.readFileSync(workerPath, "utf8")
+
+const SCHEDULED_HANDLER = `
+
+// Injected by patch-cf-externals: handle CF Workers cron triggers.
+const __originalDefault = globalThis.__workerDefault ?? (await import("./worker.js")).default;
+export const scheduled = async (event, env, ctx) => {
+  const secret = env.CRON_SECRET ?? ""
+  const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
+  try {
+    const res = await fetch(\`\${baseUrl}/api/cron/verify-fc-estates\`, {
+      headers: { Authorization: \`Bearer \${secret}\` },
+    })
+    if (!res.ok) {
+      console.error("[cron] verify-fc-estates failed:", res.status)
+    } else {
+      const result = await res.json()
+      console.log("[cron] verify-fc-estates result:", JSON.stringify(result))
+    }
+  } catch (err) {
+    console.error("[cron] verify-fc-estates error:", err)
+  }
+}
+`
+
+if (workerSrc.includes("export const scheduled")) {
+  console.log("[patch-cf-externals] scheduled handler already present — skipping.")
+} else {
+  // Find the closing `};` of `export default { ... };` and insert scheduled after it
+  const lastBrace = workerSrc.lastIndexOf("};")
+  if (lastBrace === -1) {
+    console.error("[patch-cf-externals] Could not find end of worker.js default export — scheduled handler NOT added.")
+  } else {
+    // Instead of patching worker.js (which is re-exported), append a separate scheduled export
+    // by writing a wrapper worker entry that re-exports default + adds scheduled.
+    const scheduledShim = `
+// Generated by patch-cf-externals: re-export worker.js default + add scheduled handler.
+export * from "./worker-original.js"
+export { default } from "./worker-original.js"
+
+export const scheduled = async (event, env, ctx) => {
+  const secret = env.CRON_SECRET ?? ""
+  const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
+  try {
+    const res = await fetch(\`\${baseUrl}/api/cron/verify-fc-estates\`, {
+      headers: { Authorization: \`Bearer \${secret}\` },
+    })
+    if (!res.ok) {
+      console.error("[cron] verify-fc-estates failed:", res.status)
+    } else {
+      const result = await res.json()
+      console.log("[cron] verify-fc-estates result:", JSON.stringify(result))
+    }
+  } catch (err) {
+    console.error("[cron] verify-fc-estates error:", err)
+  }
+}
+`.trimStart()
+
+    // Rename original worker.js → worker-original.js, write wrapper as worker.js
+    const workerOriginalPath = path.join(projectRoot, ".open-next", "worker-original.js")
+    fs.renameSync(workerPath, workerOriginalPath)
+    fs.writeFileSync(workerPath, scheduledShim)
+    console.log("[patch-cf-externals] scheduled handler injected into worker.js")
+  }
 }

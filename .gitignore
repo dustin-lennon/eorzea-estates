@@ -62,3 +62,5 @@ prod.dump
 sync_prod_to_develop.sh
 .env*.local
 credentials.txt
+.vercel/
+.wrangler/

@@ -8,8 +8,8 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
-import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
+import { getServerSession } from "@/lib/session"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,7 +84,7 @@ export default async function RootLayout({
     try {
       const [settings, session] = await Promise.all([
         prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
-        auth.api.getSession({ headers: await headers() }),
+        getServerSession(),
       ])
       maintenanceOn = settings?.maintenanceMode ?? false
       isAdmin = session?.user?.role === "ADMIN"

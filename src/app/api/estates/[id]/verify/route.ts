@@ -1,12 +1,11 @@
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
-import { NextResponse, after } from "next/server"
+import { NextResponse } from "next/server"
 import { uploadVerificationScreenshot } from "@/lib/storage"
 import { analyzeVerificationScreenshot } from "@/lib/ai-verification"
 import { sendVerificationApprovedEmail, sendVerificationQueuedEmail, sendVerificationRejectedEmail } from "@/lib/email"
 import { getCharacterFCId, getFCName } from "@/lib/lodestone"
-import { langfuseSpanProcessor } from "@/instrumentation"
 
 const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
 
@@ -132,13 +131,7 @@ export async function POST(
   } catch (err) {
     // AI unavailable — queue for manual review
     console.error("[verify] AI analysis failed:", err)
-    console.error("[verify] Gateway URL:", process.env.VERCEL_AI_GATEWAY_URL ?? "(not set — using direct API)")
-    console.error("[verify] OIDC token present:", !!process.env.VERCEL_OIDC_TOKEN)
-    console.error("[verify] Anthropic key present:", !!process.env.ANTHROPIC_API_KEY)
   }
-
-  // Flush Langfuse traces after the response is sent
-  after(() => langfuseSpanProcessor.forceFlush())
 
   if (aiResult && aiResult.verified && aiResult.confidence === "high") {
     // Auto-approve
