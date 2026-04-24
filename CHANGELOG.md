@@ -3,6 +3,15 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.32.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.0...v1.32.1) (2026-04-24)
+
+### 🐛 Bug Fixes
+
+* assign AsyncLocalStorage to globalThis for better-auth CF Workers compat ([f3894a6](https://github.com/dustin-lennon/eorzea-estates/commit/f3894a6a322b9ba2dcf538ebb758f9a99bde1d22))
+* force-static on changelog page to avoid fs.readFileSync at CF Workers runtime ([d3fc10a](https://github.com/dustin-lennon/eorzea-estates/commit/d3fc10a9e73cc889292fa06d527c1af3ee899783))
+* inline CHANGELOG.md at build time via webpack asset/source (no runtime fs) ([f1cb0ad](https://github.com/dustin-lennon/eorzea-estates/commit/f1cb0ad10a035a013fc81ff8ab983ddca29a3ed4))
+* read CHANGELOG.md in next.config.ts and embed as build-time env var ([3ead654](https://github.com/dustin-lennon/eorzea-estates/commit/3ead6541dd075b59358542e1bbffa499786842a3))
+
 ## [1.32.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.31.0...v1.32.0) (2026-04-24)
 
 ### ✨ Features
