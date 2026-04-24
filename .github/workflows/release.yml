@@ -9,6 +9,9 @@ permissions:
   issues: write        # comment on issues when released
   pull-requests: write # comment on PRs when released
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   release:
     name: Semantic Release
