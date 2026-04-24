@@ -1,7 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "packageManager": "pnpm",
   "schedule": ["every weekend"],
   "commitMessagePrefix": "chore(deps):",
   "semanticCommits": "enabled",
