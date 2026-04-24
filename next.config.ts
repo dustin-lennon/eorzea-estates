@@ -12,6 +12,10 @@ initOpenNextCloudflareForDev().catch((e: unknown) => {
 });
 
 const nextConfig: NextConfig = {
+  webpack(config) {
+    config.module.rules.push({ test: /\.md$/, type: "asset/source" })
+    return config
+  },
   serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
   // Turbopack hashes sharp to a random module ID (e.g. "sharp-03c9e6d01f648d5d") that
   // OpenNext's esbuild step cannot resolve. Aliasing to a null shim prevents the error.
