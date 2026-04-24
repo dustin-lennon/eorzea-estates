@@ -19,14 +19,24 @@ const nextConfig: NextConfig = {
   env: {
     CHANGELOG_CONTENT: changelogContent,
   },
-  serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
+  serverExternalPackages: ["regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
   // Turbopack hashes sharp to a random module ID (e.g. "sharp-03c9e6d01f648d5d") that
   // OpenNext's esbuild step cannot resolve. Aliasing to a null shim prevents the error.
   // Next.js skips image optimization when sharp is unavailable, which is fine for CF Workers.
   turbopack: {
     resolveAlias: {
       sharp: "./src/shims/sharp.js",
+      "@xivapi/nodestone": "./src/shims/xivapi-nodestone.js",
     },
+  },
+  webpack(config) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require("path")
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@xivapi/nodestone": path.resolve(__dirname, "src/shims/xivapi-nodestone.js"),
+    }
+    return config
   },
   images: {
     remotePatterns: [
