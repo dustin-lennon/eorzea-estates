@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.32.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.2...v1.32.3) (2026-04-24)
+
+### 🐛 Bug Fixes
+
+* add @xivapi/nodestone type stub, downgrade @vitejs/plugin-react to v5 ([1938e94](https://github.com/dustin-lennon/eorzea-estates/commit/1938e94a72ddf20f93de24d22da402d8330dbe9b))
+* downgrade eslint to v9 (v10 breaks eslint-plugin-react@7.x API) ([5b8c741](https://github.com/dustin-lennon/eorzea-estates/commit/5b8c74104059f914d8b1c7ddefbbbec66ae2fd62))
+
 ## [1.32.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.1...v1.32.2) (2026-04-24)
 
 ### 🐛 Bug Fixes
