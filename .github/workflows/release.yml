@@ -18,16 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     # Only run after CI passes — reuse the same commit SHA
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # full history needed for semantic-release
           token: ${{ secrets.SYNC_PAT }}  # PAT needed to push changelog commit back to main
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
