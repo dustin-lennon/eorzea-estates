@@ -1,16 +1,8 @@
-name: Deploy
+name: Deploy (manual)
 
 on:
   workflow_dispatch:
     inputs:
-      platform:
-        description: Deployment platform
-        required: true
-        type: choice
-        options:
-          - cloudflare
-          - vercel
-        default: cloudflare
       environment:
         description: Target environment
         required: true
@@ -19,18 +11,23 @@ on:
           - preview
           - production
         default: preview
+      ref:
+        description: Branch or SHA to deploy (defaults to develop for preview, main for production)
+        required: false
+        type: string
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  deploy-cloudflare:
+  deploy:
     name: Deploy to Cloudflare Workers (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    if: inputs.platform == 'cloudflare'
     environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || (inputs.environment == 'production' && 'main' || 'develop') }}
 
       - uses: pnpm/action-setup@v6
         with:
@@ -38,7 +35,7 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
 
       - name: Install dependencies
@@ -67,30 +64,9 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           OPEN_NEXT_DEPLOY: "true"
 
-  deploy-vercel:
-    name: Deploy to Vercel (${{ inputs.environment }})
-    runs-on: ubuntu-latest
-    if: inputs.platform == 'vercel'
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Deploy to Vercel
+      - name: CF Dashboard logs link
+        if: always()
         run: |
-          pnpm exec vercel pull --yes --environment=${{ inputs.environment == 'production' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
-          pnpm exec vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
-          pnpm exec vercel deploy --prebuilt ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+          WORKER=${{ inputs.environment == 'production' && 'eorzea-estates' || 'eorzea-estates-preview' }}
+          echo "### Cloudflare Worker Logs" >> $GITHUB_STEP_SUMMARY
+          echo "[View logs in CF Dashboard](https://dash.cloudflare.com/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/${WORKER}/production/logs)" >> $GITHUB_STEP_SUMMARY

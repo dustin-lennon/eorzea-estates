@@ -1,23 +1,25 @@
-name: Auto Deploy to Cloudflare Workers
+name: Auto Deploy to Cloudflare Workers (preview)
 
 on:
   workflow_run:
-    workflows: [Release]
+    workflows: [CI]
     types: [completed]
-    branches: [main]
-  workflow_dispatch:
+    branches: [develop]
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  deploy-production:
-    name: Deploy to Cloudflare Workers (production)
+  deploy-preview:
+    name: Deploy to Cloudflare Workers (preview)
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
-    environment: production
+    if: github.event.workflow_run.conclusion == 'success'
+    environment: preview
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: develop
+          token: ${{ secrets.SYNC_PAT }}
 
       - uses: pnpm/action-setup@v6
         with:
@@ -25,7 +27,7 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
@@ -48,7 +50,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Deploy
-        run: pnpm exec wrangler deploy --env production
+        run: pnpm exec wrangler deploy --env preview
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -58,4 +60,4 @@ jobs:
         if: always()
         run: |
           echo "### Cloudflare Worker Logs" >> $GITHUB_STEP_SUMMARY
-          echo "[View logs in CF Dashboard](https://dash.cloudflare.com/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eorzea-estates/production/logs)" >> $GITHUB_STEP_SUMMARY
+          echo "[View logs in CF Dashboard](https://dash.cloudflare.com/${{ vars.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eorzea-estates-preview/production/logs)" >> $GITHUB_STEP_SUMMARY
