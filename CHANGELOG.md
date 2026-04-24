@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.32.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.3...v1.32.4) (2026-04-24)
+
+### 🐛 Bug Fixes
+
+* replace @xivapi/nodestone with fetch-based xivapi.com shim for CF Workers ([292a787](https://github.com/dustin-lennon/eorzea-estates/commit/292a787108f9a2b95ec751fff03e0038b898150b))
+
 ## [1.32.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.2...v1.32.3) (2026-04-24)
 
 ### 🐛 Bug Fixes
