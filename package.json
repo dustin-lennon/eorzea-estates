@@ -66,7 +66,10 @@
       "sharp",
       "unrs-resolver",
       "workerd"
-    ]
+    ],
+    "patchedDependencies": {
+      "pg@8.20.0": "patches/pg@8.20.0.patch"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
