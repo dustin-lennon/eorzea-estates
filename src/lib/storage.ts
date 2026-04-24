@@ -1,7 +1,52 @@
 import { createClient } from "@supabase/supabase-js"
-import sharp from "sharp"
+import sharpLib from "sharp"
+import * as photon from "@cf-wasm/photon"
 import { randomUUID } from "crypto"
 import { REGIONS } from "./ffxiv-data"
+
+// sharp is null in CF Workers (native binary; shimmed to null via Turbopack alias).
+// Fallback: use @cf-wasm/photon (WASM, CF Workers compatible) for resize + WebP output.
+const sharp = sharpLib as typeof sharpLib | null
+
+async function resizeInside(buffer: Buffer, maxWidth: number, maxHeight: number): Promise<{ data: Buffer; contentType: string; ext: string }> {
+  if (sharp) {
+    const data = await sharp(buffer).resize(maxWidth, maxHeight, { fit: "inside", withoutEnlargement: true }).webp({ quality: 85 }).toBuffer()
+    return { data, contentType: "image/webp", ext: "webp" }
+  }
+  const img = photon.PhotonImage.new_from_byteslice(new Uint8Array(buffer))
+  const origW = img.get_width()
+  const origH = img.get_height()
+  const scale = Math.min(maxWidth / origW, maxHeight / origH, 1)
+  const newW = Math.max(1, Math.round(origW * scale))
+  const newH = Math.max(1, Math.round(origH * scale))
+  const resized = photon.resize(img, newW, newH, photon.SamplingFilter.Lanczos3)
+  img.free()
+  const data = Buffer.from(resized.get_bytes_webp())
+  resized.free()
+  return { data, contentType: "image/webp", ext: "webp" }
+}
+
+async function resizeCover(buffer: Buffer, size: number): Promise<{ data: Buffer; contentType: string; ext: string }> {
+  if (sharp) {
+    const data = await sharp(buffer).resize(size, size, { fit: "cover", position: "center" }).webp({ quality: 85 }).toBuffer()
+    return { data, contentType: "image/webp", ext: "webp" }
+  }
+  const img = photon.PhotonImage.new_from_byteslice(new Uint8Array(buffer))
+  const origW = img.get_width()
+  const origH = img.get_height()
+  const scale = Math.max(size / origW, size / origH)
+  const newW = Math.max(size, Math.round(origW * scale))
+  const newH = Math.max(size, Math.round(origH * scale))
+  const resized = photon.resize(img, newW, newH, photon.SamplingFilter.Lanczos3)
+  img.free()
+  const x1 = Math.floor((newW - size) / 2)
+  const y1 = Math.floor((newH - size) / 2)
+  const cropped = photon.crop(resized, x1, y1, x1 + size, y1 + size)
+  resized.free()
+  const data = Buffer.from(cropped.get_bytes_webp())
+  cropped.free()
+  return { data, contentType: "image/webp", ext: "webp" }
+}
 
 const BUCKET = "estate-images"
 
@@ -74,25 +119,17 @@ export async function uploadEstateImage(
   buffer: Buffer,
   ctx: StoragePathContext
 ): Promise<{ url: string; storageKey: string }> {
-  const processed = await sharp(buffer)
-    .resize(1920, 1080, { fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 85 })
-    .toBuffer()
-
-  const storageKey = buildStoragePath(ctx, "webp")
+  const { data: processed, contentType, ext } = await resizeInside(buffer, 1920, 1080)
+  const storageKey = buildStoragePath(ctx, ext)
   const supabase = getSupabase()
 
   const { error } = await supabase.storage
     .from(BUCKET)
-    .upload(storageKey, processed, {
-      contentType: "image/webp",
-      upsert: false,
-    })
+    .upload(storageKey, processed, { contentType, upsert: false })
 
   if (error) throw new Error(`Storage upload failed: ${error.message}`)
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
-
   return { url: data.publicUrl, storageKey }
 }
 
@@ -127,27 +164,18 @@ export async function uploadUserAvatar(
   buffer: Buffer,
   userId: string
 ): Promise<{ url: string; storageKey: string }> {
-  const processed = await sharp(buffer)
-    .resize(256, 256, { fit: "cover", position: "center" })
-    .webp({ quality: 85 })
-    .toBuffer()
-
-  const storageKey = `user-avatars/${userId}.webp`
+  const { data: processed, contentType, ext } = await resizeCover(buffer, 256)
+  const storageKey = `user-avatars/${userId}.${ext}`
   const supabase = getSupabase()
 
   const { error } = await supabase.storage
     .from(BUCKET)
-    .upload(storageKey, processed, {
-      contentType: "image/webp",
-      upsert: true,
-    })
+    .upload(storageKey, processed, { contentType, upsert: true })
 
   if (error) throw new Error(`Storage upload failed: ${error.message}`)
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
-
-  // Append a version timestamp so browsers don't serve the stale cached image
-  // when the user uploads a replacement (same path, new file content).
+  // Append version timestamp so browsers don't serve stale cached image after replacement.
   const url = `${data.publicUrl}?v=${Date.now()}`
   return { url, storageKey }
 }
@@ -157,24 +185,16 @@ export async function uploadVerificationScreenshot(
   userId: string,
   estateId: string
 ): Promise<{ url: string; storageKey: string }> {
-  const processed = await sharp(buffer)
-    .resize(1920, 1080, { fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 85 })
-    .toBuffer()
-
-  const storageKey = `verification/${userId}/${estateId}/${randomUUID()}.webp`
+  const { data: processed, contentType, ext } = await resizeInside(buffer, 1920, 1080)
+  const storageKey = `verification/${userId}/${estateId}/${randomUUID()}.${ext}`
   const supabase = getSupabase()
 
   const { error } = await supabase.storage
     .from(BUCKET)
-    .upload(storageKey, processed, {
-      contentType: "image/webp",
-      upsert: false,
-    })
+    .upload(storageKey, processed, { contentType, upsert: false })
 
   if (error) throw new Error(`Storage upload failed: ${error.message}`)
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(storageKey)
-
   return { url: data.publicUrl, storageKey }
 }

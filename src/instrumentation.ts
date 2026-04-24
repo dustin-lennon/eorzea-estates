@@ -1,10 +1,3 @@
-import { NodeSDK } from "@opentelemetry/sdk-node"
-import { LangfuseSpanProcessor } from "@langfuse/otel"
-
-export const langfuseSpanProcessor = new LangfuseSpanProcessor()
-
-const sdk = new NodeSDK({
-  spanProcessors: [langfuseSpanProcessor],
-})
-
-sdk.start()
+export async function register() {
+  // Instrumentation entry point — reserved for future use.
+}

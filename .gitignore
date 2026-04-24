@@ -39,8 +39,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
+# cloudflare / opennext
+.open-next
+.dev.vars
+cloudflare-env.d.ts
 
 # typescript
 *.tsbuildinfo
@@ -60,3 +62,5 @@ prod.dump
 sync_prod_to_develop.sh
 .env*.local
 credentials.txt
+.vercel/
+.wrangler/
