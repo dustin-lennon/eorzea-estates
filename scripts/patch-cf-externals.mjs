@@ -261,11 +261,17 @@ if (wasmDecodeMatches && wasmDecodeMatches.length > 0) {
 // at startup. CF Workers block dynamic WebAssembly compilation.
 //
 // Fix: copy the photon .wasm file alongside handler.mjs, prepend a static import,
-// and replace the var q=Uint8Array.from(atob(...)).buffer,d=new WebAssembly.Module(q);r.sync({module:d})
-// pattern with a direct r.sync({module: __photonWasm}) call.
+// and replace:
+//   var X=Uint8Array.from(atob("..."),c=>c.charCodeAt(0)).buffer;
+//   var Y=new WebAssembly.Module(X);
+//   Z.sync({module:Y})
+// with: Z.sync({module:__photonWasm})
+//
+// Note: dist/node.js uses separate statements (not a single var declaration),
+// so the regex must match across two var statements.
 
 const PHOTON_WASM_IMPORT = `import __photonWasm from "./photon.wasm";\n`
-const PHOTON_WASM_RE = /var q=Uint8Array\.from\(atob\("[A-Za-z0-9+/=]+"\),\w+=>\w+\.charCodeAt\(0\)\)\.buffer,\w+=new WebAssembly\.Module\(q\);(\w+)\.sync\(\{module:\w+\}\)/
+const PHOTON_WASM_RE = /var \w+=Uint8Array\.from\(atob\("[A-Za-z0-9+/=]+"\),\w+=>\w+\.charCodeAt\(0\)\)\.buffer;var \w+=new WebAssembly\.Module\(\w+\);(\w+)\.sync\(\{module:\w+\}\)/
 
 const photonWasmMatch = handler.match(PHOTON_WASM_RE)
 if (photonWasmMatch) {
@@ -296,7 +302,7 @@ if (photonWasmMatch) {
   if (!handler.includes(PHOTON_WASM_IMPORT)) {
     handler = PHOTON_WASM_IMPORT + handler
   }
-  handler = handler.replace(PHOTON_WASM_RE, `${syncVar}.sync({module:__photonWasm})`)
+  handler = handler.replace(PHOTON_WASM_RE, (_, s) => `${s}.sync({module:__photonWasm})`)
   console.log("[patch-cf-externals] photon WASM static import shimmed.")
   patched = true
 } else {
