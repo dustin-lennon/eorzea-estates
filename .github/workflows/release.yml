@@ -9,22 +9,25 @@ permissions:
   issues: write        # comment on issues when released
   pull-requests: write # comment on PRs when released
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
     # Only run after CI passes — reuse the same commit SHA
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # full history needed for semantic-release
           token: ${{ secrets.SYNC_PAT }}  # PAT needed to push changelog commit back to main
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm

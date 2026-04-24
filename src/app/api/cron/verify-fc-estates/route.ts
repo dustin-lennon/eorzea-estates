@@ -84,9 +84,7 @@ export async function GET(req: Request) {
         select: { token: true },
       })
 
-      const baseUrl =
-        process.env.NEXTAUTH_URL ??
-        (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+      const baseUrl = process.env.BETTER_AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:8787"
       const confirmUrl = `${baseUrl}/estate-transfer/confirm/${transfer!.token}`
 
       // Email new owner

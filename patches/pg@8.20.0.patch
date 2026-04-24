@@ -1,0 +1,13 @@
+--- a/lib/stream.js
++++ b/lib/stream.js
+@@ -38,7 +38,9 @@
+  */
+ function getCloudflareStreamFuncs() {
+   function getStream(ssl) {
+-    const { CloudflareSocket } = require('pg-cloudflare')
++    // try/catch so esbuild skips at bundle time; shim copied by patch-cf-externals
++    let CloudflareSocket
++    try { ;({ CloudflareSocket } = require('pg-cloudflare')) } catch (e) { throw new Error('pg-cloudflare unavailable: ' + e.message) }
+     return new CloudflareSocket(ssl)
+   }
+ 
