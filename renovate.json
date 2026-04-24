@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageManager": "pnpm",
+  "schedule": ["every weekend"],
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommits": "enabled",
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "groupName": "Next.js",
+      "matchPackageNames": ["next", "react", "react-dom", "@types/react", "@types/react-dom"]
+    },
+    {
+      "groupName": "Prisma",
+      "matchPackageNames": ["prisma", "@prisma/client"]
+    },
+    {
+      "groupName": "ESLint",
+      "matchPackageNames": ["/eslint/"]
+    },
+    {
+      "groupName": "Tailwind CSS",
+      "matchPackageNames": ["/tailwind/"]
+    },
+    {
+      "groupName": "Radix UI",
+      "matchPackageNames": ["/@radix-ui//"]
+    },
+    {
+      "groupName": "Vitest",
+      "matchPackageNames": ["/vitest/", "@testing-library/**"]
+    },
+    {
+      "groupName": "Playwright",
+      "matchPackageNames": ["/playwright/"]
+    }
+  ]
+}
