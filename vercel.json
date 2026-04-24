@@ -1,9 +1,0 @@
-{
-  "buildCommand": "prisma migrate deploy && next build",
-  "crons": [
-    {
-      "path": "/api/cron/verify-fc-estates",
-      "schedule": "0 6 * * *"
-    }
-  ]
-}

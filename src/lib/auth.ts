@@ -10,6 +10,14 @@
  *   const { data: session } = authClient.useSession()
  */
 
+// CF Workers supports `node:async_hooks` as a static import but not as a
+// dynamic import. better-auth uses dynamic import internally and falls back
+// to globalThis.AsyncLocalStorage. Assign it here so the fallback always works.
+import { AsyncLocalStorage } from "node:async_hooks"
+if (!("AsyncLocalStorage" in globalThis)) {
+  (globalThis as unknown as Record<string, unknown>).AsyncLocalStorage = AsyncLocalStorage
+}
+
 import { betterAuth } from "better-auth"
 import { prismaAdapter } from "better-auth/adapters/prisma"
 import prisma from "@/lib/prisma"
