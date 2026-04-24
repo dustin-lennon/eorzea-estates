@@ -21,7 +21,7 @@ importers:
         version: 0.3.4
       '@hookform/resolvers':
         specifier: ^5.2.2
-        version: 5.2.2(react-hook-form@7.72.0(react@19.2.4))
+        version: 5.2.2(react-hook-form@7.73.1(react@19.2.4))
       '@opentelemetry/sdk-node':
         specifier: ^0.215.0
         version: 0.215.0(@opentelemetry/api@1.9.1)
@@ -93,7 +93,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       react-hook-form:
         specifier: ^7.72.0
-        version: 7.72.0(react@19.2.4)
+        version: 7.73.1(react@19.2.4)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.14)(react@19.2.4)
@@ -7665,8 +7665,8 @@ packages:
     peerDependencies:
       react: ^19.2.4
 
-  react-hook-form@7.72.0:
-    resolution: {integrity: sha512-V4v6jubaf6JAurEaVnT9aUPKFbNtDgohj5CIgVGyPHvT9wRx5OZHVjz31GsxnPNI278XMu+ruFz+wGOscHaLKw==}
+  react-hook-form@7.73.1:
+    resolution: {integrity: sha512-VAfVYOPcx3piiEVQy95vyFmBwbVUsP/AUIN+mpFG8h11yshDd444nn0VyfaGWSRnhOLVgiDu7HIuBtAIzxn9dA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -10606,10 +10606,10 @@ snapshots:
     dependencies:
       hono: 4.12.7
 
-  '@hookform/resolvers@5.2.2(react-hook-form@7.72.0(react@19.2.4))':
+  '@hookform/resolvers@5.2.2(react-hook-form@7.73.1(react@19.2.4))':
     dependencies:
       '@standard-schema/utils': 0.3.0
-      react-hook-form: 7.72.0(react@19.2.4)
+      react-hook-form: 7.73.1(react@19.2.4)
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -17698,7 +17698,7 @@ snapshots:
       react: 19.2.4
       scheduler: 0.27.0
 
-  react-hook-form@7.72.0(react@19.2.4):
+  react-hook-form@7.73.1(react@19.2.4):
     dependencies:
       react: 19.2.4
 
