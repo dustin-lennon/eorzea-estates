@@ -3,6 +3,27 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.32.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.31.0...v1.32.0) (2026-04-24)
+
+### ✨ Features
+
+* migrate from Vercel to Cloudflare Workers via OpenNext ([78efaf5](https://github.com/dustin-lennon/eorzea-estates/commit/78efaf50167ee4974b9e5284750b668324599247)), closes [#262](https://github.com/dustin-lennon/eorzea-estates/issues/262)
+* use WebP output in CF Workers via photon.get_bytes_webp() ([2967def](https://github.com/dustin-lennon/eorzea-estates/commit/2967defed1eaff7cbda0424f51e09dc1bb356fff))
+
+### 🐛 Bug Fixes
+
+* patch pg stream.js to wrap require('pg-cloudflare') in try/catch ([525ace3](https://github.com/dustin-lennon/eorzea-estates/commit/525ace3b3fcaa3e83eb86bcf3e1b8a59befb4907))
+* remove JSX from try/catch in navbar, add eslint-disable for pg-cloudflare shim require ([b8aae06](https://github.com/dustin-lennon/eorzea-estates/commit/b8aae06a7004d77fe4a605c8b3ef0852545b2c95))
+* replace photon WASM regex with indexOf surgery (2.2MB base64 breaks regex engine) ([6f00651](https://github.com/dustin-lennon/eorzea-estates/commit/6f00651b222b8e66fa3f87371c1589136e500429))
+* revert useWorkerdCondition, patch pg-cloudflare dist in CI instead ([1421719](https://github.com/dustin-lennon/eorzea-estates/commit/142171950d79acd61bc2d0f08a18288514cd2399))
+* set cloudflare.useWorkerdCondition on returned config object ([8e65ae8](https://github.com/dustin-lennon/eorzea-estates/commit/8e65ae8b74271f0bb8e14bfd370f9f455c246ceb))
+* set useWorkerdCondition=false to unblock CF Workers build ([80a9787](https://github.com/dustin-lennon/eorzea-estates/commit/80a97871fee5b078cc88507dec012b179eb3317a))
+* skip externalImport injection if hashId already present anywhere in handler ([b5c92e8](https://github.com/dustin-lennon/eorzea-estates/commit/b5c92e8ea93dadc1b53ff66769eaf74b9b977854))
+* switch AI verification to direct Anthropic with Langfuse observability ([9af61b2](https://github.com/dustin-lennon/eorzea-estates/commit/9af61b214fa95287d30606d29a40ff4aad7c10fc))
+* update patch script for switch/case externalImport format in handler.mjs ([9c58c05](https://github.com/dustin-lennon/eorzea-estates/commit/9c58c051e4ddc04d520261f66d7195009c91f970))
+* update photon WASM regex to match separate var statements in Turbopack output ([a01d37c](https://github.com/dustin-lennon/eorzea-estates/commit/a01d37c6a5541bed2b9c24040709ba0b90a85813))
+* wire up Hyperdrive for local preview and fix DB connection in CF Workers ([12ab5cb](https://github.com/dustin-lennon/eorzea-estates/commit/12ab5cbb12e3284d9311430c3817a026e55612c1))
+
 ## [1.31.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.30.0...v1.31.0) (2026-04-17)
 
 ### ✨ Features
