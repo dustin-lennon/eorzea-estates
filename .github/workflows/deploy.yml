@@ -41,6 +41,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Patch pg-cloudflare for CF Workers
+        run: |
+          PG_CF=$(node -e "console.log(require('path').dirname(require.resolve('pg-cloudflare/package.json')))")
+          mkdir -p "$PG_CF/dist"
+          cp src/shims/pg-cloudflare-fixed.js "$PG_CF/dist/index.js"
+
       - name: Generate Prisma client
         run: pnpm prisma generate
 
