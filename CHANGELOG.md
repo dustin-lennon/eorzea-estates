@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.32.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.1...v1.32.2) (2026-04-24)
+
+### 🐛 Bug Fixes
+
+* **deps:** remove invalid packageManager option from renovate.json ([31b2c2c](https://github.com/dustin-lennon/eorzea-estates/commit/31b2c2ca509c4159fb845d7ed7d28ed84c358bd1))
+
 ## [1.32.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.0...v1.32.1) (2026-04-24)
 
 ### 🐛 Bug Fixes
