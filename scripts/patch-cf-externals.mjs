@@ -136,14 +136,13 @@ if (patches.length > 0) {
   }
 
   let ogCount = 0
-  handler = handler.replaceAll(OG_ANCHOR, (match, offset) => {
+  handler = handler.replaceAll(OG_ANCHOR, (match) => {
     ogCount++
-    const lookback = handler.slice(Math.max(0, offset - 1000), offset)
-
     let extraCases = ""
     for (const { hashId, specifier } of patches) {
-      // Idempotency: skip if this hash already has a case before the anchor
-      if (lookback.includes(`case"${hashId}"`)) continue
+      // Idempotency: skip if this hash already has a case anywhere in the handler
+      // (OpenNext may emit its own cases for pg, @prisma/client, etc.)
+      if (handler.includes(`case"${hashId}"`)) continue
       extraCases += `case"${hashId}":raw2=await import("${specifier}");break;`
     }
     return extraCases + match
