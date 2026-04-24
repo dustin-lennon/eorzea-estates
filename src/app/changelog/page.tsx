@@ -4,6 +4,8 @@ import { Metadata } from "next"
 import { BackButton } from "@/components/back-button"
 import { ChangelogRenderer } from "@/components/changelog-renderer"
 
+export const dynamic = "force-static"
+
 export const metadata: Metadata = { title: "Changelog" }
 
 export default function ChangelogPage() {
