@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
 import { BadgeCheck, MapPin, Clock, Users, ExternalLink, ShieldCheck, Palette } from "lucide-react"
+import Image from "next/image"
 import prisma from "@/lib/prisma"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
@@ -81,6 +82,9 @@ export default async function EstateDetailPage({ params }: PageProps) {
               take: 1,
             },
           },
+        },
+        designerCreditCharacter: {
+          select: { userId: true },
         },
         venueDetails: {
           include: {
@@ -238,6 +242,35 @@ export default async function EstateDetailPage({ params }: PageProps) {
               <Palette className="h-3.5 w-3.5" />
               {estate.designer.characters[0]?.characterName ?? estate.designer.name}
             </Link>
+          </div>
+        )}
+        {estate.designerCreditName && !estate.designer && (
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground">Designed by</span>
+            {estate.designerCreditAvatarUrl && (
+              <Image
+                src={estate.designerCreditAvatarUrl}
+                alt={estate.designerCreditName}
+                width={20}
+                height={20}
+                className="rounded-full"
+              />
+            )}
+            {estate.designerCreditCharacter?.userId ? (
+              <Link
+                href={`/profile/${estate.designerCreditCharacter.userId}`}
+                className="flex items-center gap-1 font-medium text-purple-600 dark:text-purple-400 hover:underline"
+              >
+                <Palette className="h-3.5 w-3.5" />
+                {estate.designerCreditName}
+              </Link>
+            ) : (
+              <span className="flex items-center gap-1 font-medium">
+                <Palette className="h-3.5 w-3.5 text-purple-500" />
+                {estate.designerCreditName}
+              </span>
+            )}
+            <span className="text-xs text-muted-foreground">({estate.designerCreditServer})</span>
           </div>
         )}
       </div>
@@ -432,6 +465,33 @@ export default async function EstateDetailPage({ params }: PageProps) {
                     <Palette className="h-3.5 w-3.5" />
                     {estate.designer.characters[0]?.characterName ?? estate.designer.name}
                   </Link>
+                </div>
+              )}
+              {estate.designerCreditName && !estate.designer && (
+                <div className="flex justify-between items-center gap-2">
+                  <span className="text-muted-foreground shrink-0">Designer</span>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    {estate.designerCreditAvatarUrl && (
+                      <Image
+                        src={estate.designerCreditAvatarUrl}
+                        alt={estate.designerCreditName}
+                        width={18}
+                        height={18}
+                        className="rounded-full shrink-0"
+                      />
+                    )}
+                    {estate.designerCreditCharacter?.userId ? (
+                      <Link
+                        href={`/profile/${estate.designerCreditCharacter.userId}`}
+                        className="flex items-center gap-1 text-purple-600 dark:text-purple-400 hover:underline text-xs font-medium truncate"
+                      >
+                        {estate.designerCreditName}
+                        <ExternalLink className="h-3 w-3 shrink-0" />
+                      </Link>
+                    ) : (
+                      <span className="text-xs font-medium truncate">{estate.designerCreditName}</span>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

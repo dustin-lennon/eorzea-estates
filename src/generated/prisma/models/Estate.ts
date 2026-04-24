@@ -75,6 +75,11 @@ export type EstateMinAggregateOutputType = {
   designerId: string | null
   claimedAt: Date | null
   confirmedActiveAt: Date | null
+  designerCreditName: string | null
+  designerCreditServer: string | null
+  designerCreditLodestoneId: string | null
+  designerCreditAvatarUrl: string | null
+  designerCreditCharacterId: string | null
 }
 
 export type EstateMaxAggregateOutputType = {
@@ -110,6 +115,11 @@ export type EstateMaxAggregateOutputType = {
   designerId: string | null
   claimedAt: Date | null
   confirmedActiveAt: Date | null
+  designerCreditName: string | null
+  designerCreditServer: string | null
+  designerCreditLodestoneId: string | null
+  designerCreditAvatarUrl: string | null
+  designerCreditCharacterId: string | null
 }
 
 export type EstateCountAggregateOutputType = {
@@ -146,6 +156,11 @@ export type EstateCountAggregateOutputType = {
   designerId: number
   claimedAt: number
   confirmedActiveAt: number
+  designerCreditName: number
+  designerCreditServer: number
+  designerCreditLodestoneId: number
+  designerCreditAvatarUrl: number
+  designerCreditCharacterId: number
   _all: number
 }
 
@@ -199,6 +214,11 @@ export type EstateMinAggregateInputType = {
   designerId?: true
   claimedAt?: true
   confirmedActiveAt?: true
+  designerCreditName?: true
+  designerCreditServer?: true
+  designerCreditLodestoneId?: true
+  designerCreditAvatarUrl?: true
+  designerCreditCharacterId?: true
 }
 
 export type EstateMaxAggregateInputType = {
@@ -234,6 +254,11 @@ export type EstateMaxAggregateInputType = {
   designerId?: true
   claimedAt?: true
   confirmedActiveAt?: true
+  designerCreditName?: true
+  designerCreditServer?: true
+  designerCreditLodestoneId?: true
+  designerCreditAvatarUrl?: true
+  designerCreditCharacterId?: true
 }
 
 export type EstateCountAggregateInputType = {
@@ -270,6 +295,11 @@ export type EstateCountAggregateInputType = {
   designerId?: true
   claimedAt?: true
   confirmedActiveAt?: true
+  designerCreditName?: true
+  designerCreditServer?: true
+  designerCreditLodestoneId?: true
+  designerCreditAvatarUrl?: true
+  designerCreditCharacterId?: true
   _all?: true
 }
 
@@ -393,6 +423,11 @@ export type EstateGroupByOutputType = {
   designerId: string | null
   claimedAt: Date | null
   confirmedActiveAt: Date | null
+  designerCreditName: string | null
+  designerCreditServer: string | null
+  designerCreditLodestoneId: string | null
+  designerCreditAvatarUrl: string | null
+  designerCreditCharacterId: string | null
   _count: EstateCountAggregateOutputType | null
   _avg: EstateAvgAggregateOutputType | null
   _sum: EstateSumAggregateOutputType | null
@@ -452,11 +487,17 @@ export type EstateWhereInput = {
   designerId?: Prisma.StringNullableFilter<"Estate"> | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
   confirmedActiveAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  designerCreditName?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditServer?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditLodestoneId?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditAvatarUrl?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditCharacterId?: Prisma.StringNullableFilter<"Estate"> | string | null
   comments?: Prisma.CommentListRelationFilter
   character?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   flaggedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   designer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  designerCreditCharacter?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   pinnedByUsers?: Prisma.UserListRelationFilter
   pendingTransfer?: Prisma.XOR<Prisma.EstatePendingTransferNullableScalarRelationFilter, Prisma.EstatePendingTransferWhereInput> | null
   claimRequest?: Prisma.XOR<Prisma.EstateClaimRequestNullableScalarRelationFilter, Prisma.EstateClaimRequestWhereInput> | null
@@ -502,11 +543,17 @@ export type EstateOrderByWithRelationInput = {
   designerId?: Prisma.SortOrderInput | Prisma.SortOrder
   claimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmedActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditName?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditServer?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditLodestoneId?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditAvatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditCharacterId?: Prisma.SortOrderInput | Prisma.SortOrder
   comments?: Prisma.CommentOrderByRelationAggregateInput
   character?: Prisma.FfxivCharacterOrderByWithRelationInput
   flaggedBy?: Prisma.UserOrderByWithRelationInput
   owner?: Prisma.UserOrderByWithRelationInput
   designer?: Prisma.UserOrderByWithRelationInput
+  designerCreditCharacter?: Prisma.FfxivCharacterOrderByWithRelationInput
   pinnedByUsers?: Prisma.UserOrderByRelationAggregateInput
   pendingTransfer?: Prisma.EstatePendingTransferOrderByWithRelationInput
   claimRequest?: Prisma.EstateClaimRequestOrderByWithRelationInput
@@ -555,11 +602,17 @@ export type EstateWhereUniqueInput = Prisma.AtLeast<{
   designerId?: Prisma.StringNullableFilter<"Estate"> | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
   confirmedActiveAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  designerCreditName?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditServer?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditLodestoneId?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditAvatarUrl?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditCharacterId?: Prisma.StringNullableFilter<"Estate"> | string | null
   comments?: Prisma.CommentListRelationFilter
   character?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   flaggedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   designer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  designerCreditCharacter?: Prisma.XOR<Prisma.FfxivCharacterNullableScalarRelationFilter, Prisma.FfxivCharacterWhereInput> | null
   pinnedByUsers?: Prisma.UserListRelationFilter
   pendingTransfer?: Prisma.XOR<Prisma.EstatePendingTransferNullableScalarRelationFilter, Prisma.EstatePendingTransferWhereInput> | null
   claimRequest?: Prisma.XOR<Prisma.EstateClaimRequestNullableScalarRelationFilter, Prisma.EstateClaimRequestWhereInput> | null
@@ -605,6 +658,11 @@ export type EstateOrderByWithAggregationInput = {
   designerId?: Prisma.SortOrderInput | Prisma.SortOrder
   claimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmedActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditName?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditServer?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditLodestoneId?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditAvatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  designerCreditCharacterId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EstateCountOrderByAggregateInput
   _avg?: Prisma.EstateAvgOrderByAggregateInput
   _max?: Prisma.EstateMaxOrderByAggregateInput
@@ -649,6 +707,11 @@ export type EstateScalarWhereWithAggregatesInput = {
   designerId?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
   claimedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Estate"> | Date | string | null
   confirmedActiveAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Estate"> | Date | string | null
+  designerCreditName?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
+  designerCreditServer?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
+  designerCreditLodestoneId?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
+  designerCreditAvatarUrl?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
+  designerCreditCharacterId?: Prisma.StringNullableWithAggregatesFilter<"Estate"> | string | null
 }
 
 export type EstateCreateInput = {
@@ -681,11 +744,16 @@ export type EstateCreateInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -731,6 +799,11 @@ export type EstateUncheckedCreateInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -773,11 +846,16 @@ export type EstateUpdateInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -823,6 +901,11 @@ export type EstateUncheckedUpdateInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -869,6 +952,11 @@ export type EstateCreateManyInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
 }
 
 export type EstateUpdateManyMutationInput = {
@@ -901,6 +989,10 @@ export type EstateUpdateManyMutationInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EstateUncheckedUpdateManyInput = {
@@ -937,6 +1029,11 @@ export type EstateUncheckedUpdateManyInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EstateListRelationFilter = {
@@ -988,6 +1085,11 @@ export type EstateCountOrderByAggregateInput = {
   designerId?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   confirmedActiveAt?: Prisma.SortOrder
+  designerCreditName?: Prisma.SortOrder
+  designerCreditServer?: Prisma.SortOrder
+  designerCreditLodestoneId?: Prisma.SortOrder
+  designerCreditAvatarUrl?: Prisma.SortOrder
+  designerCreditCharacterId?: Prisma.SortOrder
 }
 
 export type EstateAvgOrderByAggregateInput = {
@@ -1031,6 +1133,11 @@ export type EstateMaxOrderByAggregateInput = {
   designerId?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   confirmedActiveAt?: Prisma.SortOrder
+  designerCreditName?: Prisma.SortOrder
+  designerCreditServer?: Prisma.SortOrder
+  designerCreditLodestoneId?: Prisma.SortOrder
+  designerCreditAvatarUrl?: Prisma.SortOrder
+  designerCreditCharacterId?: Prisma.SortOrder
 }
 
 export type EstateMinOrderByAggregateInput = {
@@ -1066,6 +1173,11 @@ export type EstateMinOrderByAggregateInput = {
   designerId?: Prisma.SortOrder
   claimedAt?: Prisma.SortOrder
   confirmedActiveAt?: Prisma.SortOrder
+  designerCreditName?: Prisma.SortOrder
+  designerCreditServer?: Prisma.SortOrder
+  designerCreditLodestoneId?: Prisma.SortOrder
+  designerCreditAvatarUrl?: Prisma.SortOrder
+  designerCreditCharacterId?: Prisma.SortOrder
 }
 
 export type EstateSumOrderByAggregateInput = {
@@ -1230,10 +1342,24 @@ export type EstateCreateNestedManyWithoutCharacterInput = {
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
 }
 
+export type EstateCreateNestedManyWithoutDesignerCreditCharacterInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput> | Prisma.EstateCreateWithoutDesignerCreditCharacterInput[] | Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput[]
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput | Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput[]
+  createMany?: Prisma.EstateCreateManyDesignerCreditCharacterInputEnvelope
+  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+}
+
 export type EstateUncheckedCreateNestedManyWithoutCharacterInput = {
   create?: Prisma.XOR<Prisma.EstateCreateWithoutCharacterInput, Prisma.EstateUncheckedCreateWithoutCharacterInput> | Prisma.EstateCreateWithoutCharacterInput[] | Prisma.EstateUncheckedCreateWithoutCharacterInput[]
   connectOrCreate?: Prisma.EstateCreateOrConnectWithoutCharacterInput | Prisma.EstateCreateOrConnectWithoutCharacterInput[]
   createMany?: Prisma.EstateCreateManyCharacterInputEnvelope
+  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+}
+
+export type EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput> | Prisma.EstateCreateWithoutDesignerCreditCharacterInput[] | Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput[]
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput | Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput[]
+  createMany?: Prisma.EstateCreateManyDesignerCreditCharacterInputEnvelope
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
 }
 
@@ -1251,6 +1377,20 @@ export type EstateUpdateManyWithoutCharacterNestedInput = {
   deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
 }
 
+export type EstateUpdateManyWithoutDesignerCreditCharacterNestedInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput> | Prisma.EstateCreateWithoutDesignerCreditCharacterInput[] | Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput[]
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput | Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput[]
+  upsert?: Prisma.EstateUpsertWithWhereUniqueWithoutDesignerCreditCharacterInput | Prisma.EstateUpsertWithWhereUniqueWithoutDesignerCreditCharacterInput[]
+  createMany?: Prisma.EstateCreateManyDesignerCreditCharacterInputEnvelope
+  set?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  disconnect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  delete?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  update?: Prisma.EstateUpdateWithWhereUniqueWithoutDesignerCreditCharacterInput | Prisma.EstateUpdateWithWhereUniqueWithoutDesignerCreditCharacterInput[]
+  updateMany?: Prisma.EstateUpdateManyWithWhereWithoutDesignerCreditCharacterInput | Prisma.EstateUpdateManyWithWhereWithoutDesignerCreditCharacterInput[]
+  deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
+}
+
 export type EstateUncheckedUpdateManyWithoutCharacterNestedInput = {
   create?: Prisma.XOR<Prisma.EstateCreateWithoutCharacterInput, Prisma.EstateUncheckedCreateWithoutCharacterInput> | Prisma.EstateCreateWithoutCharacterInput[] | Prisma.EstateUncheckedCreateWithoutCharacterInput[]
   connectOrCreate?: Prisma.EstateCreateOrConnectWithoutCharacterInput | Prisma.EstateCreateOrConnectWithoutCharacterInput[]
@@ -1262,6 +1402,20 @@ export type EstateUncheckedUpdateManyWithoutCharacterNestedInput = {
   connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
   update?: Prisma.EstateUpdateWithWhereUniqueWithoutCharacterInput | Prisma.EstateUpdateWithWhereUniqueWithoutCharacterInput[]
   updateMany?: Prisma.EstateUpdateManyWithWhereWithoutCharacterInput | Prisma.EstateUpdateManyWithWhereWithoutCharacterInput[]
+  deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
+}
+
+export type EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput = {
+  create?: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput> | Prisma.EstateCreateWithoutDesignerCreditCharacterInput[] | Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput[]
+  connectOrCreate?: Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput | Prisma.EstateCreateOrConnectWithoutDesignerCreditCharacterInput[]
+  upsert?: Prisma.EstateUpsertWithWhereUniqueWithoutDesignerCreditCharacterInput | Prisma.EstateUpsertWithWhereUniqueWithoutDesignerCreditCharacterInput[]
+  createMany?: Prisma.EstateCreateManyDesignerCreditCharacterInputEnvelope
+  set?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  disconnect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  delete?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  connect?: Prisma.EstateWhereUniqueInput | Prisma.EstateWhereUniqueInput[]
+  update?: Prisma.EstateUpdateWithWhereUniqueWithoutDesignerCreditCharacterInput | Prisma.EstateUpdateWithWhereUniqueWithoutDesignerCreditCharacterInput[]
+  updateMany?: Prisma.EstateUpdateManyWithWhereWithoutDesignerCreditCharacterInput | Prisma.EstateUpdateManyWithWhereWithoutDesignerCreditCharacterInput[]
   deleteMany?: Prisma.EstateScalarWhereInput | Prisma.EstateScalarWhereInput[]
 }
 
@@ -1460,10 +1614,15 @@ export type EstateCreateWithoutFlaggedByInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -1508,6 +1667,11 @@ export type EstateUncheckedCreateWithoutFlaggedByInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -1560,10 +1724,15 @@ export type EstateCreateWithoutOwnerInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -1608,6 +1777,11 @@ export type EstateUncheckedCreateWithoutOwnerInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -1660,11 +1834,16 @@ export type EstateCreateWithoutPinnedByUsersInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
@@ -1709,6 +1888,11 @@ export type EstateUncheckedCreateWithoutPinnedByUsersInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedCreateNestedOneWithoutEstateInput
@@ -1755,10 +1939,15 @@ export type EstateCreateWithoutDesignerInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -1803,6 +1992,11 @@ export type EstateUncheckedCreateWithoutDesignerInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -1878,6 +2072,11 @@ export type EstateScalarWhereInput = {
   designerId?: Prisma.StringNullableFilter<"Estate"> | string | null
   claimedAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
   confirmedActiveAt?: Prisma.DateTimeNullableFilter<"Estate"> | Date | string | null
+  designerCreditName?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditServer?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditLodestoneId?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditAvatarUrl?: Prisma.StringNullableFilter<"Estate"> | string | null
+  designerCreditCharacterId?: Prisma.StringNullableFilter<"Estate"> | string | null
 }
 
 export type EstateUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1937,11 +2136,16 @@ export type EstateUpdateWithoutPinnedByUsersInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
@@ -1986,6 +2190,11 @@ export type EstateUncheckedUpdateWithoutPinnedByUsersInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedUpdateOneWithoutEstateNestedInput
@@ -2043,10 +2252,15 @@ export type EstateCreateWithoutCharacterInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -2091,6 +2305,11 @@ export type EstateUncheckedCreateWithoutCharacterInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -2113,6 +2332,116 @@ export type EstateCreateManyCharacterInputEnvelope = {
   skipDuplicates?: boolean
 }
 
+export type EstateCreateWithoutDesignerCreditCharacterInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  size?: $Enums.EstateSize | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  room?: number | null
+  subdivision?: string | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  verified?: boolean
+  verificationStatus?: $Enums.VerificationStatus | null
+  claimedAt?: Date | string | null
+  confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
+  character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
+  flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
+  owner: Prisma.UserCreateNestedOneWithoutEstatesInput
+  designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
+  pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
+  claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsCreateNestedOneWithoutEstateInput
+  verification?: Prisma.EstateVerificationCreateNestedOneWithoutEstateInput
+  collectionEntries?: Prisma.CollectionEstateCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutEstateInput
+}
+
+export type EstateUncheckedCreateWithoutDesignerCreditCharacterInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  size?: $Enums.EstateSize | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  ownerId: string
+  characterId?: string | null
+  room?: number | null
+  subdivision?: string | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  flaggedById?: string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  verified?: boolean
+  verificationStatus?: $Enums.VerificationStatus | null
+  designerId?: string | null
+  claimedAt?: Date | string | null
+  confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
+  pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
+  claimRequest?: Prisma.EstateClaimRequestUncheckedCreateNestedOneWithoutEstateInput
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutEstateInput
+  likes?: Prisma.LikeUncheckedCreateNestedManyWithoutEstateInput
+  venueDetails?: Prisma.VenueDetailsUncheckedCreateNestedOneWithoutEstateInput
+  verification?: Prisma.EstateVerificationUncheckedCreateNestedOneWithoutEstateInput
+  collectionEntries?: Prisma.CollectionEstateUncheckedCreateNestedManyWithoutEstateInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutEstateInput
+}
+
+export type EstateCreateOrConnectWithoutDesignerCreditCharacterInput = {
+  where: Prisma.EstateWhereUniqueInput
+  create: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput>
+}
+
+export type EstateCreateManyDesignerCreditCharacterInputEnvelope = {
+  data: Prisma.EstateCreateManyDesignerCreditCharacterInput | Prisma.EstateCreateManyDesignerCreditCharacterInput[]
+  skipDuplicates?: boolean
+}
+
 export type EstateUpsertWithWhereUniqueWithoutCharacterInput = {
   where: Prisma.EstateWhereUniqueInput
   update: Prisma.XOR<Prisma.EstateUpdateWithoutCharacterInput, Prisma.EstateUncheckedUpdateWithoutCharacterInput>
@@ -2127,6 +2456,22 @@ export type EstateUpdateWithWhereUniqueWithoutCharacterInput = {
 export type EstateUpdateManyWithWhereWithoutCharacterInput = {
   where: Prisma.EstateScalarWhereInput
   data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutCharacterInput>
+}
+
+export type EstateUpsertWithWhereUniqueWithoutDesignerCreditCharacterInput = {
+  where: Prisma.EstateWhereUniqueInput
+  update: Prisma.XOR<Prisma.EstateUpdateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedUpdateWithoutDesignerCreditCharacterInput>
+  create: Prisma.XOR<Prisma.EstateCreateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedCreateWithoutDesignerCreditCharacterInput>
+}
+
+export type EstateUpdateWithWhereUniqueWithoutDesignerCreditCharacterInput = {
+  where: Prisma.EstateWhereUniqueInput
+  data: Prisma.XOR<Prisma.EstateUpdateWithoutDesignerCreditCharacterInput, Prisma.EstateUncheckedUpdateWithoutDesignerCreditCharacterInput>
+}
+
+export type EstateUpdateManyWithWhereWithoutDesignerCreditCharacterInput = {
+  where: Prisma.EstateScalarWhereInput
+  data: Prisma.XOR<Prisma.EstateUpdateManyMutationInput, Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterInput>
 }
 
 export type EstateCreateWithoutVerificationInput = {
@@ -2159,11 +2504,16 @@ export type EstateCreateWithoutVerificationInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -2208,6 +2558,11 @@ export type EstateUncheckedCreateWithoutVerificationInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -2265,11 +2620,16 @@ export type EstateUpdateWithoutVerificationInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -2314,6 +2674,11 @@ export type EstateUncheckedUpdateWithoutVerificationInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -2355,11 +2720,16 @@ export type EstateCreateWithoutPendingTransferInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
@@ -2404,6 +2774,11 @@ export type EstateUncheckedCreateWithoutPendingTransferInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedCreateNestedOneWithoutEstateInput
@@ -2461,11 +2836,16 @@ export type EstateUpdateWithoutPendingTransferInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
@@ -2510,6 +2890,11 @@ export type EstateUncheckedUpdateWithoutPendingTransferInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedUpdateOneWithoutEstateNestedInput
@@ -2551,11 +2936,16 @@ export type EstateCreateWithoutImagesInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -2600,6 +2990,11 @@ export type EstateUncheckedCreateWithoutImagesInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -2657,11 +3052,16 @@ export type EstateUpdateWithoutImagesInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -2706,6 +3106,11 @@ export type EstateUncheckedUpdateWithoutImagesInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -2747,11 +3152,16 @@ export type EstateCreateWithoutVenueDetailsInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -2796,6 +3206,11 @@ export type EstateUncheckedCreateWithoutVenueDetailsInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -2853,11 +3268,16 @@ export type EstateUpdateWithoutVenueDetailsInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -2902,6 +3322,11 @@ export type EstateUncheckedUpdateWithoutVenueDetailsInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -2943,11 +3368,16 @@ export type EstateCreateWithoutLikesInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -2992,6 +3422,11 @@ export type EstateUncheckedCreateWithoutLikesInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -3049,11 +3484,16 @@ export type EstateUpdateWithoutLikesInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -3098,6 +3538,11 @@ export type EstateUncheckedUpdateWithoutLikesInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -3139,10 +3584,15 @@ export type EstateCreateWithoutCommentsInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -3188,6 +3638,11 @@ export type EstateUncheckedCreateWithoutCommentsInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedCreateNestedOneWithoutEstateInput
@@ -3245,10 +3700,15 @@ export type EstateUpdateWithoutCommentsInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -3294,6 +3754,11 @@ export type EstateUncheckedUpdateWithoutCommentsInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUncheckedUpdateOneWithoutEstateNestedInput
@@ -3335,11 +3800,16 @@ export type EstateCreateWithoutClaimRequestInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   images?: Prisma.ImageCreateNestedManyWithoutEstateInput
@@ -3384,6 +3854,11 @@ export type EstateUncheckedCreateWithoutClaimRequestInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -3441,11 +3916,16 @@ export type EstateUpdateWithoutClaimRequestInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
@@ -3490,6 +3970,11 @@ export type EstateUncheckedUpdateWithoutClaimRequestInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -3531,11 +4016,16 @@ export type EstateCreateWithoutCollectionEntriesInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -3580,6 +4070,11 @@ export type EstateUncheckedCreateWithoutCollectionEntriesInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -3637,11 +4132,16 @@ export type EstateUpdateWithoutCollectionEntriesInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -3686,6 +4186,11 @@ export type EstateUncheckedUpdateWithoutCollectionEntriesInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -3727,11 +4232,16 @@ export type EstateCreateWithoutFcOverrideRequestsInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutEstateInput
   character?: Prisma.FfxivCharacterCreateNestedOneWithoutEstatesInput
   flaggedBy?: Prisma.UserCreateNestedOneWithoutFlaggedEstatesInput
   owner: Prisma.UserCreateNestedOneWithoutEstatesInput
   designer?: Prisma.UserCreateNestedOneWithoutDesignedEstatesInput
+  designerCreditCharacter?: Prisma.FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput
   pinnedByUsers?: Prisma.UserCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferCreateNestedOneWithoutEstateInput
   claimRequest?: Prisma.EstateClaimRequestCreateNestedOneWithoutEstateInput
@@ -3776,6 +4286,11 @@ export type EstateUncheckedCreateWithoutFcOverrideRequestsInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutEstateInput
   pinnedByUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPinnedEstateInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedCreateNestedOneWithoutEstateInput
@@ -3833,11 +4348,16 @@ export type EstateUpdateWithoutFcOverrideRequestsInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -3882,6 +4402,11 @@ export type EstateUncheckedUpdateWithoutFcOverrideRequestsInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -3926,6 +4451,11 @@ export type EstateCreateManyFlaggedByInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
 }
 
 export type EstateCreateManyOwnerInput = {
@@ -3961,6 +4491,11 @@ export type EstateCreateManyOwnerInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
 }
 
 export type EstateCreateManyDesignerInput = {
@@ -3996,6 +4531,11 @@ export type EstateCreateManyDesignerInput = {
   verificationStatus?: $Enums.VerificationStatus | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
 }
 
 export type EstateUpdateWithoutFlaggedByInput = {
@@ -4028,10 +4568,15 @@ export type EstateUpdateWithoutFlaggedByInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -4076,6 +4621,11 @@ export type EstateUncheckedUpdateWithoutFlaggedByInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -4121,6 +4671,11 @@ export type EstateUncheckedUpdateManyWithoutFlaggedByInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EstateUpdateWithoutOwnerInput = {
@@ -4153,10 +4708,15 @@ export type EstateUpdateWithoutOwnerInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -4201,6 +4761,11 @@ export type EstateUncheckedUpdateWithoutOwnerInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -4246,6 +4811,11 @@ export type EstateUncheckedUpdateManyWithoutOwnerInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EstateUpdateWithoutDesignerInput = {
@@ -4278,10 +4848,15 @@ export type EstateUpdateWithoutDesignerInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -4326,6 +4901,11 @@ export type EstateUncheckedUpdateWithoutDesignerInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -4371,6 +4951,11 @@ export type EstateUncheckedUpdateManyWithoutDesignerInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type EstateCreateManyCharacterInput = {
@@ -4406,6 +4991,51 @@ export type EstateCreateManyCharacterInput = {
   designerId?: string | null
   claimedAt?: Date | string | null
   confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
+  designerCreditCharacterId?: string | null
+}
+
+export type EstateCreateManyDesignerCreditCharacterInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  published?: boolean
+  name: string
+  description: string
+  inspiration: string
+  type: $Enums.EstateType
+  district?: $Enums.HousingDistrict | null
+  region: string
+  dataCenter: string
+  server: string
+  ward?: number | null
+  plot?: number | null
+  size?: $Enums.EstateSize | null
+  tags?: Prisma.EstateCreatetagsInput | string[]
+  likeCount?: number
+  commentCount?: number
+  ownerId: string
+  characterId?: string | null
+  room?: number | null
+  subdivision?: string | null
+  flagReason?: string | null
+  flagged?: boolean
+  flaggedAt?: Date | string | null
+  flaggedById?: string | null
+  moderationStatus?: $Enums.ModerationStatus
+  deletedAt?: Date | string | null
+  verified?: boolean
+  verificationStatus?: $Enums.VerificationStatus | null
+  designerId?: string | null
+  claimedAt?: Date | string | null
+  confirmedActiveAt?: Date | string | null
+  designerCreditName?: string | null
+  designerCreditServer?: string | null
+  designerCreditLodestoneId?: string | null
+  designerCreditAvatarUrl?: string | null
 }
 
 export type EstateUpdateWithoutCharacterInput = {
@@ -4438,10 +5068,15 @@ export type EstateUpdateWithoutCharacterInput = {
   verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
   flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
   designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  designerCreditCharacter?: Prisma.FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput
   pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
   claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
@@ -4486,6 +5121,11 @@ export type EstateUncheckedUpdateWithoutCharacterInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
   pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
   pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
@@ -4531,6 +5171,151 @@ export type EstateUncheckedUpdateManyWithoutCharacterInput = {
   designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditCharacterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type EstateUpdateWithoutDesignerCreditCharacterInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
+  claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUpdateManyWithoutEstateNestedInput
+  character?: Prisma.FfxivCharacterUpdateOneWithoutEstatesNestedInput
+  flaggedBy?: Prisma.UserUpdateOneWithoutFlaggedEstatesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutEstatesNestedInput
+  designer?: Prisma.UserUpdateOneWithoutDesignedEstatesNestedInput
+  pinnedByUsers?: Prisma.UserUpdateManyWithoutPinnedEstateNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUpdateOneWithoutEstateNestedInput
+  claimRequest?: Prisma.EstateClaimRequestUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUpdateOneWithoutEstateNestedInput
+  verification?: Prisma.EstateVerificationUpdateOneWithoutEstateNestedInput
+  collectionEntries?: Prisma.CollectionEstateUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutEstateNestedInput
+}
+
+export type EstateUncheckedUpdateWithoutDesignerCreditCharacterInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
+  designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutEstateNestedInput
+  pinnedByUsers?: Prisma.UserUncheckedUpdateManyWithoutPinnedEstateNestedInput
+  pendingTransfer?: Prisma.EstatePendingTransferUncheckedUpdateOneWithoutEstateNestedInput
+  claimRequest?: Prisma.EstateClaimRequestUncheckedUpdateOneWithoutEstateNestedInput
+  images?: Prisma.ImageUncheckedUpdateManyWithoutEstateNestedInput
+  likes?: Prisma.LikeUncheckedUpdateManyWithoutEstateNestedInput
+  venueDetails?: Prisma.VenueDetailsUncheckedUpdateOneWithoutEstateNestedInput
+  verification?: Prisma.EstateVerificationUncheckedUpdateOneWithoutEstateNestedInput
+  collectionEntries?: Prisma.CollectionEstateUncheckedUpdateManyWithoutEstateNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutEstateNestedInput
+}
+
+export type EstateUncheckedUpdateManyWithoutDesignerCreditCharacterInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inspiration?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumEstateTypeFieldUpdateOperationsInput | $Enums.EstateType
+  district?: Prisma.NullableEnumHousingDistrictFieldUpdateOperationsInput | $Enums.HousingDistrict | null
+  region?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  ward?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  plot?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  size?: Prisma.NullableEnumEstateSizeFieldUpdateOperationsInput | $Enums.EstateSize | null
+  tags?: Prisma.EstateUpdatetagsInput | string[]
+  likeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  commentCount?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  room?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subdivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  flagged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  flaggedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  flaggedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderationStatus?: Prisma.EnumModerationStatusFieldUpdateOperationsInput | $Enums.ModerationStatus
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verificationStatus?: Prisma.NullableEnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus | null
+  designerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  claimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  confirmedActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  designerCreditName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditServer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditLodestoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designerCreditAvatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -4643,11 +5428,17 @@ export type EstateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   designerId?: boolean
   claimedAt?: boolean
   confirmedActiveAt?: boolean
+  designerCreditName?: boolean
+  designerCreditServer?: boolean
+  designerCreditLodestoneId?: boolean
+  designerCreditAvatarUrl?: boolean
+  designerCreditCharacterId?: boolean
   comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
   pinnedByUsers?: boolean | Prisma.Estate$pinnedByUsersArgs<ExtArgs>
   pendingTransfer?: boolean | Prisma.Estate$pendingTransferArgs<ExtArgs>
   claimRequest?: boolean | Prisma.Estate$claimRequestArgs<ExtArgs>
@@ -4694,10 +5485,16 @@ export type EstateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   designerId?: boolean
   claimedAt?: boolean
   confirmedActiveAt?: boolean
+  designerCreditName?: boolean
+  designerCreditServer?: boolean
+  designerCreditLodestoneId?: boolean
+  designerCreditAvatarUrl?: boolean
+  designerCreditCharacterId?: boolean
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
 export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -4734,10 +5531,16 @@ export type EstateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   designerId?: boolean
   claimedAt?: boolean
   confirmedActiveAt?: boolean
+  designerCreditName?: boolean
+  designerCreditServer?: boolean
+  designerCreditLodestoneId?: boolean
+  designerCreditAvatarUrl?: boolean
+  designerCreditCharacterId?: boolean
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
 }, ExtArgs["result"]["estate"]>
 
 export type EstateSelectScalar = {
@@ -4774,15 +5577,21 @@ export type EstateSelectScalar = {
   designerId?: boolean
   claimedAt?: boolean
   confirmedActiveAt?: boolean
+  designerCreditName?: boolean
+  designerCreditServer?: boolean
+  designerCreditLodestoneId?: boolean
+  designerCreditAvatarUrl?: boolean
+  designerCreditCharacterId?: boolean
 }
 
-export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "size" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "subdivision" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt" | "confirmedActiveAt", ExtArgs["result"]["estate"]>
+export type EstateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "published" | "name" | "description" | "inspiration" | "type" | "district" | "region" | "dataCenter" | "server" | "ward" | "plot" | "size" | "tags" | "likeCount" | "commentCount" | "ownerId" | "characterId" | "room" | "subdivision" | "flagReason" | "flagged" | "flaggedAt" | "flaggedById" | "moderationStatus" | "deletedAt" | "verified" | "verificationStatus" | "designerId" | "claimedAt" | "confirmedActiveAt" | "designerCreditName" | "designerCreditServer" | "designerCreditLodestoneId" | "designerCreditAvatarUrl" | "designerCreditCharacterId", ExtArgs["result"]["estate"]>
 export type EstateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | Prisma.Estate$commentsArgs<ExtArgs>
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
   pinnedByUsers?: boolean | Prisma.Estate$pinnedByUsersArgs<ExtArgs>
   pendingTransfer?: boolean | Prisma.Estate$pendingTransferArgs<ExtArgs>
   claimRequest?: boolean | Prisma.Estate$claimRequestArgs<ExtArgs>
@@ -4799,12 +5608,14 @@ export type EstateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
 }
 export type EstateIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   character?: boolean | Prisma.Estate$characterArgs<ExtArgs>
   flaggedBy?: boolean | Prisma.Estate$flaggedByArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   designer?: boolean | Prisma.Estate$designerArgs<ExtArgs>
+  designerCreditCharacter?: boolean | Prisma.Estate$designerCreditCharacterArgs<ExtArgs>
 }
 
 export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4815,6 +5626,7 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     flaggedBy: Prisma.$UserPayload<ExtArgs> | null
     owner: Prisma.$UserPayload<ExtArgs>
     designer: Prisma.$UserPayload<ExtArgs> | null
+    designerCreditCharacter: Prisma.$FfxivCharacterPayload<ExtArgs> | null
     pinnedByUsers: Prisma.$UserPayload<ExtArgs>[]
     pendingTransfer: Prisma.$EstatePendingTransferPayload<ExtArgs> | null
     claimRequest: Prisma.$EstateClaimRequestPayload<ExtArgs> | null
@@ -4859,6 +5671,11 @@ export type $EstatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     designerId: string | null
     claimedAt: Date | null
     confirmedActiveAt: Date | null
+    designerCreditName: string | null
+    designerCreditServer: string | null
+    designerCreditLodestoneId: string | null
+    designerCreditAvatarUrl: string | null
+    designerCreditCharacterId: string | null
   }, ExtArgs["result"]["estate"]>
   composites: {}
 }
@@ -5258,6 +6075,7 @@ export interface Prisma__EstateClient<T, Null = never, ExtArgs extends runtime.T
   flaggedBy<T extends Prisma.Estate$flaggedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$flaggedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   designer<T extends Prisma.Estate$designerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$designerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  designerCreditCharacter<T extends Prisma.Estate$designerCreditCharacterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$designerCreditCharacterArgs<ExtArgs>>): Prisma.Prisma__FfxivCharacterClient<runtime.Types.Result.GetResult<Prisma.$FfxivCharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   pinnedByUsers<T extends Prisma.Estate$pinnedByUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$pinnedByUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pendingTransfer<T extends Prisma.Estate$pendingTransferArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$pendingTransferArgs<ExtArgs>>): Prisma.Prisma__EstatePendingTransferClient<runtime.Types.Result.GetResult<Prisma.$EstatePendingTransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   claimRequest<T extends Prisma.Estate$claimRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Estate$claimRequestArgs<ExtArgs>>): Prisma.Prisma__EstateClaimRequestClient<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -5329,6 +6147,11 @@ export interface EstateFieldRefs {
   readonly designerId: Prisma.FieldRef<"Estate", 'String'>
   readonly claimedAt: Prisma.FieldRef<"Estate", 'DateTime'>
   readonly confirmedActiveAt: Prisma.FieldRef<"Estate", 'DateTime'>
+  readonly designerCreditName: Prisma.FieldRef<"Estate", 'String'>
+  readonly designerCreditServer: Prisma.FieldRef<"Estate", 'String'>
+  readonly designerCreditLodestoneId: Prisma.FieldRef<"Estate", 'String'>
+  readonly designerCreditAvatarUrl: Prisma.FieldRef<"Estate", 'String'>
+  readonly designerCreditCharacterId: Prisma.FieldRef<"Estate", 'String'>
 }
     
 
@@ -5808,6 +6631,25 @@ export type Estate$designerArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * Estate.designerCreditCharacter
+ */
+export type Estate$designerCreditCharacterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FfxivCharacter
+   */
+  select?: Prisma.FfxivCharacterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FfxivCharacter
+   */
+  omit?: Prisma.FfxivCharacterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FfxivCharacterInclude<ExtArgs> | null
+  where?: Prisma.FfxivCharacterWhereInput
 }
 
 /**
