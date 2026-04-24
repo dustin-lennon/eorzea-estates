@@ -12,6 +12,7 @@
  * a fresh one. All other code is identical to the upstream release.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const events_1 = require("events")
 
 class CloudflareSocket extends events_1.EventEmitter {
