@@ -121,10 +121,14 @@ let patched = false
 
 if (patches.length > 0) {
   // handler.mjs has TWO separate externalImport() functions (two Turbopack chunk
-  // contexts). Both have the OG ternary case. We must patch ALL occurrences.
+  // contexts). Both have the OG case. We must patch ALL occurrences.
   // The patch is idempotent: skip any hashId already present before the og anchor.
+  //
+  // OpenNext now emits switch/case format:
+  //   switch(id){case"next/dist/compiled/@vercel/og/index.node.js":raw2=...;break;...}
+  // We insert new case statements immediately before the OG case anchor.
 
-  const OG_ANCHOR = 'id==="next/dist/compiled/@vercel/og/index.node.js"'
+  const OG_ANCHOR = 'case"next/dist/compiled/@vercel/og/index.node.js"'
 
   if (!handler.includes(OG_ANCHOR)) {
     console.error("[patch-cf-externals] Could not find og anchor in handler.mjs")
@@ -132,22 +136,15 @@ if (patches.length > 0) {
   }
 
   let ogCount = 0
-  // replaceAll with a function so we can handle each occurrence independently
   handler = handler.replaceAll(OG_ANCHOR, (match, offset) => {
     ogCount++
-    // Extract the raw variable name from context just before this occurrence
-    const before = handler.slice(Math.max(0, offset - 50), offset)
-    const rawVarMatch = before.match(/([a-z]\w*)\s*=\s*$/) ||
-                        handler.slice(offset).match(/\?(raw2|[a-z]\w*)=await/)
-    const rawVar = rawVarMatch ? rawVarMatch[1] : "raw2"
+    const lookback = handler.slice(Math.max(0, offset - 1000), offset)
 
     let extraCases = ""
     for (const { hashId, specifier } of patches) {
-      // Skip if already patched in this function (idempotency)
-      // Look back up to 500 chars for an existing case for this hash
-      const lookback = handler.slice(Math.max(0, offset - 500), offset)
-      if (lookback.includes(`id==="${hashId}"`)) continue
-      extraCases += `id==="${hashId}"?${rawVar}=await import("${specifier}"):`
+      // Idempotency: skip if this hash already has a case before the anchor
+      if (lookback.includes(`case"${hashId}"`)) continue
+      extraCases += `case"${hashId}":raw2=await import("${specifier}");break;`
     }
     return extraCases + match
   })
