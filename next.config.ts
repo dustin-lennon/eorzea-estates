@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 // Don't crash the build if local Hyperdrive proxy fails to start (e.g., no
 // localConnectionString configured). Wrangler sets up the CF context at
@@ -11,7 +13,12 @@ initOpenNextCloudflareForDev().catch((e: unknown) => {
   }
 });
 
+const changelogContent = readFileSync(join(process.cwd(), "CHANGELOG.md"), "utf-8");
+
 const nextConfig: NextConfig = {
+  env: {
+    CHANGELOG_CONTENT: changelogContent,
+  },
   serverExternalPackages: ["@xivapi/nodestone", "regex-translator", "@langfuse/otel", "@opentelemetry/sdk-node"],
   // Turbopack hashes sharp to a random module ID (e.g. "sharp-03c9e6d01f648d5d") that
   // OpenNext's esbuild step cannot resolve. Aliasing to a null shim prevents the error.
