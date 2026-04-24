@@ -257,56 +257,78 @@ if (wasmDecodeMatches && wasmDecodeMatches.length > 0) {
 
 // ── 3e. @cf-wasm/photon WASM static import shim ─────────────────────────────
 // Turbopack bundles @cf-wasm/photon using the Node.js export condition, which
-// inlines the WASM bytes as base64 and compiles them with new WebAssembly.Module()
-// at startup. CF Workers block dynamic WebAssembly compilation.
+// inlines the WASM bytes as base64 (~2.2 MB) and compiles them with new
+// WebAssembly.Module() at startup. CF Workers block dynamic WASM compilation.
 //
-// Fix: copy the photon .wasm file alongside handler.mjs, prepend a static import,
-// and replace:
-//   var X=Uint8Array.from(atob("..."),c=>c.charCodeAt(0)).buffer;
-//   var Y=new WebAssembly.Module(X);
-//   Z.sync({module:Y})
-// with: Z.sync({module:__photonWasm})
+// Regex is unusable here: the base64 string is 2.2 million characters, which
+// causes the regex engine to stall. Use indexOf-based string surgery instead.
 //
-// Note: dist/node.js uses separate statements (not a single var declaration),
-// so the regex must match across two var statements.
+// Pattern to remove (any of these Turbopack structural variants):
+//   var A=Uint8Array.from(atob("...2.2MB..."),c=>c.charCodeAt(0)).buffer;
+//   var B=new WebAssembly.Module(A);
+//   Z.sync({module:B})
+// Replace the entire block (from the leading `var A=`) with:
+//   Z.sync({module:__photonWasm})
 
 const PHOTON_WASM_IMPORT = `import __photonWasm from "./photon.wasm";\n`
-const PHOTON_WASM_RE = /var \w+=Uint8Array\.from\(atob\("[A-Za-z0-9+/=]+"\),\w+=>\w+\.charCodeAt\(0\)\)\.buffer;var \w+=new WebAssembly\.Module\(\w+\);(\w+)\.sync\(\{module:\w+\}\)/
 
-const photonWasmMatch = handler.match(PHOTON_WASM_RE)
-if (photonWasmMatch) {
-  const syncVar = photonWasmMatch[1]
-  const photonWasmSrc = path.join(
-    projectRoot,
-    "node_modules",
-    "@cf-wasm",
-    "photon",
-    "dist",
-    "lib",
-    "photon_rs_bg.wasm"
-  )
-  if (!fs.existsSync(photonWasmSrc)) {
-    console.error("[patch-cf-externals] photon WASM not found:", photonWasmSrc)
-    process.exit(1)
-  }
-  const photonWasmDest = path.join(
-    projectRoot,
-    ".open-next",
-    "server-functions",
-    "default",
-    "photon.wasm"
-  )
-  fs.copyFileSync(photonWasmSrc, photonWasmDest)
-  console.log(`[patch-cf-externals] photon WASM written (${fs.statSync(photonWasmDest).size} bytes): ${photonWasmDest}`)
+;{
+  // Regex unusable: base64 string is ~2.2 MB. Use indexOf string surgery instead.
+  const ATOB_START = 'Uint8Array.from(atob("'
+  const atobPos = handler.indexOf(ATOB_START)
 
-  if (!handler.includes(PHOTON_WASM_IMPORT)) {
-    handler = PHOTON_WASM_IMPORT + handler
+  if (atobPos === -1) {
+    console.log("[patch-cf-externals] photon WASM pattern not found — already patched or not present.")
+  } else {
+    // base64 chars never include `"` so indexOf finds the exact closing quote
+    const base64End = handler.indexOf('")', atobPos + ATOB_START.length)
+    const bufferEnd = base64End !== -1 ? handler.indexOf('.buffer', base64End) + 7 : -1
+    const syncPos   = bufferEnd > 0   ? handler.indexOf('.sync({module:', bufferEnd) : -1
+
+    if (syncPos === -1 || syncPos - bufferEnd > 500) {
+      console.error("[patch-cf-externals] photon WASM .sync call not found after .buffer — skipping.")
+    } else {
+      const syncEnd = handler.indexOf('})', syncPos) + 2
+
+      // Sync variable: identifier immediately before `.sync`
+      let svEnd = syncPos, svStart = syncPos
+      while (svStart > 0 && /[\w$]/.test(handler[svStart - 1])) svStart--
+      const syncVar = handler.slice(svStart, svEnd)
+
+      // Replacement start: walk back from atobPos to nearest var/let/const (≤50 chars)
+      let replaceStart = atobPos
+      for (let i = atobPos - 1; i >= Math.max(0, atobPos - 50); i--) {
+        const tok = handler.slice(i, i + 4)
+        if (tok === 'var ' || tok === 'let ' || tok === 'con') { replaceStart = i; break }
+        if (handler[i] === ';' || handler[i] === '{') break
+      }
+
+      // Do content replacement FIRST (positions valid on current handler),
+      // then prepend static import so offset arithmetic stays simple.
+      handler = handler.slice(0, replaceStart) +
+                `${syncVar}.sync({module:__photonWasm})` +
+                handler.slice(syncEnd)
+
+      if (!handler.startsWith(PHOTON_WASM_IMPORT)) {
+        handler = PHOTON_WASM_IMPORT + handler
+      }
+
+      const photonWasmSrc = path.join(
+        projectRoot, "node_modules", "@cf-wasm", "photon", "dist", "lib", "photon_rs_bg.wasm"
+      )
+      if (!fs.existsSync(photonWasmSrc)) {
+        console.error("[patch-cf-externals] photon WASM not found:", photonWasmSrc)
+        process.exit(1)
+      }
+      const photonWasmDest = path.join(
+        projectRoot, ".open-next", "server-functions", "default", "photon.wasm"
+      )
+      fs.copyFileSync(photonWasmSrc, photonWasmDest)
+      console.log(`[patch-cf-externals] photon WASM written (${fs.statSync(photonWasmDest).size} bytes)`)
+      console.log("[patch-cf-externals] photon WASM static import shimmed.")
+      patched = true
+    }
   }
-  handler = handler.replace(PHOTON_WASM_RE, (_, s) => `${s}.sync({module:__photonWasm})`)
-  console.log("[patch-cf-externals] photon WASM static import shimmed.")
-  patched = true
-} else {
-  console.log("[patch-cf-externals] photon WASM pattern not found — already patched or not present.")
 }
 
 // ── 3g. pg-cloudflare fixed shim ─────────────────────────────────────────────
