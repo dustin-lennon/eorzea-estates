@@ -5,7 +5,7 @@ import { randomUUID } from "crypto"
 import { REGIONS } from "./ffxiv-data"
 
 // sharp is null in CF Workers (native binary; shimmed to null via Turbopack alias).
-// Fallback: use @cf-wasm/photon (WASM, CF Workers compatible) for resize + JPEG output.
+// Fallback: use @cf-wasm/photon (WASM, CF Workers compatible) for resize + WebP output.
 const sharp = sharpLib as typeof sharpLib | null
 
 async function resizeInside(buffer: Buffer, maxWidth: number, maxHeight: number): Promise<{ data: Buffer; contentType: string; ext: string }> {
@@ -21,9 +21,9 @@ async function resizeInside(buffer: Buffer, maxWidth: number, maxHeight: number)
   const newH = Math.max(1, Math.round(origH * scale))
   const resized = photon.resize(img, newW, newH, photon.SamplingFilter.Lanczos3)
   img.free()
-  const data = Buffer.from(resized.get_bytes_jpeg(85))
+  const data = Buffer.from(resized.get_bytes_webp())
   resized.free()
-  return { data, contentType: "image/jpeg", ext: "jpg" }
+  return { data, contentType: "image/webp", ext: "webp" }
 }
 
 async function resizeCover(buffer: Buffer, size: number): Promise<{ data: Buffer; contentType: string; ext: string }> {
@@ -43,9 +43,9 @@ async function resizeCover(buffer: Buffer, size: number): Promise<{ data: Buffer
   const y1 = Math.floor((newH - size) / 2)
   const cropped = photon.crop(resized, x1, y1, x1 + size, y1 + size)
   resized.free()
-  const data = Buffer.from(cropped.get_bytes_jpeg(85))
+  const data = Buffer.from(cropped.get_bytes_webp())
   cropped.free()
-  return { data, contentType: "image/jpeg", ext: "jpg" }
+  return { data, contentType: "image/webp", ext: "webp" }
 }
 
 const BUCKET = "estate-images"
