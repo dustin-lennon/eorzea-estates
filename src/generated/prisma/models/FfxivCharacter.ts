@@ -221,6 +221,7 @@ export type FfxivCharacterWhereInput = {
   claimRequests?: Prisma.EstateClaimRequestListRelationFilter
   fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
   fcOverrides?: Prisma.FcOverrideListRelationFilter
+  designerCreditEstates?: Prisma.EstateListRelationFilter
 }
 
 export type FfxivCharacterOrderByWithRelationInput = {
@@ -240,6 +241,7 @@ export type FfxivCharacterOrderByWithRelationInput = {
   claimRequests?: Prisma.EstateClaimRequestOrderByRelationAggregateInput
   fcOverrideRequests?: Prisma.FcOverrideRequestOrderByRelationAggregateInput
   fcOverrides?: Prisma.FcOverrideOrderByRelationAggregateInput
+  designerCreditEstates?: Prisma.EstateOrderByRelationAggregateInput
 }
 
 export type FfxivCharacterWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type FfxivCharacterWhereUniqueInput = Prisma.AtLeast<{
   claimRequests?: Prisma.EstateClaimRequestListRelationFilter
   fcOverrideRequests?: Prisma.FcOverrideRequestListRelationFilter
   fcOverrides?: Prisma.FcOverrideListRelationFilter
+  designerCreditEstates?: Prisma.EstateListRelationFilter
 }, "id" | "userId_lodestoneId">
 
 export type FfxivCharacterOrderByWithAggregationInput = {
@@ -311,6 +314,7 @@ export type FfxivCharacterCreateInput = {
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateInput = {
@@ -329,6 +333,7 @@ export type FfxivCharacterUncheckedCreateInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUpdateInput = {
@@ -347,6 +352,7 @@ export type FfxivCharacterUpdateInput = {
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateInput = {
@@ -365,6 +371,7 @@ export type FfxivCharacterUncheckedUpdateInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateManyInput = {
@@ -511,6 +518,12 @@ export type FfxivCharacterCreateNestedOneWithoutEstatesInput = {
   connect?: Prisma.FfxivCharacterWhereUniqueInput
 }
 
+export type FfxivCharacterCreateNestedOneWithoutDesignerCreditEstatesInput = {
+  create?: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutDesignerCreditEstatesInput>
+  connectOrCreate?: Prisma.FfxivCharacterCreateOrConnectWithoutDesignerCreditEstatesInput
+  connect?: Prisma.FfxivCharacterWhereUniqueInput
+}
+
 export type FfxivCharacterUpdateOneWithoutEstatesNestedInput = {
   create?: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutEstatesInput>
   connectOrCreate?: Prisma.FfxivCharacterCreateOrConnectWithoutEstatesInput
@@ -519,6 +532,16 @@ export type FfxivCharacterUpdateOneWithoutEstatesNestedInput = {
   delete?: Prisma.FfxivCharacterWhereInput | boolean
   connect?: Prisma.FfxivCharacterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FfxivCharacterUpdateToOneWithWhereWithoutEstatesInput, Prisma.FfxivCharacterUpdateWithoutEstatesInput>, Prisma.FfxivCharacterUncheckedUpdateWithoutEstatesInput>
+}
+
+export type FfxivCharacterUpdateOneWithoutDesignerCreditEstatesNestedInput = {
+  create?: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutDesignerCreditEstatesInput>
+  connectOrCreate?: Prisma.FfxivCharacterCreateOrConnectWithoutDesignerCreditEstatesInput
+  upsert?: Prisma.FfxivCharacterUpsertWithoutDesignerCreditEstatesInput
+  disconnect?: Prisma.FfxivCharacterWhereInput | boolean
+  delete?: Prisma.FfxivCharacterWhereInput | boolean
+  connect?: Prisma.FfxivCharacterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FfxivCharacterUpdateToOneWithWhereWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUpdateWithoutDesignerCreditEstatesInput>, Prisma.FfxivCharacterUncheckedUpdateWithoutDesignerCreditEstatesInput>
 }
 
 export type FfxivCharacterCreateNestedOneWithoutVenueStaffLinksInput = {
@@ -608,6 +631,7 @@ export type FfxivCharacterCreateWithoutUserInput = {
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutUserInput = {
@@ -625,6 +649,7 @@ export type FfxivCharacterUncheckedCreateWithoutUserInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutUserInput = {
@@ -683,6 +708,7 @@ export type FfxivCharacterCreateWithoutEstatesInput = {
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutEstatesInput = {
@@ -700,11 +726,53 @@ export type FfxivCharacterUncheckedCreateWithoutEstatesInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutEstatesInput = {
   where: Prisma.FfxivCharacterWhereUniqueInput
   create: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutEstatesInput>
+}
+
+export type FfxivCharacterCreateWithoutDesignerCreditEstatesInput = {
+  id?: string
+  lodestoneId: string
+  characterName: string
+  server: string
+  verified?: boolean
+  createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
+  estates?: Prisma.EstateCreateNestedManyWithoutCharacterInput
+  user: Prisma.UserCreateNestedOneWithoutCharactersInput
+  lodestoneVerification?: Prisma.LodestoneVerificationCreateNestedOneWithoutCharacterInput
+  venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
+  claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
+  fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+}
+
+export type FfxivCharacterUncheckedCreateWithoutDesignerCreditEstatesInput = {
+  id?: string
+  userId: string
+  lodestoneId: string
+  characterName: string
+  server: string
+  verified?: boolean
+  createdAt?: Date | string
+  avatarUrl?: string
+  dataCenter?: string
+  estates?: Prisma.EstateUncheckedCreateNestedManyWithoutCharacterInput
+  lodestoneVerification?: Prisma.LodestoneVerificationUncheckedCreateNestedOneWithoutCharacterInput
+  venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
+  fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+}
+
+export type FfxivCharacterCreateOrConnectWithoutDesignerCreditEstatesInput = {
+  where: Prisma.FfxivCharacterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutDesignerCreditEstatesInput>
 }
 
 export type FfxivCharacterUpsertWithoutEstatesInput = {
@@ -733,6 +801,7 @@ export type FfxivCharacterUpdateWithoutEstatesInput = {
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutEstatesInput = {
@@ -745,6 +814,54 @@ export type FfxivCharacterUncheckedUpdateWithoutEstatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
+  venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
+  fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
+}
+
+export type FfxivCharacterUpsertWithoutDesignerCreditEstatesInput = {
+  update: Prisma.XOR<Prisma.FfxivCharacterUpdateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedUpdateWithoutDesignerCreditEstatesInput>
+  create: Prisma.XOR<Prisma.FfxivCharacterCreateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedCreateWithoutDesignerCreditEstatesInput>
+  where?: Prisma.FfxivCharacterWhereInput
+}
+
+export type FfxivCharacterUpdateToOneWithWhereWithoutDesignerCreditEstatesInput = {
+  where?: Prisma.FfxivCharacterWhereInput
+  data: Prisma.XOR<Prisma.FfxivCharacterUpdateWithoutDesignerCreditEstatesInput, Prisma.FfxivCharacterUncheckedUpdateWithoutDesignerCreditEstatesInput>
+}
+
+export type FfxivCharacterUpdateWithoutDesignerCreditEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  estates?: Prisma.EstateUpdateManyWithoutCharacterNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
+  lodestoneVerification?: Prisma.LodestoneVerificationUpdateOneWithoutCharacterNestedInput
+  venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
+  claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
+  fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
+  fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+}
+
+export type FfxivCharacterUncheckedUpdateWithoutDesignerCreditEstatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  lodestoneId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  dataCenter?: Prisma.StringFieldUpdateOperationsInput | string
+  estates?: Prisma.EstateUncheckedUpdateManyWithoutCharacterNestedInput
   lodestoneVerification?: Prisma.LodestoneVerificationUncheckedUpdateOneWithoutCharacterNestedInput
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
@@ -767,6 +884,7 @@ export type FfxivCharacterCreateWithoutVenueStaffLinksInput = {
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutVenueStaffLinksInput = {
@@ -784,6 +902,7 @@ export type FfxivCharacterUncheckedCreateWithoutVenueStaffLinksInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutVenueStaffLinksInput = {
@@ -817,6 +936,7 @@ export type FfxivCharacterUpdateWithoutVenueStaffLinksInput = {
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutVenueStaffLinksInput = {
@@ -834,6 +954,7 @@ export type FfxivCharacterUncheckedUpdateWithoutVenueStaffLinksInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateWithoutLodestoneVerificationInput = {
@@ -851,6 +972,7 @@ export type FfxivCharacterCreateWithoutLodestoneVerificationInput = {
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutLodestoneVerificationInput = {
@@ -868,6 +990,7 @@ export type FfxivCharacterUncheckedCreateWithoutLodestoneVerificationInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutLodestoneVerificationInput = {
@@ -901,6 +1024,7 @@ export type FfxivCharacterUpdateWithoutLodestoneVerificationInput = {
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutLodestoneVerificationInput = {
@@ -918,6 +1042,7 @@ export type FfxivCharacterUncheckedUpdateWithoutLodestoneVerificationInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateWithoutClaimRequestsInput = {
@@ -935,6 +1060,7 @@ export type FfxivCharacterCreateWithoutClaimRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutClaimRequestsInput = {
@@ -952,6 +1078,7 @@ export type FfxivCharacterUncheckedCreateWithoutClaimRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutClaimRequestsInput = {
@@ -985,6 +1112,7 @@ export type FfxivCharacterUpdateWithoutClaimRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutClaimRequestsInput = {
@@ -1002,6 +1130,7 @@ export type FfxivCharacterUncheckedUpdateWithoutClaimRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateWithoutFcOverrideRequestsInput = {
@@ -1019,6 +1148,7 @@ export type FfxivCharacterCreateWithoutFcOverrideRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutFcOverrideRequestsInput = {
@@ -1036,6 +1166,7 @@ export type FfxivCharacterUncheckedCreateWithoutFcOverrideRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrides?: Prisma.FcOverrideUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutFcOverrideRequestsInput = {
@@ -1069,6 +1200,7 @@ export type FfxivCharacterUpdateWithoutFcOverrideRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutFcOverrideRequestsInput = {
@@ -1086,6 +1218,7 @@ export type FfxivCharacterUncheckedUpdateWithoutFcOverrideRequestsInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateWithoutFcOverridesInput = {
@@ -1103,6 +1236,7 @@ export type FfxivCharacterCreateWithoutFcOverridesInput = {
   venueStaffLinks?: Prisma.VenueStaffCreateNestedManyWithoutLinkedCharacterInput
   claimRequests?: Prisma.EstateClaimRequestCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterUncheckedCreateWithoutFcOverridesInput = {
@@ -1120,6 +1254,7 @@ export type FfxivCharacterUncheckedCreateWithoutFcOverridesInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedCreateNestedManyWithoutLinkedCharacterInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedCreateNestedManyWithoutCharacterInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedCreateNestedManyWithoutCharacterInput
+  designerCreditEstates?: Prisma.EstateUncheckedCreateNestedManyWithoutDesignerCreditCharacterInput
 }
 
 export type FfxivCharacterCreateOrConnectWithoutFcOverridesInput = {
@@ -1153,6 +1288,7 @@ export type FfxivCharacterUpdateWithoutFcOverridesInput = {
   venueStaffLinks?: Prisma.VenueStaffUpdateManyWithoutLinkedCharacterNestedInput
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutFcOverridesInput = {
@@ -1170,6 +1306,7 @@ export type FfxivCharacterUncheckedUpdateWithoutFcOverridesInput = {
   venueStaffLinks?: Prisma.VenueStaffUncheckedUpdateManyWithoutLinkedCharacterNestedInput
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterCreateManyUserInput = {
@@ -1198,6 +1335,7 @@ export type FfxivCharacterUpdateWithoutUserInput = {
   claimRequests?: Prisma.EstateClaimRequestUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateWithoutUserInput = {
@@ -1215,6 +1353,7 @@ export type FfxivCharacterUncheckedUpdateWithoutUserInput = {
   claimRequests?: Prisma.EstateClaimRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrideRequests?: Prisma.FcOverrideRequestUncheckedUpdateManyWithoutCharacterNestedInput
   fcOverrides?: Prisma.FcOverrideUncheckedUpdateManyWithoutCharacterNestedInput
+  designerCreditEstates?: Prisma.EstateUncheckedUpdateManyWithoutDesignerCreditCharacterNestedInput
 }
 
 export type FfxivCharacterUncheckedUpdateManyWithoutUserInput = {
@@ -1239,6 +1378,7 @@ export type FfxivCharacterCountOutputType = {
   claimRequests: number
   fcOverrideRequests: number
   fcOverrides: number
+  designerCreditEstates: number
 }
 
 export type FfxivCharacterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1247,6 +1387,7 @@ export type FfxivCharacterCountOutputTypeSelect<ExtArgs extends runtime.Types.Ex
   claimRequests?: boolean | FfxivCharacterCountOutputTypeCountClaimRequestsArgs
   fcOverrideRequests?: boolean | FfxivCharacterCountOutputTypeCountFcOverrideRequestsArgs
   fcOverrides?: boolean | FfxivCharacterCountOutputTypeCountFcOverridesArgs
+  designerCreditEstates?: boolean | FfxivCharacterCountOutputTypeCountDesignerCreditEstatesArgs
 }
 
 /**
@@ -1294,6 +1435,13 @@ export type FfxivCharacterCountOutputTypeCountFcOverridesArgs<ExtArgs extends ru
   where?: Prisma.FcOverrideWhereInput
 }
 
+/**
+ * FfxivCharacterCountOutputType without action
+ */
+export type FfxivCharacterCountOutputTypeCountDesignerCreditEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EstateWhereInput
+}
+
 
 export type FfxivCharacterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1312,6 +1460,7 @@ export type FfxivCharacterSelect<ExtArgs extends runtime.Types.Extensions.Intern
   claimRequests?: boolean | Prisma.FfxivCharacter$claimRequestsArgs<ExtArgs>
   fcOverrideRequests?: boolean | Prisma.FfxivCharacter$fcOverrideRequestsArgs<ExtArgs>
   fcOverrides?: boolean | Prisma.FfxivCharacter$fcOverridesArgs<ExtArgs>
+  designerCreditEstates?: boolean | Prisma.FfxivCharacter$designerCreditEstatesArgs<ExtArgs>
   _count?: boolean | Prisma.FfxivCharacterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ffxivCharacter"]>
 
@@ -1362,6 +1511,7 @@ export type FfxivCharacterInclude<ExtArgs extends runtime.Types.Extensions.Inter
   claimRequests?: boolean | Prisma.FfxivCharacter$claimRequestsArgs<ExtArgs>
   fcOverrideRequests?: boolean | Prisma.FfxivCharacter$fcOverrideRequestsArgs<ExtArgs>
   fcOverrides?: boolean | Prisma.FfxivCharacter$fcOverridesArgs<ExtArgs>
+  designerCreditEstates?: boolean | Prisma.FfxivCharacter$designerCreditEstatesArgs<ExtArgs>
   _count?: boolean | Prisma.FfxivCharacterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FfxivCharacterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1381,6 +1531,7 @@ export type $FfxivCharacterPayload<ExtArgs extends runtime.Types.Extensions.Inte
     claimRequests: Prisma.$EstateClaimRequestPayload<ExtArgs>[]
     fcOverrideRequests: Prisma.$FcOverrideRequestPayload<ExtArgs>[]
     fcOverrides: Prisma.$FcOverridePayload<ExtArgs>[]
+    designerCreditEstates: Prisma.$EstatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1793,6 +1944,7 @@ export interface Prisma__FfxivCharacterClient<T, Null = never, ExtArgs extends r
   claimRequests<T extends Prisma.FfxivCharacter$claimRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$claimRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstateClaimRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fcOverrideRequests<T extends Prisma.FfxivCharacter$fcOverrideRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$fcOverrideRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverrideRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fcOverrides<T extends Prisma.FfxivCharacter$fcOverridesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$fcOverridesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FcOverridePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designerCreditEstates<T extends Prisma.FfxivCharacter$designerCreditEstatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FfxivCharacter$designerCreditEstatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EstatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2368,6 +2520,30 @@ export type FfxivCharacter$fcOverridesArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.FcOverrideScalarFieldEnum | Prisma.FcOverrideScalarFieldEnum[]
+}
+
+/**
+ * FfxivCharacter.designerCreditEstates
+ */
+export type FfxivCharacter$designerCreditEstatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Estate
+   */
+  select?: Prisma.EstateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Estate
+   */
+  omit?: Prisma.EstateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EstateInclude<ExtArgs> | null
+  where?: Prisma.EstateWhereInput
+  orderBy?: Prisma.EstateOrderByWithRelationInput | Prisma.EstateOrderByWithRelationInput[]
+  cursor?: Prisma.EstateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EstateScalarFieldEnum | Prisma.EstateScalarFieldEnum[]
 }
 
 /**

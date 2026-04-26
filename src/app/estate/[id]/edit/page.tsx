@@ -5,6 +5,7 @@ import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
 import { EstateSubmitForm } from "@/app/submit/estate-submit-form"
+import { DesignerCreditSection } from "./designer-credit-section"
 import type { EstateFormValues } from "@/lib/schemas"
 import type { z } from "zod"
 import { estateFormSchema } from "@/lib/schemas"
@@ -40,6 +41,12 @@ export default async function EditEstatePage({
         tags: true,
         characterId: true,
         ownerId: true,
+        designerCreditName: true,
+        designerCreditServer: true,
+        designerCreditLodestoneId: true,
+        designerCreditAvatarUrl: true,
+        designerCreditCharacterId: true,
+        designerCreditCharacter: { select: { userId: true } },
         images: { orderBy: { order: "asc" }, select: { imageUrl: true, storageKey: true } },
         venueDetails: {
           select: {
@@ -113,6 +120,18 @@ export default async function EditEstatePage({
         }),
   }
 
+  const initialCredit =
+    estate.designerCreditName && estate.designerCreditServer && estate.designerCreditLodestoneId
+      ? {
+          name: estate.designerCreditName,
+          server: estate.designerCreditServer,
+          lodestoneId: estate.designerCreditLodestoneId,
+          avatarUrl: estate.designerCreditAvatarUrl ?? "",
+          profileCharacterId: estate.designerCreditCharacterId ?? null,
+          profileUserId: estate.designerCreditCharacter?.userId ?? null,
+        }
+      : null
+
   return (
     <div className="container mx-auto max-w-3xl px-4 py-10">
       <div className="mb-8">
@@ -126,6 +145,9 @@ export default async function EditEstatePage({
         estateId={id}
         defaultValues={defaultValues}
       />
+      <div className="mt-10 pt-8 border-t">
+        <DesignerCreditSection estateId={id} initialCredit={initialCredit} />
+      </div>
     </div>
   )
 }
