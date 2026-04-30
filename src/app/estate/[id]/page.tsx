@@ -13,6 +13,7 @@ import { CommentsSection } from "@/components/comments-section"
 import { ESTATE_TYPES, ESTATE_SIZES, HOUSING_DISTRICTS, VENUE_TYPES, DAYS_OF_WEEK } from "@/lib/ffxiv-data"
 import type { HoursSchedule } from "@/lib/ffxiv-data"
 import { EstateImageGallery } from "./estate-image-gallery"
+import { BackToBrowse } from "./back-to-browse"
 import { FlagButton } from "@/components/flag-button"
 import { ClaimButton } from "./claim-button"
 import { ConfirmActiveButton } from "@/components/confirm-active-button"
@@ -184,6 +185,8 @@ export default async function EstateDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <BackToBrowse />
+
       {/* Gallery */}
       <EstateImageGallery images={estate.images.map((i) => i.imageUrl)} name={estate.name} />
 
