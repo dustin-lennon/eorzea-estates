@@ -38,6 +38,16 @@
     {
       "groupName": "Playwright",
       "matchPackageNames": ["/playwright/"]
+    },
+    {
+      "matchPackageNames": ["eslint"],
+      "allowedVersions": "<10.0.0",
+      "description": "eslint-plugin-react@7.x uses context.getFilename() removed in ESLint 10 — re-enable when eslint-plugin-react supports ESLint 10"
+    },
+    {
+      "matchPackageNames": ["@vitejs/plugin-react"],
+      "allowedVersions": "<6.0.0",
+      "description": "@vitejs/plugin-react@6.x requires vite@^8.0.0 — re-enable when vite is also upgraded to v8"
     }
   ]
 }
