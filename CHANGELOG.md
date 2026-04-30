@@ -3,6 +3,21 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.33.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.4...v1.33.0) (2026-04-30)
+
+### ✨ Features
+
+* add back to browse link on estate detail page ([a83a1a3](https://github.com/dustin-lennon/eorzea-estates/commit/a83a1a3606e076fba46dcd080a01eaee6478c85c))
+* add back to dashboard link on estate edit page ([47ffc8a](https://github.com/dustin-lennon/eorzea-estates/commit/47ffc8a90b478b1cce1b35106d10f519f7e2d5ea))
+* add designer credit to estates with Lodestone lookup ([5dfe6b7](https://github.com/dustin-lennon/eorzea-estates/commit/5dfe6b7ceeced3062fdc6a430dd26f65ee429aeb)), closes [#323](https://github.com/dustin-lennon/eorzea-estates/issues/323)
+* add platform designer selection to designer credit ([4803bf4](https://github.com/dustin-lennon/eorzea-estates/commit/4803bf437b422d9fec49da1a0dd4c4303d5f2075))
+
+### 🐛 Bug Fixes
+
+* downgrade eslint to v9 and @vitejs/plugin-react to v5 for compatibility ([1971c6e](https://github.com/dustin-lennon/eorzea-estates/commit/1971c6e7a4258583a4cfb1a73790a4239d653d4b))
+* make add_designer_credit migration idempotent ([220af75](https://github.com/dustin-lennon/eorzea-estates/commit/220af75ec0f6dd107ffa7d869723d15531068a67))
+* restrict designer credit to PRIVATE, FC_ESTATE, VENUE only ([0fa6b07](https://github.com/dustin-lennon/eorzea-estates/commit/0fa6b074f8106c36f075b6100684ff0456df5f1b))
+
 ## [1.32.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.3...v1.32.4) (2026-04-24)
 
 ### 🐛 Bug Fixes
