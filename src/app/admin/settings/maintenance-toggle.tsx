@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { Label } from "@/components/ui/label"
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function MaintenanceToggle({ initialValue }: Props) {
+  const router = useRouter()
   const [enabled, setEnabled] = useState(initialValue)
   const [loading, setLoading] = useState(false)
 
@@ -24,6 +26,7 @@ export function MaintenanceToggle({ initialValue }: Props) {
       })
       if (!res.ok) throw new Error("Failed to update")
       toast.success(value ? "Maintenance mode enabled" : "Maintenance mode disabled")
+      router.refresh()
     } catch {
       setEnabled(prev) // revert
       toast.error("Failed to update maintenance mode")
