@@ -145,9 +145,11 @@ export default async function EditEstatePage({
         estateId={id}
         defaultValues={defaultValues}
       />
-      <div className="mt-10 pt-8 border-t">
-        <DesignerCreditSection estateId={id} initialCredit={initialCredit} />
-      </div>
+      {estate.type !== "APARTMENT" && estate.type !== "FC_ROOM" && (
+        <div className="mt-10 pt-8 border-t">
+          <DesignerCreditSection estateId={id} initialCredit={initialCredit} />
+        </div>
+      )}
     </div>
   )
 }

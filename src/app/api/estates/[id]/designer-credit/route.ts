@@ -10,10 +10,12 @@ const schema = z.union([
   z.object({ lodestoneId: z.string().regex(/^\d+$/, "Lodestone ID must be a number") }),
 ])
 
+const ALLOWED_TYPES = ["PRIVATE", "FC_ESTATE", "VENUE"]
+
 async function getAuthorizedEstate(estateId: string, userId: string) {
   return prisma.estate.findUnique({
     where: { id: estateId, ownerId: userId, deletedAt: null },
-    select: { id: true },
+    select: { id: true, type: true },
   })
 }
 
@@ -30,6 +32,9 @@ export async function POST(
   const estate = await getAuthorizedEstate(id, session.user.id)
   if (!estate) {
     return NextResponse.json({ error: "Estate not found" }, { status: 404 })
+  }
+  if (!ALLOWED_TYPES.includes(estate.type)) {
+    return NextResponse.json({ error: "Designer credit not available for this estate type" }, { status: 422 })
   }
 
   const body = await req.json()
@@ -99,6 +104,9 @@ export async function DELETE(
   const estate = await getAuthorizedEstate(id, session.user.id)
   if (!estate) {
     return NextResponse.json({ error: "Estate not found" }, { status: 404 })
+  }
+  if (!ALLOWED_TYPES.includes(estate.type)) {
+    return NextResponse.json({ error: "Designer credit not available for this estate type" }, { status: 422 })
   }
 
   await prisma.estate.update({
