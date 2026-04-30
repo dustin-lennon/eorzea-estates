@@ -3,6 +3,7 @@ import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import prisma from "@/lib/prisma"
 import { MaintenanceToggle } from "./maintenance-toggle"
+import { LodestoneMaintenanceToggle } from "./lodestone-maintenance-toggle"
 import { DisputeEmailInput } from "./dispute-email-input"
 
 export default async function AdminSettingsPage() {
@@ -14,6 +15,7 @@ export default async function AdminSettingsPage() {
   })
 
   const maintenanceMode = settings?.maintenanceMode ?? false
+  const lodestoneMaintenanceMode = settings?.lodestoneMaintenanceMode ?? false
   const disputeEmail = settings?.disputeEmail ?? "dispute@eorzeaestates.com"
 
   return (
@@ -25,6 +27,7 @@ export default async function AdminSettingsPage() {
 
       <div className="max-w-xl space-y-4">
         <MaintenanceToggle initialValue={maintenanceMode} />
+        <LodestoneMaintenanceToggle initialValue={lodestoneMaintenanceMode} />
         <DisputeEmailInput initialValue={disputeEmail} />
 
         {process.env.MAINTENANCE_MODE === "true" && (
@@ -35,6 +38,7 @@ export default async function AdminSettingsPage() {
           </div>
         )}
       </div>
+
     </div>
   )
 }

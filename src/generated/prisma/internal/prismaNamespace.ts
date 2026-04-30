@@ -401,6 +401,7 @@ export const ModelName = {
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
   SiteSettings: 'SiteSettings',
+  LodestoneMaintenanceWindow: 'LodestoneMaintenanceWindow',
   EstateClaimRequest: 'EstateClaimRequest',
   Collection: 'Collection',
   CollectionEstate: 'CollectionEstate',
@@ -425,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "session" | "verificationToken" | "verification" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription" | "fcOverrideRequest" | "fcOverride" | "moderationLog"
+    modelProps: "account" | "session" | "verificationToken" | "verification" | "user" | "ffxivCharacter" | "estate" | "estateVerification" | "estatePendingTransfer" | "image" | "venueDetails" | "venueStaff" | "like" | "comment" | "lodestoneVerification" | "legalPage" | "siteSettings" | "lodestoneMaintenanceWindow" | "estateClaimRequest" | "collection" | "collectionEstate" | "conversation" | "message" | "pushSubscription" | "fcOverrideRequest" | "fcOverride" | "moderationLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1687,6 +1688,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LodestoneMaintenanceWindow: {
+      payload: Prisma.$LodestoneMaintenanceWindowPayload<ExtArgs>
+      fields: Prisma.LodestoneMaintenanceWindowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LodestoneMaintenanceWindowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LodestoneMaintenanceWindowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        findFirst: {
+          args: Prisma.LodestoneMaintenanceWindowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LodestoneMaintenanceWindowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        findMany: {
+          args: Prisma.LodestoneMaintenanceWindowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>[]
+        }
+        create: {
+          args: Prisma.LodestoneMaintenanceWindowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        createMany: {
+          args: Prisma.LodestoneMaintenanceWindowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LodestoneMaintenanceWindowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>[]
+        }
+        delete: {
+          args: Prisma.LodestoneMaintenanceWindowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        update: {
+          args: Prisma.LodestoneMaintenanceWindowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        deleteMany: {
+          args: Prisma.LodestoneMaintenanceWindowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LodestoneMaintenanceWindowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LodestoneMaintenanceWindowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>[]
+        }
+        upsert: {
+          args: Prisma.LodestoneMaintenanceWindowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LodestoneMaintenanceWindowPayload>
+        }
+        aggregate: {
+          args: Prisma.LodestoneMaintenanceWindowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLodestoneMaintenanceWindow>
+        }
+        groupBy: {
+          args: Prisma.LodestoneMaintenanceWindowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LodestoneMaintenanceWindowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LodestoneMaintenanceWindowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LodestoneMaintenanceWindowCountAggregateOutputType> | number
+        }
+      }
+    }
     EstateClaimRequest: {
       payload: Prisma.$EstateClaimRequestPayload<ExtArgs>
       fields: Prisma.EstateClaimRequestFieldRefs
@@ -2657,10 +2732,25 @@ export type LegalPageScalarFieldEnum = (typeof LegalPageScalarFieldEnum)[keyof t
 export const SiteSettingsScalarFieldEnum = {
   id: 'id',
   maintenanceMode: 'maintenanceMode',
-  disputeEmail: 'disputeEmail'
+  disputeEmail: 'disputeEmail',
+  lodestoneMaintenanceMode: 'lodestoneMaintenanceMode'
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const LodestoneMaintenanceWindowScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  title: 'title',
+  rawText: 'rawText',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LodestoneMaintenanceWindowScalarFieldEnum = (typeof LodestoneMaintenanceWindowScalarFieldEnum)[keyof typeof LodestoneMaintenanceWindowScalarFieldEnum]
 
 
 export const EstateClaimRequestScalarFieldEnum = {
@@ -3163,6 +3253,7 @@ export type GlobalOmitConfig = {
   lodestoneVerification?: Prisma.LodestoneVerificationOmit
   legalPage?: Prisma.LegalPageOmit
   siteSettings?: Prisma.SiteSettingsOmit
+  lodestoneMaintenanceWindow?: Prisma.LodestoneMaintenanceWindowOmit
   estateClaimRequest?: Prisma.EstateClaimRequestOmit
   collection?: Prisma.CollectionOmit
   collectionEstate?: Prisma.CollectionEstateOmit

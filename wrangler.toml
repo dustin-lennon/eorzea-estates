@@ -128,7 +128,7 @@ service = "eorzea-estates-preview"
 binding = "IMAGES"
 
 [env.preview.triggers]
-crons = ["0 6 * * *"]
+crons = ["0 6 * * *", "0 * * * *"]
 
 [env.production]
 name = "eorzea-estates"
@@ -177,7 +177,7 @@ service = "eorzea-estates"
 binding = "IMAGES"
 
 [env.production.triggers]
-crons = ["0 6 * * *"]
+crons = ["0 6 * * *", "0 * * * *"]
 
 [observability]
 enabled = true

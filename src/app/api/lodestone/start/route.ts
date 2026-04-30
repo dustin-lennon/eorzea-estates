@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
-import { searchCharacter, getCharacterById, generateVerificationCode } from "@/lib/lodestone"
+import { searchCharacter, getCharacterById, generateVerificationCode, LodestoneMaintenanceError } from "@/lib/lodestone"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -16,6 +16,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
+  const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } })
+  if (settings?.lodestoneMaintenanceMode) {
+    return NextResponse.json({ error: "lodestone_maintenance" }, { status: 503 })
+  }
+
   const body = await req.json()
   const parsed = schema.safeParse(body)
   if (!parsed.success) {
@@ -24,7 +29,14 @@ export async function POST(req: Request) {
 
   let character: Awaited<ReturnType<typeof getCharacterById>>
   if ("lodestoneId" in parsed.data) {
-    character = await getCharacterById(parseInt(parsed.data.lodestoneId))
+    try {
+      character = await getCharacterById(parseInt(parsed.data.lodestoneId))
+    } catch (e) {
+      if (e instanceof LodestoneMaintenanceError) {
+        return NextResponse.json({ error: "lodestone_maintenance" }, { status: 503 })
+      }
+      return NextResponse.json({ error: `Character with Lodestone ID ${parsed.data.lodestoneId} not found` }, { status: 404 })
+    }
     if (!character) {
       return NextResponse.json(
         { error: `Character with Lodestone ID ${parsed.data.lodestoneId} not found` },
@@ -33,7 +45,14 @@ export async function POST(req: Request) {
     }
   } else {
     const { characterName, server } = parsed.data
-    character = await searchCharacter(characterName, server)
+    try {
+      character = await searchCharacter(characterName, server)
+    } catch (e) {
+      if (e instanceof LodestoneMaintenanceError) {
+        return NextResponse.json({ error: "lodestone_maintenance" }, { status: 503 })
+      }
+      return NextResponse.json({ error: `Character "${characterName}" not found on ${server}` }, { status: 404 })
+    }
     if (!character) {
       return NextResponse.json(
         { error: `Character "${characterName}" not found on ${server}` },

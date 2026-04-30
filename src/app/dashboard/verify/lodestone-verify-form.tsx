@@ -18,6 +18,7 @@ interface Props {
   pendingCode: string | null
   pendingCharacterName: string | null
   pendingAvatarUrl: string | null
+  lodestoneMaintenance: boolean
 }
 
 type SearchTab = "name" | "id"
@@ -27,6 +28,7 @@ export function LodestoneVerifyForm({
   pendingCode,
   pendingCharacterName,
   pendingAvatarUrl,
+  lodestoneMaintenance,
 }: Props) {
   const router = useRouter()
   const { refetch } = authClient.useSession()
@@ -59,7 +61,10 @@ export function LodestoneVerifyForm({
         body: JSON.stringify(body),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
+      if (!res.ok) {
+        if (data.error === "lodestone_maintenance") throw new Error("Lodestone is under maintenance. Please try again later.")
+        throw new Error(data.error)
+      }
       setCode(data.code)
       setCharacterId(data.characterId)
       setDisplayName(data.characterName ?? "")
@@ -83,7 +88,10 @@ export function LodestoneVerifyForm({
         body: JSON.stringify({ characterId }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
+      if (!res.ok) {
+        if (data.error === "lodestone_maintenance") throw new Error("Lodestone is under maintenance. Please try again later.")
+        throw new Error(data.error)
+      }
       toast.success(`${data.characterName} verified successfully!`)
       await refetch() // refresh session so navbar reflects new name + avatar immediately
       router.push("/dashboard")
@@ -97,6 +105,13 @@ export function LodestoneVerifyForm({
 
   return (
     <div className="space-y-6">
+      {lodestoneMaintenance && (
+        <div className="rounded-xl border border-yellow-500/50 bg-yellow-500/10 p-4 text-sm text-yellow-700 dark:text-yellow-400">
+          <strong>Lodestone Maintenance:</strong> FFXIV Lodestone is currently under maintenance.
+          Character verification is temporarily unavailable. Please check back after the maintenance window.
+        </div>
+      )}
+
       {step === "search" && (
         <Card>
           <CardHeader>
@@ -108,7 +123,8 @@ export function LodestoneVerifyForm({
               <button
                 type="button"
                 onClick={() => setSearchTab("name")}
-                className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                disabled={lodestoneMaintenance}
+                className={`flex-1 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                   searchTab === "name"
                     ? "bg-primary text-primary-foreground"
                     : "bg-background text-muted-foreground hover:text-foreground"
@@ -119,7 +135,8 @@ export function LodestoneVerifyForm({
               <button
                 type="button"
                 onClick={() => setSearchTab("id")}
-                className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                disabled={lodestoneMaintenance}
+                className={`flex-1 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                   searchTab === "id"
                     ? "bg-primary text-primary-foreground"
                     : "bg-background text-muted-foreground hover:text-foreground"
@@ -140,6 +157,7 @@ export function LodestoneVerifyForm({
                       placeholder="Firstname Lastname"
                       className="mt-1"
                       required
+                      disabled={lodestoneMaintenance}
                     />
                   </div>
                   <div>
@@ -148,7 +166,8 @@ export function LodestoneVerifyForm({
                       value={server}
                       onChange={(e) => setServer(e.target.value)}
                       required
-                      className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      disabled={lodestoneMaintenance}
+                      className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <option value="" disabled>Select home world</option>
                       {REGIONS.flatMap((region) =>
@@ -173,6 +192,7 @@ export function LodestoneVerifyForm({
                     className="mt-1"
                     inputMode="numeric"
                     required
+                    disabled={lodestoneMaintenance}
                   />
                   <p className="text-xs text-muted-foreground mt-1.5">
                     Find your ID in your Lodestone profile URL:{" "}
@@ -181,7 +201,7 @@ export function LodestoneVerifyForm({
                 </div>
               )}
 
-              <Button type="submit" disabled={loading}>
+              <Button type="submit" disabled={loading || lodestoneMaintenance}>
                 {loading ? "Searching..." : "Find Character"}
               </Button>
             </form>
@@ -259,7 +279,7 @@ export function LodestoneVerifyForm({
           </Card>
 
           <div className="flex gap-3">
-            <Button onClick={handleConfirm} disabled={loading}>
+            <Button onClick={handleConfirm} disabled={loading || lodestoneMaintenance}>
               <BadgeCheck className="h-4 w-4 mr-1.5" />
               {loading ? "Verifying..." : "Verify"}
             </Button>

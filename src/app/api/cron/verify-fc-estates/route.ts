@@ -14,6 +14,11 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
+  const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } })
+  if (settings?.lodestoneMaintenanceMode) {
+    return NextResponse.json({ skipped: "lodestone_maintenance" })
+  }
+
   const estates = await prisma.estate.findMany({
     where: { type: "FC_ESTATE", published: true, deletedAt: null },
     select: {
