@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
+import Link from "next/link"
+import { ChevronLeft } from "lucide-react"
 import { EstateSubmitForm } from "@/app/submit/estate-submit-form"
 import { DesignerCreditSection } from "./designer-credit-section"
 import type { EstateFormValues } from "@/lib/schemas"
@@ -135,6 +137,13 @@ export default async function EditEstatePage({
   return (
     <div className="container mx-auto max-w-3xl px-4 py-10">
       <div className="mb-8">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back to Dashboard
+        </Link>
         <h1 className="text-3xl font-bold">Edit Estate</h1>
         <p className="text-muted-foreground mt-1">
           Update your estate listing. All fields marked with * are required.
