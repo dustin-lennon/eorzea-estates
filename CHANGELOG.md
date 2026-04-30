@@ -3,6 +3,18 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.34.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.33.0...v1.34.0) (2026-04-30)
+
+### ✨ Features
+
+* auto-detect Lodestone maintenance via RSS feed with site-wide banner ([6869a1b](https://github.com/dustin-lennon/eorzea-estates/commit/6869a1bdf2ba2feeb8fbc57fffd2792a88e1a2b2)), closes [#334](https://github.com/dustin-lennon/eorzea-estates/issues/334)
+
+### 🐛 Bug Fixes
+
+* add revalidatePath and force-dynamic to bust CF Workers page cache on settings toggle ([887f7dd](https://github.com/dustin-lennon/eorzea-estates/commit/887f7dd2ebdc98a15d2b87685eb19bb7c9914889))
+* call router.refresh() after admin settings toggle to bust CF route cache ([dbf7a53](https://github.com/dustin-lennon/eorzea-estates/commit/dbf7a53cf6b80d090142ce2071f49e959f339a45)), closes [#336](https://github.com/dustin-lennon/eorzea-estates/issues/336)
+* make Lodestone maintenance banner respond to toggle via CustomEvent ([a154018](https://github.com/dustin-lennon/eorzea-estates/commit/a1540185151e5bf7d32f9bc540deb408b92fd6ba))
+
 ## [1.33.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.32.4...v1.33.0) (2026-04-30)
 
 ### ✨ Features
