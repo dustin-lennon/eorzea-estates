@@ -8,6 +8,7 @@ import { z } from "zod"
 const schema = z.union([
   z.object({ characterName: z.string().min(1), server: z.string().min(1) }),
   z.object({ lodestoneId: z.string().regex(/^\d+$/, "Lodestone ID must be a number") }),
+  z.object({ platformCharacterId: z.string().min(1) }),
 ])
 
 const ALLOWED_TYPES = ["PRIVATE", "FC_ESTATE", "VENUE"]
@@ -43,6 +44,39 @@ export async function POST(
     return NextResponse.json({ error: "Invalid input" }, { status: 400 })
   }
 
+  // Platform designer path — use DB data directly, no Lodestone call
+  if ("platformCharacterId" in parsed.data) {
+    const char = await prisma.ffxivCharacter.findUnique({
+      where: { id: parsed.data.platformCharacterId, verified: true },
+      select: { id: true, userId: true, characterName: true, server: true, dataCenter: true, lodestoneId: true, avatarUrl: true },
+    })
+    if (!char) {
+      return NextResponse.json({ error: "Designer not found" }, { status: 404 })
+    }
+
+    await prisma.estate.update({
+      where: { id },
+      data: {
+        designerCreditName: char.characterName,
+        designerCreditServer: char.server,
+        designerCreditLodestoneId: char.lodestoneId,
+        designerCreditAvatarUrl: char.avatarUrl,
+        designerCreditCharacterId: char.id,
+      },
+    })
+
+    return NextResponse.json({
+      name: char.characterName,
+      server: char.server,
+      dataCenter: char.dataCenter,
+      lodestoneId: char.lodestoneId,
+      avatarUrl: char.avatarUrl,
+      profileCharacterId: char.id,
+      profileUserId: char.userId,
+    })
+  }
+
+  // Lodestone lookup paths
   let character: Awaited<ReturnType<typeof getCharacterById>>
   if ("lodestoneId" in parsed.data) {
     character = await getCharacterById(parseInt(parsed.data.lodestoneId))

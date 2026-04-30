@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { toast } from "sonner"
@@ -29,40 +29,85 @@ interface DesignerCredit {
   profileUserId: string | null
 }
 
+interface PlatformDesigner {
+  userId: string
+  name: string | null
+  characterId: string
+  characterName: string
+  server: string
+  dataCenter: string
+  avatarUrl: string
+}
+
 interface Props {
   estateId: string
   initialCredit: DesignerCredit | null
 }
 
-type LookupMode = "search" | "id"
+type LookupMode = "search" | "id" | "platform"
 
 export function DesignerCreditSection({ estateId, initialCredit }: Props) {
   const [credit, setCredit] = useState<DesignerCredit | null>(initialCredit)
   const [editing, setEditing] = useState(false)
-  const [mode, setMode] = useState<LookupMode>("search")
+  const [mode, setMode] = useState<LookupMode>("platform")
+
+  // Search by name+server state
   const [characterName, setCharacterName] = useState("")
   const [server, setServer] = useState("")
+
+  // Lodestone ID state
   const [lodestoneId, setLodestoneId] = useState("")
-  const [preview, setPreview] = useState<DesignerCredit | null>(null)
+
+  // Platform designer state
+  const [designers, setDesigners] = useState<PlatformDesigner[]>([])
+  const [designersLoading, setDesignersLoading] = useState(false)
+  const [selectedDesignerId, setSelectedDesignerId] = useState("")
+  const [designerFilter, setDesignerFilter] = useState("")
+
   const [loading, setLoading] = useState(false)
   const [removing, setRemoving] = useState(false)
+
+  useEffect(() => {
+    if ((mode === "platform" && editing) || (mode === "platform" && !credit)) {
+      loadDesigners()
+    }
+  }, [mode, editing]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function loadDesigners() {
+    if (designers.length > 0) return
+    setDesignersLoading(true)
+    try {
+      const res = await fetch("/api/designers")
+      const data = await res.json() as PlatformDesigner[]
+      setDesigners(data)
+    } catch {
+      toast.error("Failed to load designers")
+    } finally {
+      setDesignersLoading(false)
+    }
+  }
 
   function resetForm() {
     setCharacterName("")
     setServer("")
     setLodestoneId("")
-    setPreview(null)
+    setSelectedDesignerId("")
+    setDesignerFilter("")
     setEditing(false)
   }
 
-  async function handleLookup() {
+  async function handleSave() {
     setLoading(true)
-    setPreview(null)
     try {
-      const body =
-        mode === "id"
-          ? { lodestoneId }
-          : { characterName, server }
+      let body: Record<string, string>
+      if (mode === "platform") {
+        if (!selectedDesignerId) return
+        body = { platformCharacterId: selectedDesignerId }
+      } else if (mode === "id") {
+        body = { lodestoneId }
+      } else {
+        body = { characterName, server }
+      }
 
       const res = await fetch(`/api/estates/${estateId}/designer-credit`, {
         method: "POST",
@@ -70,14 +115,13 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
         body: JSON.stringify(body),
       })
       const data = await res.json() as DesignerCredit & { error?: string }
-      if (!res.ok) throw new Error(data.error ?? "Lookup failed")
+      if (!res.ok) throw new Error(data.error ?? "Save failed")
 
-      setPreview(data)
       setCredit(data)
       toast.success("Designer credit saved.")
       resetForm()
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Lookup failed")
+      toast.error(err instanceof Error ? err.message : "Save failed")
     } finally {
       setLoading(false)
     }
@@ -86,9 +130,7 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
   async function handleRemove() {
     setRemoving(true)
     try {
-      const res = await fetch(`/api/estates/${estateId}/designer-credit`, {
-        method: "DELETE",
-      })
+      const res = await fetch(`/api/estates/${estateId}/designer-credit`, { method: "DELETE" })
       if (!res.ok) {
         const data = await res.json() as { error?: string }
         throw new Error(data.error ?? "Failed to remove credit")
@@ -102,8 +144,26 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
     }
   }
 
-  const canLookup =
-    mode === "id" ? lodestoneId.trim() !== "" : characterName.trim() !== "" && server !== ""
+  const filteredDesigners = designers.filter((d) => {
+    if (!designerFilter) return true
+    const q = designerFilter.toLowerCase()
+    return (
+      d.characterName.toLowerCase().includes(q) ||
+      d.server.toLowerCase().includes(q) ||
+      (d.name ?? "").toLowerCase().includes(q)
+    )
+  })
+
+  const selectedDesigner = designers.find((d) => d.characterId === selectedDesignerId)
+
+  const canSave =
+    mode === "platform"
+      ? selectedDesignerId !== ""
+      : mode === "id"
+      ? lodestoneId.trim() !== ""
+      : characterName.trim() !== "" && server !== ""
+
+  const buttonLabel = mode === "platform" ? "Save" : "Look up & Save"
 
   return (
     <div className="space-y-4">
@@ -112,8 +172,7 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
         <h2 className="text-lg font-semibold">Designer Credit</h2>
       </div>
       <p className="text-sm text-muted-foreground">
-        Credit the character who designed this estate&apos;s interior. A Lodestone lookup fetches their profile image.
-        If they have a verified character on Eorzea Estates, their profile will be linked.
+        Credit the character who designed this estate&apos;s interior. If they have a verified account on Eorzea Estates, their profile will be linked.
       </p>
 
       {credit && !editing && (
@@ -146,7 +205,7 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
-            <Button size="sm" variant="outline" onClick={() => setEditing(true)}>
+            <Button size="sm" variant="outline" onClick={() => { setEditing(true); loadDesigners() }}>
               Change
             </Button>
             <Button
@@ -165,33 +224,83 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
       {(!credit || editing) && (
         <div className="rounded-lg border p-4 space-y-4">
           {/* Mode toggle */}
-          <div className="flex gap-1 text-sm">
-            <button
-              type="button"
-              onClick={() => { setMode("search"); setPreview(null) }}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                mode === "search"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Name &amp; Server
-            </button>
-            <button
-              type="button"
-              onClick={() => { setMode("id"); setPreview(null) }}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                mode === "id"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Lodestone ID
-            </button>
+          <div className="flex gap-1 text-sm flex-wrap">
+            {(["platform", "search", "id"] as LookupMode[]).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMode(m)}
+                className={`px-3 py-1.5 rounded-md transition-colors ${
+                  mode === m
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {m === "platform" ? "Eorzea Estates" : m === "search" ? "Name & Server" : "Lodestone ID"}
+              </button>
+            ))}
           </div>
 
           <Separator />
 
+          {/* Platform designers */}
+          {mode === "platform" && (
+            <div className="space-y-3">
+              {designersLoading ? (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground py-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Loading designers…
+                </div>
+              ) : designers.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No registered designers found.</p>
+              ) : (
+                <>
+                  <Input
+                    placeholder="Filter by name or server…"
+                    value={designerFilter}
+                    onChange={(e) => setDesignerFilter(e.target.value)}
+                  />
+                  <div className="max-h-56 overflow-y-auto rounded-md border divide-y">
+                    {filteredDesigners.map((d) => (
+                      <button
+                        key={d.characterId}
+                        type="button"
+                        onClick={() => setSelectedDesignerId(d.characterId)}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors ${
+                          selectedDesignerId === d.characterId ? "bg-muted" : ""
+                        }`}
+                      >
+                        {d.avatarUrl && (
+                          <Image
+                            src={d.avatarUrl}
+                            alt={d.characterName}
+                            width={32}
+                            height={32}
+                            className="rounded-full shrink-0 object-cover"
+                          />
+                        )}
+                        <div className="min-w-0">
+                          <div className="text-sm font-medium truncate">{d.characterName}</div>
+                          <div className="text-xs text-muted-foreground">{d.server} ({d.dataCenter})</div>
+                        </div>
+                      </button>
+                    ))}
+                    {filteredDesigners.length === 0 && (
+                      <p className="text-sm text-muted-foreground px-3 py-4 text-center">No results.</p>
+                    )}
+                  </div>
+                  {selectedDesigner && (
+                    <div className="flex items-center gap-2 text-xs text-purple-600 dark:text-purple-400">
+                      <Palette className="h-3.5 w-3.5" />
+                      Selected: {selectedDesigner.characterName} — profile will be linked
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Search by name + server */}
           {mode === "search" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
@@ -228,6 +337,7 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
             </div>
           )}
 
+          {/* Lodestone ID */}
           {mode === "id" && (
             <div className="space-y-1.5">
               <Label htmlFor="dc-lodestone-id">Lodestone Profile ID</Label>
@@ -243,45 +353,22 @@ export function DesignerCreditSection({ estateId, initialCredit }: Props) {
             </div>
           )}
 
-          {preview && (
-            <div className="flex items-center gap-3 rounded-lg bg-muted/50 p-3">
-              {preview.avatarUrl && (
-                <Image
-                  src={preview.avatarUrl}
-                  alt={preview.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full shrink-0 object-cover"
-                />
-              )}
-              <div className="min-w-0">
-                <div className="font-medium text-sm">{preview.name}</div>
-                <div className="text-xs text-muted-foreground">{preview.server}</div>
-                {preview.profileUserId && (
-                  <div className="text-xs text-purple-600 dark:text-purple-400 mt-0.5">
-                    Verified on Eorzea Estates — profile will be linked
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
           <div className="flex gap-2">
             <Button
               type="button"
               size="sm"
-              disabled={loading || !canLookup}
-              onClick={handleLookup}
+              disabled={loading || !canSave}
+              onClick={handleSave}
             >
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />
-                  Looking up…
+                  {mode === "platform" ? "Saving…" : "Looking up…"}
                 </>
               ) : (
                 <>
-                  <Search className="h-4 w-4 mr-1.5" />
-                  {preview ? "Re-search" : "Look up & Save"}
+                  {mode !== "platform" && <Search className="h-4 w-4 mr-1.5" />}
+                  {buttonLabel}
                 </>
               )}
             </Button>
