@@ -7,6 +7,7 @@ import { z } from "zod"
 const schema = z.union([
   z.object({ maintenanceMode: z.boolean() }),
   z.object({ disputeEmail: z.string().email() }),
+  z.object({ lodestoneMaintenanceMode: z.boolean() }),
 ])
 
 export async function PATCH(req: Request) {

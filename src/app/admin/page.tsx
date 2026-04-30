@@ -1,6 +1,7 @@
 import Link from "next/link"
 import prisma from "@/lib/prisma"
 import { Users, FileText, Flag } from "lucide-react"
+import { MaintenanceWindows } from "./settings/maintenance-windows"
 
 export default async function AdminDashboardPage() {
   const [userCount, estateCount, moderatorCount, flaggedCount] = await prisma.$transaction([
@@ -28,6 +29,10 @@ export default async function AdminDashboardPage() {
             <p className="text-3xl font-bold">{stat.value}</p>
           </div>
         ))}
+      </div>
+
+      <div className="mb-10">
+        <MaintenanceWindows />
       </div>
 
       <h2 className="text-lg font-semibold mb-4">Quick Links</h2>

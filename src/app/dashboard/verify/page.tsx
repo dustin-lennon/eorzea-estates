@@ -11,16 +11,19 @@ export default async function VerifyPage() {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
-  // Check for any in-progress (unverified) verification for this user
-  const pending = await prisma.lodestoneVerification.findFirst({
-    where: {
-      verified: false,
-      character: { userId: session.user.id },
-    },
-    include: { character: true },
-  })
+  const [pending, settings] = await prisma.$transaction([
+    prisma.lodestoneVerification.findFirst({
+      where: {
+        verified: false,
+        character: { userId: session.user.id },
+      },
+      include: { character: true },
+    }),
+    prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
+  ])
 
   const isExpired = pending ? pending.expiresAt <= new Date() : false
+  const lodestoneMaintenance = settings?.lodestoneMaintenanceMode ?? false
 
   return (
     <div className="container mx-auto max-w-xl px-4 py-10">
@@ -34,6 +37,7 @@ export default async function VerifyPage() {
         pendingCode={pending && !isExpired ? pending.code : null}
         pendingCharacterName={pending && !isExpired ? pending.character.characterName : null}
         pendingAvatarUrl={pending && !isExpired ? pending.character.avatarUrl : null}
+        lodestoneMaintenance={lodestoneMaintenance}
       />
     </div>
   )
