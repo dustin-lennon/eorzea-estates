@@ -1,6 +1,15 @@
 // Lodestone character lookup via @xivapi/nodestone (direct Lodestone HTML parser)
 import { CharacterSearch, Character, FCMembers, FreeCompany } from "@xivapi/nodestone"
 
+export class LodestoneMaintenanceError extends Error {
+  constructor() { super('Lodestone is under maintenance') }
+}
+
+function rethrowMaintenance(e: unknown): null {
+  if (e instanceof Error && e.message === 'xivapi_maintenance') throw new LodestoneMaintenanceError()
+  return null
+}
+
 const characterSearchParser = new CharacterSearch()
 const characterParser = new Character()
 const fcMembersParser = new FCMembers()
@@ -21,7 +30,7 @@ export async function searchCharacter(
   const result = await characterSearchParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ query: { name, server } } as any)
-    .catch(() => null) as { List?: { ID: number; Name: string; World: string; DC: string; Avatar: string }[] } | null
+    .catch(rethrowMaintenance) as { List?: { ID: number; Name: string; World: string; DC: string; Avatar: string }[] } | null
   if (!result) return null
 
   const entries = result.List ?? []
@@ -40,7 +49,7 @@ export async function getCharacterById(lodestoneId: number): Promise<LodestoneCh
   const result = await characterParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
-    .catch(() => null) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
+    .catch(rethrowMaintenance) as { Name?: string; World?: string; DC?: string; Avatar?: string } | null
   if (!result?.Name) return null
   return {
     ID: lodestoneId,
@@ -55,7 +64,7 @@ export async function getCharacterBio(lodestoneId: number): Promise<string> {
   const result = await characterParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
-    .catch(() => null) as { Bio?: string } | null
+    .catch(rethrowMaintenance) as { Bio?: string } | null
   if (!result) return ""
   return result.Bio ?? ""
 }
@@ -64,7 +73,7 @@ export async function getCharacterFCId(lodestoneId: number): Promise<string | nu
   const result = await characterParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { characterId: String(lodestoneId) }, query: {} } as any)
-    .catch(() => null) as { FreeCompany?: { ID?: string } } | null
+    .catch(rethrowMaintenance) as { FreeCompany?: { ID?: string } } | null
   return result?.FreeCompany?.ID ?? null
 }
 
@@ -72,7 +81,7 @@ export async function getFCMasterLodestoneId(fcId: string): Promise<string | nul
   const result = await fcMembersParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { fcId }, query: {} } as any)
-    .catch(() => null) as { List?: Array<{ ID?: number }> } | null
+    .catch(rethrowMaintenance) as { List?: Array<{ ID?: number }> } | null
   const masterId = result?.List?.[0]?.ID
   return masterId != null ? String(masterId) : null
 }
@@ -81,7 +90,7 @@ export async function getFCName(fcId: string): Promise<string | null> {
   const result = await fcParser
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .parse({ params: { fcId }, query: {} } as any)
-    .catch(() => null) as { Name?: string } | null
+    .catch(rethrowMaintenance) as { Name?: string } | null
   return result?.Name ?? null
 }
 

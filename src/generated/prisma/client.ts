@@ -127,6 +127,11 @@ export type LegalPage = Prisma.LegalPageModel
  */
 export type SiteSettings = Prisma.SiteSettingsModel
 /**
+ * Model LodestoneMaintenanceWindow
+ * 
+ */
+export type LodestoneMaintenanceWindow = Prisma.LodestoneMaintenanceWindowModel
+/**
  * Model EstateClaimRequest
  * 
  */

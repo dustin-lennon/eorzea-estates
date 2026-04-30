@@ -303,9 +303,21 @@ model LegalPage {
 }
 
 model SiteSettings {
-  id              String  @id @default("singleton")
-  maintenanceMode Boolean @default(false)
-  disputeEmail    String  @default("dispute@eorzeaestates.com")
+  id                       String  @id @default("singleton")
+  maintenanceMode          Boolean @default(false)
+  disputeEmail             String  @default("dispute@eorzeaestates.com")
+  lodestoneMaintenanceMode Boolean @default(false)
+}
+
+model LodestoneMaintenanceWindow {
+  id             String   @id @default(cuid())
+  announcementId String   @unique
+  title          String
+  rawText        String
+  startsAt       DateTime
+  endsAt         DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model EstateClaimRequest {

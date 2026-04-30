@@ -9,7 +9,7 @@ interface Props {
   initialValue: boolean
 }
 
-export function MaintenanceToggle({ initialValue }: Props) {
+export function LodestoneMaintenanceToggle({ initialValue }: Props) {
   const router = useRouter()
   const [enabled, setEnabled] = useState(initialValue)
   const [loading, setLoading] = useState(false)
@@ -22,14 +22,15 @@ export function MaintenanceToggle({ initialValue }: Props) {
       const res = await fetch("/api/admin/settings", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ maintenanceMode: value }),
+        body: JSON.stringify({ lodestoneMaintenanceMode: value }),
       })
       if (!res.ok) throw new Error("Failed to update")
-      toast.success(value ? "Maintenance mode enabled" : "Maintenance mode disabled")
+      toast.success(value ? "Lodestone maintenance mode enabled" : "Lodestone maintenance mode disabled")
+      window.dispatchEvent(new CustomEvent("lodestone-maintenance-change", { detail: { active: value } }))
       router.refresh()
     } catch {
       setEnabled(prev) // revert
-      toast.error("Failed to update maintenance mode")
+      toast.error("Failed to update Lodestone maintenance mode")
     } finally {
       setLoading(false)
     }
@@ -38,15 +39,15 @@ export function MaintenanceToggle({ initialValue }: Props) {
   return (
     <div className="flex items-center justify-between rounded-xl border p-5">
       <div className="space-y-0.5">
-        <Label htmlFor="maintenance-toggle" className="text-base font-medium">
-          Maintenance Mode
+        <Label htmlFor="lodestone-maintenance-toggle" className="text-base font-medium">
+          Lodestone Maintenance Mode
         </Label>
         <p className="text-sm text-muted-foreground">
-          When enabled, all non-admin users see the maintenance page.
+          Disables character verification while Lodestone is unavailable. Also use this to simulate maintenance in development.
         </p>
       </div>
       <button
-        id="maintenance-toggle"
+        id="lodestone-maintenance-toggle"
         role="switch"
         aria-checked={enabled}
         disabled={loading}

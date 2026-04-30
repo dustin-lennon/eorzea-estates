@@ -68,6 +68,7 @@ export const ModelName = {
   LodestoneVerification: 'LodestoneVerification',
   LegalPage: 'LegalPage',
   SiteSettings: 'SiteSettings',
+  LodestoneMaintenanceWindow: 'LodestoneMaintenanceWindow',
   EstateClaimRequest: 'EstateClaimRequest',
   Collection: 'Collection',
   CollectionEstate: 'CollectionEstate',
@@ -360,10 +361,25 @@ export type LegalPageScalarFieldEnum = (typeof LegalPageScalarFieldEnum)[keyof t
 export const SiteSettingsScalarFieldEnum = {
   id: 'id',
   maintenanceMode: 'maintenanceMode',
-  disputeEmail: 'disputeEmail'
+  disputeEmail: 'disputeEmail',
+  lodestoneMaintenanceMode: 'lodestoneMaintenanceMode'
 } as const
 
 export type SiteSettingsScalarFieldEnum = (typeof SiteSettingsScalarFieldEnum)[keyof typeof SiteSettingsScalarFieldEnum]
+
+
+export const LodestoneMaintenanceWindowScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  title: 'title',
+  rawText: 'rawText',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LodestoneMaintenanceWindowScalarFieldEnum = (typeof LodestoneMaintenanceWindowScalarFieldEnum)[keyof typeof LodestoneMaintenanceWindowScalarFieldEnum]
 
 
 export const EstateClaimRequestScalarFieldEnum = {

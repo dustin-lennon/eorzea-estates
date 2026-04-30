@@ -13,6 +13,7 @@ class CharacterSearch {
     if (server) url += `&server=${encodeURIComponent(server)}`
     else if (dc) url += `&server=_dc_${encodeURIComponent(dc)}`
     const res = await fetch(url)
+    if (res.status === 503) throw new Error('xivapi_maintenance')
     if (!res.ok) throw new Error(`xivapi search failed: ${res.status}`)
     const data = await res.json()
     return {
@@ -32,6 +33,7 @@ class Character {
     const id = req.params?.characterId
     if (!id) throw new Error('characterId required')
     const res = await fetch(`${XIVAPI}/character/${id}?extended=1`)
+    if (res.status === 503) throw new Error('xivapi_maintenance')
     if (!res.ok) throw new Error(`xivapi character failed: ${res.status}`)
     const data = await res.json()
     const c = data.Character ?? {}
@@ -51,6 +53,7 @@ class FCMembers {
     const id = req.params?.fcId
     if (!id) throw new Error('fcId required')
     const res = await fetch(`${XIVAPI}/freecompany/${id}/members`)
+    if (res.status === 503) throw new Error('xivapi_maintenance')
     if (!res.ok) throw new Error(`xivapi fc members failed: ${res.status}`)
     const data = await res.json()
     return { List: (data.FreeCompanyMembers ?? []).map((m) => ({ ID: m.ID })) }
@@ -62,6 +65,7 @@ class FreeCompany {
     const id = req.params?.fcId
     if (!id) throw new Error('fcId required')
     const res = await fetch(`${XIVAPI}/freecompany/${id}`)
+    if (res.status === 503) throw new Error('xivapi_maintenance')
     if (!res.ok) throw new Error(`xivapi fc failed: ${res.status}`)
     const data = await res.json()
     return { Name: data.FreeCompany?.Name }

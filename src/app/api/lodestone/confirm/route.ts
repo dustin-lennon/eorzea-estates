@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
-import { getCharacterBio } from "@/lib/lodestone"
+import { getCharacterBio, LodestoneMaintenanceError } from "@/lib/lodestone"
 import { maybeGrantPathfinder } from "@/lib/pathfinder"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -14,6 +14,11 @@ export async function POST(req: Request) {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const settings = await prisma.siteSettings.findUnique({ where: { id: "singleton" } })
+  if (settings?.lodestoneMaintenanceMode) {
+    return NextResponse.json({ error: "lodestone_maintenance" }, { status: 503 })
   }
 
   const body = await req.json()
@@ -46,7 +51,15 @@ export async function POST(req: Request) {
     )
   }
 
-  const bio = await getCharacterBio(parseInt(character.lodestoneId))
+  let bio: string
+  try {
+    bio = await getCharacterBio(parseInt(character.lodestoneId))
+  } catch (e) {
+    if (e instanceof LodestoneMaintenanceError) {
+      return NextResponse.json({ error: "lodestone_maintenance" }, { status: 503 })
+    }
+    bio = ""
+  }
 
   if (!bio.includes(verification.code)) {
     return NextResponse.json(

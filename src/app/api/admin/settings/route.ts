@@ -2,11 +2,13 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
+import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 const schema = z.union([
   z.object({ maintenanceMode: z.boolean() }),
   z.object({ disputeEmail: z.string().email() }),
+  z.object({ lodestoneMaintenanceMode: z.boolean() }),
 ])
 
 export async function PATCH(req: Request) {
@@ -28,6 +30,9 @@ export async function PATCH(req: Request) {
     update: data,
     create: { id: "singleton", ...data },
   })
+
+  revalidatePath("/admin/settings")
+  revalidatePath("/", "layout")
 
   const res = NextResponse.json(settings)
   if ("maintenanceMode" in data) {

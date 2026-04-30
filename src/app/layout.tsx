@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import { LodestoneMaintenanceBanner } from "@/components/lodestone-maintenance-banner"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
@@ -120,6 +121,7 @@ export default async function RootLayout({
             ) : (
               <>
                 <Navbar />
+                <LodestoneMaintenanceBanner />
                 <main className="flex-1 flex flex-col">{children}</main>
                 <Footer />
               </>
