@@ -4,7 +4,10 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import prisma from "@/lib/prisma"
 import { getCharacterFCId, getFCMasterLodestoneId } from "@/lib/lodestone"
+import Link from "next/link"
+import { ChevronLeft } from "lucide-react"
 import { EstateSubmitForm } from "@/app/submit/estate-submit-form"
+import { DesignerCreditSection } from "./designer-credit-section"
 import type { EstateFormValues } from "@/lib/schemas"
 import type { z } from "zod"
 import { estateFormSchema } from "@/lib/schemas"
@@ -40,6 +43,12 @@ export default async function EditEstatePage({
         tags: true,
         characterId: true,
         ownerId: true,
+        designerCreditName: true,
+        designerCreditServer: true,
+        designerCreditLodestoneId: true,
+        designerCreditAvatarUrl: true,
+        designerCreditCharacterId: true,
+        designerCreditCharacter: { select: { userId: true } },
         images: { orderBy: { order: "asc" }, select: { imageUrl: true, storageKey: true } },
         venueDetails: {
           select: {
@@ -113,9 +122,28 @@ export default async function EditEstatePage({
         }),
   }
 
+  const initialCredit =
+    estate.designerCreditName && estate.designerCreditServer && estate.designerCreditLodestoneId
+      ? {
+          name: estate.designerCreditName,
+          server: estate.designerCreditServer,
+          lodestoneId: estate.designerCreditLodestoneId,
+          avatarUrl: estate.designerCreditAvatarUrl ?? "",
+          profileCharacterId: estate.designerCreditCharacterId ?? null,
+          profileUserId: estate.designerCreditCharacter?.userId ?? null,
+        }
+      : null
+
   return (
     <div className="container mx-auto max-w-3xl px-4 py-10">
       <div className="mb-8">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back to Dashboard
+        </Link>
         <h1 className="text-3xl font-bold">Edit Estate</h1>
         <p className="text-muted-foreground mt-1">
           Update your estate listing. All fields marked with * are required.
@@ -126,6 +154,11 @@ export default async function EditEstatePage({
         estateId={id}
         defaultValues={defaultValues}
       />
+      {estate.type !== "APARTMENT" && estate.type !== "FC_ROOM" && (
+        <div className="mt-10 pt-8 border-t">
+          <DesignerCreditSection estateId={id} initialCredit={initialCredit} />
+        </div>
+      )}
     </div>
   )
 }

@@ -144,6 +144,7 @@ model FfxivCharacter {
   claimRequests         EstateClaimRequest[]
   fcOverrideRequests    FcOverrideRequest[]
   fcOverrides           FcOverride[]
+  designerCreditEstates Estate[]               @relation("EstateDesignerCredit")
 
   @@unique([userId, lodestoneId])
 }
@@ -179,14 +180,20 @@ model Estate {
   deletedAt          DateTime?
   verified           Boolean                @default(false)
   verificationStatus VerificationStatus?
-  designerId         String?
-  claimedAt          DateTime?
-  confirmedActiveAt  DateTime?
-  comments           Comment[]
-  character          FfxivCharacter?        @relation(fields: [characterId], references: [id])
-  flaggedBy          User?                  @relation("FlaggedByUser", fields: [flaggedById], references: [id])
-  owner              User                   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  designer           User?                  @relation("DesignedEstates", fields: [designerId], references: [id])
+  designerId                String?
+  claimedAt                 DateTime?
+  confirmedActiveAt         DateTime?
+  designerCreditName        String?
+  designerCreditServer      String?
+  designerCreditLodestoneId String?
+  designerCreditAvatarUrl   String?
+  designerCreditCharacterId String?
+  comments                  Comment[]
+  character                 FfxivCharacter?        @relation(fields: [characterId], references: [id])
+  flaggedBy                 User?                  @relation("FlaggedByUser", fields: [flaggedById], references: [id])
+  owner                     User                   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  designer                  User?                  @relation("DesignedEstates", fields: [designerId], references: [id])
+  designerCreditCharacter   FfxivCharacter?        @relation("EstateDesignerCredit", fields: [designerCreditCharacterId], references: [id])
   pinnedByUsers      User[]                 @relation("PinnedEstate")
   pendingTransfer    EstatePendingTransfer?
   claimRequest       EstateClaimRequest?
