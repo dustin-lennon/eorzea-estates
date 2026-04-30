@@ -26,6 +26,7 @@ export function LodestoneMaintenanceToggle({ initialValue }: Props) {
       })
       if (!res.ok) throw new Error("Failed to update")
       toast.success(value ? "Lodestone maintenance mode enabled" : "Lodestone maintenance mode disabled")
+      window.dispatchEvent(new CustomEvent("lodestone-maintenance-change", { detail: { active: value } }))
       router.refresh()
     } catch {
       setEnabled(prev) // revert
