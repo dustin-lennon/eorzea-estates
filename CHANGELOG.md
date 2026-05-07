@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.9](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.8...v1.35.9) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* add BETTER_AUTH_SECRET and BETTER_AUTH_URL to build env in deploy workflows ([97b51b4](https://github.com/dustin-lennon/eorzea-estates/commit/97b51b49e7c724c80e0d74fcc8aa64771329a047))
+
 ## [1.35.8](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.7...v1.35.8) (2026-05-07)
 
 ### 🐛 Bug Fixes
