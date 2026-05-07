@@ -496,7 +496,7 @@ if (workerSrc.includes("async scheduled(")) {
   if (closeIdx === -1 || closeIdx < workerSrc.length - CLOSE.length - 5) {
     console.error("[patch-cf-externals] Could not find default export closing }; in worker.js — skipping scheduled patch.")
   } else {
-    const scheduledMethod = `,
+    const scheduledMethod = `
     async scheduled(event, env, ctx) {
         const secret = env.CRON_SECRET ?? ""
         const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
