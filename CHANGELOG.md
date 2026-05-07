@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.3...v1.35.4) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* log active database connection source in Prisma client ([3978b2d](https://github.com/dustin-lennon/eorzea-estates/commit/3978b2dabc11e02f0b01344d85bb414ccea67a85)), closes [#369](https://github.com/dustin-lennon/eorzea-estates/issues/369)
+
 ## [1.35.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.2...v1.35.3) (2026-05-07)
 
 ### 🐛 Bug Fixes
