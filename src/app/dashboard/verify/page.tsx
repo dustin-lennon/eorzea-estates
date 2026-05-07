@@ -11,7 +11,8 @@ export default async function VerifyPage() {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user?.id) redirect("/login")
 
-  const [pending, settings] = await prisma.$transaction([
+  const now = new Date()
+  const [pending, settings, activeWindow] = await prisma.$transaction([
     prisma.lodestoneVerification.findFirst({
       where: {
         verified: false,
@@ -20,10 +21,13 @@ export default async function VerifyPage() {
       include: { character: true },
     }),
     prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
+    prisma.lodestoneMaintenanceWindow.findFirst({
+      where: { startsAt: { lte: now }, endsAt: { gte: now } },
+    }),
   ])
 
   const isExpired = pending ? pending.expiresAt <= new Date() : false
-  const lodestoneMaintenance = settings?.lodestoneMaintenanceMode ?? false
+  const lodestoneMaintenance = (settings?.lodestoneMaintenanceMode ?? false) || !!activeWindow
 
   return (
     <div className="container mx-auto max-w-xl px-4 py-10">
