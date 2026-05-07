@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.8](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.7...v1.35.8) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* make Account legacy NextAuth fields nullable for BA compatibility ([1ddbf14](https://github.com/dustin-lennon/eorzea-estates/commit/1ddbf14046c480322383083a7c7c80bb71c13c95))
+
 ## [1.35.7](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.6...v1.35.7) (2026-05-07)
 
 ### 🐛 Bug Fixes
