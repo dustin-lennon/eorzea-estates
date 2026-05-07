@@ -1,10 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { format } from "date-fns"
 
 function formatUtc(date: Date): string {
-  return format(date, "MMM d 'at' h:mm a") + " UTC"
+  return date.toLocaleString("en-US", {
+    timeZone: "UTC",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }) + " UTC"
 }
 
 interface Props {
