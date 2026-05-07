@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.13](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.12...v1.35.13) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* remove extra leading comma in scheduled handler injection ([503585d](https://github.com/dustin-lennon/eorzea-estates/commit/503585da0e9155da5478b5af2ad0ba52290f9258))
+
 ## [1.35.12](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.11...v1.35.12) (2026-05-07)
 
 ### 🐛 Bug Fixes
