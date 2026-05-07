@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.6](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.5...v1.35.6) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* scope Prisma client to CF context object instead of React.cache() ([9261251](https://github.com/dustin-lennon/eorzea-estates/commit/92612510055e317c3e0aef1814e462bc3c84ef9b))
+
 ## [1.35.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.4...v1.35.5) (2026-05-07)
 
 ### 🐛 Bug Fixes
