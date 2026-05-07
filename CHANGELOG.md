@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.10](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.9...v1.35.10) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* add OAuth env vars to build step in deploy workflows ([c28acac](https://github.com/dustin-lennon/eorzea-estates/commit/c28acaca3db534e7ac91588279d60461b1d589f4))
+
 ## [1.35.9](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.8...v1.35.9) (2026-05-07)
 
 ### 🐛 Bug Fixes
