@@ -1,4 +1,3 @@
-import { cache } from "react"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
 import { PrismaClient } from "../generated/prisma/client"
 import { PrismaPg } from "@prisma/adapter-pg"
@@ -57,18 +56,13 @@ declare global {
   var __prisma: PrismaClientInstance | undefined
 }
 
-// In CF Workers, cloudflare:sockets I/O objects are bound to the request that
-// created them — they CANNOT be shared across requests. pg Pool stores connections
-// in _idle and hands them to the next request, which CF Workers rejects with
-// "Cannot perform I/O on behalf of a different request."
-//
-// React.cache() scopes the memoized value to the current request context (works
-// in Server Components, Route Handlers, and Server Actions). Each request gets
-// its own PrismaClient/Pool with fresh cloudflare:sockets connections.
-const getRequestPrisma = cache(createPrismaClient)
-
 // Lazy factory — deferred until first property access so that getCloudflareContext()
 // is called inside request context (where the CF env bindings are available).
+//
+// In CF Workers: scope the client to the CF execution context object rather than
+// React.cache(). React.cache() breaks when Better Auth's runWithTransaction uses
+// AsyncLocalStorage.run(), creating a new async context. The CF context object is
+// the same JS object for the entire request regardless of ALS context changes.
 function getPrisma(): PrismaClientInstance {
   if (process.env.NODE_ENV !== "production") {
     // In dev (Node.js), cache on globalThis to survive hot-module reload
@@ -77,8 +71,16 @@ function getPrisma(): PrismaClientInstance {
     }
     return globalThis.__prisma
   }
-  // In CF Workers: per-request instance via React.cache()
-  return getRequestPrisma()
+  // In CF Workers: store on the CF context object (request-scoped, ALS-invariant)
+  try {
+    const ctx = getCloudflareContext() as unknown as Record<string, unknown>
+    if (!ctx.__prismaClient) {
+      ctx.__prismaClient = createPrismaClient()
+    }
+    return ctx.__prismaClient as PrismaClientInstance
+  } catch {
+    return createPrismaClient()
+  }
 }
 
 // Proxy preserves the PrismaClient API at all existing call sites while
