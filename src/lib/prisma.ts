@@ -37,12 +37,10 @@ function createPrismaClient() {
   const pool = new Pool({
     connectionString,
     max: 1,
-    // maxUses:1 destroys connections immediately after use (no idle state).
-    // In CF Workers, setTimeout callbacks from completed requests don't reliably
-    // fire, so idleTimeoutMillis-based cleanup never runs. Without maxUses:1,
-    // idle connections from completed requests accumulate and exhaust the DB
-    // connection limit. With maxUses:1 there are no idle connections to accumulate.
-    maxUses: ssl ? undefined : 1,
+    // Hyperdrive (ssl=false): do NOT set maxUses — it destroys the connection
+    // after one query, breaking multi-statement transactions. Hyperdrive manages
+    // its own connection lifecycle; the CF Workers request boundary handles cleanup.
+    // Non-Hyperdrive (ssl=true): no maxUses needed either; idleTimeoutMillis handles it.
     idleTimeoutMillis: ssl ? 30000 : 1000,
     connectionTimeoutMillis: 10000,
     ssl: ssl ? true : false,
