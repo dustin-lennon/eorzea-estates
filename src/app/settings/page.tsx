@@ -71,7 +71,7 @@ export default async function SettingsPage() {
       const oauthAccounts = accounts.filter(
         (a) => (a.providerId ?? a.provider) !== "credential" && (a.providerId ?? a.provider) !== "credentials"
       )
-      linkedProviders = oauthAccounts.map((a) => a.providerId ?? a.provider)
+      linkedProviders = oauthAccounts.map((a) => a.providerId ?? a.provider).filter((p): p is string => p !== null)
       hasPassword = !!user.password || accounts.some(
         (a) => a.providerId === "credential" || a.provider === "credentials"
       )
