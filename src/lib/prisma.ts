@@ -13,6 +13,7 @@ function createPrismaClient() {
   // Local dev (wrangler dev via preview-local.mjs): Hyperdrive is pointed at a
   //   Node.js TLS proxy started by preview-local.mjs. The proxy does STARTTLS
   //   to Supabase using real node:tls outside of miniflare.
+  let source = "DATABASE_URL"
   try {
     const ctx = getCloudflareContext()
     const env = ctx?.env as Record<string, unknown>
@@ -20,25 +21,26 @@ function createPrismaClient() {
     if (hyperdrive?.connectionString) {
       connectionString = hyperdrive.connectionString
       ssl = false
-      const u = new URL(connectionString)
-      console.log(`[prisma] using Hyperdrive: ${u.host}${u.pathname}`)
-    } else {
-      const u = new URL(connectionString)
-      console.log(`[prisma] using DATABASE_URL: ${u.host}${u.pathname}`)
+      source = "Hyperdrive"
     }
-  } catch {
+  } catch (e) {
+    console.log(`[prisma] getCloudflareContext failed: ${e}`)
     // Not in CF Workers context (Next.js dev server, build time, etc.) — use DATABASE_URL
+  }
+  try {
+    const u = new URL(connectionString)
+    console.log(`[prisma] source=${source} host=${u.host} port=${u.port}`)
+  } catch {
+    console.log(`[prisma] source=${source} connectionString unparseable`)
   }
 
   const pool = new Pool({
     connectionString,
     max: 1,
-    // maxUses:1 destroys connections immediately after use (no idle state).
-    // In CF Workers, setTimeout callbacks from completed requests don't reliably
-    // fire, so idleTimeoutMillis-based cleanup never runs. Without maxUses:1,
-    // idle connections from completed requests accumulate and exhaust the DB
-    // connection limit. With maxUses:1 there are no idle connections to accumulate.
-    maxUses: ssl ? undefined : 1,
+    // Hyperdrive (ssl=false): do NOT set maxUses — it destroys the connection
+    // after one query, breaking multi-statement transactions. Hyperdrive manages
+    // its own connection lifecycle; the CF Workers request boundary handles cleanup.
+    // Non-Hyperdrive (ssl=true): no maxUses needed either; idleTimeoutMillis handles it.
     idleTimeoutMillis: ssl ? 30000 : 1000,
     connectionTimeoutMillis: 10000,
     ssl: ssl ? true : false,
