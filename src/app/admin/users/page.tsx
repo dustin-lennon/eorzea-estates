@@ -29,7 +29,7 @@ export default async function AdminUsersPage() {
       createdAt: true,
       _count: { select: { estates: true, characters: true } },
       characters: { where: { verified: true }, select: { id: true, characterName: true, avatarUrl: true, lodestoneId: true }, orderBy: { createdAt: "asc" } },
-      accounts: { select: { provider: true } },
+      accounts: { select: { provider: true, providerId: true } },
     },
     orderBy: { createdAt: "asc" },
   })
@@ -83,9 +83,12 @@ export default async function AdminUsersPage() {
                   </div>
                 </td>
                 <td className="px-4 py-3 text-muted-foreground text-xs">
-                  {user.accounts.length > 0
-                    ? user.accounts.map((a) => a.provider).join(", ")
-                    : user.email ? "email" : "—"}
+                  {(() => {
+                    const providers = user.accounts
+                      .map((a) => a.providerId ?? a.provider)
+                      .filter((p): p is string => !!p && p !== "credential" && p !== "credentials")
+                    return providers.length > 0 ? providers.join(", ") : user.email ? "email" : "—"
+                  })()}
                 </td>
                 <td className="px-4 py-3">
                   {user.characters.length > 0 ? (
