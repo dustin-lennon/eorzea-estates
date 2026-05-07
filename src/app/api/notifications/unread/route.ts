@@ -1,18 +1,15 @@
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
+import { getSessionFromRequest } from "@/lib/session"
 import prisma from "@/lib/prisma"
 import { NextResponse } from "next/server"
 
-export async function GET() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user?.id) {
+export async function GET(req: Request) {
+  const session = await getSessionFromRequest(req)
+  if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const userId = session.user.id
+  const userId = session.userId
 
-  // Count conversations where the current user's readAt is null
-  // and the last message was sent by the other party
   const conversations = await prisma.conversation.findMany({
     where: {
       OR: [
@@ -30,7 +27,6 @@ export async function GET() {
     },
   })
 
-  // Only count if the last message was not sent by the current user
   const count = conversations.filter((conv) => {
     const lastMsg = conv.messages[0]
     return lastMsg && lastMsg.senderId !== userId
