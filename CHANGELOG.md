@@ -3,6 +3,16 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.34.0...v1.35.0) (2026-05-07)
+
+### ✨ Features
+
+* show Eastern Time alongside UTC in admin maintenance windows ([023e1bf](https://github.com/dustin-lennon/eorzea-estates/commit/023e1bf278965f3efaf9fc03b9c31d386936a8cb)), closes [#354](https://github.com/dustin-lennon/eorzea-estates/issues/354)
+
+### 🐛 Bug Fixes
+
+* add check-lodestone-maintenance to CF Workers scheduled handler ([f6cc848](https://github.com/dustin-lennon/eorzea-estates/commit/f6cc848c512ebe54991c2ee3a46ad11c8e43e9bb)), closes [#353](https://github.com/dustin-lennon/eorzea-estates/issues/353)
+
 ## [1.34.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.33.0...v1.34.0) (2026-04-30)
 
 ### ✨ Features
