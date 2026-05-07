@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.5](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.4...v1.35.5) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* improve prisma connection debug logging to survive catch blocks ([36a650a](https://github.com/dustin-lennon/eorzea-estates/commit/36a650a7c3991b9510fe4bbf356bb4ef8e3e2e0d))
+* remove maxUses:1 from Hyperdrive pool to allow multi-statement transactions ([cc625a8](https://github.com/dustin-lennon/eorzea-estates/commit/cc625a8db8bdb751bad011c7e9a047661cc5b6fc))
+
 ## [1.35.4](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.3...v1.35.4) (2026-05-07)
 
 ### 🐛 Bug Fixes
