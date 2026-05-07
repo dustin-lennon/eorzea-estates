@@ -20,6 +20,11 @@ function createPrismaClient() {
     if (hyperdrive?.connectionString) {
       connectionString = hyperdrive.connectionString
       ssl = false
+      const u = new URL(connectionString)
+      console.log(`[prisma] using Hyperdrive: ${u.host}${u.pathname}`)
+    } else {
+      const u = new URL(connectionString)
+      console.log(`[prisma] using DATABASE_URL: ${u.host}${u.pathname}`)
     }
   } catch {
     // Not in CF Workers context (Next.js dev server, build time, etc.) — use DATABASE_URL
