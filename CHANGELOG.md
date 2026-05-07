@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.0...v1.35.1) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* use explicit UTC timezone in maintenance banner time formatting ([f69d6c1](https://github.com/dustin-lennon/eorzea-estates/commit/f69d6c1a489a7c0c2a408db679e84a7d60dc7e1f)), closes [#358](https://github.com/dustin-lennon/eorzea-estates/issues/358)
+
 ## [1.35.0](https://github.com/dustin-lennon/eorzea-estates/compare/v1.34.0...v1.35.0) (2026-05-07)
 
 ### ✨ Features
