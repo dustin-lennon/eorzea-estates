@@ -474,41 +474,52 @@ if (patched) {
 // ── 5. Add scheduled handler to worker.js ────────────────────────────────────
 //
 // CF Workers cron triggers fire a `scheduled` event, not an HTTP request.
-// OpenNext only exports a `fetch` handler. We patch worker.js to inject a
-// `scheduled` export that calls the cron API route via self-fetch with the
-// CRON_SECRET auth header.
+// OpenNext emits a module-format worker (export default { fetch }). In module
+// workers, the scheduled handler MUST be on the default export object —
+// top-level named exports (export const scheduled) are silently ignored by CF.
+//
+// Strategy: find the closing `};` of the default export object (always the last
+// line of the template) and inject the scheduled method before it.
 
 const workerPath = path.join(projectRoot, ".open-next", "worker.js")
 const workerSrc = fs.readFileSync(workerPath, "utf8")
 
-if (workerSrc.includes("export const scheduled")) {
+if (workerSrc.includes("async scheduled(")) {
   console.log("[patch-cf-externals] scheduled handler already present — skipping.")
 } else {
-  const scheduledExport = `
-export const scheduled = async (event, env, ctx) => {
-  const secret = env.CRON_SECRET ?? ""
-  const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
-
-  const runCron = async (path) => {
-    try {
-      const res = await fetch(\`\${baseUrl}\${path}\`, {
-        headers: { Authorization: \`Bearer \${secret}\` },
-      })
-      if (!res.ok) {
-        console.error(\`[cron] \${path} failed:\`, res.status)
-      } else {
-        const result = await res.json()
-        console.log(\`[cron] \${path} result:\`, JSON.stringify(result))
-      }
-    } catch (err) {
-      console.error(\`[cron] \${path} error:\`, err)
-    }
+  // The opennextjs worker.js template always ends with the default export closing:
+  //   },
+  // };
+  // Find that final `\n};` and inject the scheduled method before it.
+  const CLOSE = "\n};"
+  const closeIdx = workerSrc.lastIndexOf(CLOSE)
+  if (closeIdx === -1 || closeIdx < workerSrc.length - CLOSE.length - 5) {
+    console.error("[patch-cf-externals] Could not find default export closing }; in worker.js — skipping scheduled patch.")
+  } else {
+    const scheduledMethod = `,
+    async scheduled(event, env, ctx) {
+        const secret = env.CRON_SECRET ?? ""
+        const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
+        const runCron = async (cronPath) => {
+            try {
+                const res = await fetch(\`\${baseUrl}\${cronPath}\`, {
+                    headers: { Authorization: \`Bearer \${secret}\` },
+                })
+                if (!res.ok) {
+                    console.error(\`[cron] \${cronPath} failed:\`, res.status)
+                } else {
+                    const result = await res.json()
+                    console.log(\`[cron] \${cronPath} result:\`, JSON.stringify(result))
+                }
+            } catch (err) {
+                console.error(\`[cron] \${cronPath} error:\`, err)
+            }
+        }
+        await runCron("/api/cron/check-lodestone-maintenance")
+        await runCron("/api/cron/verify-fc-estates")
+    }`
+    const patched = workerSrc.slice(0, closeIdx) + scheduledMethod + CLOSE
+    fs.writeFileSync(workerPath, patched)
+    console.log("[patch-cf-externals] scheduled handler injected into default export in worker.js")
   }
-
-  await runCron("/api/cron/check-lodestone-maintenance")
-  await runCron("/api/cron/verify-fc-estates")
-}
-`
-  fs.writeFileSync(workerPath, workerSrc + scheduledExport)
-  console.log("[patch-cf-externals] scheduled handler appended to worker.js")
 }
