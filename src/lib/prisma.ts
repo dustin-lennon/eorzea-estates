@@ -13,6 +13,7 @@ function createPrismaClient() {
   // Local dev (wrangler dev via preview-local.mjs): Hyperdrive is pointed at a
   //   Node.js TLS proxy started by preview-local.mjs. The proxy does STARTTLS
   //   to Supabase using real node:tls outside of miniflare.
+  let source = "DATABASE_URL"
   try {
     const ctx = getCloudflareContext()
     const env = ctx?.env as Record<string, unknown>
@@ -20,14 +21,17 @@ function createPrismaClient() {
     if (hyperdrive?.connectionString) {
       connectionString = hyperdrive.connectionString
       ssl = false
-      const u = new URL(connectionString)
-      console.log(`[prisma] using Hyperdrive: ${u.host}${u.pathname}`)
-    } else {
-      const u = new URL(connectionString)
-      console.log(`[prisma] using DATABASE_URL: ${u.host}${u.pathname}`)
+      source = "Hyperdrive"
     }
-  } catch {
+  } catch (e) {
+    console.log(`[prisma] getCloudflareContext failed: ${e}`)
     // Not in CF Workers context (Next.js dev server, build time, etc.) — use DATABASE_URL
+  }
+  try {
+    const u = new URL(connectionString)
+    console.log(`[prisma] source=${source} host=${u.host} port=${u.port}`)
+  } catch {
+    console.log(`[prisma] source=${source} connectionString unparseable`)
   }
 
   const pool = new Pool({
