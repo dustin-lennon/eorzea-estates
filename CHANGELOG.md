@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.7](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.6...v1.35.7) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* use BA-compatible scrypt hash in register endpoint ([7d554e4](https://github.com/dustin-lennon/eorzea-estates/commit/7d554e470167bbce2fae301aa2e19c126738f87c))
+
 ## [1.35.6](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.5...v1.35.6) (2026-05-07)
 
 ### 🐛 Bug Fixes
