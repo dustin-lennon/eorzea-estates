@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
-import bcrypt from "bcryptjs"
+import { hashPassword } from "better-auth/crypto"
 import prisma from "@/lib/prisma"
 
 const schema = z
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "An account with this email already exists" }, { status: 409 })
   }
 
-  const hashed = await bcrypt.hash(password, 12)
+  const hashed = await hashPassword(password)
 
   await prisma.$transaction(async (tx) => {
     await tx.verificationToken.deleteMany({ where: { identifier: email } })
