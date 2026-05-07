@@ -5,22 +5,6 @@ function formatUtc(date: Date): string {
   return format(date, "MMM d, yyyy h:mm a") + " UTC"
 }
 
-function formatEt(date: Date): string {
-  return date.toLocaleString("en-US", {
-    timeZone: "America/New_York",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZoneName: "short",
-  })
-}
-
-function formatWindow(date: Date): string {
-  return `${formatUtc(date)} / ${formatEt(date)}`
-}
-
 function WindowRow({
   window,
   now,
@@ -55,7 +39,7 @@ function WindowRow({
           </a>
         </div>
         <p className="text-muted-foreground">
-          {formatWindow(window.startsAt)} &rarr; {formatWindow(window.endsAt)}
+          {formatUtc(window.startsAt)} &rarr; {formatUtc(window.endsAt)}
         </p>
       </div>
     </div>
