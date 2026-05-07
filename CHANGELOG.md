@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.11](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.10...v1.35.11) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* inject scheduled handler into default export instead of named export ([cc2231d](https://github.com/dustin-lennon/eorzea-estates/commit/cc2231d3c8c8992b84eff727a714164fb7fe06dd))
+
 ## [1.35.10](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.9...v1.35.10) (2026-05-07)
 
 ### 🐛 Bug Fixes
