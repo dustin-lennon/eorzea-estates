@@ -10,10 +10,10 @@ datasource db {
 model Account {
   id                String  @id @default(cuid())
   userId            String
-  // NextAuth fields (kept for dual-run period)
-  type              String
-  provider          String
-  providerAccountId String
+  // NextAuth fields (kept for dual-run period; nullable so BA can create accounts without them)
+  type              String?
+  provider          String?
+  providerAccountId String?
   refresh_token     String?
   access_token      String?
   expires_at        Int?
