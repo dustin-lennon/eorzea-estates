@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.1...v1.35.2) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* disable verify form when active maintenance window exists in DB ([6458bc4](https://github.com/dustin-lennon/eorzea-estates/commit/6458bc44673d316122be71fc8faf3ff492603f77)), closes [#361](https://github.com/dustin-lennon/eorzea-estates/issues/361)
+
 ## [1.35.1](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.0...v1.35.1) (2026-05-07)
 
 ### 🐛 Bug Fixes
