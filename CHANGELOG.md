@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.12](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.11...v1.35.12) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* use providerId and filter credentials in admin users provider column ([e1d0d73](https://github.com/dustin-lennon/eorzea-estates/commit/e1d0d737a0ce03832adaf7eed450d1cd2e70e72d))
+
 ## [1.35.11](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.10...v1.35.11) (2026-05-07)
 
 ### 🐛 Bug Fixes
