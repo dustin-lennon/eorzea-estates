@@ -3,6 +3,13 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.3](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.2...v1.35.3) (2026-05-07)
+
+### 🐛 Bug Fixes
+
+* append scheduled export directly to worker.js instead of rename wrapper ([a29c244](https://github.com/dustin-lennon/eorzea-estates/commit/a29c244d7f246273dea48f7757de0d71bce0a8e3)), closes [#364](https://github.com/dustin-lennon/eorzea-estates/issues/364)
+* bypass BA runWithRequestState in polled CF Workers routes ([1f0d9cc](https://github.com/dustin-lennon/eorzea-estates/commit/1f0d9cc7772951497c8220e3995520780bcd271d)), closes [#366](https://github.com/dustin-lennon/eorzea-estates/issues/366)
+
 ## [1.35.2](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.1...v1.35.2) (2026-05-07)
 
 ### 🐛 Bug Fixes
