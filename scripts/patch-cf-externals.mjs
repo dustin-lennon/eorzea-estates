@@ -499,25 +499,19 @@ export { default } from "./worker-original.js"
 export const scheduled = async (event, env, ctx) => {
   const secret = env.CRON_SECRET ?? ""
   const baseUrl = env.BETTER_AUTH_URL ?? "http://localhost:8787"
-
-  const runCron = async (path) => {
-    try {
-      const res = await fetch(\`\${baseUrl}\${path}\`, {
-        headers: { Authorization: \`Bearer \${secret}\` },
-      })
-      if (!res.ok) {
-        console.error(\`[cron] \${path} failed:\`, res.status)
-      } else {
-        const result = await res.json()
-        console.log(\`[cron] \${path} result:\`, JSON.stringify(result))
-      }
-    } catch (err) {
-      console.error(\`[cron] \${path} error:\`, err)
+  try {
+    const res = await fetch(\`\${baseUrl}/api/cron/verify-fc-estates\`, {
+      headers: { Authorization: \`Bearer \${secret}\` },
+    })
+    if (!res.ok) {
+      console.error("[cron] verify-fc-estates failed:", res.status)
+    } else {
+      const result = await res.json()
+      console.log("[cron] verify-fc-estates result:", JSON.stringify(result))
     }
+  } catch (err) {
+    console.error("[cron] verify-fc-estates error:", err)
   }
-
-  await runCron("/api/cron/check-lodestone-maintenance")
-  await runCron("/api/cron/verify-fc-estates")
 }
 `.trimStart()
 
