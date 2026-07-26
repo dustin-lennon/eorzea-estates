@@ -1,0 +1,10 @@
+allowBuilds:
+  '@prisma/engines': true
+  '@sentry/cli': true
+  esbuild: true
+  msw: true
+  prisma: true
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
