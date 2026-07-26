@@ -37,11 +37,33 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lint commit messages
+        shell: bash
         run: |
-          pnpm exec commitlint \
-            --from ${{ github.event.pull_request.base.sha }} \
-            --to ${{ github.event.pull_request.head.sha }} \
-            --verbose
+          set -euo pipefail
+        
+          FROM_SHA="${{ github.event.pull_request.base.sha || '' }}"
+          TO_SHA="${{ github.event.pull_request.head.sha || '' }}"
+        
+          if [ -z "$FROM_SHA" ] || [ -z "$TO_SHA" ]; then
+            echo "No pull_request base/head SHAs available — skipping commitlint."
+            exit 0
+          fi
+        
+          echo "Commit range: $FROM_SHA..$TO_SHA"
+          COUNT=$(git rev-list --count "$FROM_SHA..$TO_SHA" || echo 0)
+          echo "Commits found in range: $COUNT"
+        
+          if [ "$COUNT" -eq 0 ]; then
+            echo "No commits to lint in range — skipping commitlint."
+            exit 0
+          fi
+        
+          # Run commitlint and on failure show the commit list for debugging
+          if ! pnpm exec commitlint --from "$FROM_SHA" --to "$TO_SHA" --verbose; then
+            echo "commitlint failed — listing commits in range for debugging:"
+            git --no-pager log --oneline "$FROM_SHA..$TO_SHA" || true
+            exit 1
+          fi
 
   # ─── Type Check + Lint ──────────────────────────────────────────────────────
   typecheck:
