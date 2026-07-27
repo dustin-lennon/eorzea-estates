@@ -22,3 +22,4 @@ minimumReleaseAgeExclude:
   - eslint-config-next@16.2.12
   - next@16.2.12
   - '@hookform/resolvers@5.5.7'
+  - '@ai-sdk/anthropic@3.0.103'
