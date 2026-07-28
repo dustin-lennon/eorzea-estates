@@ -102,7 +102,6 @@ jobs:
             - **Sync branch:** `${{ steps.sync.outputs.sync_branch }}`
             - **Triggered by:** ${{ github.event.head_commit.message || 'Manual workflow dispatch' }}
           base: develop
-          head: ${{ steps.sync.outputs.sync_branch }}
           labels: |
             sync
             merge-conflict
