@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.15](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.14...v1.35.15) (2026-07-28)
+
+### 🐛 Bug Fixes
+
+* add patchedDependencies to pnpm-workspace.yaml for pg@8.20.0 ([ace5e79](https://github.com/dustin-lennon/eorzea-estates/commit/ace5e79f7c05676f2d239bf823b6c9c30928cf94))
+
 ## [1.35.14](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.13...v1.35.14) (2026-07-28)
 
 ### 🐛 Bug Fixes
