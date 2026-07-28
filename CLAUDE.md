@@ -89,21 +89,27 @@ NEXT_PUBLIC_VAPID_PUBLIC_KEY  # VAPID public key for web push (same value as VAP
 ### Branching and Release Flow
 
 There are two long-lived branches:
-- **`main`** — production; every push triggers a semantic-release run and a Vercel production deploy
-- **`develop`** — staging; automatically synced from `main` after every release; Vercel preview deploys on push
+- **`main`** — production; every push triggers a semantic-release run and a Cloudflare Workers production deploy
+- **`develop`** — staging; Vercel preview deploys on push; all feature/fix work lands here first
 
-Feature branches should be named `feature/<description>`, fix branches `fix/<issue-number>-<description>` (matching the CI patterns). PRs target `develop` for staging or `main` for direct release work.
+**Normal flow (all work):**
+1. Create a GitHub issue
+2. Cut a branch from `develop`: `feature/<description>` or `fix/<issue-number>-<description>`
+3. Open a PR targeting **`develop`**
+4. Link the issue with `Closes #<issue-number>` in the PR body
+5. Merge into `develop` — triggers CI and preview deploy
 
-Every PR must have a corresponding GitHub issue. Link the issue in the PR description using `Closes #<issue-number>` so it closes automatically when the PR is merged into `develop`.
+**Release flow (promoting develop → production):**
+1. Open a PR from `develop` → `main`
+2. Merge — triggers `semantic-release` on `main`:
+   - Analyzes Conventional Commits since last tag
+   - Determines next version (`feat` → minor, `fix`/`perf`/`revert` → patch, breaking → major)
+   - Generates/updates `CHANGELOG.md`, creates GitHub release and tag
+3. Release completion triggers the Cloudflare Workers production deploy
 
-**Release process** is fully automated via `semantic-release` on push to `main`:
-1. Analyzes commits since the last tag using Conventional Commits
-2. Determines the next version (major/minor/patch) based on commit types
-3. Generates/updates `CHANGELOG.md`
-4. Creates a GitHub release and tag
-5. After the release push, the `sync-develop` workflow merges `main` → `develop` automatically
+**Hotfixes** (rare — critical prod-only issues): cut from `main`, PR to `main` directly, then manually sync `main` → `develop` afterward.
 
-There is no manual release step — merging to `main` is the release.
+Every PR must have a corresponding GitHub issue.
 
 ### Commit Conventions
 
