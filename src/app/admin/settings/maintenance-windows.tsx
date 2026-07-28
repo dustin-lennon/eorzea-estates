@@ -1,11 +1,6 @@
 import prisma from "@/lib/prisma"
-import { format } from "date-fns"
 
-function formatUtc(date: Date): string {
-  return format(date, "MMM d, yyyy h:mm a") + " UTC"
-}
-
-function formatEt(date: Date): string {
+function formatEastern(date: Date): string {
   return date.toLocaleString("en-US", {
     timeZone: "America/New_York",
     month: "short",
@@ -15,10 +10,6 @@ function formatEt(date: Date): string {
     minute: "2-digit",
     timeZoneName: "short",
   })
-}
-
-function formatWindow(date: Date): string {
-  return `${formatUtc(date)} / ${formatEt(date)}`
 }
 
 function WindowRow({
@@ -55,7 +46,7 @@ function WindowRow({
           </a>
         </div>
         <p className="text-muted-foreground">
-          {formatWindow(window.startsAt)} &rarr; {formatWindow(window.endsAt)}
+          {formatEastern(window.startsAt)} &rarr; {formatEastern(window.endsAt)}
         </p>
       </div>
     </div>
