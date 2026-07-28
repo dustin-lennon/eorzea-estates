@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react"
 
-function formatUtc(date: Date): string {
+function formatEastern(date: Date): string {
   return date.toLocaleString("en-US", {
-    timeZone: "UTC",
+    timeZone: "America/New_York",
     month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
-  }) + " UTC"
+    timeZoneName: "short",
+  })
 }
 
 interface Props {
@@ -44,13 +45,13 @@ export function LodestoneMaintenanceBannerClient({ initialVisible, initialIsActi
           {isActive ? (
             <>
               <strong>Lodestone maintenance in progress</strong> — character verification is temporarily unavailable.
-              {endsAt && <> Expected to end {formatUtc(new Date(endsAt))}.</>}
+              {endsAt && <> Expected to end {formatEastern(new Date(endsAt))}.</>}
             </>
           ) : (
             startsAt && endsAt && (
               <>
                 <strong>Scheduled Lodestone maintenance</strong> — character verification will be unavailable
-                from {formatUtc(new Date(startsAt))} to {formatUtc(new Date(endsAt))}.
+                from {formatEastern(new Date(startsAt))} to {formatEastern(new Date(endsAt))}.
               </>
             )
           )}
