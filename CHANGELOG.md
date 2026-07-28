@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.16](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.15...v1.35.16) (2026-07-28)
+
+### 🐛 Bug Fixes
+
+* copy pg-cloudflare shim before opennext build to prevent esbuild failure ([a88bb93](https://github.com/dustin-lennon/eorzea-estates/commit/a88bb93205135eadddf07a15eef2532e5d1f9ef6))
+
 ## [1.35.15](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.14...v1.35.15) (2026-07-28)
 
 ### 🐛 Bug Fixes
