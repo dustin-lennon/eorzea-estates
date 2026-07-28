@@ -3,6 +3,12 @@
 All notable changes to Eorzea Estates are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.35.14](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.13...v1.35.14) (2026-07-28)
+
+### 🐛 Bug Fixes
+
+* show Eastern time in lodestone maintenance banner ([ab1655a](https://github.com/dustin-lennon/eorzea-estates/commit/ab1655abb303c17e67e048fe4004a06c5fed09a0)), closes [#442](https://github.com/dustin-lennon/eorzea-estates/issues/442)
+
 ## [1.35.13](https://github.com/dustin-lennon/eorzea-estates/compare/v1.35.12...v1.35.13) (2026-05-07)
 
 ### 🐛 Bug Fixes
