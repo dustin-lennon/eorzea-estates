@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     # Only run after CI passes — reuse the same commit SHA
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0  # full history needed for semantic-release
           token: ${{ secrets.SYNC_PAT }}  # PAT needed to push changelog commit back to main
@@ -27,7 +27,7 @@ jobs:
         with:
           version: 11
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
