@@ -3,6 +3,7 @@
   "extends": ["config:recommended"],
   "schedule": ["every weekend"],
   "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
   "semanticCommits": "enabled",
   "labels": ["dependencies"],
   "packageRules": [
