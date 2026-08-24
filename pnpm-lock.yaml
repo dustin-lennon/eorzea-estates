@@ -15,8 +15,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.21(zod@4.4.3)
       '@cf-wasm/photon':
-        specifier: ^0.3.4
-        version: 0.3.7
+        specifier: ^0.4.0
+        version: 0.4.0
       '@hookform/resolvers':
         specifier: ^5.5.7
         version: 5.5.7(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(effect@3.20.0)(react-hook-form@7.83.0(react@19.2.8))(valibot@1.4.2(typescript@6.0.3))(zod@4.4.3)
@@ -756,11 +756,11 @@ packages:
     resolution: {integrity: sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw==}
     hasBin: true
 
-  '@cf-wasm/internals@0.1.2':
-    resolution: {integrity: sha512-9d/I3JFv1IpQFYOrIw5RQShQPyuZRw9DyeBylF39Uj/MH7my8+EzKDPpUCHiqZ5O7tZS/A6zwP08egpeI5NBhA==}
+  '@cf-wasm/internals@0.2.0':
+    resolution: {integrity: sha512-QwMNETkTCtrx0uCzjJPRCTyok0OZNvOry9alfG8a8TpHo7oPJ17htPMDG4ptudpwe9F0VtJHy9+nOzJmupteiQ==}
 
-  '@cf-wasm/photon@0.3.7':
-    resolution: {integrity: sha512-rMPUUuiIgXVNJFPIexU9aKCudVrsxMmaknmEqY6x9/apcjoHR8im1T+V6USnhy3wDVVtlZZb6z9+ZlHRk+pX2w==}
+  '@cf-wasm/photon@0.4.0':
+    resolution: {integrity: sha512-PQcN6sThZAR/V6SH2MQmeFndDDhGfOxvra6UStyaBbkDHrgTPKvB+WapAhh0/TA9LsRAUaX/rEEw6hvY9uphbQ==}
 
   '@cloudflare/kv-asset-handler@0.5.0':
     resolution: {integrity: sha512-jxQYkj8dSIzc0cD6cMMNdOc1UVjqSqu8BZdor5s8cGjW2I8BjODt/kWPVdY+u9zj3ms75Q5qaZgnxUad83+eAg==}
@@ -10340,11 +10340,11 @@ snapshots:
     dependencies:
       css-tree: 3.2.1
 
-  '@cf-wasm/internals@0.1.2': {}
+  '@cf-wasm/internals@0.2.0': {}
 
-  '@cf-wasm/photon@0.3.7':
+  '@cf-wasm/photon@0.4.0':
     dependencies:
-      '@cf-wasm/internals': 0.1.2
+      '@cf-wasm/internals': 0.2.0
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 

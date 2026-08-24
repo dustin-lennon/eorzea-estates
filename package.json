@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.0",
-    "@cf-wasm/photon": "^0.3.4",
+    "@cf-wasm/photon": "^0.4.0",
     "@hookform/resolvers": "^5.5.7",
     "@opentelemetry/sdk-node": "^0.221.0",
     "@prisma/adapter-pg": "^7.4.2",
