@@ -34,7 +34,7 @@ importers:
         version: 2.112.3(@opentelemetry/api@1.9.1)
       '@uiw/react-md-editor':
         specifier: ^4.0.11
-        version: 4.1.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@10.2.2)
+        version: 4.1.2(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@10.2.2)
       '@xivapi/nodestone':
         specifier: ^0.2.7
         version: 0.2.8(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
@@ -4271,8 +4271,8 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@uiw/react-md-editor@4.1.1':
-    resolution: {integrity: sha512-yZqV5twN/sSfpce4cO/1bqy16o7v2oW324VNh2gcnsSpzOr2jEHpchM+ElD1y+ivUmFXcDZ5Ky5TOuPZg4qL6g==}
+  '@uiw/react-md-editor@4.1.2':
+    resolution: {integrity: sha512-EA19S+GS1KDi9MvKoCjJ16luGBE2yZLaBp+6tkNJvIYQ+J6zxdkTAHWl0i+Te02HwQrVMIjVG74M54uyW8K7wQ==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -13741,7 +13741,7 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@uiw/react-md-editor@4.1.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@10.2.2)':
+  '@uiw/react-md-editor@4.1.2(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@10.2.2)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@uiw/react-markdown-preview': 5.2.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@10.2.2)
