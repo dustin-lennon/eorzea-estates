@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "schedule": ["every weekend"],
+  "minimumReleaseAge": "1 day",
   "commitMessagePrefix": "chore(deps):",
   "commitMessageAction": "update",
   "semanticCommits": "enabled",
