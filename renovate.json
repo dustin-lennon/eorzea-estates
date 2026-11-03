@@ -55,6 +55,11 @@
       "matchPackageNames": ["typescript"],
       "allowedVersions": "<7.0.0",
       "description": "typescript-eslint does not support TS 7.x yet — re-enable when typescript-eslint/typescript-eslint#10940 is resolved"
+    },
+    {
+      "matchPackageNames": ["conventional-changelog-conventionalcommits"],
+      "allowedVersions": "<=10.2.1",
+      "description": "conventional-changelog-conventionalcommits@>=10.3 requires conventional-changelog-writer@9, but @semantic-release/release-notes-generator@14 still uses writer@8 — re-enable when release-notes-generator supports writer@9 (#547)"
     }
   ]
 }
