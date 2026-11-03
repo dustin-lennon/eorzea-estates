@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ai-sdk/anthropic':
         specifier: ^4.0.0
-        version: 4.0.41(zod@4.4.3)
+        version: 4.0.94(zod@4.4.3)
       '@cf-wasm/photon':
         specifier: ^0.4.0
         version: 0.4.0
@@ -122,7 +122,7 @@ importers:
         version: 21.2.4
       '@opennextjs/cloudflare':
         specifier: latest
-        version: 1.20.13(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.127.1)
+        version: 1.20.15(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.127.1)
       '@playwright/test':
         specifier: ^1.58.2
         version: 1.62.1
@@ -237,8 +237,8 @@ packages:
   '@adobe/css-tools@4.5.0':
     resolution: {integrity: sha512-6OzddxPio9UiWTCemp4N8cYLV2ZN1ncRnV1cVGtve7dhPOtRkleRyx32GQCYSwDYgaHU3USMm84tNsvKzRCa1Q==}
 
-  '@ai-sdk/anthropic@4.0.41':
-    resolution: {integrity: sha512-So62as8fexWMmXMIxvrWVaDLjLRe6EG2+5mmRc1KCPBoyyyFx6zbTcCvxJkViSUHhsGMBDryAm+mfs91n7Jl8g==}
+  '@ai-sdk/anthropic@4.0.94':
+    resolution: {integrity: sha512-gD0KmsUZTRuhiYleM2SdMrY0c7m+VeRckLX2VVPnEAlQmaKqSw8+noHiK5ED+SHy4tuDf9VQqcHxlGeObzMNyw==}
     engines: {node: '>=22'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -254,6 +254,16 @@ packages:
     engines: {node: '>=22'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/provider-utils@5.0.72':
+    resolution: {integrity: sha512-M6QAztI84jWumQSvKcGOL91DxhChsWxn3D3gYtV0/7E1TPQg9BmLdIerOolUC/jghQbMlQrHyzp0hqdIhUZ2Rw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/provider@4.0.35':
+    resolution: {integrity: sha512-yBz6fmLS8MSCIzy7NiHEUAq56ZLD4ZA1GR6bpXBxgbwUacP1La7LuwAr/xy9jSzthem4F8Xu2OrhvU/JrE9fYA==}
+    engines: {node: '>=22'}
 
   '@ai-sdk/provider@4.0.7':
     resolution: {integrity: sha512-6or44XprPzKbr8zkmzosowSE0pxkvJcoojBL+mCZvPUt3kvXp3XSNqeVun9golb1acEfSo6yaEBRT18h2VU+1Q==}
@@ -1980,14 +1990,18 @@ packages:
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
 
-  '@opennextjs/aws@4.1.12':
-    resolution: {integrity: sha512-tZm1rBTRY6MVOOPCxvx0oZIg3b2Z5u0TzDm9D4Wy1cZpMp8Rjfex20gRQeEn0o6dsXpVQCE8q65TjsCFJA5Fpw==}
+  '@opennextjs/aws@4.1.14':
+    resolution: {integrity: sha512-jV+rxEi5dNxnQbKBftWuIppVvemMrbfaUj0tXINJMEzX7crk1pkmsMwudgk2kgyak1T03/GSMSEpE8nzOKrkDA==}
     hasBin: true
     peerDependencies:
+      diff: ^9.0.0
       next: '>=15.5.28 <16 || >=16.4.1'
+    peerDependenciesMeta:
+      diff:
+        optional: true
 
-  '@opennextjs/cloudflare@1.20.13':
-    resolution: {integrity: sha512-Rhcvsx/PlQzOslleCBttG+r2o16lOFazKbULxiN33CYexm8S1Fd00mn3tU2w76PIaqO9evzgVKInOpR/fTMc0Q==}
+  '@opennextjs/cloudflare@1.20.15':
+    resolution: {integrity: sha512-Ft7GdS3oDnZ5cZpAowSqpFsjHuZCZ9zBcTjJwYeJGa7Uq32JG3DOlLXh8GW+gsMVWXTz8YTL20sMxG1u+k4NwQ==}
     hasBin: true
     peerDependencies:
       next: '>=15.5.28 <16 || >=16.4.1'
@@ -2132,6 +2146,7 @@ packages:
   '@opentelemetry/propagator-jaeger@2.10.0':
     resolution: {integrity: sha512-yw/IX8DL470dSMZJoE82ScfYGp7JWZ/G8kFJo35ZILUVTB2jFPTOaioN+8s09pH0RHsWNhweVZb+ZnjJJpCChg==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Package no longer supported. See https://github.com/open-telemetry/opentelemetry-js/pull/7077
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -2169,6 +2184,7 @@ packages:
   '@opentelemetry/sdk-trace-node@2.10.0':
     resolution: {integrity: sha512-GZK/G6oZyBLGlH1pUgeDch7D91KoHd2uotUGIkWCPi9GI5T9X0p4L7nNAMDR1BQjkRYoDqo+ddfVx9t5Uhys+Q==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -3564,6 +3580,7 @@ packages:
   '@smithy/core@3.30.0':
     resolution: {integrity: sha512-dl2yRglDxfzH9uJ4fSo4zTaAHa0zH7+V7BZMRWy8hEYIKT1BiqMUK/CN6T3ADQ3kbA5N1tmUulroJ2UtONS7Kw==}
     engines: {node: '>=18.0.0'}
+    deprecated: Deprecated due to a bug in custom logger data redaction. See https://github.com/aws/aws-sdk-js-v3/issues/8393.
 
   '@smithy/credential-provider-imds@4.4.14':
     resolution: {integrity: sha512-QgbuahIb2qxQeZQvNK0sw3aF3JH5zwH8j2lLp5DUasVXexGGMWULAR+7z0omPXFolCP/m5wN9M5lm9EGdSviTQ==}
@@ -9327,10 +9344,10 @@ snapshots:
 
   '@adobe/css-tools@4.5.0': {}
 
-  '@ai-sdk/anthropic@4.0.41(zod@4.4.3)':
+  '@ai-sdk/anthropic@4.0.94(zod@4.4.3)':
     dependencies:
-      '@ai-sdk/provider': 4.0.7
-      '@ai-sdk/provider-utils': 5.0.29(zod@4.4.3)
+      '@ai-sdk/provider': 4.0.35
+      '@ai-sdk/provider-utils': 5.0.72(zod@4.4.3)
       zod: 4.4.3
 
   '@ai-sdk/gateway@4.0.62(zod@4.4.3)':
@@ -9348,6 +9365,19 @@ snapshots:
       eventsource-parser: 3.1.0
       undici: 7.29.0
       zod: 4.4.3
+
+  '@ai-sdk/provider-utils@5.0.72(zod@4.4.3)':
+    dependencies:
+      '@ai-sdk/provider': 4.0.35
+      '@standard-schema/spec': 1.1.0
+      '@workflow/serde': 4.1.0
+      eventsource-parser: 3.1.0
+      undici: 7.29.0
+      zod: 4.4.3
+
+  '@ai-sdk/provider@4.0.35':
+    dependencies:
+      json-schema: 0.4.0
 
   '@ai-sdk/provider@4.0.7':
     dependencies:
@@ -11151,7 +11181,7 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 27.0.0
 
-  '@opennextjs/aws@4.1.12(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)':
+  '@opennextjs/aws@4.1.14(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@aws-sdk/client-cloudfront': 3.984.0
@@ -11174,11 +11204,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@opennextjs/cloudflare@1.20.13(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.127.1)':
+  '@opennextjs/cloudflare@1.20.15(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.127.1)':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@dotenvx/dotenvx': 2.38.2
-      '@opennextjs/aws': 4.1.12(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)
+      '@opennextjs/aws': 4.1.14(next@16.3.2(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@25.9.9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)
       ci-info: 4.4.0
       cloudflare: 4.5.0
       comment-json: 4.6.2
@@ -11189,6 +11219,7 @@ snapshots:
       wrangler: 4.127.1
       yargs: 18.2.0
     transitivePeerDependencies:
+      - diff
       - encoding
       - supports-color
 
