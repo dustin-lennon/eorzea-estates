@@ -9,18 +9,12 @@ allowBuilds:
   unrs-resolver: true
   workerd: true
 minimumReleaseAgeExclude:
-  - '@next/env@16.2.12'
-  - '@next/eslint-plugin-next@16.2.12'
-  - '@next/swc-darwin-arm64@16.2.12'
-  - '@next/swc-darwin-x64@16.2.12'
-  - '@next/swc-linux-arm64-gnu@16.2.12'
-  - '@next/swc-linux-arm64-musl@16.2.12'
-  - '@next/swc-linux-x64-gnu@16.2.12'
-  - '@next/swc-linux-x64-musl@16.2.12'
-  - '@next/swc-win32-arm64-msvc@16.2.12'
-  - '@next/swc-win32-x64-msvc@16.2.12'
-  - eslint-config-next@16.2.12
-  - next@16.2.12
-  - '@hookform/resolvers@5.5.7'
-  - '@ai-sdk/anthropic@3.0.103'
-  - '@ai-sdk/anthropic@3.0.103'
+  # Temporary: pulled in by #566/#567/#568 before they cleared pnpm's 24h
+  # minimumReleaseAge window. Safe to remove after 2026-11-14T22:33Z.
+  - '@ai-sdk/anthropic@4.0.105'
+  - '@ai-sdk/gateway@4.0.146'
+  - '@ai-sdk/provider-utils@5.0.81'
+  - '@playwright/test@1.65.1'
+  - ai@7.0.173
+  - playwright-core@1.65.1
+  - playwright@1.65.1
