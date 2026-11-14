@@ -8,6 +8,9 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+# Refuse packages published < 24h ago (pnpm 11 default, made explicit).
+# Keep in sync with renovate.json "minimumReleaseAge".
+minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   # Temporary: pulled in by #566/#567/#568 before they cleared pnpm's 24h
   # minimumReleaseAge window. Safe to remove after 2026-11-14T22:33Z.
