@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { withSentryConfig } from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs/config";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -72,11 +72,15 @@ export default withSentryConfig(nextConfig, {
   // Proxy Sentry requests through the app to avoid ad blockers
   tunnelRoute: "/monitoring",
 
-  // Tree-shake Sentry debug code in production
-  disableLogger: true,
+  webpack: {
+    // Tree-shake Sentry debug code in production
+    treeshake: {
+      removeDebugLogging: true,
+    },
 
-  // Automatically instrument Next.js data fetching, API routes, and middleware
-  autoInstrumentServerFunctions: true,
-  autoInstrumentMiddleware: true,
-  autoInstrumentAppDirectory: true,
+    // Automatically instrument Next.js data fetching, API routes, and middleware
+    autoInstrumentServerFunctions: true,
+    autoInstrumentMiddleware: true,
+    autoInstrumentAppDirectory: true,
+  },
 });
