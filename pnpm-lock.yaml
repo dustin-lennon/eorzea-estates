@@ -16,7 +16,7 @@ importers:
         version: 0.4.0
       '@hookform/resolvers':
         specifier: ^7.0.0
-        version: 7.0.6(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.91.0(@types/react@19.3.0)(react@19.3.1))(valibot@1.4.2(typescript@6.0.3))(zod@4.6.7)
+        version: 7.0.6(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1)(ajv@8.20.0)(react-hook-form@7.91.0(@types/react@19.3.0)(react@19.3.1))(valibot@1.4.2(typescript@6.0.3))(zod@4.6.7)
       '@opentelemetry/sdk-node':
         specifier: ^0.301.0
         version: 0.301.2(@opentelemetry/api@1.10.0)(supports-color@10.2.2)
@@ -97,7 +97,7 @@ importers:
         version: 4.0.1(supports-color@10.2.2)
       resend:
         specifier: ^6.9.4
-        version: 6.37.0
+        version: 6.38.0
       sharp:
         specifier: ^0.35.4
         version: 0.35.5(@types/node@25.9.9)
@@ -245,12 +245,6 @@ packages:
 
   '@ai-sdk/gateway@4.0.146':
     resolution: {integrity: sha512-rJ5NQSyjnpo6HSBEYc9Ff6k1EROUuB7KeAfHYVbVDsk68ynY0Eb8JeWflZKXlT6NhYgqyCiBDxE5blXWACXMKQ==}
-    engines: {node: '>=22'}
-    peerDependencies:
-      zod: ^3.25.76 || ^4.1.8
-
-  '@ai-sdk/provider-utils@5.0.80':
-    resolution: {integrity: sha512-WJ/eiRiBUWbuIBX8v2+U4FssBFskNo4z9TnzEwqTtSQ56TF6H2g/sPkOq0SDMz9yY9u5uOT+tEq28CBUTWVNlA==}
     engines: {node: '>=22'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -7660,8 +7654,8 @@ packages:
     resolution: {integrity: sha512-QT7FVMXfWOYFbeRBF6nu+I6tr2Tf3u0q8RIEjNob/heKY/nh7drD/k7eeMFmSQgnTtCzLDcCu/XEnpW2wk4xCQ==}
     engines: {node: '>=9.3.0 || >=8.10.0 <9.0.0'}
 
-  resend@6.37.0:
-    resolution: {integrity: sha512-iYNhmhfXVomZr+TMIxf6oqj7kTeGqPDE+wGcYw1H4g8WMBR59NsbShnUz43dSYpStW16iEA6dZs+egqQmdm0zA==}
+  resend@6.38.0:
+    resolution: {integrity: sha512-+t1bz6unmYcyYrLqrZtkn73ODZhUgKJTViuRf+a4ewgo3mT/Bpg64WkBtAVQlXQcmUkeuorO1eLAd2+1h4jgNQ==}
     engines: {node: '>=20'}
     peerDependencies:
       '@react-email/render': '*'
@@ -8210,6 +8204,7 @@ packages:
 
   tldts-core@7.4.20:
     resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
+    deprecated: Partial release, see https://github.com/remusao/tldts/issues/2735. Use >=7.4.22.
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
@@ -8869,14 +8864,6 @@ snapshots:
       '@ai-sdk/provider': 4.0.38
       '@ai-sdk/provider-utils': 5.0.81(zod@4.6.7)
       '@vercel/oidc': 3.2.0
-      zod: 4.6.7
-
-  '@ai-sdk/provider-utils@5.0.80(zod@4.6.7)':
-    dependencies:
-      '@ai-sdk/provider': 4.0.38
-      '@standard-schema/spec': 1.1.0
-      '@workflow/serde': 4.1.0
-      eventsource-parser: 3.1.1
       zod: 4.6.7
 
   '@ai-sdk/provider-utils@5.0.81(zod@4.6.7)':
@@ -10133,14 +10120,14 @@ snapshots:
       protobufjs: 7.6.6
       yargs: 17.7.3
 
-  '@hookform/resolvers@7.0.6(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.91.0(@types/react@19.3.0)(react@19.3.1))(valibot@1.4.2(typescript@6.0.3))(zod@4.6.7)':
+  '@hookform/resolvers@7.0.6(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1)(ajv@8.20.0)(react-hook-form@7.91.0(@types/react@19.3.0)(react@19.3.1))(valibot@1.4.2(typescript@6.0.3))(zod@4.6.7)':
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.91.0(@types/react@19.3.0)(react@19.3.1)
     optionalDependencies:
       '@standard-schema/spec': 1.1.0
       ajv: 8.20.0
-      ajv-formats: 2.1.1(ajv@8.20.0)
+      ajv-formats: 2.1.1
       valibot: 1.4.2(typescript@6.0.3)
       zod: 4.6.7
 
@@ -13111,8 +13098,8 @@ snapshots:
       '@ai-sdk/provider-utils': 5.0.81(zod@4.6.7)
       zod: 4.6.7
 
-  ajv-formats@2.1.1(ajv@8.20.0):
-    optionalDependencies:
+  ajv-formats@2.1.1:
+    dependencies:
       ajv: 8.20.0
 
   ajv-formats@3.0.1(ajv@8.20.0):
@@ -13658,7 +13645,7 @@ snapshots:
   conf@10.2.0:
     dependencies:
       ajv: 8.20.0
-      ajv-formats: 2.1.1(ajv@8.20.0)
+      ajv-formats: 2.1.1
       atomically: 1.7.0
       debounce-fn: 4.0.0
       dot-prop: 6.0.1
@@ -17134,7 +17121,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  resend@6.37.0:
+  resend@6.38.0:
     dependencies:
       postal-mime: 2.7.6
       standardwebhooks: 1.1.1
